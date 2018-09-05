@@ -1,10 +1,4 @@
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
-
-body {
+#login-page {
 	background: url("../images/b2.jpg");
 	background-repeat: no-repeat;
 	background-attachment: fixed;
@@ -15,111 +9,27 @@ body {
 	-o-background-size: cover;
 	color: #FFF;
 	font-family: 'Quicksand', sans-serif;
-	text-align: center;
 }
 
-h1 {
-    font-size: 45px;
+#login-logo a {
+	color: #fff;
+    font-size: 35px;
+    text-align: center;
+    margin-bottom: 25px;
     font-weight: 300;
-    color: #fff;
-    letter-spacing: 7px;
-    margin: 65px auto;
 }
 
-.container {
-	width: 30%;
-	margin: 0 auto;
-	background: rgba(0, 0, 0, 0.5);
+#login-box-body {
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.5);
     padding: 30px;
 }
 
-h2 {
-    font-size: 35px;
-    font-weight: 300;
-    margin-bottom: 30px;
-    color: #fff;
-    text-transform: uppercase;
-}
-
-input[type="password"], input[type="email"]{
-	width: 84%;
-	padding: 15px 10px 15px;
-	font-size: 14px;
-	background: transparent;
-	border: 2px solid #537b35;
-	outline: none;
-	margin-bottom: 26px;
+#login-box-msg {
 	color: #fff;
-	font-family: 'Quicksand', sans-serif;
+	font-size: 25px;
 }
 
-input[type="email"] {
-	background: url("../images/e-mail.png") no-repeat 300px 11px;
-	background-size: 25px;
+#checkbox {
+	color: #fff;
 }
-
-input[type="password"] {
-	background: url("../images/password.png") no-repeat 300px 11px;
-	background-size: 25px;
-}
-
-ul {
-	list-style: none;
-	display: inline-block;
-	width: 100%;
-	margin-bottom: 40px;
-	text-align: left;
-	padding-left: 10px;
-}
-
-ul li {
-	text-decoration: none;
-}
-
-ul li input[type="checkbox"] {
-	display: none;
-}
-
-ul li input[type="checkbox"]+label {
-	position: relative;
-	padding-left: 50px;
-	border: #F0F8FF;
-	display: inline-block;
-	font-size: 15px;
-    color: #fff;
-}
-
-ul li input[type="checkbox"]+label span:first-child {
-	width: 17px;
-	height: 17px;
-	display: inline-block;
-	border: 2px solid #537b35;
-	position: absolute;
-	top: -1px;
-	left: 23px;
-	bottom: 4px;
-}
-
-ul li input[type="checkbox"]:checked+label span:first-child:before {
-	content: "";
-	background: url("../images/tick.png")no-repeat;
-	position: absolute;
-	left: 2px;
-	top: 2px;
-	font-size: 10px;
-	width: 10px;
-	height: 10px;
-}
-
-ul li a {
-	float: right;
-    margin-right: 40px;
-    color: #fff;
-    font-size: 15px;
-
-}
-
-ul li a:hover {
-	color: #537b35;
-}
-
