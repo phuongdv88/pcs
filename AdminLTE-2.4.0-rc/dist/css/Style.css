@@ -11,7 +11,7 @@
 	font-family: 'Quicksand', sans-serif;
 }
 
-#login-logo a {
+#login-logo {
 	color: #fff;
     font-size: 35px;
     text-align: center;
@@ -33,3 +33,183 @@
 #checkbox {
 	color: #fff;
 }
+
+/*--- Responsive Code ---*/
+
+@media screen and (max-width: 1440px) {
+	#login-page {
+		width: 33%;
+	}
+}
+
+@media screen and (max-width: 1366px) {
+	#login-page {
+		width: 35%;
+	}
+}
+
+@media screen and (max-width: 1280px) {
+	#login-page {
+		width: 37%;
+	}
+}
+
+@media screen and (max-width: 1080px) {
+	#login-page {
+		width: 45%;
+	}
+}
+
+@media screen and (max-width: 1024px) {
+	h1 {
+		font-size: 45px;
+		margin: 50px auto;
+	}
+	#login-page {
+		width: 47%;
+	}
+}
+
+@media screen and (max-width: 991px) {
+	#login-page {
+		width: 48%;
+	}
+}
+@media screen and (max-width: 900px) {
+	#login-page {
+		width:53%;
+	}
+}
+
+@media screen and (max-width: 853px) {
+	#login-page {
+		width: 58%;
+	}
+}
+
+@media screen and (max-width: 800px) {
+	#login-page {
+		width: 59%;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	#login-page {
+		width: 61%;
+	}
+}
+
+@media screen and (max-width: 736px) {
+	h1 {
+		font-size: 40px;
+		margin: 40px auto;
+	}
+	#login-page {
+		width: 65%;
+	}
+	h2 {
+		font-size: 35px;
+	}
+}
+
+@media screen and (max-width: 667px) {
+	#login-page {
+		width: 70%;
+	}
+}
+
+@media screen and (max-width: 640px) {
+	h1 {
+		margin: 35px auto;
+	}
+	#login-page {
+		width: 74%;
+	}
+}
+
+@media screen and (max-width: 603px) {
+	#login-page {
+		width: 78%;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	#login-page {
+		width: 78%;
+	}
+}
+
+@media screen and (max-width: 568px) {
+	h1 {
+		font-size: 35px;
+		margin: 25px auto;
+	}
+	h2 {
+		font-size: 30px;
+	}
+	#login-page {
+		width: 92%;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	h1 {
+		font-size: 35px;
+		margin: 25px auto;
+		letter-spacing: 4px;
+	}
+	#login-page {
+		width: 70%;
+	}
+}
+
+@media screen and (max-width: 414px) {
+	#login-page {
+		width: 70%;
+	}
+	h1 {
+		font-size: 30px;
+		letter-spacing: 3px;
+	}
+	h2 {
+		font-size: 28px;
+	}
+}
+
+@media screen and (max-width: 384px) {
+	h1 {
+		letter-spacing: 0;
+	}
+	#login-page {
+		width: 78%;
+	}
+	h2 {
+		font-size: 26px;
+	}
+}
+@media screen and (max-width: 375px) {
+	#login-page {
+		width: 80%;
+	}
+	h2 {
+		font-size: 26px;
+	}
+}
+@media screen and (max-width: 320px) {
+	h1 {
+		font-size: 28px;
+		font-weight: 500;
+	}
+	h2 {
+		font-size: 25px;
+	}
+	#login-page {
+		width: 86%;
+	}
+	#login-page {
+		padding: 20px 15px;
+	}
+}
+
+
+/*--- Responsive Code ---*/

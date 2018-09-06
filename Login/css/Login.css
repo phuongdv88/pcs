@@ -11,12 +11,21 @@
 	font-family: 'Quicksand', sans-serif;
 }
 
-#login-logo a {
+#login-logo {
+	padding-top: 5%;
+}
+
+#login-box {
+	margin: 3% auto;
+	width: 550px;
+}
+
+#login-page h1 {
 	color: #fff;
-    font-size: 35px;
+    font-size: 55px;
     text-align: center;
     margin-bottom: 25px;
-    font-weight: 300;
+    font-weight: 300; 
 }
 
 #login-box-body {
@@ -33,3 +42,14 @@
 #checkbox {
 	color: #fff;
 }
+
+.forgot-password {
+	margin: 10px 0;
+}
+
+.Submit {
+	width: 50%;
+	margin: 0 auto;
+	padding: 10px 0;
+}
+
