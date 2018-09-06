@@ -22,16 +22,16 @@
 
 #login-page h1 {
 	color: #fff;
-    font-size: 55px;
-    text-align: center;
-    margin-bottom: 25px;
-    font-weight: 300; 
+	font-size: 55px;
+	text-align: center;
+	margin-bottom: 25px;
+	font-weight: 300; 
 }
 
 #login-box-body {
-    margin: 0 auto;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 30px;
+	margin: 0 auto;
+	background: rgba(0, 0, 0, 0.5);
+	padding: 30px;
 }
 
 #login-box-msg {
@@ -51,5 +51,33 @@
 	width: 50%;
 	margin: 0 auto;
 	padding: 10px 0;
+}
+
+.social-icon {
+	padding: 2%;
+	float: right;
+}
+
+
+.social-icon ul {
+	list-style: none;
+}
+
+.social-icon li {
+	float: left;
+	margin-right: 15px;
+}
+
+.social-icon li a {
+	text-transform: uppercase;
+	color: #fff;
+	padding: 20px;
+	line-height: 20px;
+	display: inline-block;
+}
+
+.social-icon li a i {
+	font-size: 40px;
+	margin-top: -10px;
 }
 
