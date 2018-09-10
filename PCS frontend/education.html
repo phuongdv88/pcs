@@ -79,116 +79,7 @@
       <div class="box-footer">
 
         <div id="addeducation">
-          <form action="" method="post" accept-charset="utf-8">
-            <div class="box-body">
-              <div class="row">
-                <div class="col-md-9">
-                  <h3>Education Information 2</h3>
-                </div>
-                <div class="col-md-3">
-                  <div class="cancel text-right" id="cancel">
-                    <i class="fa fa-times" aria-hidden="true"></i>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="">File images</label>
-                <input type="file" name="images">
-              </div>
-              <div class="form-group">
-                <label for="">University</label>
-                <div class="row">
-                  <div class="col-xs-6">
-                    <input type="text" class="form-control" placeholder="First Name" required="">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-md-3">
-                  <label for="">Major</label>
-                  <input type="text" class="form-control" placeholder="CNTT" required="">
-                </div>
-                <div class="form-group col-md-3">
-                  <label for="">StartDate</label>
-                  <input type="date" class="form-control" placeholder="01/01/2014"required="">
-                </div>
-                <div class="form-group col-md-3">
-                  <label for="">StopDate</label>
-                  <input type="date" class="form-control" placeholder="01/01/2018" required="">
-                </div>
-              </div>
-            </div>
-          </form>
-          <form action="" method="post" accept-charset="utf-8">
-            <div class="box-body">
-              <div class="row">
-                <div class="col-md-9">
-                  <h3>Education Information 3</h3>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="">File images</label>
-                <input type="file" name="images">
-              </div>
-              <div class="form-group">
-                <label for="">University</label>
-                <div class="row">
-                  <div class="col-xs-6">
-                    <input type="text" class="form-control" placeholder="First Name" required="">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-md-3">
-                  <label for="">Major</label>
-                  <input type="text" class="form-control" placeholder="CNTT" required="">
-                </div>
-                <div class="form-group col-md-3">
-                  <label for="">StartDate</label>
-                  <input type="date" class="form-control" placeholder="01/01/2014"required="">
-                </div>
-                <div class="form-group col-md-3">
-                  <label for="">StopDate</label>
-                  <input type="date" class="form-control" placeholder="01/01/2018" required="">
-                </div>
-              </div>
-            </div>
-          </form>
-          <form action="" method="post" accept-charset="utf-8">
-            <div class="box-body">
-              <div class="row">
-                <div class="col-md-9">
-                  <h3>Education Information 4</h3>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="">File images</label>
-                <input type="file" name="images">
-              </div>
-              <div class="form-group">
-                <label for="">University</label>
-                <div class="row">
-                  <div class="col-xs-6">
-                    <input type="text" class="form-control" placeholder="First Name" required="">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-md-3">
-                  <label for="">Major</label>
-                  <input type="text" class="form-control" placeholder="CNTT" required="">
-                </div>
-                <div class="form-group col-md-3">
-                  <label for="">StartDate</label>
-                  <input type="date" class="form-control" placeholder="01/01/2014"required="">
-                </div>
-                <div class="form-group col-md-3">
-                  <label for="">StopDate</label>
-                  <input type="date" class="form-control" placeholder="01/01/2018" required="">
-                </div>
-              </div>
-            </div>
-          </form>
+          
         </div>
         <div class="text-right clickadd">
           <button type="button" class="btn btn-primary" id="check"><i class="fa fa-plus" aria-hidden="true"></i></button>
@@ -227,6 +118,61 @@
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 <script type="text/javascript">
+
+            (function($){
+              $countForms = 1;
+              $.fn.addForms = function(){
+                var myform = 
+                '<button class="btn btn-danger text-right" id="btn-remove">X</button>'+
+                '<form action="" method="post" accept-charset="utf-8" id=addform>'+
+                '<div class="box-body">'+
+                '<div class="form-group">'+
+                '<label for="">University</label>'+
+                '<div class="row">'+
+                '<div class="col-xs-6">'+
+                '<input type="text" class="form-control" placeholder="First Name" required="">'+
+                '</div>'+
+                '</div>'+
+                '</div>'+
+                '<div class="row">'+
+                '<div class="form-group col-md-3">'+
+                '<label for="">Major</label>'+
+                '<input type="text" class="form-control" placeholder="CNTT" required="">'+
+                '</div>'+
+                '<div class="form-group col-md-3">'+
+                '<label for="">StartDate</label>'+
+                '<input type="date" class="form-control" placeholder="01/01/2014"required="">'+
+                '</div>'+
+                '<div class="form-group col-md-3">'+
+                '<label for="">StopDate</label>'+
+                '<input type="date" class="form-control" placeholder="01/01/2018" required="">'+
+                '</div>'+
+                '</div>'+
+                '<div class="form-group">'+
+                '<label for="">File images</label>'+
+                '<input type="file" name="images">'+
+                '</div>'+
+                '</div>'+
+                '</form>';;
+
+                myform = $("<div>"+myform+"</div>");
+                $("button", $(myform)).click(function(){ 
+                    $(this).parent().remove(); 
+                });
+
+                $(this).append(myform);
+                $countForms++;
+            };
+        })(jQuery);     
+
+        $(function(){
+            $("#check").bind("click", function(){
+                $("#addeducation").addForms();
+            });
+        });
+
+    </script>
+<!-- <script type="text/javascript">
   $(document).ready(function(){
     $('#addeducation').hide();
     $('button#check').click(function(){
@@ -246,6 +192,6 @@
       } 
     });
   });
-</script>
+</script> -->
 </body>
 </html>

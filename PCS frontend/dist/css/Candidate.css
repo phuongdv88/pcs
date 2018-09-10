@@ -26,8 +26,16 @@ button[type="button"] {
 	border-radius: 30px;
 }
 
-#addeducation {
+#addformeducation {
 	border: 1px solid #333;
+}
+
+#addformreference {
+	border: 1px solid #333;
+}
+
+#btn-remove {
+	float: right;
 }
 
 #addeducation1 {
@@ -75,16 +83,6 @@ button[type="button"] {
 }
 
 #checkeducation {
-	border-radius: 100px;
-	font-size: 20px;
-}
-
-#checkeducation1 {
-	border-radius: 100px;
-	font-size: 20px;
-}
-
-#checkeducation2 {
 	border-radius: 100px;
 	font-size: 20px;
 }
