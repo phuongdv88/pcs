@@ -11,13 +11,16 @@ using PCSs.Models;
 
 namespace PCSs.Controllers
 {
-    public class SpecialistsController : Controller
+    [SpecialistAuthorization]
+    public class SpecialistController : Controller
     {
         private PCSEntities db = new PCSEntities();
 
         // GET: Specialists
         public async Task<ActionResult> Index()
         {
+            if (Session["Role"] == null || Session["Role"]?.ToString() != "2")
+                return RedirectToAction("Error", "Error");
             return View(await db.Specialists.ToListAsync());
         }
 

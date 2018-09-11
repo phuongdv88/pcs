@@ -134,10 +134,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\CandidatesController.cs" />
-    <Compile Include="Controllers\ClientsController.cs" />
+    <Compile Include="Controllers\CandidateController.cs" />
+    <Compile Include="Controllers\ClientController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\SpecialistsController.cs" />
+    <Compile Include="Controllers\SpecialistController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -147,10 +148,11 @@
     <Compile Include="Models\Candidate.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CheckAuthorization.cs" />
+    <Compile Include="Models\CandidateAuthorization.cs" />
     <Compile Include="Models\Client.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClientAuthorization.cs" />
     <Compile Include="Models\CompanyInfo.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -181,6 +183,7 @@
     <Compile Include="Models\Specialist.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SpecialistAuthorization.cs" />
     <Compile Include="Models\UserLogin.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -1994,7 +1997,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Layout\_LoginLayout.cshtml" />
     <Content Include="Scripts\jquery\.bower.json" />
     <Content Include="Scripts\jquery\bower.json" />
@@ -2002,22 +2004,24 @@
     <Content Include="Scripts\jquery\dist\jquery.slim.min.map" />
     <Content Include="Scripts\jquery\external\sizzle\dist\sizzle.min.map" />
     <Content Include="Scripts\jquery\src\.eslintrc.json" />
-    <Content Include="Views\Clients\Create.cshtml" />
-    <Content Include="Views\Clients\Delete.cshtml" />
-    <Content Include="Views\Clients\Details.cshtml" />
-    <Content Include="Views\Clients\Edit.cshtml" />
-    <Content Include="Views\Clients\Index.cshtml" />
-    <Content Include="Views\Candidates\Create.cshtml" />
-    <Content Include="Views\Candidates\Delete.cshtml" />
-    <Content Include="Views\Candidates\Details.cshtml" />
-    <Content Include="Views\Candidates\Edit.cshtml" />
-    <Content Include="Views\Candidates\Index.cshtml" />
-    <Content Include="Views\Specialists\Create.cshtml" />
-    <Content Include="Views\Specialists\Delete.cshtml" />
-    <Content Include="Views\Specialists\Details.cshtml" />
-    <Content Include="Views\Specialists\Edit.cshtml" />
-    <Content Include="Views\Specialists\Index.cshtml" />
+    <Content Include="Views\Client\Create.cshtml" />
+    <Content Include="Views\Client\Delete.cshtml" />
+    <Content Include="Views\Client\Details.cshtml" />
+    <Content Include="Views\Client\Edit.cshtml" />
+    <Content Include="Views\Client\Index.cshtml" />
+    <Content Include="Views\Candidate\Create.cshtml" />
+    <Content Include="Views\Candidate\Delete.cshtml" />
+    <Content Include="Views\Candidate\Details.cshtml" />
+    <Content Include="Views\Candidate\Edit.cshtml" />
+    <Content Include="Views\Candidate\Index.cshtml" />
+    <Content Include="Views\Specialist\Create.cshtml" />
+    <Content Include="Views\Specialist\Delete.cshtml" />
+    <Content Include="Views\Specialist\Details.cshtml" />
+    <Content Include="Views\Specialist\Edit.cshtml" />
+    <Content Include="Views\Specialist\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Error\Error.cshtml" />
+    <Content Include="Views\Error\ErrorDontHavePermission.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

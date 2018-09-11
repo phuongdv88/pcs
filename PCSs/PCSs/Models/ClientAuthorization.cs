@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace PCSs.Models
 {
-    public class CheckAuthorization : AuthorizeAttribute
+    public class ClientAuthorization : AuthorizeAttribute
     {
-           public override void OnAuthorization(AuthorizationContext filterContext)
+        public override void OnAuthorization(AuthorizationContext filterContext)
         {
             if (HttpContext.Current.Session["UserID"] == null || !HttpContext.Current.Request.IsAuthenticated)
             {
@@ -19,17 +19,24 @@ namespace PCSs.Models
                 }
                 else
                 {
-                    //filterContext.Result = new RedirectResult(System.Web.Security.FormsAuthentication.LoginUrl + "?ReturnUrl=" +
-                    //     filterContext.HttpContext.Server.UrlEncode(filterContext.HttpContext.Request.RawUrl));
-                    //filterContext.Result = new RedirectResult(System.Web.Security.FormsAuthentication.LoginUrl);
+                    filterContext.Result = new RedirectResult(System.Web.Security.FormsAuthentication.LoginUrl + "?ReturnUrl=" +
+                         filterContext.HttpContext.Server.UrlEncode(filterContext.HttpContext.Request.RawUrl));
                 }
             }
             else
             {
 
                 //Code HERE for page level authorization
+                //Code HERE for page level authorization
+                if (HttpContext.Current.Session["Role"] == null
+                    || HttpContext.Current.Session["Role"].ToString() != "1")
+                {
+                    // signed in but don't have permission to access
+                    filterContext.Result = new RedirectResult("~/Error/ErrorDontHavePermission");
+                }
 
             }
         }
     }
+
 }

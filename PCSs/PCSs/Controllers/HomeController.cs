@@ -10,7 +10,6 @@ using PCSs.Util;
 
 namespace PCSs.Controllers
 {
-    [CheckAuthorization]
     public class HomeController : Controller
     {
         // GET: Home
@@ -22,6 +21,7 @@ namespace PCSs.Controllers
             {
                 EnsureLoggedOut();
                 // Store the originating URL so we can attach it to a form field
+                userInfo.ReturnURL = returnURL;
                 return View(userInfo);
             }
             catch {
@@ -43,11 +43,10 @@ namespace PCSs.Controllers
             try {
                 // If the return url starts with a slash "/" we assume it belongs to our site
                 // so we will redirect to this "action"
-                if(!string.IsNullOrWhiteSpace(returnURL) && Url.IsLocalUrl(returnURL))
-                {
+                if (!string.IsNullOrWhiteSpace(returnURL) && Url.IsLocalUrl(returnURL))
                     return Redirect(returnURL);
-                }
-                return RedirectToAction("Index");
+                
+                return RedirectToAction("Login  ", "Home");
             } catch { throw; }
         }
 
@@ -111,28 +110,62 @@ namespace PCSs.Controllers
                     if (isLogin)
                     {
                         // Login success
+                        // check lockoutdate
+                        if (userInfo.LockoutEnabled)
+                        {
+                            if(userInfo.LockoutDateUtc != null && userInfo.LockoutDateUtc < DateTime.UtcNow)
+                            {
+                                // account is expired
+                                throw new Exception("Access Denied! This account is expired");
+                            }
+                        }
+                        // check role to redirection to right link
+
                         // For set authentication in Cookie (remember me option)
                         SignInRemember(entity.UserName, entity.IsRemember);
                         // set a unique id in session
                         Session["UserID"] = userInfo.UserLoginId;
+                        Session["UserName"] = userInfo.UserName;
+                        Session["Role"] = userInfo.Role;
+                        if (string.IsNullOrEmpty(entity.ReturnURL))
+                        {
+                            switch (userInfo.Role)
+                            {
+                                case 0:
+                                    //admin 
+                                    return RedirectToAction("Index", "Candidate");
+                                case 1:
+                                    // Recruiter
+                                    return RedirectToAction("Index", "Client");
 
-                        // if we got this far, something failed, redisplay form 
+                                case 2:
+                                    // specialist
+                                    return RedirectToAction("Index", "Specialist");
 
+                                case 3:
+                                    // Candidate
+                                    return RedirectToAction("Index", "Candiate");
+                                default:
+                                    throw new Exception("Access Denied! Role of account is not allowed.");
+                            }
+                        }
                         return RedirectToLocal(entity.ReturnURL);
+
+
+                        
                     }
                     else
                     {
                         // login fail
-                        TempData["ErrorMSG"] = "Access Denied! Wrong Credential";
-                        return View(entity);
+                        throw new Exception("Access Denied! Wrong Credential.");
                     }
 
                 }
             }
-            catch 
+            catch (Exception e)
             {
-
-                throw;
+                TempData["ErrorMSG"] = e.Message;
+                return View(entity);
             }
         }
 
