@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VectorIcon.FormsPlugin.Android</name>
+    </assembly>
+    <members>
+        <member name="T:VectorIcon.FormsPlugin.Android.VectorIconTabRenderer">
+            <summary>
+            Renders <see cref="P:Android.Support.Design.Widget.TabLayout.Tab.Icon"/>
+            </summary>
+            <author>Joshua Poling</author>
+            <date>April 2, 2017</date>
+            <copyright>
+            </copyright>
+            <productName>VectorIconTabRenderer.cs</productName>
+            <history>
+            Date             Author              Change Reason                      Change Description
+            ----------------------------------------------------------------------------------------------------------
+            
+            ----------------------------------------------------------------------------------------------------------
+            </history>
+        </member>
+        <member name="P:VectorIcon.FormsPlugin.Android.VectorIconTabRenderer.TabLayoutResourceID">
+            <summary>
+            <see cref="T:Xamarin.Forms.Platform.Android.Resource"/> used for <see cref="T:Android.Support.Design.Widget.TabLayout"/>
+            </summary>
+        </member>
+        <member name="M:VectorIcon.FormsPlugin.Android.VectorIconTabRenderer.Init">
+            <summary>
+            Used for registration with dependency service
+            </summary>
+        </member>
+        <member name="M:VectorIcon.FormsPlugin.Android.VectorIconTabRenderer.OnElementChanged(Xamarin.Forms.Platform.Android.ElementChangedEventArgs{Xamarin.Forms.TabbedPage})">
+            <summary>
+            Called on first binding of <see cref="T:VectorIcon.FormsPlugin.Abstractions.VectorIconTabbedPage"/>. Sets <see cref="N:VectorIcon.FormsPlugin.Android"/> View to 
+            use for <see cref="T:Android.Support.Design.Widget.TabLayout"/>, and sets <see cref="P:Android.Support.Design.Widget.TabLayout.TabTextColors"/>
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:VectorIcon.FormsPlugin.Android.VectorIconTabRenderer.OnElementPropertyChanged(System.Object,System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+            <author>Joshua Poling</author>
+            <date>April 1, 2017</date>
+            <exception cref="T:System.NullReferenceException" ></exception>
+            <history>
+            Date             Author              Change Reason                      Change Description
+            ----------------------------------------------------------------------------------------------------------
+            
+            ----------------------------------------------------------------------------------------------------------
+            </history>
+        </member>
+        <member name="T:VectorIcon.FormsPlugin.Android.VectorIconLabelRenderer">
+            <summary>
+            Custom renderer for display's vector font for <see cref="P:Xamarin.Forms.Label.Text"/>
+            </summary>
+            <author>Joshua Poling</author>
+            <date>April 4, 2017</date>
+            <productName>VectorIconLabelRenderer.cs</productName>
+            <history>
+            Date             Author              Change Reason                      Change Description
+            ----------------------------------------------------------------------------------------------------------
+            
+            ----------------------------------------------------------------------------------------------------------
+            </history>
+        </member>
+        <member name="M:VectorIcon.FormsPlugin.Android.VectorIconLabelRenderer.Init">
+            <summary>
+            Used for registration with dependency service
+            </summary>
+            <author>Joshua Poling</author>
+            <date>April 4, 2017</date>
+            <history>
+            Date             Author              Change Reason                      Change Description
+            ----------------------------------------------------------------------------------------------------------
+            
+            ----------------------------------------------------------------------------------------------------------
+            </history>
+        </member>
+        <member name="M:VectorIcon.FormsPlugin.Android.VectorIconLabelRenderer.OnElementChanged(Xamarin.Forms.Platform.Android.ElementChangedEventArgs{Xamarin.Forms.Label})">
+            <summary>
+            Sets <see cref="P:Xamarin.Forms.Label.FontFamily"/>
+            </summary>
+            <param name="e"></param>
+            <author>Joshua Poling</author>
+            <date>April 4, 2017</date>
+            <history>
+            Date             Author              Change Reason                      Change Description
+            ----------------------------------------------------------------------------------------------------------
+            
+            ----------------------------------------------------------------------------------------------------------
+            </history>
+        </member>
+    </members>
+</doc>

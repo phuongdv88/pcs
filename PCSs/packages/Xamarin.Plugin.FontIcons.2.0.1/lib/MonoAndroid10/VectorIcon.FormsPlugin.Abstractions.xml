@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VectorIcon.FormsPlugin.Abstractions</name>
+    </assembly>
+    <members>
+        <member name="T:VectorIcon.FormsPlugin.Abstractions.FoundationIconCode">
+            <summary>
+            
+            </summary>
+            <author>Joshua Poling</author>
+            <date>April 5, 2017</date>
+            <copyright>
+            </copyright>
+            <productName>FoundationIconCode.cs</productName>
+            <history>
+            Date             Author              Change Reason                      Change Description
+            ----------------------------------------------------------------------------------------------------------
+            
+            ----------------------------------------------------------------------------------------------------------
+            </history>
+        </member>
+        <member name="T:VectorIcon.FormsPlugin.Abstractions.VectorIconLabel">
+            <summary>
+            Vector icon in place of <see cref="P:Xamarin.Forms.Label.Text"/>
+            </summary>
+            <author>Joshua Poling</author>
+            <date>DATE</date>
+            <copyright>
+            Copyright (c) YEAR Computer Technology Solutions, Inc.  ALL RIGHTS RESERVED
+            </copyright>
+            <productName>VectorIconLabel.cs</productName>
+            <history>
+            Date             Author              Change Reason                      Change Description
+            ----------------------------------------------------------------------------------------------------------
+            
+            ----------------------------------------------------------------------------------------------------------
+            </history>
+        </member>
+        <member name="M:VectorIcon.FormsPlugin.Abstractions.VectorIconLabel.#ctor">
+            <summary>
+            Initialize a new <see cref="T:VectorIcon.FormsPlugin.Abstractions.VectorIconLabel"/>
+            </summary>
+            <author>Joshua Poling</author>
+            <date>April 4, 2017</date>
+            <history>
+            Date             Author              Change Reason                      Change Description
+            ----------------------------------------------------------------------------------------------------------
+            
+            ----------------------------------------------------------------------------------------------------------
+            </history>
+        </member>
+        <member name="T:VectorIcon.FormsPlugin.Abstractions.VectorIconTabbedPage">
+            <summary>
+            <see cref="T:Xamarin.Forms.TabbedPage"/> with list of <see cref="T:VectorIcon.FormsPlugin.Abstractions.VectorIconNavigationPage"/>
+            </summary>
+            <author>Joshua Poling</author>
+            <date>April 2, 2017</date>
+            <copyright>
+            </copyright>
+            <productName>VectorIconTabbedPage.cs</productName>
+            <history>
+            Date             Author              Change Reason                      Change Description
+            ----------------------------------------------------------------------------------------------------------
+             
+            ----------------------------------------------------------------------------------------------------------
+            </history>
+        </member>
+        <member name="P:VectorIcon.FormsPlugin.Abstractions.VectorIconTabbedPage.Tabs">
+            <summary>
+            List of <see cref="T:Xamarin.Forms.NavigationPage"/> to use as root pages of tabs
+            </summary>
+        </member>
+        <member name="P:VectorIcon.FormsPlugin.Abstractions.VectorIconTabbedPage.SelectedIconColor">
+            <summary>
+            Get/Set the <see cref="P:VectorIcon.FormsPlugin.Abstractions.VectorIconNavigationPage.TabIcon"/> <see cref="T:Xamarin.Forms.Color"/> for selected tab
+            </summary>
+        </member>
+        <member name="P:VectorIcon.FormsPlugin.Abstractions.VectorIconTabbedPage.UnselectedIconColor">
+            <summary>
+            Get/Set the <see cref="P:VectorIcon.FormsPlugin.Abstractions.VectorIconNavigationPage.TabIcon"/> <see cref="T:Xamarin.Forms.Color"/> for inactive tab
+            </summary>
+        </member>
+        <member name="P:VectorIcon.FormsPlugin.Abstractions.VectorIconTabbedPage.IconSize">
+            <summary>
+            Get/Set the size of the iOS icon. 
+            <para>Width and Height are proportional.</para>
+            </summary>
+        </member>
+        <member name="M:VectorIcon.FormsPlugin.Abstractions.VectorIconTabbedPage.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:VectorIcon.FormsPlugin.Abstractions.VectorIconNavigationPage">
+            <summary>
+            <see cref="T:Xamarin.Forms.NavigationPage"/> with vector <see cref="P:Xamarin.Forms.Page.Icon"/>
+            </summary>
+            <author>Joshua Poling</author>
+            <date>April 2, 2017</date>
+            <copyright>
+            </copyright>
+            <productName>VectorIconNavigationPage.cs</productName>
+            <history>
+            Date             Author              Change Reason                      Change Description
+            ----------------------------------------------------------------------------------------------------------
+            
+            ----------------------------------------------------------------------------------------------------------
+            </history>
+        </member>
+        <member name="P:VectorIcon.FormsPlugin.Abstractions.VectorIconNavigationPage.TabIcon">
+            <summary>
+            Get/Set tab icon to display
+            </summary>
+        </member>
+        <member name="P:VectorIcon.FormsPlugin.Abstractions.VectorIconNavigationPage.IconFontFamily">
+            <summary>
+            Get/Set Icon font family
+            </summary>
+        </member>
+        <member name="M:VectorIcon.FormsPlugin.Abstractions.VectorIconNavigationPage.#ctor(Xamarin.Forms.Page)">
+            <summary>
+            Sets <see cref="T:Xamarin.Forms.NavigationPage"/> root page
+            </summary>
+            <param name="root"><see cref="T:Xamarin.Forms.Page"/> to set as root</param>
+        </member>
+    </members>
+</doc>

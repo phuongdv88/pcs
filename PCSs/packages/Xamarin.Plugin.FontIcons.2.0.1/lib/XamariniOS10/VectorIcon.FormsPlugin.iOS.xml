@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VectorIcon.FormsPlugin.iOS</name>
+    </assembly>
+    <members>
+        <member name="T:VectorIcon.FormsPlugin.iOS.VectorIconTabRenderer">
+            <summary>
+            Renders <see cref="P:UIKit.UITabBar.SelectedItem"/> and <see cref="P:UIKit.UITabBar.BackgroundImage"/>
+            </summary>
+            <author>Joshua Poling</author>
+            <date>April 2, 2017</date>
+            <productName>VectorIconRenderer.cs</productName>
+            <history>
+            Date             Author              Change Reason                      Change Description
+            ----------------------------------------------------------------------------------------------------------
+            4/6/2017    Joshua Poling       Bug with icon color     Added function to set set UITabBar appearance
+            ----------------------------------------------------------------------------------------------------------
+            4/6/2017    Joshua Poling       Not descriptive         Changed class name from implementation to renderer
+            ----------------------------------------------------------------------------------------------------------
+            </history>
+        </member>
+        <member name="M:VectorIcon.FormsPlugin.iOS.VectorIconTabRenderer.Init">
+            <summary>
+            Used for registration with dependency service
+            </summary>
+        </member>
+        <member name="M:VectorIcon.FormsPlugin.iOS.VectorIconTabRenderer.OnElementChanged(Xamarin.Forms.Platform.iOS.VisualElementChangedEventArgs)">
+            <summary>
+            Called on initial creation of <see cref="T:VectorIcon.FormsPlugin.Abstractions.VectorIconTabbedPage"/>
+            </summary>
+            <param name="e"></param>
+            <author>Joshua Poling</author>
+            <date>April 6, 2017</date>
+            <history>
+            Date             Author              Change Reason                      Change Description
+            ----------------------------------------------------------------------------------------------------------
+            
+            ----------------------------------------------------------------------------------------------------------
+            </history>
+        </member>
+        <member name="M:VectorIcon.FormsPlugin.iOS.VectorIconTabRenderer.ViewWillAppear(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="animated"></param>
+            <author>Joshua Poling</author>
+            <date>April 2, 2017</date>
+            <history>
+            Date             Author              Change Reason                      Change Description
+            ----------------------------------------------------------------------------------------------------------
+            
+            ----------------------------------------------------------------------------------------------------------
+            </history>
+        </member>
+    </members>
+</doc>
