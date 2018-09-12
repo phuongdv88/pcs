@@ -17,6 +17,7 @@ namespace PCSs.Controllers
         public ActionResult Login(string returnURL)
         {
             var userInfo = new UserLoginInfo();
+            
             try
             {
                 EnsureLoggedOut();
@@ -24,7 +25,8 @@ namespace PCSs.Controllers
                 userInfo.ReturnURL = returnURL;
                 return View(userInfo);
             }
-            catch {
+            catch
+            {
                 throw;
             }
         }
@@ -38,16 +40,39 @@ namespace PCSs.Controllers
             FormsAuthentication.SetAuthCookie(userName, isPersistent);
         }
         //GET: RedirectToLocal
-        private ActionResult RedirectToLocal(string returnURL = "")
+        private ActionResult RedirectToLocal(string returnURL = "", int role = -1)
         {
-            try {
+            try
+            {
                 // If the return url starts with a slash "/" we assume it belongs to our site
                 // so we will redirect to this "action"
                 if (!string.IsNullOrWhiteSpace(returnURL) && Url.IsLocalUrl(returnURL))
                     return Redirect(returnURL);
-                
+                else if (string.IsNullOrEmpty(returnURL))
+                {
+                    switch ((UserRole)role)
+                    {
+                        case UserRole.ADMIN:
+                            //admin 
+                            return RedirectToAction("Index", "Admin");
+                        case UserRole.CLIENT:
+                            // Recruiter
+                            return RedirectToAction("Index", "Client");
+
+                        case UserRole.SPECIALIST:
+                            // specialist
+                            return RedirectToAction("Index", "Specialist");
+
+                        case UserRole.CANDIDATE:
+                            // Candidate
+                            return RedirectToAction("Index", "Candiate");
+                        default:
+                            return RedirectToAction("Login  ", "Home");
+                    }
+                }
                 return RedirectToAction("Login  ", "Home");
-            } catch { throw; }
+            }
+            catch { throw; }
         }
 
         private void EnsureLoggedOut()
@@ -91,7 +116,8 @@ namespace PCSs.Controllers
 
             try
             {
-                using(var db = new PCSEntities()) {
+                using (var db = new PCSEntities())
+                {
                     // ensure we have a valid vewModel to work with
                     if (!ModelState.IsValid)
                     {
@@ -99,7 +125,7 @@ namespace PCSs.Controllers
                     }
                     // retrive stored hash value from database according to username
                     var userInfo = db.UserLogins.Where(s => s.UserName == entity.UserName.Trim()).FirstOrDefault();
-                    if(userInfo != null)
+                    if (userInfo != null)
                     {
                         oldHashValue = userInfo.PasswordHash;
                         salt = userInfo.SecurityStamp;
@@ -113,7 +139,7 @@ namespace PCSs.Controllers
                         // check lockoutdate
                         if (userInfo.LockoutEnabled)
                         {
-                            if(userInfo.LockoutDateUtc != null && userInfo.LockoutDateUtc < DateTime.UtcNow)
+                            if (userInfo.LockoutDateUtc != null && userInfo.LockoutDateUtc < DateTime.UtcNow)
                             {
                                 // account is expired
                                 throw new Exception("Access Denied! This account is expired");
@@ -127,32 +153,11 @@ namespace PCSs.Controllers
                         Session["UserID"] = userInfo.UserLoginId;
                         Session["UserName"] = userInfo.UserName;
                         Session["Role"] = userInfo.Role;
-                        if (string.IsNullOrEmpty(entity.ReturnURL))
-                        {
-                            switch (userInfo.Role)
-                            {
-                                case 0:
-                                    //admin 
-                                    return RedirectToAction("Index", "Candidate");
-                                case 1:
-                                    // Recruiter
-                                    return RedirectToAction("Index", "Client");
 
-                                case 2:
-                                    // specialist
-                                    return RedirectToAction("Index", "Specialist");
-
-                                case 3:
-                                    // Candidate
-                                    return RedirectToAction("Index", "Candiate");
-                                default:
-                                    throw new Exception("Access Denied! Role of account is not allowed.");
-                            }
-                        }
-                        return RedirectToLocal(entity.ReturnURL);
+                        return RedirectToLocal(entity.ReturnURL, userInfo.Role);
 
 
-                        
+
                     }
                     else
                     {
@@ -170,6 +175,6 @@ namespace PCSs.Controllers
         }
 
 
-        
+
     }
 }

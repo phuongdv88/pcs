@@ -29,7 +29,7 @@ namespace PCSs.Models
 
                 //Code HERE for page level authorization
                 if(HttpContext.Current.Session["Role"] == null
-                    || HttpContext.Current.Session["Role"].ToString() != "2")
+                    || HttpContext.Current.Session["Role"].ToString() != UserRole.SPECIALIST.ToString("D"))
                 {
                     // signed in but don't have permission to access
                     filterContext.Result = new RedirectResult("~/Error/ErrorDontHavePermission");

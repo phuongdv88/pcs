@@ -6,8 +6,9 @@ using System.Web.Mvc;
 
 namespace PCSs.Models
 {
-    public class CandidateAuthorization : AuthorizeAttribute
+    public class AdminAuthorization : AuthorizeAttribute
     {
+
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
             if (HttpContext.Current.Session["UserID"] == null || !HttpContext.Current.Request.IsAuthenticated)
@@ -25,12 +26,10 @@ namespace PCSs.Models
             }
             else
             {
-                var tmp = UserRole.CANDIDATE.ToString("D");
 
                 //Code HERE for page level authorization
-                //Code HERE for page level authorization
                 if (HttpContext.Current.Session["Role"] == null
-                    || HttpContext.Current.Session["Role"].ToString() != UserRole.CANDIDATE.ToString("D"))
+                    || HttpContext.Current.Session["Role"].ToString() != UserRole.ADMIN.ToString("D"))
                 {
                     // signed in but don't have permission to access
                     filterContext.Result = new RedirectResult("~/Error/ErrorDontHavePermission");
@@ -38,5 +37,4 @@ namespace PCSs.Models
             }
         }
     }
-
 }

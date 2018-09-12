@@ -5,6 +5,13 @@ using System.Web;
 
 namespace PCSs.Models
 {
+    public enum UserRole
+    {
+        ADMIN = 0,
+        CLIENT = 1,
+        SPECIALIST = 2,
+        CANDIDATE = 3,
+    }
     public class UserLoginInfo
     {
         public string UserName { get; set; }

@@ -134,14 +134,17 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CandidateController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\GeneralController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SpecialistController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminAuthorization.cs" />
     <Compile Include="Models\AttachmentFile.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -2022,6 +2025,13 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Error\Error.cshtml" />
     <Content Include="Views\Error\ErrorDontHavePermission.cshtml" />
+    <Content Include="Views\Admin\Create.cshtml" />
+    <Content Include="Views\Admin\Delete.cshtml" />
+    <Content Include="Views\Admin\Details.cshtml" />
+    <Content Include="Views\Admin\Edit.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\General\ForgetPassword.cshtml" />
+    <Content Include="Views\Error\ErrorCantVerifyAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

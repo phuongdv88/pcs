@@ -17,5 +17,9 @@ namespace PCSs.Controllers
         {
             return View();
         }
+        public ActionResult ErrorCantVerifyAccount()
+        {
+            return View();
+        }
     }
 }
