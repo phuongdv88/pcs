@@ -1,0 +1,527 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Untitled Document</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/stylesheet.css" type="text/css" />
+<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="../AdminLTE-2.4.0-rc/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    <script src="../AdminLTE-2.4.0-rc/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="../AdminLTE-2.4.0-rc/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+</head>
+<body>
+	<div class="header">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="logo">
+						<img src="images/LogoSample_ByTailorBrands.jpg">
+					</div>
+				</div>
+				<div class="col-md-7">
+					<div class="name-company">
+						Welcome: Haipro2906@gmail.com
+					</div>
+					<div class="popup-company-top">
+						<div class="form-group">
+							<div class="edit-profile-top item">Edit Profile</div>
+							<div class="profile-top item">Profile</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<a class="logout" href="">Logout</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="company-tab">
+		<div class="container">
+			<div class="row">
+				<div class="side-bar col-md-3 col-sm-3 col-xs-12">
+					<div class="list">
+						<div class="company item">
+							Company
+						</div>
+						<div class="recruiter item">
+							Recruiter Manager
+						</div>
+						<div class="candidate item active">
+							Candidate Manager
+						</div>
+					</div>
+				</div>
+				<div class="col-md-9 col-sm-9 col-xs-12">
+					<div class="form-company">
+						<form>
+							<div class="form-group">
+						      <label>Tên KH:</label>
+						      <input required type="text" class="form-control">
+						    </div>
+						    <div class="form-group">
+						      <label>Address:</label>
+						      <input require type="text" class="form-control">
+						    </div>
+						    <div class="form-group">
+							  	<label for="comment">Description:</label>
+							  	<textarea class="form-control"></textarea>
+							</div>
+							<div class="form-group">
+							  <label>Packet:</label>
+							  <select class="form-control" id="sel1">
+							    <option>Fake</option>
+							    <option>Super Fake</option>
+							    <option>Sách Tay</option>
+							  </select>
+							</div>
+							<div class="form-group">
+								<input type="submit" class="form-control" name="edit-company" value="Edit">
+							</div>
+						</form>
+					</div>
+					<div class="form-recruiter">
+						<form>
+							<table class="table">
+								<thead>
+									<tr class="title-bar">
+										<th class="title-name">Tên</th>
+										<th class="title-email">Email</th>
+										<th class="title-phone-number">Sdt</th>
+										<th class="title-edit">Sửa</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td class="email">nguyenvana@gmail.com</td>
+										<td class="phone-number">0123456789</td>
+										<td class="edit">
+											<a href="#" class="fas fa-pencil-alt"></a>
+			                            </td>
+									</tr>
+									<tr>
+										<td class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td class="email">nguyenvana@gmail.com</td>
+										<td class="phone-number">0123456789</td>
+										<td class="edit">
+											<a href="#" class="fas fa-pencil-alt"></a>
+			                            </td>
+									</tr>
+									<tr>
+										<td class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td class="email">nguyenvana@gmail.com</td>
+										<td class="phone-number">0123456789</td>
+										<td class="edit">
+											<a href="#" class="fas fa-pencil-alt"></a>
+			                            </td>
+									</tr>
+									<tr>
+										<td class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td class="email">nguyenvana@gmail.com</td>
+										<td class="phone-number">0123456789</td>
+										<td class="edit">
+											<a href="#" class="fas fa-pencil-alt"></a>
+			                            </td>
+									</tr>
+									<tr>
+										<td class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td class="email">nguyenvana@gmail.com</td>
+										<td class="phone-number">0123456789</td>
+										<td class="edit">
+											<a href="#" class="fas fa-pencil-alt"></a>
+			                            </td>
+									</tr>
+									<tr>
+										<td class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td class="email">nguyenvana@gmail.com</td>
+										<td class="phone-number">0123456789</td>
+										<td class="edit">
+											<a href="#" class="fas fa-pencil-alt"></a>
+			                            </td>
+									</tr>
+									<tr>
+										<td class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td class="email">nguyenvana@gmail.com</td>
+										<td class="phone-number">0123456789</td>
+										<td class="edit">
+											<a href="#" class="fas fa-pencil-alt"></a>
+			                            </td>
+									</tr>
+									<tr>
+										<td class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td class="email">nguyenvana@gmail.com</td>
+										<td class="phone-number">0123456789</td>
+										<td class="edit">
+											<a href="#" class="fas fa-pencil-alt"></a>
+			                            </td>
+									</tr>
+									<tr>
+										<td class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td class="email">nguyenvana@gmail.com</td>
+										<td class="phone-number">0123456789</td>
+										<td class="edit">
+											<a href="#" class="fas fa-pencil-alt"></a>
+			                            </td>
+									</tr>
+									<tr>
+										<td class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td class="email">nguyenvana@gmail.com</td>
+										<td class="phone-number">0123456789</td>
+										<td class="edit">
+											<a href="#" class="fas fa-pencil-alt"></a>
+			                            </td>
+									</tr>
+								</tbody>
+							</table>
+							<div class="form-group">
+								<input id="add-recruiter" type="submit" class="form-control" name="add" value="Add">
+							</div>
+						</form>
+					</div>
+
+
+					<div class="form-candidate show">
+						<form class="navbar-form navbar-left">
+							<div class="input-group">
+						        <input type="text" class="form-control" placeholder="Search" name="search">
+						        <div class="input-group-btn">
+						          <button class="btn btn-default" type="submit">
+						            <i class="glyphicon glyphicon-search"></i>
+						          </button>
+						        </div>
+						    </div>
+						    <div class="list-button">
+						    	
+								<div class="form-group">
+									<input type="text">
+								</div>
+								<div class="form-group">
+									<input type="submit" name="import" class="form-control" value="Filter">
+								</div>
+								<div class="form-group">
+									<input id="create-candidate" type="submit" name="create" class="form-control" value="Create New">
+								</div>
+								<div class="form-group">
+									<input type="submit" name="import" class="form-control" value="Import">
+								</div>
+						    </div>
+							
+							<table class="table table-bordered table-hover dataTable">
+								<thead>
+									<tr class="title-bar">
+										<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column descending" aria-sort="ascending">Tên</th>
+										<th class="sorting title-email" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column descending" aria-sort="ascending">Email</th>
+										<th class="sorting title-phone-number" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column descending" aria-sort="ascending">Sdt</th>
+										<th class="sorting title-status" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column descending" aria-sort="ascending">Status</th>
+										<th class="sorting title-complete" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column descending" aria-sort="ascending">Completed</th>
+										<th class="sorting title-start-date" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column descending" aria-sort="ascending">Start date</th>
+										<th class="title-edit">Sửa</th>
+										<th class="title-report">Report</th>
+
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td class="email">nguyenvana@gmail.com</td>
+										<td class="phone-number">0123456789</td>
+										<td class="status">Initial</td>
+										<td class="complete">abc</td>
+										<td class="start-date">10-09-2018</td>
+										<td class="edit">
+											<a href="#" class="fas fa-pencil-alt"></a>
+			                            </td>
+			                            <td class="report">
+											<a href="" class="far fa-calendar-alt"></a>
+			                            </td>
+
+									</tr>
+									<tr>
+										<td class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td class="email">nguyenvana@gmail.com</td>
+										<td class="phone-number">0123456789</td>
+										<td class="status">Initial</td>
+										<td class="complete">abc</td>
+										<td class="start-date">10-09-2018</td>
+										<td class="edit">
+											<a href="#" class="fas fa-pencil-alt"></a>
+			                            </td>
+			                            <td class="report">
+											<a href="" class="far fa-calendar-alt"></a>
+			                            </td>
+									</tr>
+									<tr>
+										<td class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td class="email">nguyenvana@gmail.com</td>
+										<td class="phone-number">0123456789</td>
+										<td class="status">Initial</td>
+										<td class="complete">abc</td>
+										<td class="start-date">10-09-2018</td>
+										<td class="edit">
+											<a href="#" class="fas fa-pencil-alt"></a>
+			                            </td>
+			                            <td class="report">
+											<a href="" class="far fa-calendar-alt"></a>
+			                            </td>
+									</tr>
+									<tr>
+										<td class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td class="email">nguyenvana@gmail.com</td>
+										<td class="phone-number">0123456789</td>
+										<td class="status">Initial</td>
+										<td class="complete">abc</td>
+										<td class="start-date">10-09-2018</td>
+										<td class="edit">
+											<a href="#" class="fas fa-pencil-alt"></a>
+			                            </td>
+			                            <td class="report">
+											<a href="" class="far fa-calendar-alt"></a>
+			                            </td>
+									</tr>
+									<tr>
+										<td class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td class="email">nguyenvana@gmail.com</td>
+										<td class="phone-number">0123456789</td>
+										<td class="status">Initial</td>
+										<td class="complete">abc</td>
+										<td class="start-date">10-09-2018</td>
+										<td class="edit">
+											<a href="#" class="fas fa-pencil-alt"></a>
+			                            </td>
+			                            <td class="report">
+											<a href="" class="far fa-calendar-alt"></a>
+			                            </td>
+									</tr>
+									<tr>
+										<td class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td class="email">nguyenvana@gmail.com</td>
+										<td class="phone-number">0123456789</td>
+										<td class="status">Initial</td>
+										<td class="complete">abc</td>
+										<td class="start-date">10-09-2018</td>
+										<td class="edit">
+											<a href="#" class="fas fa-pencil-alt"></a>
+			                            </td>
+			                            <td class="report">
+											<a href="" class="far fa-calendar-alt"></a>
+			                            </td>
+									</tr>
+									<tr>
+										<td class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td class="email">nguyenvana@gmail.com</td>
+										<td class="phone-number">0123456789</td>
+										<td class="status">Initial</td>
+										<td class="complete">abc</td>
+										<td class="start-date">10-09-2018</td>
+										<td class="edit">
+											<a href="#" class="fas fa-pencil-alt"></a>
+			                            </td>
+			                            <td class="report">
+											<a href="" class="far fa-calendar-alt"></a>
+			                            </td>
+									</tr>
+									<tr>
+										<td class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td class="email">nguyenvana@gmail.com</td>
+										<td class="phone-number">0123456789</td>
+										<td class="status">Initial</td>
+										<td class="complete">abc</td>
+										<td class="start-date">10-09-2018</td>
+										<td class="edit">
+											<a href="#" class="fas fa-pencil-alt"></a>
+			                            </td>
+			                            <td class="report">
+											<a href="" class="far fa-calendar-alt"></a>
+			                            </td>
+									</tr>
+									<tr>
+										<td class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td class="email">nguyenvana@gmail.com</td>
+										<td class="phone-number">0123456789</td>
+										<td class="status">Initial</td>
+										<td class="complete">abc</td>
+										<td class="start-date">10-09-2018</td>
+										<td class="edit">
+											<a href="#" class="fas fa-pencil-alt"></a>
+			                            </td>
+			                            <td class="report">
+											<a href="" class="far fa-calendar-alt"></a>
+			                            </td>
+									</tr>
+									<tr>
+										<td class="name"><a href="#">Bguyễn Văn A</a></td>
+										<td class="email">nguyenvana@gmail.com</td>
+										<td class="phone-number">0123456789</td>
+										<td class="status">Initial</td>
+										<td class="complete">abc</td>
+										<td class="start-date">10-09-2018</td>
+										<td class="edit">
+											<a href="#" class="fas fa-pencil-alt"></a>
+			                            </td>
+			                            <td class="report">
+											<a href="" class="far fa-calendar-alt"></a>
+			                            </td>
+									</tr>
+								</tbody>
+							</table>
+							<ul class="pagination">
+							  <li class="paginate_button"><a href="#">Previous</a></li>
+							  <li class="paginate_button"><a href="#">1</a></li>
+							  <li class="paginate_button"><a href="#">2</a></li>
+							  <li class="paginate_button"><a href="#">3</a></li>
+							  <li class="paginate_button"><a href="#">4</a></li>
+							  <li class="paginate_button"><a href="#">5</a></li>
+							  <li class="paginate_button"><a href="#">Next</a></li>
+							</ul>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-popup-recruiter">
+			<form>
+				<a class="fas fa-times"></a>
+				<div class="form-group">
+			      <label>Tên:</label>
+			      <input required type="text" class="form-control">
+			    </div>
+			    <div class="form-group">
+			      <label>Email</label>
+			      <input require type="email" class="form-control">
+			    </div>
+			    <div class="form-group">
+			      <label>Sdt</label>
+			      <input required type="text" class="form-control">
+			    </div>
+			    <div class="form-group">
+					<input type="submit" class="form-control" name="add" value="Finish">
+				</div>
+			</form>
+		</div>
+		<div class="form-popup-candidate">
+			<form>
+				<a class="fas fa-times"></a>
+				<div class="form-group">
+			      <label>First:</label>
+			      <input required type="text" class="form-control">
+			    </div>
+			    <div class="form-group">
+			      <label>Middle Name:</label>
+			      <input require type="email" class="form-control">
+			    </div>
+			    <div class="form-group">
+			      <label>Last Name:</label>
+			      <input required type="text" class="form-control">
+			    </div>
+			    <div class="form-group">
+			      <label>Email:</label>
+			      <input required type="text" class="form-control">
+			    </div>
+			    <div class="form-group">
+			      <label>Phone Number:</label>
+			      <input required type="text" class="form-control">
+			    </div>
+			    <div class="form-group">
+					<input type="submit" class="form-control btn bg-orange" name="add" value="Finish">
+				</div>
+			</form>
+		</div>
+		<div class="mask">
+		</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".list .company").click(function(){
+			$(".form-company").addClass('show');
+			$(".form-candidate").removeClass('show');
+			$(".form-recruiter").removeClass('show');
+		});
+
+		$(".list .recruiter").click(function(){
+			$(".form-company").removeClass('show');
+			$(".form-recruiter").addClass('show');
+			$(".form-candidate").removeClass('show');
+		});
+
+		$(".list .candidate").click(function(){
+			$(".form-company").removeClass('show');
+			$(".form-recruiter").removeClass('show');
+			$(".form-candidate").addClass('show');
+		});
+
+		$('.list .item').click(function(){
+		    $('.list .item').removeClass("active");
+		    $(this).addClass("active");
+		});
+		//popup recruiter
+		$('.company-tab #add-recruiter').click(function(){
+		    $('.company-tab .mask').addClass("show");
+		    $('.company-tab .form-popup-recruiter').addClass("show");
+		});
+		$('.form-popup-recruiter .fa-times').click(function(){
+		    $('.company-tab .mask').removeClass("show");
+		    $('.company-tab .form-popup-recruiter').removeClass("show");
+		});
+		$('.company-tab .mask').click(function(){
+		    $('.company-tab .mask').removeClass("show");
+		    $('.company-tab .form-popup-recruiter').removeClass("show");
+		});
+
+		//popup candidate
+		$('.company-tab #create-candidate').click(function(){
+		    $('.company-tab .mask').addClass("show");
+		    $('.company-tab .form-popup-candidate').addClass("show");
+		});
+		$('.form-popup-candidate .fa-times').click(function(){
+		    $('.company-tab .mask').removeClass("show");
+		    $('.company-tab .form-popup-candidate').removeClass("show");
+		});
+		$('.company-tab .mask').click(function(){
+		    $('.company-tab .mask').removeClass("show");
+		    $('.company-tab .form-popup-candidate').removeClass("show");
+		});
+
+		//slidetoggle name-company-top
+
+		$('.header .name-company').click(function(){
+		    $('.popup-company-top').slideToggle();
+		});
+	});
+
+
+
+
+
+	function myFunction(x) {
+        if (x.matches) {
+            $(window).scroll(function(even){
+				var pos_body = $('html,body').scrollTop();
+				if(pos_body>140){
+					$('.side-bar .list').addClass('fixed');
+				}
+				else{
+					$('.side-bar .list').removeClass('fixed');
+				}
+			});
+        }
+        else{
+
+        }
+    }
+
+    var x = window.matchMedia("(min-width: 768px)");
+    myFunction(x);
+    x.addListener(myFunction);
+</script>
