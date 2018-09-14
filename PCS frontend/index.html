@@ -216,15 +216,15 @@
 								</div>
 						    </div>
 							
-							<table class="table table-bordered table-hover dataTable">
+							<table id="myTable" class="table table-bordered table-hover dataTable">
 								<thead>
 									<tr class="title-bar">
-										<th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column descending" aria-sort="ascending">Tên</th>
-										<th class="sorting title-email" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column descending" aria-sort="ascending">Email</th>
-										<th class="sorting title-phone-number" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column descending" aria-sort="ascending">Sdt</th>
-										<th class="sorting title-status" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column descending" aria-sort="ascending">Status</th>
-										<th class="sorting title-complete" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column descending" aria-sort="ascending">Completed</th>
-										<th class="sorting title-start-date" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column descending" aria-sort="ascending">Start date</th>
+										<th onclick="sortTable(0)" class="sorting">Tên</th>
+										<th onclick="sortTable(1)" class="sorting title-email">Email</th>
+										<th onclick="sortTable(2)" class="sorting title-phone-number">Sdt</th>
+										<th onclick="sortTable(3)" class="sorting title-status">Status</th>
+										<th onclick="sortTable(4)" class="sorting title-complete">Completed</th>
+										<th onclick="sortTable(5)" class="sorting title-start-date">Start date</th>
 										<th class="title-edit">Sửa</th>
 										<th class="title-report">Report</th>
 
@@ -232,12 +232,12 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td class="name"><a href="#">Nguyễn Văn A</a></td>
-										<td class="email">nguyenvana@gmail.com</td>
+										<td id="name" class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td class="email">cguyenvana@gmail.com</td>
 										<td class="phone-number">0123456789</td>
-										<td class="status">Initial</td>
-										<td class="complete">abc</td>
-										<td class="start-date">10-09-2018</td>
+										<td class="status">tnitial</td>
+										<td class="complete">bbc</td>
+										<td class="start-date">1-09-2018</td>
 										<td class="edit">
 											<a href="#" class="fas fa-pencil-alt"></a>
 			                            </td>
@@ -252,7 +252,77 @@
 										<td class="phone-number">0123456789</td>
 										<td class="status">Initial</td>
 										<td class="complete">abc</td>
-										<td class="start-date">10-09-2018</td>
+										<td class="start-date">2-09-2018</td>
+										<td class="edit">
+											<a href="#" class="fas fa-pencil-alt"></a>
+			                            </td>
+			                            <td class="report">
+											<a href="" class="far fa-calendar-alt"></a>
+			                            </td>
+									</tr>
+									<tr>
+										<td class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td class="email">nguyenvana@gmail.com</td>
+										<td class="phone-number">9656789</td>
+										<td class="status">Bnitial</td>
+										<td class="complete">Kbc</td>
+										<td class="start-date">3-09-2018</td>
+										<td class="edit">
+											<a href="#" class="fas fa-pencil-alt"></a>
+			                            </td>
+			                            <td class="report">
+											<a href="" class="far fa-calendar-alt"></a>
+			                            </td>
+									</tr>
+									<tr>
+										<td class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td class="email">nguyenvana@gmail.com</td>
+										<td class="phone-number">5123456789</td>
+										<td class="status">taitial</td>
+										<td class="complete">ba</td>
+										<td class="start-date">4-09-2018</td>
+										<td class="edit">
+											<a href="#" class="fas fa-pencil-alt"></a>
+			                            </td>
+			                            <td class="report">
+											<a href="" class="far fa-calendar-alt"></a>
+			                            </td>
+									</tr>
+									<tr>
+										<td class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td class="email">nguyenvana@gmail.com</td>
+										<td class="phone-number">4123456789</td>
+										<td class="status">Initial</td>
+										<td class="complete">abc</td>
+										<td class="start-date">5-09-2018</td>
+										<td class="edit">
+											<a href="#" class="fas fa-pencil-alt"></a>
+			                            </td>
+			                            <td class="report">
+											<a href="" class="far fa-calendar-alt"></a>
+			                            </td>
+									</tr>
+									<tr>
+										<td class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td class="email">nguyenvana@gmail.com</td>
+										<td class="phone-number">7123456789</td>
+										<td class="status">Initial</td>
+										<td class="complete">abc</td>
+										<td class="start-date">6-09-2018</td>
+										<td class="edit">
+											<a href="#" class="fas fa-pencil-alt"></a>
+			                            </td>
+			                            <td class="report">
+											<a href="" class="far fa-calendar-alt"></a>
+			                            </td>
+									</tr>
+									<tr>
+										<td class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td class="email">nguyenvana@gmail.com</td>
+										<td class="phone-number">8123456789</td>
+										<td class="status">Initial</td>
+										<td class="complete">abc</td>
+										<td class="start-date">7-09-2018</td>
 										<td class="edit">
 											<a href="#" class="fas fa-pencil-alt"></a>
 			                            </td>
@@ -266,7 +336,7 @@
 										<td class="phone-number">0123456789</td>
 										<td class="status">Initial</td>
 										<td class="complete">abc</td>
-										<td class="start-date">10-09-2018</td>
+										<td class="start-date">8-09-2018</td>
 										<td class="edit">
 											<a href="#" class="fas fa-pencil-alt"></a>
 			                            </td>
@@ -280,77 +350,7 @@
 										<td class="phone-number">0123456789</td>
 										<td class="status">Initial</td>
 										<td class="complete">abc</td>
-										<td class="start-date">10-09-2018</td>
-										<td class="edit">
-											<a href="#" class="fas fa-pencil-alt"></a>
-			                            </td>
-			                            <td class="report">
-											<a href="" class="far fa-calendar-alt"></a>
-			                            </td>
-									</tr>
-									<tr>
-										<td class="name"><a href="#">Nguyễn Văn A</a></td>
-										<td class="email">nguyenvana@gmail.com</td>
-										<td class="phone-number">0123456789</td>
-										<td class="status">Initial</td>
-										<td class="complete">abc</td>
-										<td class="start-date">10-09-2018</td>
-										<td class="edit">
-											<a href="#" class="fas fa-pencil-alt"></a>
-			                            </td>
-			                            <td class="report">
-											<a href="" class="far fa-calendar-alt"></a>
-			                            </td>
-									</tr>
-									<tr>
-										<td class="name"><a href="#">Nguyễn Văn A</a></td>
-										<td class="email">nguyenvana@gmail.com</td>
-										<td class="phone-number">0123456789</td>
-										<td class="status">Initial</td>
-										<td class="complete">abc</td>
-										<td class="start-date">10-09-2018</td>
-										<td class="edit">
-											<a href="#" class="fas fa-pencil-alt"></a>
-			                            </td>
-			                            <td class="report">
-											<a href="" class="far fa-calendar-alt"></a>
-			                            </td>
-									</tr>
-									<tr>
-										<td class="name"><a href="#">Nguyễn Văn A</a></td>
-										<td class="email">nguyenvana@gmail.com</td>
-										<td class="phone-number">0123456789</td>
-										<td class="status">Initial</td>
-										<td class="complete">abc</td>
-										<td class="start-date">10-09-2018</td>
-										<td class="edit">
-											<a href="#" class="fas fa-pencil-alt"></a>
-			                            </td>
-			                            <td class="report">
-											<a href="" class="far fa-calendar-alt"></a>
-			                            </td>
-									</tr>
-									<tr>
-										<td class="name"><a href="#">Nguyễn Văn A</a></td>
-										<td class="email">nguyenvana@gmail.com</td>
-										<td class="phone-number">0123456789</td>
-										<td class="status">Initial</td>
-										<td class="complete">abc</td>
-										<td class="start-date">10-09-2018</td>
-										<td class="edit">
-											<a href="#" class="fas fa-pencil-alt"></a>
-			                            </td>
-			                            <td class="report">
-											<a href="" class="far fa-calendar-alt"></a>
-			                            </td>
-									</tr>
-									<tr>
-										<td class="name"><a href="#">Nguyễn Văn A</a></td>
-										<td class="email">nguyenvana@gmail.com</td>
-										<td class="phone-number">0123456789</td>
-										<td class="status">Initial</td>
-										<td class="complete">abc</td>
-										<td class="start-date">10-09-2018</td>
+										<td class="start-date">9-09-2018</td>
 										<td class="edit">
 											<a href="#" class="fas fa-pencil-alt"></a>
 			                            </td>
@@ -493,13 +493,13 @@
 		    $('.company-tab .form-popup-candidate').removeClass("show");
 		});
 
+
 		//slidetoggle name-company-top
 
 		$('.header .name-company').click(function(){
 		    $('.popup-company-top').slideToggle();
 		});
 	});
-
 
 
 
@@ -524,4 +524,46 @@
     var x = window.matchMedia("(min-width: 768px)");
     myFunction(x);
     x.addListener(myFunction);
+
+
+
+
+
+    //js sortable
+    function sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("myTable");
+  switching = true;
+  dir = "asc"; 
+  while (switching) {
+    switching = false;
+    rows = table.rows;
+    for (i = 1; i < (rows.length - 1); i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          shouldSwitch= true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      switchcount ++;      
+    } else {
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
 </script>
