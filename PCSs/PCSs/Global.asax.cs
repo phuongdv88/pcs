@@ -16,6 +16,7 @@ namespace PCSs
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            //ValueProviderFactories.Factories.Insert(0, new CryptoValueProfiderFactory());
         }
     }
 }
