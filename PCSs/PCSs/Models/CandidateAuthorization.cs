@@ -10,7 +10,7 @@ namespace PCSs.Models
     {
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
-            if (HttpContext.Current.Session["UserID"] == null || !HttpContext.Current.Request.IsAuthenticated)
+            if (HttpContext.Current.Session["UserId"] == null || !HttpContext.Current.Request.IsAuthenticated)
             {
                 if (filterContext.HttpContext.Request.IsAjaxRequest())
                 {
@@ -26,8 +26,6 @@ namespace PCSs.Models
             else
             {
                 var tmp = UserRole.CANDIDATE.ToString("D");
-
-                //Code HERE for page level authorization
                 //Code HERE for page level authorization
                 if (HttpContext.Current.Session["Role"] == null
                     || HttpContext.Current.Session["Role"].ToString() != UserRole.CANDIDATE.ToString("D"))
@@ -35,6 +33,20 @@ namespace PCSs.Models
                     // signed in but don't have permission to access
                     filterContext.Result = new RedirectResult("~/Error/ErrorDontHavePermission");
                 }
+                else
+                {
+                    // verify candidate id only able to see his profile
+                    var requestId = HttpContext.Current.Request.QueryString["userLoginId"];
+                    var userId = HttpContext.Current.Session["UserId"];
+                    if ( requestId!= null)
+                    {
+                        if (userId.ToString() != requestId.ToString())
+                        {
+                            filterContext.Result = new RedirectResult("~/Error/ErrorDontHavePermission");
+                        }
+                    }
+                }
+                
             }
         }
     }

@@ -203,6 +203,14 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Css\AdminLTE.css" />
     <Content Include="Content\Css\AdminLTE.min.css" />
+    <Content Include="Content\Css\alt\AdminLTE-bootstrap-social.css" />
+    <Content Include="Content\Css\alt\AdminLTE-bootstrap-social.min.css" />
+    <Content Include="Content\Css\alt\AdminLTE-fullcalendar.css" />
+    <Content Include="Content\Css\alt\AdminLTE-fullcalendar.min.css" />
+    <Content Include="Content\Css\alt\AdminLTE-select2.css" />
+    <Content Include="Content\Css\alt\AdminLTE-select2.min.css" />
+    <Content Include="Content\Css\alt\AdminLTE-without-plugins.css" />
+    <Content Include="Content\Css\alt\AdminLTE-without-plugins.min.css" />
     <Content Include="Content\Css\animate.css" />
     <Content Include="Content\Css\bootstrap\dist\css\bootstrap-theme.css" />
     <Content Include="Content\Css\bootstrap\dist\css\bootstrap-theme.min.css" />
@@ -232,8 +240,35 @@
     <Content Include="Content\Css\bootstrap\js\tooltip.js" />
     <Content Include="Content\Css\bootstrap\js\transition.js" />
     <Content Include="Content\Css\bootstrap\package.js" />
+    <Content Include="Content\Css\Candidate.css" />
     <Content Include="Content\Css\font-awesome.css" />
     <Content Include="Content\Css\Login.css" />
+    <Content Include="Content\Css\skins\skin-black-light.css" />
+    <Content Include="Content\Css\skins\skin-black-light.min.css" />
+    <Content Include="Content\Css\skins\skin-black.css" />
+    <Content Include="Content\Css\skins\skin-black.min.css" />
+    <Content Include="Content\Css\skins\skin-blue-light.css" />
+    <Content Include="Content\Css\skins\skin-blue-light.min.css" />
+    <Content Include="Content\Css\skins\skin-blue.css" />
+    <Content Include="Content\Css\skins\skin-blue.min.css" />
+    <Content Include="Content\Css\skins\skin-green-light.css" />
+    <Content Include="Content\Css\skins\skin-green-light.min.css" />
+    <Content Include="Content\Css\skins\skin-green.css" />
+    <Content Include="Content\Css\skins\skin-green.min.css" />
+    <Content Include="Content\Css\skins\skin-purple-light.css" />
+    <Content Include="Content\Css\skins\skin-purple-light.min.css" />
+    <Content Include="Content\Css\skins\skin-purple.css" />
+    <Content Include="Content\Css\skins\skin-purple.min.css" />
+    <Content Include="Content\Css\skins\skin-red-light.css" />
+    <Content Include="Content\Css\skins\skin-red-light.min.css" />
+    <Content Include="Content\Css\skins\skin-red.css" />
+    <Content Include="Content\Css\skins\skin-red.min.css" />
+    <Content Include="Content\Css\skins\skin-yellow-light.css" />
+    <Content Include="Content\Css\skins\skin-yellow-light.min.css" />
+    <Content Include="Content\Css\skins\skin-yellow.css" />
+    <Content Include="Content\Css\skins\skin-yellow.min.css" />
+    <Content Include="Content\Css\skins\_all-skins.css" />
+    <Content Include="Content\Css\skins\_all-skins.min.css" />
     <Content Include="Content\font-awesome\css\font-awesome.css" />
     <Content Include="Content\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
@@ -1696,6 +1731,14 @@
     <Content Include="Content\Ionicons\src\woman.svg" />
     <Content Include="Content\Ionicons\src\wrench.svg" />
     <Content Include="Content\Ionicons\src\xbox.svg" />
+    <Content Include="Content\Js\adminlte.js" />
+    <Content Include="Content\Js\adminlte.min.js" />
+    <Content Include="Content\Js\app.js" />
+    <Content Include="Content\Js\app.min.js" />
+    <Content Include="Content\Js\demo.js" />
+    <Content Include="Content\Js\fastclick\lib\fastclick.js" />
+    <Content Include="Content\Js\jquery-slimscroll\jquery.slimscroll.js" />
+    <Content Include="Content\Js\jquery-slimscroll\jquery.slimscroll.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -1868,6 +1911,13 @@
     <Content Include="Models\DBModel.edmx.diagram">
       <DependentUpon>DBModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\Js\jquery-slimscroll\.bower.json" />
+    <Content Include="Content\Js\jquery-slimscroll\bower.json" />
+    <Content Include="Content\Js\jquery-slimscroll\package.json" />
+    <Content Include="Content\Js\fastclick\.bower.json" />
+    <Content Include="Content\Js\fastclick\bower.json" />
+    <Content Include="Content\Js\fastclick\LICENSE" />
+    <Content Include="Content\Js\fastclick\README.md" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -2032,10 +2082,11 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\General\ForgetPassword.cshtml" />
     <Content Include="Views\Error\ErrorCantVerifyAccount.cshtml" />
+    <Content Include="Views\Candidate\UpdateProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Js\" />
+    <Folder Include="Content\Js\pages\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

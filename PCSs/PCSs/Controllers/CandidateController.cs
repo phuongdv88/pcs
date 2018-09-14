@@ -24,6 +24,22 @@ namespace PCSs.Controllers
             return View(await db.Candidates.ToListAsync());
         }
 
+        // GET: update form
+        public async Task<ActionResult> UpdateProfile(long? userLoginId)
+        {
+            if (userLoginId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Candidate candidate = await db.Candidates.FirstOrDefaultAsync(s => s.UserLoginId == userLoginId);
+            if (candidate == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.Title = candidate.FirstName + " " + candidate.MiddleName + " " + candidate.LastName + " 's Information";
+            return View(candidate);
+        }
+
         // GET: Candidates/Details/5
         public async Task<ActionResult> Details(long? id)
         {

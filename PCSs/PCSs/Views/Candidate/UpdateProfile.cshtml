@@ -1,0 +1,1438 @@
+﻿@model PCSs.Models.Candidate
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title</title>
+
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    <link href="~/Content/Css/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/Ionicons/css/ionicons.min.css" rel="stylesheet" />
+    <link href="~/Content/Css/AdminLTE.min.css" rel="stylesheet" />
+    <link href="~/Content/Css/Candidate.css" rel="stylesheet" />
+    <link href="~/Content/Css/skins/_all-skins.min.css" rel="stylesheet" />
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+</head>
+<body class="body-candidate">
+    <header class="text-center">
+        <!-- Logo -->
+        <img src="~/Content/Image/LogoSample_ByTailorBrands.jpg" alt="Professional Checking System"/>
+    </header>
+    <!-- Main content -->
+    <div class="row">
+        <!-- general form elements -->
+        <div class="box">
+            <div class="box-header with-border">
+                <div class="with-border text-center">
+                    <h3 class="">Information</h3>
+                </div>
+                <ul class="nav nav-pills">
+                    <li class="active"><a data-toggle="pill" href="#candidate"></a></li>
+                    <!-- <p><b><i class="fa fa-arrow-right" aria-hidden="true"></i></b></p> -->
+                    <li><a data-toggle="pill" href="#education"></a></li>
+                    <li><a data-toggle="pill" href="#company"></a></li>
+                    <li><a data-toggle="pill" href="#information"></a></li>
+                </ul>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <div class="tab-content">
+                <div id="candidate" class="tab-pane fade in active">
+                    <div class="row">
+                        <!-- general form elements -->
+                        <div class="col-md-12">
+                            <!-- /.box-header -->
+                            <!-- form start -->
+                            <form role="form">
+                                <div class="box-body">
+                                    <div class="with-border text-center">
+                                        <h3 class="box-title">Basic Information</h3>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="">File images</label>
+                                                <input type="file" id="exampleInputFile">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-9">
+                                            <label for="exampleInputEmail1">Username</label>
+                                            <div class="row">
+                                                <div class="col-xs-4">
+                                                    <input type="text" class="form-control" placeholder="First Name" required="">
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <input type="text" class="form-control" placeholder="Middle Name" required="">
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <input type="text" class="form-control" placeholder="Last name" required="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="">Gender</label>
+                                            <div class="row gender">
+                                                <div class="col-md-6">
+                                                    <input type="radio" name="gender" value="male" checked> Male<br>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <input type="radio" name="gender" value="female"> Female<br>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-3">
+                                            <label for="">Email address</label>
+                                            <input type="email" class="form-control" placeholder="Enter email" required="">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="">Phone number</label>
+                                            <input type="text" class="form-control" placeholder="0123456789" maxlength="11" minlength="10" required="">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="">DOB</label>
+                                            <input type="date" class="form-control" placeholder="01/01/1999" required="">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-3">
+                                            <label for="">Job title</label>
+                                            <input type="text" class="form-control" placeholder="quản lí, giám đốc" required="">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>Job level</label>
+                                            <select class="form-control">
+                                                <option>Fresher</option>
+                                                <option>Junior</option>
+                                                <option>Senior</option>
+                                                <option>Expert manager</option>
+                                                <option>Higher</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="">SocialIsuranceNumber</label>
+                                            <input type="text" class="form-control" placeholder="491563615684">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label for="">Note</label>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <textarea name="note" id="" cols="103" rows="3"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-3">
+                                            <label>Documenttype</label>
+                                            <select class="form-control">
+                                                <a href="" type="button"><option id="checkidnumber">IDNumber</option></a>
+                                                <a href="" type="button"><option id="checkpasstportnumber">PassportNumber</option></a>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="form-group col-md-3" id="idnumber">
+                                                        <label for="">IDNumber</label>
+                                                        <input type="text" class="form-control" placeholder="Số CMND" maxlength="13" minlength="9">
+                                                    </div>
+                                                    <div class="form-group col-md-3" id="iddate">
+                                                        <label for="">IDDate</label>
+                                                        <input type="date" class="form-control" placeholder="01/01/2018" required="">
+                                                    </div>
+                                                    <div class="form-group col-md-3" id="idsupply">
+                                                        <label for="">IDSupply</label>
+                                                        <input type="text" class="form-control" required="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.box-body -->
+                                <div class="col-md-6"></div>
+                                <div class="box-footer text-right col-md-6">
+                                    <a href="#education" data-toggle="pill"><button type="submit" class="btn btn-primary">Next</button></a>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                </div>
+                <div id="education" class="tab-pane fade">
+                    <div class="row">
+                        <!-- general form elements -->
+                        <div class="col-md-12">
+                            <!-- /.box-header -->
+                            <!-- form start -->
+                            <form role="form">
+                                <div class="box-body">
+                                    <div class="with-border text-center">
+                                        <h3 class="box-title">Education Information</h3>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">File images</label>
+                                        <input type="file" name="images">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">University</label>
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <input type="text" class="form-control" name="University" placeholder="First Name">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-3">
+                                            <label for="">Major</label>
+                                            <input type="text" class="form-control" name="Major" placeholder="CNTT">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="">StartDate</label>
+                                            <input type="date" class="form-control" name="StartDate" placeholder="01/01/2014">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="">StopDate</label>
+                                            <input type="date" class="form-control" name="StopDate" placeholder="01/01/2018">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.box-body -->
+
+                                <div class="box-footer">
+                                    <div id="addeducation">
+                                    </div>
+                                    <div class="text-right clickadd">
+                                        <button type="button" class="btn btn-primary" id="checkeducation"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="box-footer">
+                                        <a href="#candidate" data-toggle="pill"><button type="submit" class="btn btn-primary">Back</button></a>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="box-footer text-right">
+                                        <a href="#company" data-toggle="pill"><button type="submit" class="btn btn-primary">Next</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                </div>
+                <div id="company" class="tab-pane fade">
+                    <div class="row">
+                        <!-- general form elements -->
+                        <div class="col-md-12">
+                            <!-- /.box-header -->
+                            <!-- form start -->
+                            <form role="form">
+                                <div class="box-body">
+                                    <div class="with-border text-center">
+                                        <h3 class="box-title">Company Information</h3>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-4">
+                                            <label for="">Name</label>
+                                            <input type="text" class="form-control" placeholder="Swilife" required="">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="">Country</label>
+                                            <input type="email" class="form-control" placeholder="Viet Nam" required="">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-4">
+                                            <label for="">Address</label>
+                                            <input type="email" class="form-control" placeholder="Cau giay - Ha noi" required="">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="">Website</label>
+                                            <input type="text" class="form-control" placeholder="Swilife.com" required="">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-4">
+                                            <label for="">Job title</label>
+                                            <input type="text" class="form-control" placeholder="quản lí, giám đốc" required="">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label>Job level</label>
+                                            <select class="form-control">
+                                                <option>Fresher</option>
+                                                <option>Junior</option>
+                                                <option>Senior</option>
+                                                <option>Expert manager</option>
+                                                <option>Higher</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-4">
+                                            <label for="">StartDate</label>
+                                            <input type="date" class="form-control" name="StartDate" placeholder="01/01/2014">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="">StopDate</label>
+                                            <input type="date" class="form-control" name="StopDate" placeholder="01/01/2018">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label for="">Description</label>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <textarea name="note" id="" cols="103" rows="3"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label for="">Document</label>
+                                            <input type="file" name="images">
+                                        </div>
+                                    </div>
+                                    <div id="addreference-a">
+                                        <form action="" method="post" accept-charset="utf-8">
+                                            <div class="box-body">
+                                                <div class="row">
+                                                    <div class="col-md-9">
+                                                        <h3>Reference Information</h3>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="cancel text-right" id="cancelreference-a">
+                                                            <button class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-md-5">
+                                                        <label for="">Name</label>
+                                                        <div class="row">
+                                                            <div class="col-xs-12">
+                                                                <input type="text" class="form-control" placeholder="" required="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-md-5">
+                                                        <label for="">Gender</label>
+                                                        <div class="row gender">
+                                                            <div class="col-md-3">
+                                                                <input type="radio" name="gender" value="male" checked> Male<br>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <input type="radio" name="gender" value="female"> Female<br>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-md-4">
+                                                        <label for="">Email</label>
+                                                        <input type="mail" class="form-control" placeholder="abc@gmail.com" required="">
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label for="">Phonenumber</label>
+                                                        <input type="text" class="form-control" placeholder="0123456789" required="">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-md-4">
+                                                        <label for="">Job title</label>
+                                                        <input type="text" class="form-control" placeholder="quản lí, giám đốc" required="">
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label>Job level</label>
+                                                        <select class="form-control">
+                                                            <option>Fresher</option>
+                                                            <option>Junior</option>
+                                                            <option>Senior</option>
+                                                            <option>Expert manager</option>
+                                                            <option>Higher</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-md-6">
+                                                        <label for="">Note</label>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <textarea name="note" id="" cols="88" rows="3"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div id="addreference-b">
+                                        <form action="" method="post" accept-charset="utf-8">
+                                            <div class="box-body">
+                                                <div class="row">
+                                                    <div class="col-md-9">
+                                                        <h3>Reference Information</h3>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="cancel text-right" id="cancelreference-b">
+                                                            <button class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-md-5">
+                                                        <label for="">Name</label>
+                                                        <div class="row">
+                                                            <div class="col-xs-12">
+                                                                <input type="text" class="form-control" placeholder="" required="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-md-5">
+                                                        <label for="">Gender</label>
+                                                        <div class="row gender">
+                                                            <div class="col-md-3">
+                                                                <input type="radio" name="gender" value="male" checked> Male<br>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <input type="radio" name="gender" value="female"> Female<br>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-md-4">
+                                                        <label for="">Email</label>
+                                                        <input type="mail" class="form-control" placeholder="abc@gmail.com" required="">
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label for="">Phonenumber</label>
+                                                        <input type="text" class="form-control" placeholder="0123456789" required="">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-md-4">
+                                                        <label for="">Job title</label>
+                                                        <input type="text" class="form-control" placeholder="quản lí, giám đốc" required="">
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label>Job level</label>
+                                                        <select class="form-control">
+                                                            <option>Fresher</option>
+                                                            <option>Junior</option>
+                                                            <option>Senior</option>
+                                                            <option>Expert manager</option>
+                                                            <option>Higher</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-md-6">
+                                                        <label for="">Note</label>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <textarea name="note" id="" cols="88" rows="3"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="box-title clickadd">
+                                        <button type="button" class="btn btn-primary" id="checkaddreference-a">+ Add reference</button>
+                                    </div>
+                                    <div class="box-title clickadd">
+                                        <button type="button" class="btn btn-primary" id="checkaddreference-b">+ Add reference</button>
+                                    </div>
+                                    <div id="addcompany">
+                                        <div class="box-header with-border">
+                                            <div class="col-md-9">
+                                                <h3 class="box-title">Company Information 2</h3>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="cancel text-right" id="cancelcompany">
+                                                    <button class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="box-body">
+                                            <div class="row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="">Name</label>
+                                                    <input type="text" class="form-control" placeholder="Swilife" required="">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="">Country</label>
+                                                    <input type="email" class="form-control" placeholder="Viet Nam" required="">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="">Address</label>
+                                                    <input type="email" class="form-control" placeholder="Cau giay - Ha noi" required="">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="">Website</label>
+                                                    <input type="text" class="form-control" placeholder="Swilife.com" required="">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="">Job title</label>
+                                                    <input type="text" class="form-control" placeholder="quản lí, giám đốc" required="">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label>Job level</label>
+                                                    <select class="form-control">
+                                                        <option>Fresher</option>
+                                                        <option>Junior</option>
+                                                        <option>Senior</option>
+                                                        <option>Expert manager</option>
+                                                        <option>Higher</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="">StartDate</label>
+                                                    <input type="date" class="form-control" name="StartDate" placeholder="01/01/2014">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="">StopDate</label>
+                                                    <input type="date" class="form-control" name="StopDate" placeholder="01/01/2018">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Description</label>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <textarea name="note" id="" cols="103" rows="3"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="addreference1a">
+                                                <form action="" method="post" accept-charset="utf-8">
+                                                    <div class="box-body">
+                                                        <div class="row">
+                                                            <div class="col-md-9">
+                                                                <h3>Reference Information</h3>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="cancel text-right" id="cancelreference1a">
+                                                                    <button class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group col-md-5">
+                                                                <label for="">Name</label>
+                                                                <div class="row">
+                                                                    <div class="col-xs-12">
+                                                                        <input type="text" class="form-control" placeholder="" required="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group col-md-5">
+                                                                <label for="">Gender</label>
+                                                                <div class="row gender">
+                                                                    <div class="col-md-3">
+                                                                        <input type="radio" name="gender" value="male" checked> Male<br>
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <input type="radio" name="gender" value="female"> Female<br>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group col-md-4">
+                                                                <label for="">Email</label>
+                                                                <input type="mail" class="form-control" placeholder="abc@gmail.com" required="">
+                                                            </div>
+                                                            <div class="form-group col-md-4">
+                                                                <label for="">Phonenumber</label>
+                                                                <input type="text" class="form-control" placeholder="0123456789" required="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group col-md-4">
+                                                                <label for="">Job title</label>
+                                                                <input type="text" class="form-control" placeholder="quản lí, giám đốc" required="">
+                                                            </div>
+                                                            <div class="form-group col-md-4">
+                                                                <label>Job level</label>
+                                                                <select class="form-control">
+                                                                    <option>Fresher</option>
+                                                                    <option>Junior</option>
+                                                                    <option>Senior</option>
+                                                                    <option>Expert manager</option>
+                                                                    <option>Higher</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group col-md-6">
+                                                                <label for="">Note</label>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <textarea name="note" id="" cols="88" rows="3"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div id="addreference1b">
+                                                <form action="" method="post" accept-charset="utf-8">
+                                                    <div class="box-body">
+                                                        <div class="row">
+                                                            <div class="col-md-9">
+                                                                <h3>Reference Information</h3>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="cancel text-right" id="cancelreference1b">
+                                                                    <button class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group col-md-5">
+                                                                <label for="">Name</label>
+                                                                <div class="row">
+                                                                    <div class="col-xs-12">
+                                                                        <input type="text" class="form-control" placeholder="" required="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group col-md-5">
+                                                                <label for="">Gender</label>
+                                                                <div class="row gender">
+                                                                    <div class="col-md-3">
+                                                                        <input type="radio" name="gender" value="male" checked> Male<br>
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <input type="radio" name="gender" value="female"> Female<br>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group col-md-4">
+                                                                <label for="">Email</label>
+                                                                <input type="mail" class="form-control" placeholder="abc@gmail.com" required="">
+                                                            </div>
+                                                            <div class="form-group col-md-4">
+                                                                <label for="">Phonenumber</label>
+                                                                <input type="text" class="form-control" placeholder="0123456789" required="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group col-md-4">
+                                                                <label for="">Job title</label>
+                                                                <input type="text" class="form-control" placeholder="quản lí, giám đốc" required="">
+                                                            </div>
+                                                            <div class="form-group col-md-4">
+                                                                <label>Job level</label>
+                                                                <select class="form-control">
+                                                                    <option>Fresher</option>
+                                                                    <option>Junior</option>
+                                                                    <option>Senior</option>
+                                                                    <option>Expert manager</option>
+                                                                    <option>Higher</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group col-md-6">
+                                                                <label for="">Note</label>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <textarea name="note" id="" cols="88" rows="3"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="box-title clickadd">
+                                                <button type="button" class="btn btn-primary" id="checkaddreference1a">+ Add reference</button>
+                                            </div>
+                                            <div class="box-title clickadd">
+                                                <button type="button" class="btn btn-primary" id="checkaddreference1b">+ Add reference</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="addcompany1">
+                                        <div class="box-header with-border">
+                                            <div class="col-md-9">
+                                                <h3 class="box-title">Company Information 3</h3>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="cancel text-right" id="cancelcompany1">
+                                                    <button class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="box-body">
+                                            <div class="row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="">Name</label>
+                                                    <input type="text" class="form-control" placeholder="Swilife" required="">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="">Country</label>
+                                                    <input type="email" class="form-control" placeholder="Viet Nam" required="">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="">Address</label>
+                                                    <input type="email" class="form-control" placeholder="Cau giay - Ha noi" required="">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="">Website</label>
+                                                    <input type="text" class="form-control" placeholder="Swilife.com" required="">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="">Job title</label>
+                                                    <input type="text" class="form-control" placeholder="quản lí, giám đốc" required="">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label>Job level</label>
+                                                    <select class="form-control">
+                                                        <option>Fresher</option>
+                                                        <option>Junior</option>
+                                                        <option>Senior</option>
+                                                        <option>Expert manager</option>
+                                                        <option>Higher</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="">StartDate</label>
+                                                    <input type="date" class="form-control" name="StartDate" placeholder="01/01/2014">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="">StopDate</label>
+                                                    <input type="date" class="form-control" name="StopDate" placeholder="01/01/2018">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Description</label>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <textarea name="note" id="" cols="103" rows="3"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="addreference2a">
+                                                <form action="" method="post" accept-charset="utf-8">
+                                                    <div class="box-body">
+                                                        <div class="row">
+                                                            <div class="col-md-9">
+                                                                <h3>Reference Information</h3>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="cancel text-right" id="cancelreference2a">
+                                                                    <button class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group col-md-5">
+                                                                <label for="">Name</label>
+                                                                <div class="row">
+                                                                    <div class="col-xs-12">
+                                                                        <input type="text" class="form-control" placeholder="" required="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group col-md-5">
+                                                                <label for="">Gender</label>
+                                                                <div class="row gender">
+                                                                    <div class="col-md-3">
+                                                                        <input type="radio" name="gender" value="male" checked> Male<br>
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <input type="radio" name="gender" value="female"> Female<br>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group col-md-4">
+                                                                <label for="">Email</label>
+                                                                <input type="mail" class="form-control" placeholder="abc@gmail.com" required="">
+                                                            </div>
+                                                            <div class="form-group col-md-4">
+                                                                <label for="">Phonenumber</label>
+                                                                <input type="text" class="form-control" placeholder="0123456789" required="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group col-md-4">
+                                                                <label for="">Job title</label>
+                                                                <input type="text" class="form-control" placeholder="quản lí, giám đốc" required="">
+                                                            </div>
+                                                            <div class="form-group col-md-4">
+                                                                <label>Job level</label>
+                                                                <select class="form-control">
+                                                                    <option>Fresher</option>
+                                                                    <option>Junior</option>
+                                                                    <option>Senior</option>
+                                                                    <option>Expert manager</option>
+                                                                    <option>Higher</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group col-md-6">
+                                                                <label for="">Note</label>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <textarea name="note" id="" cols="88" rows="3"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div id="addreference2b">
+                                                <form action="" method="post" accept-charset="utf-8">
+                                                    <div class="box-body">
+                                                        <div class="row">
+                                                            <div class="col-md-9">
+                                                                <h3>Reference Information</h3>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="cancel text-right" id="cancelreference2b">
+                                                                    <button class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group col-md-5">
+                                                                <label for="">Name</label>
+                                                                <div class="row">
+                                                                    <div class="col-xs-12">
+                                                                        <input type="text" class="form-control" placeholder="" required="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group col-md-5">
+                                                                <label for="">Gender</label>
+                                                                <div class="row gender">
+                                                                    <div class="col-md-3">
+                                                                        <input type="radio" name="gender" value="male" checked> Male<br>
+                                                                    </div>
+                                                                    <div class="col-md-3">
+                                                                        <input type="radio" name="gender" value="female"> Female<br>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group col-md-4">
+                                                                <label for="">Email</label>
+                                                                <input type="mail" class="form-control" placeholder="abc@gmail.com" required="">
+                                                            </div>
+                                                            <div class="form-group col-md-4">
+                                                                <label for="">Phonenumber</label>
+                                                                <input type="text" class="form-control" placeholder="0123456789" required="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group col-md-4">
+                                                                <label for="">Job title</label>
+                                                                <input type="text" class="form-control" placeholder="quản lí, giám đốc" required="">
+                                                            </div>
+                                                            <div class="form-group col-md-4">
+                                                                <label>Job level</label>
+                                                                <select class="form-control">
+                                                                    <option>Fresher</option>
+                                                                    <option>Junior</option>
+                                                                    <option>Senior</option>
+                                                                    <option>Expert manager</option>
+                                                                    <option>Higher</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group col-md-6">
+                                                                <label for="">Note</label>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <textarea name="note" id="" cols="88" rows="3"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="box-title clickadd">
+                                                <button type="button" class="btn btn-primary" id="checkaddreference2a">+ Add reference</button>
+                                            </div>
+                                            <div class="box-title clickadd">
+                                                <button type="button" class="btn btn-primary" id="checkaddreference2b">+ Add reference</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="box-footer text-right">
+                                        <button type="button" class="btn btn-primary" id="checkaddcompany"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                                    </div>
+                                    <div class="text-right">
+                                        <button type="button" class="btn btn-primary" id="checkaddcompany1"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                                    </div>
+                                </div>
+
+                                <!-- /.box-body -->
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="box-footer">
+                                            <a href="#education" data-toggle="pill"><button type="submit" class="btn btn-primary">Back</button></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="box-footer text-right">
+                                            <a href="#information" data-toggle="pill"><button type="submit" class="btn btn-primary">Next</button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                </div>
+                <div id="information" class="tab-pane fade">
+                    <div class="row">
+                        <!-- general form elements -->
+                        <div class="col-md-12">
+                            <!-- /.box-header -->
+                            <!-- form start -->
+                            <form role="form">
+                                <div class="box-body">
+                                    <div class="with-border text-center">
+                                        <h3 class="box-title">General Information</h3>
+                                    </div>
+                                    <div class="with-border">
+                                        <h3 class="box-title">Basic Information</h3>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Name:</label>
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <label for="">DOB:</label>
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <label for="">Gender:</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Address:</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Email:</label>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Phone:</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="">IDNumber:</label>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="">IDDate:</label>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="">IDSupply:</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="">SocialIsuranceNumber:</label>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="">PassportNumber:</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Job title:</label>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Job level:</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Note:</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label for=""></label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="">University:</label>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Major:</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-5">
+                                                    <label for="">Startdate - Stopdate:</label>
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <label for="">to</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="img_information">
+                                                <form action="">
+                                                    <p>Ảnh</p>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="with-border">
+                                        <h3 class="box-title">Experience</h3>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Name company:</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Address:</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Email:</label>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Phone:</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Job title:</label>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Job level:</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-5">
+                                                    <label for="">Startdate - Stopdate:</label>
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <label for="">to</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Description</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label for=""></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="with-border">
+                                        <h3 class="box-title">Reference</h3>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Name:</label>
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <label for="">Gender:</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Address:</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Email:</label>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Phone:</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Job title:</label>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Job level:</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="">Description</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label for=""></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="checkbox col-md-12">
+                                    <label>
+                                        <input type="checkbox"> I accept
+                                    </label>
+                                </div>
+                                <!-- /.box-body -->
+                            </form>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="box-footer">
+                                        <a href="#company" data-toggle="pill"><button type="submit" class="btn btn-primary">Back</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-footer text-center">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.box -->
+    </div>
+    <!-- /.row -->
+    <!-- /.content -->
+    <!-- ./wrapper -->
+    <!-- jQuery 3 -->
+    <script src="~/Scripts/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <!-- Slimscroll -->
+    <script src="~/Content/Js/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="~/Content/Js/fastclick/lib/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Content/Js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="~/Content/Js/demo.js"></script>
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+
+    <script type="text/javascript">
+  (function($){
+    $countFormseducation = 1;
+    $.fn.addForms = function(){
+      var myformeducation =
+      '<button class="btn btn-danger text-right" id="btn-remove"><i class="fa fa-times" aria-hidden="true"></i></button>'+
+      '<form action="" method="post" accept-charset="utf-8" id="addformeducation">'+
+      '<div class="box-body">'+
+      '<div class="form-group">'+
+      '<label for="">File images</label>'+
+      '<input type="file" name="images">'+
+      '</div>'+
+      '<div class="form-group">'+
+      '<label for="">University</label>'+
+      '<div class="row">'+
+      '<div class="col-xs-6">'+
+      '<input type="text" class="form-control" placeholder="First Name" required="">'+
+      '</div>'+
+      '</div>'+
+      '</div>'+
+      '<div class="row">'+
+      '<div class="form-group col-md-3">'+
+      '<label for="">Major</label>'+
+      '<input type="text" class="form-control" placeholder="CNTT" required="">'+
+      '</div>'+
+      '<div class="form-group col-md-3">'+
+      '<label for="">StartDate</label>'+
+      '<input type="date" class="form-control" placeholder="01/01/2014"required="">'+
+      '</div>'+
+      '<div class="form-group col-md-3">'+
+      '<label for="">StopDate</label>'+
+      '<input type="date" class="form-control" placeholder="01/01/2018" required="">'+
+      '</div>'+
+      '</div>'+
+      '</div>'+
+      '</form>';;
+
+      myformeducation = $("<div>"+myformeducation+"</div>");
+      $("button", $(myformeducation)).click(function(){
+        $(this).parent().remove();
+      });
+
+      $(this).append(myformeducation);
+      $countFormseducation++;
+    };
+  })(jQuery);
+
+  $(function(){
+    $("#checkeducation").bind("click", function(){
+      $("#addeducation").addForms();
+    });
+  });
+    </script>
+
+    <script type="text/javascript">
+  $(document).ready(function(){
+    $('select').change(function() {
+      /* Act on the event */
+      $('select option:selected').each(function() {
+        var cmd = $(this).attr('id');
+
+        if ( cmd == 'checkpasstportnumber') {
+          $('#iddate').hide();
+          $('#idsupply').hide();
+          $('#idnumber').replaceWith(function() {
+            return '<div id="passportnumber">'+
+            '<div class="form-group col-md-3">'+
+            '<label for="">PassportNumber</label>'+
+            '<input type="text" class="form-control" required="">'+
+            '</div>'+
+            '</div>';
+          });
+        }
+        if( cmd == 'checkidnumber'){
+          $('#passportnumber').replaceWith(function() {
+            $('#iddate').show();
+            $('#idsupply').show();
+            return '<div class="form-group col-md-3" id="idnumber">'+
+            '<label for="">IDNumber</label>'+
+            '<input type="text" class="form-control" placeholder="Số CMND" maxlength="13" minlength="9">'+
+            '</div>';
+          });
+        }
+      });
+    });
+  });
+    </script>
+    <script type="text/javascript">
+  $(document).ready(function(){
+    $('#addreference-a').hide();
+    $('#checkaddreference-b').hide();
+    $('button#checkaddreference-a').click(function(){
+      if($('button#checkaddreference-a')){
+        $('#addreference-a').show();
+        $('#checkaddreference-a').hide();
+        $('#checkaddreference-b').show();
+      }else{
+        $('#addreference-a').hide();
+      }
+    });
+    $('#cancelreference-a').click(function(){
+      if($('#cancelreference-a')){
+        $('#addreference-a').hide();
+        $('#checkaddreference-a').show();
+        $('#checkaddreference-b').hide();
+      }else{
+        $('#addreference-a').show();
+      }
+    });
+    $('#addreference-b').hide();
+    $('button#checkaddreference-b').click(function(){
+      if($('button#checkaddreference-b')){
+        $('#addreference-b').show();
+        $('#checkaddreference-a').hide();
+        $('#checkaddreference-b').hide();
+      }else{
+        $('#addreference-b').hide();
+      }
+    });
+    $('#cancelreference-b').click(function(){
+      if($('#cancelreference-b')){
+        $('#addreference-b').hide();
+        $('#checkaddreference-a').show();
+        $('#checkaddreference-b').hide();
+      }else{
+        $('#addreference-b').show();
+      }
+    });
+
+    $('#addreference1a').hide();
+    $('#checkaddreference1b').hide();
+    $('button#checkaddreference1a').click(function(){
+      if($('button#checkaddreference1a')){
+        $('#addreference1a').show();
+        $('#checkaddreference1a').hide();
+        $('#checkaddreference1b').show();
+      }else{
+        $('#addreference1a').hide();
+      }
+    });
+    $('#cancelreference1a').click(function(){
+      if($('#cancelreference1a')){
+        $('#addreference1a').hide();
+        $('#checkaddreference1a').show();
+        $('#checkaddreference1b').hide();
+      }else{
+        $('#addreference1a').show();
+      }
+    });
+    $('#addreference1b').hide();
+    $('button#checkaddreference1b').click(function(){
+      if($('button#checkaddreference1b')){
+        $('#addreference1b').show();
+        $('#checkaddreference1a').hide();
+        $('#checkaddreference1b').hide();
+      }else{
+        $('#addreference1b').hide();
+      }
+    });
+    $('#cancelreference1b').click(function(){
+      if($('#cancelreference1b')){
+        $('#addreference1b').hide();
+        $('#checkaddreference1a').show();
+        $('#checkaddreference1b').hide();
+      }else{
+        $('#addreference1b').show();
+      }
+    });
+
+    $('#addreference2a').hide();
+    $('#checkaddreference2b').hide();
+    $('button#checkaddreference2a').click(function(){
+      if($('button#checkaddreference2a')){
+        $('#addreference2a').show();
+        $('#checkaddreference2a').hide();
+        $('#checkaddreference2b').show();
+      }else{
+        $('#addreference2a').hide();
+      }
+    });
+    $('#cancelreference2a').click(function(){
+      if($('#cancelreference2a')){
+        $('#addreference2a').hide();
+        $('#checkaddreference2a').show();
+        $('#checkaddreference2b').hide();
+      }else{
+        $('#addreference2a').show();
+      }
+    });
+    $('#addreference2b').hide();
+    $('button#checkaddreference2b').click(function(){
+      if($('button#checkaddreference2b')){
+        $('#addreference2b').show();
+        $('#checkaddreference2a').hide();
+        $('#checkaddreference2b').hide();
+      }else{
+        $('#addreference2b').hide();
+      }
+    });
+    $('#cancelreference2b').click(function(){
+      if($('#cancelreference2b')){
+        $('#addreference2b').hide();
+        $('#checkaddreference2a').show();
+        $('#checkaddreference2b').hide();
+      }else{
+        $('#addreference2b').show();
+      }
+    });
+
+    $('#addcompany').hide();
+    $('#checkaddcompany1').hide();
+    $('button#checkaddcompany').click(function(){
+      if($('button#checkaddcompany')){
+        $('#addcompany').show();
+        $('#checkaddcompany').hide();
+        $('#checkaddcompany1').show();
+      }else{
+        $('#addcompany').hide();
+      }
+    });
+    $('#addcompany1').hide();
+    $('button#checkaddcompany1').click(function(){
+      if($('button#checkaddcompany1')){
+        $('#addcompany1').show();
+        $('#checkaddcompany').hide();
+        $('#checkaddcompany1').hide();
+      }else{
+        $('#addcompany1').hide();
+      }
+    });
+    $('#cancelcompany').click(function(){
+      if($('#cancelcompany')){
+        $('#addcompany').hide();
+        $('#checkaddcompany').show();
+        if ($('#addreference1a').show() || $('#addreference1b').show()) {
+          $('#checkaddcompany1').hide();
+        }
+      }else{
+        $('#addcompany').show();
+      }
+    });
+    $('#cancelcompany1').click(function(){
+      if($('#cancelcompany1')){
+        $('#addcompany1').hide();
+        $('#checkaddcompany').show();
+        $('#checkaddcompany1').hide();
+      }else{
+        $('#addcompany1').show();
+      }
+    });
+  });
+    </script>
+</body>
+
+</html>

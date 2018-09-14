@@ -7,6 +7,7 @@ using PCSs.Models;
 using System.Web.Security;
 using System.Security.Principal;
 using PCSs.Util;
+using System.Security.Cryptography;
 
 namespace PCSs.Controllers
 {
@@ -38,6 +39,15 @@ namespace PCSs.Controllers
             FormsAuthentication.SignOut();
             // write the authentication cookie
             FormsAuthentication.SetAuthCookie(userName, isPersistent);
+
+            //int timeout = isPersistent ? 525600 : 2;
+            //var ticket = new FormsAuthenticationTicket(userName, isPersistent, timeout);
+            //string encrypted = FormsAuthentication.Encrypt(ticket);
+            //var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted);
+            //cookie.Expires = System.DateTime.Now.AddMinutes(timeout);
+            //Response.Cookies.Add(cookie);
+
+
         }
         //GET: RedirectToLocal
         private ActionResult RedirectToLocal(string returnURL = "", int role = -1)
@@ -65,7 +75,7 @@ namespace PCSs.Controllers
 
                         case UserRole.CANDIDATE:
                             // Candidate
-                            return RedirectToAction("Index", "Candiate");
+                            return RedirectToAction("Index", "Candidate");
                         default:
                             return RedirectToAction("Login  ", "Home");
                     }
@@ -97,6 +107,7 @@ namespace PCSs.Controllers
                 // Second we clear the principal to ensure the user does not retain any authentication 
                 HttpContext.User = new GenericPrincipal(new GenericIdentity(string.Empty), null);
                 Session.Clear();
+                Session.Abandon();
                 System.Web.HttpContext.Current.Session.RemoveAll();
 
                 // Last we redirect to a controller/action that requres authentication to ensure a redirect takes place
@@ -150,14 +161,34 @@ namespace PCSs.Controllers
                         // For set authentication in Cookie (remember me option)
                         SignInRemember(entity.UserName, entity.IsRemember);
                         // set a unique id in session
-                        Session["UserID"] = userInfo.UserLoginId;
+                        Session["UserId"] = userInfo.UserLoginId;
                         Session["UserName"] = userInfo.UserName;
                         Session["Role"] = userInfo.Role;
+                        if (string.IsNullOrEmpty(entity.ReturnURL))
+                        {
+                            switch ((UserRole) userInfo.Role)
+                            {
+                                case UserRole.ADMIN:
+                                    //admin 
+                                    return RedirectToAction("Index", "Admin");
+                                case UserRole.CLIENT:
+                                    // Recruiter
+                                    return RedirectToAction("Index", "Client");
 
+                                case UserRole.SPECIALIST:
+                                    // specialist
+                                    return RedirectToAction("Index", "Specialist");
+
+                                case UserRole.CANDIDATE:
+                                    // Candidate
+                                    // get candidate id
+                                    return RedirectToAction("UpdateProfile", "Candidate", new { userLoginId = userInfo.UserLoginId });
+                                    //return RedirectToAction("UpdateProfile", "Candidate", new { query});
+                                default:
+                                    return RedirectToAction("Login  ", "Home");
+                            }
+                        }
                         return RedirectToLocal(entity.ReturnURL, userInfo.Role);
-
-
-
                     }
                     else
                     {

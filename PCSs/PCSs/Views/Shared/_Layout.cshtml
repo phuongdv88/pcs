@@ -20,7 +20,7 @@
                     @Html.ActionLink("PCS", "Login", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 </div>
                 <div class="right-menu">
-                    @Html.ActionLink("Welcome " + Session["UserName"]?.ToString(), "Edit", "Clients", new { @id = Session["UserID"] }, new { @class = "navbar-brand"})
+                    @Html.ActionLink("Welcome " + Session["UserName"]?.ToString(), "Edit", "Clients", new { @id = Session["UserId"] }, new { @class = "navbar-brand"})
                     <a href="@Url.Action("Login", "Home")">Logout</a>
                 </div>
             </div>

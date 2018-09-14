@@ -10,7 +10,7 @@ namespace PCSs.Models
     {
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
-            if (HttpContext.Current.Session["UserID"] == null || !HttpContext.Current.Request.IsAuthenticated)
+            if (HttpContext.Current.Session["UserId"] == null || !HttpContext.Current.Request.IsAuthenticated)
             {
                 if (filterContext.HttpContext.Request.IsAjaxRequest())
                 {
