@@ -191,23 +191,8 @@
 
 
 					<div class="form-candidate show">
-						<form class="navbar-form navbar-left">
-							<div class="input-group">
-						        <input onkeyup="myFunction()" id="myInput" type="text" class="form-control" placeholder="Search" name="search">
-						        <div class="input-group-btn">
-						          <button class="btn btn-default" type="submit">
-						            <i class="glyphicon glyphicon-search"></i>
-						          </button>
-						        </div>
-						    </div>
+						<form>
 						    <div class="list-button">
-						    	
-								<div class="form-group">
-									<input type="text">
-								</div>
-								<div class="form-group">
-									<input type="submit" name="import" class="form-control" value="Filter">
-								</div>
 								<div class="form-group">
 									<input id="create-candidate" type="submit" name="create" class="form-control" value="Create New">
 								</div>
@@ -219,20 +204,19 @@
 							<table id="myTable" class="table table-bordered table-hover dataTable">
 								<thead>
 									<tr class="title-bar">
-										<th onclick="sortTable(0)" class="sorting">Tên</th>
-										<th onclick="sortTable(1)" class="sorting title-email">Email</th>
-										<th onclick="sortTable(2)" class="sorting title-phone-number">Sdt</th>
-										<th onclick="sortTable(3)" class="sorting title-status">Status</th>
-										<th onclick="sortTable(4)" class="sorting title-complete">Completed</th>
-										<th onclick="sortTable(5)" class="sorting title-start-date">Start date</th>
+										<th class="sorting">Tên</th>
+										<th class="sorting title-email">Email</th>
+										<th class="sorting title-phone-number">Sdt</th>
+										<th class="sorting title-status">Status</th>
+										<th class="sorting title-complete">Completed</th>
+										<th class="sorting title-start-date">Start date</th>
 										<th class="title-edit">Sửa</th>
 										<th class="title-report">Report</th>
-
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										<td id="name" class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td id="name" class="name"><a href="#">Alfreds Futterkiste</a></td>
 										<td class="email">cguyenvana@gmail.com</td>
 										<td class="phone-number">0123456789</td>
 										<td class="status">tnitial</td>
@@ -247,7 +231,7 @@
 
 									</tr>
 									<tr>
-										<td class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td class="name"><a href="#">Berglunds snabbkop</a></td>
 										<td class="email">nguyenvana@gmail.com</td>
 										<td class="phone-number">0123456789</td>
 										<td class="status">Initial</td>
@@ -261,7 +245,7 @@
 			                            </td>
 									</tr>
 									<tr>
-										<td class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td class="name"><a href="#">Island Trading</a></td>
 										<td class="email">nguyenvana@gmail.com</td>
 										<td class="phone-number">9656789</td>
 										<td class="status">Bnitial</td>
@@ -275,7 +259,7 @@
 			                            </td>
 									</tr>
 									<tr>
-										<td class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td class="name"><a href="#">Koniglich Essen</a></td>
 										<td class="email">nguyenvana@gmail.com</td>
 										<td class="phone-number">5123456789</td>
 										<td class="status">taitial</td>
@@ -289,7 +273,7 @@
 			                            </td>
 									</tr>
 									<tr>
-										<td class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td class="name"><a href="#">Laughing Bacchus Winecellars</a></td>
 										<td class="email">nguyenvana@gmail.com</td>
 										<td class="phone-number">4123456789</td>
 										<td class="status">Initial</td>
@@ -303,12 +287,12 @@
 			                            </td>
 									</tr>
 									<tr>
-										<td class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td class="name"><a href="#">Magazzini Alimentari Riuniti</a></td>
 										<td class="email">nguyenvana@gmail.com</td>
 										<td class="phone-number">7123456789</td>
 										<td class="status">Initial</td>
 										<td class="complete">abc</td>
-										<td class="start-date">06-09-2018</td>
+										<td class="start-date">26-09-2018</td>
 										<td class="edit">
 											<a href="#" class="fas fa-pencil-alt"></a>
 			                            </td>
@@ -317,12 +301,12 @@
 			                            </td>
 									</tr>
 									<tr>
-										<td class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td class="name"><a href="#">North/South</a></td>
 										<td class="email">nguyenvana@gmail.com</td>
 										<td class="phone-number">8123456789</td>
 										<td class="status">Initial</td>
 										<td class="complete">abc</td>
-										<td class="start-date">07-09-2018</td>
+										<td class="start-date">7-09-2018</td>
 										<td class="edit">
 											<a href="#" class="fas fa-pencil-alt"></a>
 			                            </td>
@@ -331,7 +315,7 @@
 			                            </td>
 									</tr>
 									<tr>
-										<td class="name"><a href="#">Aguyễn Văn A</a></td>
+										<td class="name"><a href="#">Paris specialites</a></td>
 										<td class="email">aguyenvana@gmail.com</td>
 										<td class="phone-number">0123456789</td>
 										<td class="status">Initial</td>
@@ -345,9 +329,9 @@
 			                            </td>
 									</tr>
 									<tr>
-										<td class="name"><a href="#">Nguyễn Văn A</a></td>
+										<td class="name"><a href="#">Anh</a></td>
 										<td class="email">nguyenvana@gmail.com</td>
-										<td class="phone-number">0123456789</td>
+										<td class="phone-number">2.5</td>
 										<td class="status">Initial</td>
 										<td class="complete">abc</td>
 										<td class="start-date">9-09-2018</td>
@@ -359,9 +343,51 @@
 			                            </td>
 									</tr>
 									<tr>
-										<td class="name"><a href="#">Bguyễn Văn B</a></td>
+										<td class="name"><a href="#">Ánh</a></td>
 										<td class="email">nguyenvana@gmail.com</td>
-										<td class="phone-number">0123456789</td>
+										<td class="phone-number">1.7</td>
+										<td class="status">Initial</td>
+										<td class="complete">abc</td>
+										<td class="start-date">10-09-2018</td>
+										<td class="edit">
+											<a href="#" class="fas fa-pencil-alt"></a>
+			                            </td>
+			                            <td class="report">
+											<a href="" class="far fa-calendar-alt"></a>
+			                            </td>
+									</tr>
+									<tr>
+										<td class="name"><a href="#">Ánh</a></td>
+										<td class="email">nguyenvana@gmail.com</td>
+										<td class="phone-number">1.7</td>
+										<td class="status">Initial</td>
+										<td class="complete">abc</td>
+										<td class="start-date">10-09-2018</td>
+										<td class="edit">
+											<a href="#" class="fas fa-pencil-alt"></a>
+			                            </td>
+			                            <td class="report">
+											<a href="" class="far fa-calendar-alt"></a>
+			                            </td>
+									</tr>
+									<tr>
+										<td class="name"><a href="#">Ánh</a></td>
+										<td class="email">nguyenvana@gmail.com</td>
+										<td class="phone-number">1.7</td>
+										<td class="status">Initial</td>
+										<td class="complete">abc</td>
+										<td class="start-date">10-09-2018</td>
+										<td class="edit">
+											<a href="#" class="fas fa-pencil-alt"></a>
+			                            </td>
+			                            <td class="report">
+											<a href="" class="far fa-calendar-alt"></a>
+			                            </td>
+									</tr>
+									<tr>
+										<td class="name"><a href="#">Ánh</a></td>
+										<td class="email">nguyenvana@gmail.com</td>
+										<td class="phone-number">1.7</td>
 										<td class="status">Initial</td>
 										<td class="complete">abc</td>
 										<td class="start-date">10-09-2018</td>
@@ -374,15 +400,6 @@
 									</tr>
 								</tbody>
 							</table>
-							<ul class="pagination">
-							  <li class="paginate_button"><a href="#">Previous</a></li>
-							  <li class="paginate_button"><a href="#">1</a></li>
-							  <li class="paginate_button"><a href="#">2</a></li>
-							  <li class="paginate_button"><a href="#">3</a></li>
-							  <li class="paginate_button"><a href="#">4</a></li>
-							  <li class="paginate_button"><a href="#">5</a></li>
-							  <li class="paginate_button"><a href="#">Next</a></li>
-							</ul>
 						</form>
 					</div>
 				</div>
@@ -502,20 +519,6 @@
 
 		//sort icon table
 
-		$('.table th').click(function(){
-			$('.table th').removeClass("active");
-		    $(this).addClass("active");
-		    var ccc = $('.table th').hasClass('active');
-		    if (ccc) {
-		    	if ($(this).hasClass('sorting')) {
-				    $(this).removeClass('sorting').addClass('sorting_asc');
-				} else if ($(this).hasClass('sorting_asc')) {
-				    $(this).removeClass('sorting_asc').addClass('sorting_desc');
-				} else if ($(this).hasClass('sorting_desc')) {
-				    $(this).removeClass('sorting_desc').addClass('sorting_asc');
-				}
-			}			
-		});
 	});
 
 
@@ -542,66 +545,7 @@
     myFunction(x);
     x.addListener(myFunction);
 
-
-
-
-
-    //js sortable
-    function sortTable(n) {
-  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-  table = document.getElementById("myTable");
-  switching = true;
-  dir = "asc"; 
-  while (switching) {
-    switching = false;
-    rows = table.rows;
-    for (i = 1; i < (rows.length - 1); i++) {
-      shouldSwitch = false;
-      x = rows[i].getElementsByTagName("TD")[n];
-      y = rows[i + 1].getElementsByTagName("TD")[n];
-      if (dir == "asc") {
-        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-          shouldSwitch= true;
-          break;
-        }
-      } else if (dir == "desc") {
-        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-          shouldSwitch = true;
-          break;
-        }
-      }
-    }
-    if (shouldSwitch) {
-      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-      switching = true;
-      switchcount ++;      
-    } else {
-      if (switchcount == 0 && dir == "asc") {
-        dir = "desc";
-        switching = true;
-      }
-    }
-  }
-}
-
-
-	//filter
-
-  function myFunction() {
-  var input, filter, table, tr, td, i;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("myTable");
-  tr = table.getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }       
-  }
-}
+$(document).ready( function () {
+    $('#myTable').DataTable();
+} );
 </script>

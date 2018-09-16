@@ -159,6 +159,13 @@ form{
 	float: left;
 }
 
+#myTable .title-edit:after{
+	display: none;
+}
+#myTable .title-report:after{
+	display: none;
+}
+
 .form-recruiter .form-control{
 	width: 150px;
 	font-weight: bold;
@@ -169,9 +176,12 @@ form{
 
 .form-candidate{
 	padding-top: 50px;
+	overflow: hidden;
 	display: none;
 }
-
+.form-candidate form{
+	padding: 0;
+}
 .form-candidate .list-button{
 	margin-bottom: 40px;
 	overflow: hidden; 
@@ -198,10 +208,6 @@ form{
 .company-tab .table{
 	margin-top: 50px;
 	border: 1px solid #f4f4f4;
-}
-
-.form-candidate .pagination{
-	float: right;
 }
 
 .show{
@@ -242,16 +248,6 @@ form{
 	font-size: 20px;
 }
 
-.pagination>li>a{
-	color: #30a5ff;
-}
-
-.pagination>li>a:hover{
-	color: #fff;
-    background-color: #337ab7;
-    border-color: #337ab7;
-}
-
 .company-tab .mask{
 	position: fixed;
     width: 100vw;
@@ -265,7 +261,7 @@ form{
 }
 
 
-.company-tab .form-popup-recruiter{
+.form-popup-recruiter{
 	position: fixed;
 	width: 70%;
 	left: 0;
@@ -278,12 +274,12 @@ form{
 	transform: translate(-50%);
 }
 
-.company-tab .form-popup-recruiter form{
+.form-popup-recruiter form{
 	background: #999;
 	width: 100%;
 	position:  relative;
 }
-.company-tab .form-popup-recruiter .fa-times{
+.form-popup-recruiter .fa-times{
 	position: absolute;
 	right: 15px;
 	height: 22px;
@@ -292,18 +288,18 @@ form{
 	text-align: center;
 	cursor: pointer;
 }
-.company-tab .form-popup-recruiter .fa-times:before{
+.form-popup-recruiter .fa-times:before{
 	font-size: 22px;
 	vertical-align: middle;
 	color: #000;
 }
 
-.company-tab .form-popup-recruiter .form-group:last-child{
+.form-popup-recruiter .form-group:last-child{
 	width: 150px;
 	margin: auto;
 }
 
-.company-tab .form-popup-recruiter .form-group:last-child .form-control{
+.form-popup-recruiter .form-group:last-child .form-control{
 	width: 100%;
 	text-transform: capitalize;
 }
@@ -311,7 +307,7 @@ form{
 
 /* css popup candidate*/
 
-.company-tab .form-popup-candidate{
+.form-popup-candidate{
 	position: fixed;
 	width: 70%;
 	left: 0;
@@ -324,12 +320,12 @@ form{
 	transform: translate(-50%);
 }
 
-.company-tab .form-popup-candidate form{
+.form-popup-candidate form{
 	background: #999;
 	width: 100%;
 	position:  relative;
 }
-.company-tab .form-popup-candidate .fa-times{
+.form-popup-candidate .fa-times{
 	position: absolute;
 	right: 15px;
 	height: 22px;
@@ -338,18 +334,18 @@ form{
 	text-align: center;
 	cursor: pointer;
 }
-.company-tab .form-popup-candidate .fa-times:before{
+.form-popup-candidate .fa-times:before{
 	font-size: 22px;
 	vertical-align: middle;
 	color: #000;
 }
 
-.company-tab .form-popup-candidate .form-group:last-child{
+.form-popup-candidate .form-group:last-child{
 	width: 150px;
 	margin: auto;
 }
 
-.company-tab .form-popup-candidate .form-group:last-child .form-control{
+.form-popup-candidate .form-group:last-child .form-control{
 	width: 100%;
 	text-transform: capitalize;
 }
