@@ -154,6 +154,7 @@
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CandidateAuthorization.cs" />
+    <Compile Include="Models\CandidateInfo.cs" />
     <Compile Include="Models\Client.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -1737,6 +1738,7 @@
     <Content Include="Content\Js\adminlte.min.js" />
     <Content Include="Content\Js\app.js" />
     <Content Include="Content\Js\app.min.js" />
+    <Content Include="Content\Js\update-info-candidate.js" />
     <Content Include="Content\Js\demo.js" />
     <Content Include="Content\Js\fastclick\lib\fastclick.js" />
     <Content Include="Content\Js\jquery-slimscroll\jquery.slimscroll.js" />

@@ -13,10 +13,6 @@
 	margin: 0 auto;
 }
 
-.gender {
-	padding-left: 5%;
-}
-
 button[type="submit"] {
 	width: 20%;
 	border-radius: 30px;
@@ -26,75 +22,12 @@ button[type="button"] {
 	border-radius: 30px;
 }
 
-#addformeducation {
-	border: 1px solid #333;
-}
-
-#addformreference {
-	border: 1px solid #333;
-}
-
 #btn-remove {
 	float: right;
 }
 
-#addeducation1 {
-	border: 1px solid #333;
-}
-
-#addeducation2 {
-	border: 1px solid #333;
-}
-
-#addreference-a {
-	border: 1px solid #333;
-}
-
-#addreference-b {
-	border: 1px solid #333;
-}
-
-#addreference1a {
-	border: 1px solid #333;
-}
-
-#addreference1b {
-	border: 1px solid #333;
-}
-
-#addreference2a {
-	border: 1px solid #333;
-}
-
-#addreference2b {
-	border: 1px solid #333;
-}
-
-#addcompany {
-	border: 1px solid #333;
-}
-
-#addcompany1 {
-	border: 1px solid #333;
-}
-
 .clickadd {
 	padding : 10px;
-}
-
-#checkeducation {
-	border-radius: 100px;
-	font-size: 20px;
-}
-
-#checkaddcompany {
-	border-radius: 100px;
-	font-size: 20px;
-}
-
-#checkaddcompany1 {
-	border-radius: 100px;
-	font-size: 20px;
 }
 
 .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {

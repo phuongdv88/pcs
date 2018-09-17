@@ -19,25 +19,24 @@ namespace PCSs.Controllers
         // GET: Candidates
         public async Task<ActionResult> Index()
         {
-            if (Session["Role"] == null || Session["Role"].ToString() != "3")
-                return RedirectToAction("Error", "Error");
             return View(await db.Candidates.ToListAsync());
         }
 
         // GET: update form
-        public async Task<ActionResult> UpdateProfile(long? userLoginId)
+        public ActionResult UpdateProfile(long? userLoginId)
         {
             if (userLoginId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Candidate candidate = await db.Candidates.FirstOrDefaultAsync(s => s.UserLoginId == userLoginId);
-            if (candidate == null)
+            CandidateInfo can = new CandidateInfo(userLoginId);
+            if (can == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.Title = candidate.FirstName + " " + candidate.MiddleName + " " + candidate.LastName + " 's Information";
-            return View(candidate);
+            ViewBag.Title = can.CandidateGeneralInfo.FirstName + " " + can.CandidateGeneralInfo.MiddleName + " " + can.CandidateGeneralInfo.LastName + " 's Information";
+
+            return View(can);
         }
 
         // GET: Candidates/Details/5
