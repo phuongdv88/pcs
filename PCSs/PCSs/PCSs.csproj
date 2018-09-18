@@ -139,63 +139,66 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CandidateController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
+    <Compile Include="Controllers\CompanyInfoController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\GeneralController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ReferenceInfoController.cs" />
     <Compile Include="Controllers\SpecialistController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AdminAuthorization.cs" />
     <Compile Include="Models\AttachmentFile.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>PcsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Candidate.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>PcsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CandidateAuthorization.cs" />
     <Compile Include="Models\CandidateInfo.cs" />
     <Compile Include="Models\Client.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>PcsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ClientAuthorization.cs" />
     <Compile Include="Models\CompanyInfo.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DBModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DBModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DBModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DBModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DBModel.edmx</DependentUpon>
+      <DependentUpon>PcsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EducationInfo.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>PcsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PcsModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PcsModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PcsModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PcsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PcsModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PcsModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Recruiter.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>PcsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ReferenceInfo.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>PcsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ReferencesInformation.cs" />
     <Compile Include="Models\Specialist.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>PcsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SpecialistAuthorization.cs" />
     <Compile Include="Models\UserLogin.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>PcsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserLoginInfo.cs" />
     <Compile Include="Models\VerificationLog.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
+      <DependentUpon>PcsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\Helper.cs" />
@@ -1747,15 +1750,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\DBModel.Context.tt">
+    <Content Include="Models\PcsModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBModel.edmx</DependentUpon>
-      <LastGenOutput>DBModel.Context.cs</LastGenOutput>
+      <DependentUpon>PcsModel.edmx</DependentUpon>
+      <LastGenOutput>PcsModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\DBModel.tt">
+    <Content Include="Models\PcsModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBModel.edmx</DependentUpon>
-      <LastGenOutput>DBModel.cs</LastGenOutput>
+      <DependentUpon>PcsModel.edmx</DependentUpon>
+      <LastGenOutput>PcsModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1908,13 +1911,6 @@
     <Content Include="Content\font-awesome\scss\_screen-reader.scss" />
     <Content Include="Content\font-awesome\scss\_stacked.scss" />
     <Content Include="Content\font-awesome\scss\_variables.scss" />
-    <EntityDeploy Include="Models\DBModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DBModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DBModel.edmx.diagram">
-      <DependentUpon>DBModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\Js\jquery-slimscroll\.bower.json" />
     <Content Include="Content\Js\jquery-slimscroll\bower.json" />
     <Content Include="Content\Js\jquery-slimscroll\package.json" />
@@ -1922,6 +1918,13 @@
     <Content Include="Content\Js\fastclick\bower.json" />
     <Content Include="Content\Js\fastclick\LICENSE" />
     <Content Include="Content\Js\fastclick\README.md" />
+    <EntityDeploy Include="Models\PcsModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PcsModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\PcsModel.edmx.diagram">
+      <DependentUpon>PcsModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -2091,6 +2094,16 @@
     <Content Include="Views\General\ForgetPassword.cshtml" />
     <Content Include="Views\Error\ErrorCantVerifyAccount.cshtml" />
     <Content Include="Views\Candidate\UpdateProfile.cshtml" />
+    <Content Include="Views\CompanyInfo\Create.cshtml" />
+    <Content Include="Views\CompanyInfo\Delete.cshtml" />
+    <Content Include="Views\CompanyInfo\Details.cshtml" />
+    <Content Include="Views\CompanyInfo\Edit.cshtml" />
+    <Content Include="Views\CompanyInfo\Index.cshtml" />
+    <Content Include="Views\ReferenceInfo\Create.cshtml" />
+    <Content Include="Views\ReferenceInfo\Delete.cshtml" />
+    <Content Include="Views\ReferenceInfo\Details.cshtml" />
+    <Content Include="Views\ReferenceInfo\Edit.cshtml" />
+    <Content Include="Views\ReferenceInfo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

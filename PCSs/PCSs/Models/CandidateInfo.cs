@@ -10,7 +10,7 @@ namespace PCSs.Models
     public class CandidateInfo
     {
         public Candidate CandidateGeneralInfo { get; set; }
-        public Dictionary<CompanyInfo, ReferenceInfo> ChecksInfo { get; set; }
+        public Dictionary<CompanyInfo, ReferencesInformation> ChecksInfo { get; set; }
 
         public bool IsAccepted { get; set; }
 
@@ -26,6 +26,7 @@ namespace PCSs.Models
                 using(var db = new PCSEntities())
                 {
                     CandidateGeneralInfo = db.Candidates.FirstOrDefault(s => s.UserLoginId == userLoginId);
+                    ChecksInfo = new Dictionary<CompanyInfo, ReferencesInformation>();
                     // get checks info
                     if(CandidateGeneralInfo != null)
                     {
@@ -34,17 +35,8 @@ namespace PCSs.Models
                         {
                             foreach(var com in coms)
                             {
-                                List<ReferenceInfo> refers = db.ReferenceInfoes.Where(s => s.CompanyInfoId == com.CompanyInfoId).ToList();
-                                if(refers == null)
-                                {
-                                    ChecksInfo.Add(com, null);
-                                } else
-                                {
-                                    foreach(var refer in refers)
-                                    {
-                                        ChecksInfo.Add(com, refer);
-                                    }
-                                }
+                                var refer = new ReferencesInformation(com.CompanyInfoId);
+                                ChecksInfo.Add(com, refer);
                             }
                         }
 
@@ -52,10 +44,11 @@ namespace PCSs.Models
 
                 }
             }
-            catch
+            catch(Exception e)
             {
+                // log error
+                int i = 0;
 
-                throw;
             }
         }
 

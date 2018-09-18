@@ -36,6 +36,14 @@ namespace PCSs.Controllers
             }
             ViewBag.Title = can.CandidateGeneralInfo.FirstName + " " + can.CandidateGeneralInfo.MiddleName + " " + can.CandidateGeneralInfo.LastName + " 's Information";
 
+            List<SelectListItem> items = new List<SelectListItem>();
+            items.Add(new SelectListItem { Text = "Fresher", Value = "Fresher" });
+            items.Add(new SelectListItem { Text = "Junior", Value = "Junior" });
+            items.Add(new SelectListItem { Text = "Senior", Value = "Senior" });
+            items.Add(new SelectListItem { Text = "Manager", Value = "Manager" });
+            items.Add(new SelectListItem { Text = "Higher", Value = "Higher" });
+            ViewBag.LevelType = items;
+
             return View(can);
         }
 

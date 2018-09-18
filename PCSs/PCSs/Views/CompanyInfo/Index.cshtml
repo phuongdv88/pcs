@@ -1,0 +1,113 @@
+﻿@model IEnumerable<PCSs.Models.CompanyInfo>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StopDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Jobtitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Website)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Note)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CheckingStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CandidateId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CheckingTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isChecked)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StopDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Jobtitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Website)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CheckingStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CandidateId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CheckingTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isChecked)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.CompanyInfoId }) |
+                @Html.ActionLink("Details", "Details", new { id=item.CompanyInfoId }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.CompanyInfoId })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

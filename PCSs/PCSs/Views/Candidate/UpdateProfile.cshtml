@@ -71,22 +71,24 @@
                                             @Html.Label("Name:")
                                             <div class="row">
                                                 <div class="col-md-3">
-                                                    @Html.EditorFor(model => model.CandidateGeneralInfo.FirstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "First Name" } })
+                                                    @Html.EditorFor(s => s.CandidateGeneralInfo.FirstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "First Name" } })
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="text" class="form-control" placeholder="Middle Name" required="">
+                                                    @Html.EditorFor(s => s.CandidateGeneralInfo.MiddleName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Middle Name" } })
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="text" class="form-control" placeholder="Last name" required="">
+                                                    @Html.EditorFor(s => s.CandidateGeneralInfo.LastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Last Name" } })
                                                 </div>
                                                 <div class="form-group col-md-3">
                                                     <label for="">Gender</label>
                                                     <div class="row gender">
                                                         <div class="col-md-6">
-                                                            <input type="radio" name="gender" value="male" checked> Male<br>
+                                                            @Html.RadioButtonFor(model => model.CandidateGeneralInfo.Gender, "Male", new { id = "male" })
+                                                            @Html.Label("male", "Male")
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <input type="radio" name="gender" value="female"> Female<br>
+                                                            @Html.RadioButtonFor(model => model.CandidateGeneralInfo.Gender, "Female", new { id = "female" })
+                                                            @Html.Label("female", "Female")
                                                         </div>
                                                     </div>
                                                 </div>
@@ -96,60 +98,62 @@
 
                                     </div>
                                     <div class="row">
-                                        <div class="form-group col-md-6">
-                                            <label for="">Apply job title</label>
-                                            <input type="text" class="form-control" placeholder="quản lí, giám đốc" required="">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label>Apply job level</label>
-                                            <select class="form-control">
-                                                <option>Fresher</option>
-                                                <option>Junior</option>
-                                                <option>Senior</option>
-                                                <option>Expert manager</option>
-                                                <option>Higher</option>
-                                            </select>
-                                        </div>
+                                        <div class="form-group col-md-3">
+                                            @Html.LabelFor(model => model.CandidateGeneralInfo.Email)
+                                            @Html.EditorFor(model => model.CandidateGeneralInfo.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.CandidateGeneralInfo.Email, "", new { @class = "text-danger" })
 
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            @Html.LabelFor(model => model.CandidateGeneralInfo.PhoneNumber)
+                                            @Html.EditorFor(model => model.CandidateGeneralInfo.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.CandidateGeneralInfo.PhoneNumber, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            @Html.LabelFor(model => model.CandidateGeneralInfo.DOB)
+                                            @Html.EditorFor(model => model.CandidateGeneralInfo.DOB, new { htmlAttributes = new { @class = "form-control"} })
+                                            @Html.ValidationMessageFor(model => model.CandidateGeneralInfo.DOB, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            @Html.LabelFor(model => model.CandidateGeneralInfo.IssuranceNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                                            @Html.EditorFor(model => model.CandidateGeneralInfo.IssuranceNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.CandidateGeneralInfo.IssuranceNumber, "", new { @class = "text-danger" })
+                                        </div>
                                     </div>
                                     <div class="row">
-                                        <div class="form-group col-md-3">
-                                            <label for="">Email address</label>
-                                            <input type="email" class="form-control" placeholder="Enter email" required="">
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="">Phone number</label>
-                                            <input type="text" class="form-control" placeholder="0123456789" maxlength="11" minlength="10" required="">
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="">Birthday</label>
-                                            <input type="date" class="form-control" placeholder="01/01/1999" required="">
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="">Social Isurance Number</label>
-                                            <input type="text" class="form-control" placeholder="491563615684">
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="form-group col-md-3">
-                                            <label>Document Type</label>
-                                            <select class="form-control">
-                                                <option id="checkidnumber">IDNumber</option>
-                                                <option id="checkpasstportnumber">PassportNumber</option>
-                                            </select>
-                                        </div>
                                         <div class="form-group col-md-3" id="idnumber">
-                                            <label for="">IDNumber</label>
-                                            <input type="text" class="form-control" placeholder="Số CMND" maxlength="13" minlength="9">
+                                            @Html.LabelFor(model => model.CandidateGeneralInfo.IDNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                                            @Html.EditorFor(model => model.CandidateGeneralInfo.IDNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.CandidateGeneralInfo.IDNumber, "", new { @class = "text-danger" })
                                         </div>
                                         <div class="form-group col-md-3" id="iddate">
-                                            <label for="">IDDate</label>
-                                            <input type="date" class="form-control" placeholder="01/01/2018" required="">
+                                            @Html.LabelFor(model => model.CandidateGeneralInfo.IDDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                                            @Html.EditorFor(model => model.CandidateGeneralInfo.IDDate, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.CandidateGeneralInfo.IDDate, "", new { @class = "text-danger" })
                                         </div>
                                         <div class="form-group col-md-3" id="idsupply">
-                                            <label for="">IDSupply</label>
-                                            <input type="text" class="form-control" required="">
+                                            @Html.LabelFor(model => model.CandidateGeneralInfo.IDSupply, htmlAttributes: new { @class = "control-label col-md-2" })
+                                            @Html.EditorFor(model => model.CandidateGeneralInfo.IDSupply, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.CandidateGeneralInfo.IDSupply, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            @Html.LabelFor(model => model.CandidateGeneralInfo.JobTitle)
+                                            @Html.EditorFor(model => model.CandidateGeneralInfo.JobTitle, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.CandidateGeneralInfo.JobTitle, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            @Html.LabelFor(model => model.CandidateGeneralInfo.JobLevel)
+                                            @Html.DropDownListFor(model => model.CandidateGeneralInfo.JobLevel, new SelectList(ViewBag.LevelType, "Value", "Text"), new { id = "Level Type", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            @Html.LabelFor(model => model.CandidateGeneralInfo.Address)
+                                            @Html.TextAreaFor(model => model.CandidateGeneralInfo.Address, new { @class = "form-control col-md-12", @rows = 5 })
+                                            @Html.ValidationMessageFor(model => model.CandidateGeneralInfo.Address, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
                                 </div>
@@ -164,199 +168,189 @@
                     <!-- Company information tab-->
                     <div id="company" class="tab-pane fade">
                         <!-- form start -->
+
                         <div class="box-body" id="company-information">
-                            <form id="company-base-info" role="form" method="POST">
-                                <div class="with-border text-center">
-                                    <h3 class="box-title">Company Information</h3>
-                                </div>
-                                <div class="cold-md-3 cancel text-right" id="button-remove-company" hidden="hidden">
-                                    <button class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>
-                                </div>
-                                <div class="box-body">
-                                    <div class="company-general-information">
-                                        <div class="row">
-                                            <div class="form-group col-md-6">
-                                                <label for="">Company Name</label>
-                                                <input type="text" class="form-control" placeholder="Swilife" required="">
+                            @foreach (var companyinfo in Model.ChecksInfo.Keys)
+                            {
+                                @Html.HiddenFor(model => companyinfo.CompanyInfoId)
+                                <form id="company-base-info" role="form" method="POST">
+                                    <div class="with-border text-center">
+                                        <h3 class="box-title">Company Information</h3>
+                                    </div>
+                                    <div class="cold-md-3 cancel text-right" id="button-remove-company" hidden="hidden">
+                                        <button class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                    </div>
+                                    <div class="box-body">
+                                        <div class="company-general-information">
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    @Html.LabelFor(model => companyinfo.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    @Html.EditorFor(model => companyinfo.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => companyinfo.Name, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    @Html.LabelFor(model => companyinfo.Country, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    @Html.EditorFor(model => companyinfo.Country, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => companyinfo.Country, "", new { @class = "text-danger" })
+                                                </div>
                                             </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="">Country</label>
-                                                <input type="email" class="form-control" placeholder="Viet Nam" required="">
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    @Html.LabelFor(model => companyinfo.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    @Html.EditorFor(model => companyinfo.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => companyinfo.Address, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    @Html.LabelFor(model => companyinfo.Website, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    @Html.EditorFor(model => companyinfo.Website, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => companyinfo.Website, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    @Html.LabelFor(model => companyinfo.Jobtitle, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    @Html.EditorFor(model => companyinfo.Jobtitle, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => companyinfo.Jobtitle, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    @Html.LabelFor(model => companyinfo.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    @Html.TextBoxFor(model => companyinfo.StartDate, "{0:dd-MM-yyyy}", new {@class="form-control"})
+                                                    @Html.ValidationMessageFor(model => companyinfo.StartDate, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    @Html.LabelFor(model => companyinfo.StopDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    @Html.TextBoxFor(model => companyinfo.StopDate, "{0:dd-MM-yyyy}", new { @class = "form-control"})
+                                                    @Html.ValidationMessageFor(model => companyinfo.StopDate, "", new { @class = "text-danger" })
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="form-group col-md-6">
-                                                <label for="">Address</label>
-                                                <input type="email" class="form-control" placeholder="Cau giay - Ha noi" required="">
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="">Website</label>
-                                                <input type="text" class="form-control" placeholder="Swilife.com" required="">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group col-md-6">
-                                                <label for="">Job title</label>
-                                                <input type="text" class="form-control" placeholder="quản lí, giám đốc" required="">
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label>Job level</label>
-                                                <select class="form-control">
-                                                    <option>Fresher</option>
-                                                    <option>Junior</option>
-                                                    <option>Senior</option>
-                                                    <option>Expert manager</option>
-                                                    <option>Higher</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group col-md-6">
-                                                <label for="">StartDate</label>
-                                                <input type="date" class="form-control" name="StartDate" placeholder="01/01/2014">
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="">StopDate</label>
-                                                <input type="date" class="form-control" name="StopDate" placeholder="01/01/2018">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group col-md-6">
-                                                <label for="">Description</label>
+                                        <!--Reference information-->
+                                        @{var referenceInfo1 = Model.ChecksInfo[companyinfo].Reference1;
+                                            var referenceInfo2 = Model.ChecksInfo[companyinfo].Reference2;
+                                        }
+                                        <div id="reference-information">
+                                            <div class="box-body">
                                                 <div class="row">
-                                                    <div class="col-md-6">
-                                                        <textarea name="note" id="" cols="103" rows="3"></textarea>
+                                                    <div class="col-md-9">
+                                                        <h3>Reference Information</h3>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-md-6">
+                                                        @Html.LabelFor(model => referenceInfo1.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        @Html.EditorFor(model => referenceInfo1.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => referenceInfo1.FullName, "", new { @class = "text-danger" })
+                                                    </div>
+                                                    <div class="form-group col-md-3">
+                                                        @Html.LabelFor(model => referenceInfo1.JobTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        @Html.EditorFor(model => referenceInfo1.JobTitle, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => referenceInfo1.JobTitle, "", new { @class = "text-danger" })
+                                                    </div>
+                                                    <div class="form-group col-md-3">
+                                                        @Html.LabelFor(model => referenceInfo1.RelationShip, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        @Html.DropDownListFor(model => referenceInfo1.RelationShip,
+                                                           new[] { new SelectListItem
+                                                           {
+                                                               Text = "Superior",
+                                                               Value = "Superior",
+                                                           },new SelectListItem
+                                                           {
+                                                               Text = "Peer",
+                                                               Value = "Peer",
+                                                           },new SelectListItem
+                                                           {
+                                                               Text = "Subordinate",
+                                                               Value = "Subordinate",
+                                                           },new SelectListItem
+                                                           {
+                                                               Text = "Other",
+                                                               Value = "Other",
+                                                           }
+                                                           }, new { id = "Level Type", @class = "form-control" })
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-md-6">
+                                                        @Html.LabelFor(model => referenceInfo1.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        @Html.EditorFor(model => referenceInfo1.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => referenceInfo1.Email, "", new { @class = "text-danger" })
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        @Html.LabelFor(model => referenceInfo1.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        @Html.EditorFor(model => referenceInfo1.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => referenceInfo1.PhoneNumber, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                        <div id="reference-information1" hidden>
+                                            <div class="box-body">
+                                                <div class="row">
+                                                    <div class="col-md-9">
+                                                        <h3>Reference Information number 2</h3>
+                                                    </div>
+                                                    <div class="cold-md-3 cancel text-right" id="button-remove-reference" onclick="removeReference(0)">
+                                                        <button class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-md-6">
+                                                        @Html.LabelFor(model => referenceInfo2.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        @Html.EditorFor(model => referenceInfo2.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => referenceInfo2.FullName, "", new { @class = "text-danger" })
+                                                    </div>
+                                                    <div class="form-group col-md-3">
+                                                        @Html.LabelFor(model => referenceInfo2.JobTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        @Html.EditorFor(model => referenceInfo2.JobTitle, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => referenceInfo2.JobTitle, "", new { @class = "text-danger" })
+                                                    </div>
+                                                    <div class="form-group col-md-3">
+                                                        @Html.LabelFor(model => referenceInfo2.RelationShip, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        @Html.DropDownListFor(model => referenceInfo2.RelationShip,
+                                                           new[] { new SelectListItem
+                                                           {
+                                                               Text = "Superior",
+                                                               Value = "Superior",
+                                                           },new SelectListItem
+                                                           {
+                                                               Text = "Peer",
+                                                               Value = "Peer",
+                                                           },new SelectListItem
+                                                           {
+                                                               Text = "Subordinate",
+                                                               Value = "Subordinate",
+                                                           },new SelectListItem
+                                                           {
+                                                               Text = "Other",
+                                                               Value = "Other",
+                                                           }
+                                                           }, new { id = "Level Type", @class = "form-control" })
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-md-6">
+                                                        @Html.LabelFor(model => referenceInfo2.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        @Html.EditorFor(model => referenceInfo2.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => referenceInfo2.Email, "", new { @class = "text-danger" })
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        @Html.LabelFor(model => referenceInfo2.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        @Html.EditorFor(model => referenceInfo2.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => referenceInfo2.PhoneNumber, "", new { @class = "text-danger" })
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="form-group col-md-6">
-                                                <label for="">Document</label>
-                                                <input type="file" name="images">
-                                            </div>
+                                        <!--Add reference button-->
+                                        <div class="box-title clickadd">
+                                            <button type="button" class="btn btn-primary" id="button-add-reference" onclick="addReference(0)">+ Add reference</button>
                                         </div>
                                     </div>
-                                    <!--Reference information-->
-                                    <div id="reference-information">
-                                        <div class="box-body">
-                                            <div class="row">
-                                                <div class="col-md-9">
-                                                    <h3>Reference Information</h3>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="form-group col-md-6">
-                                                    <label for="">Full Name</label>
-                                                    <div class="row">
-                                                        <div class="col-xs-12">
-                                                            <input type="text" class="form-control" placeholder="" required="">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="">Gender</label>
-                                                    <div class="row gender">
-                                                        <div class="col-md-4">
-                                                            <input type="radio" name="gender" value="male" checked> Male<br>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <input type="radio" name="gender" value="female"> Female<br>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="form-group col-md-6">
-                                                    <label for="">Email</label>
-                                                    <input type="email" class="form-control" placeholder="email" required="">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="">Phonenumber</label>
-                                                    <input type="text" class="form-control" placeholder="phone number" required="">
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="form-group col-md-6">
-                                                    <label for="">Job title</label>
-                                                    <input type="text" class="form-control" placeholder="supervisor, director" required="">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label>Relationship</label>
-                                                    <select class="form-control">
-                                                        <option>Superior</option>
-                                                        <option>Peer</option>
-                                                        <option>Subordinate</option>
-                                                        <option>Other</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="reference-information1" hidden>
-                                        <div class="box-body">
-                                            <div class="row">
-                                                <div class="col-md-9">
-                                                    <h3>Reference Information number 2</h3>
-                                                </div>
-                                                <div class="cold-md-3 cancel text-right" id="button-remove-reference" onclick="removeReference(0)">
-                                                    <button class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="form-group col-md-6">
-                                                    <label for="">Full Name</label>
-                                                    <div class="row">
-                                                        <div class="col-xs-12">
-                                                            <input type="text" class="form-control" placeholder="" required="">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="">Gender</label>
-                                                    <div class="row gender">
-                                                        <div class="col-md-4">
-                                                            <input type="radio" name="gender" value="male" checked> Male<br>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <input type="radio" name="gender" value="female"> Female<br>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="form-group col-md-6">
-                                                    <label for="">Email</label>
-                                                    <input type="email" class="form-control" placeholder="email" required="">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="">Phonenumber</label>
-                                                    <input type="text" class="form-control" placeholder="phone number" required="">
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="form-group col-md-6">
-                                                    <label for="">Job title</label>
-                                                    <input type="text" class="form-control" placeholder="supervisor, director" required="">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label>Relationship</label>
-                                                    <select class="form-control">
-                                                        <option>Superior</option>
-                                                        <option>Peer</option>
-                                                        <option>Subordinate</option>
-                                                        <option>Other</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--Add reference button-->
-                                    <div class="box-title clickadd">
-                                        <button type="button" class="btn btn-primary" id="button-add-reference" onclick="addReference(0)">+ Add reference</button>
-                                    </div>
-                                </div>
-                            </form>
+                                </form>
+                                            }
                         </div>
                         <div class="box-footer text-right" id="add-company-button">
                             <button type="button" class="btn btn-primary" id="button-add-company" onclick="addCompany()"><i class="fa fa-plus" aria-hidden="true"></i></button>
@@ -378,7 +372,7 @@
                         </div>
                     </div>
                 </div>
-            }
+                                            }
         </div>
     </div>
     <!-- jQuery 3 -->

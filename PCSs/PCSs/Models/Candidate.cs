@@ -21,7 +21,7 @@ namespace PCSs.Models
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
-        public bool Genger { get; set; }
+        public string Gender { get; set; }
         public string DOB { get; set; }
         public string JobTitle { get; set; }
         public string JobLevel { get; set; }
@@ -38,5 +38,6 @@ namespace PCSs.Models
         public Nullable<System.DateTime> IDDate { get; set; }
         public string IDSupply { get; set; }
         public long UserLoginId { get; set; }
+        public string PassportNumber { get; set; }
     }
 }
