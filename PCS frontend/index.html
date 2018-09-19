@@ -1,3 +1,4 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -191,13 +192,14 @@
 
 
 					<div class="form-candidate show">
-						<form>
+						<form method="POST" enctype="multipart/form-data">
 						    <div class="list-button">
 								<div class="form-group">
 									<input id="create-candidate" type="submit" name="create" class="form-control" value="Create New">
 								</div>
 								<div class="form-group">
-									<input type="submit" name="import" class="form-control" value="Import">
+									<input id="select_file" type="file" name="select_file">
+									<input id="import" type="submit" name="import" class="form-control" value="Import">
 								</div>
 						    </div>
 							
@@ -548,4 +550,33 @@
 $(document).ready( function () {
     $('#myTable').DataTable();
 } );
+
+
+
+$(document).ready(function(){
+  $("#import").click(function() {
+    var test_value = $("#select_file").val();
+    var extension = test_value.split('.').pop().toLowerCase();
+	if (window.File && window.FileReader && window.FileList && window.Blob)
+    {
+        // lay dung luong va kieu file tu the input file
+        var fsize = $('#select_file')[0].files[0].size;
+ 
+        if(fsize>1048576) //thuc hien dieu gi do neu dung luong file vuot qua 1MB
+        {
+            alert(fsize +" Dung lượng file quá lớn!");
+        }else{
+            if ($.inArray(extension, ['xls','xlsx','xlsm','docx','txt']) == -1) {
+		      alert("Chỉ nhận định dạng file docx và exe!");
+		      return false;
+		    } else {
+		      alert("File hợp lệ!");
+		      return false;
+		    }
+        }
+    }else{
+        alert("Please upgrade your browser, because your current browser lacks some new features we need!");
+    } 
+  });
+});
 </script>
