@@ -89,6 +89,6 @@ D:\SwilifeSourceCode\PCSGIT\pcs\PCSs\PCSs\bin\VectorIcon.FormsPlugin.Abstraction
 D:\SwilifeSourceCode\PCSGIT\pcs\PCSs\PCSs\bin\VectorIcon.FormsPlugin.Abstractions.xml
 D:\SwilifeSourceCode\PCSGIT\pcs\PCSs\PCSs\bin\Antlr3.Runtime.pdb
 D:\SwilifeSourceCode\PCSGIT\pcs\PCSs\PCSs\bin\Newtonsoft.Json.xml
-D:\SwilifeSourceCode\PCSGIT\pcs\PCSs\PCSs\obj\Debug\PCSs.csprojResolveAssemblyReference.cache
 D:\SwilifeSourceCode\PCSGIT\pcs\PCSs\PCSs\obj\Debug\PCSs.dll
 D:\SwilifeSourceCode\PCSGIT\pcs\PCSs\PCSs\obj\Debug\PCSs.pdb
+D:\SwilifeSourceCode\PCSGIT\pcs\PCSs\PCSs\obj\Debug\PCSs.csprojResolveAssemblyReference.cache

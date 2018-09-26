@@ -11,6 +11,7 @@ namespace PCSs.Models
     {
         public Candidate CandidateGeneralInfo { get; set; }
         public Dictionary<CompanyInfo, ReferencesInformation> ChecksInfo { get; set; }
+        public int NumberOfCompany { get; set; }
 
         public bool IsAccepted { get; set; }
 
@@ -39,6 +40,7 @@ namespace PCSs.Models
                                 ChecksInfo.Add(com, refer);
                             }
                         }
+                        NumberOfCompany = ChecksInfo.Count;
 
                     }
 

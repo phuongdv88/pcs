@@ -16,6 +16,12 @@ namespace PCSs.Controllers
     {
         private PCSEntities db = new PCSEntities();
 
+        // GET: Client Manager
+
+        public ActionResult ManageAccount(long? id)
+        {
+            return View();
+        }
         // GET: Clients
         public async Task<ActionResult> Index()
         {

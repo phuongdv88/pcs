@@ -27,10 +27,10 @@
 
 </head>
 <body class="body-candidate">
-    <header class="text-center">
+    <h1 class="text-center">
         <!-- Logo -->
         <img src="~/Content/Image/LogoSample_ByTailorBrands.jpg" alt="Professional Checking System" />
-    </header>
+    </h1>
     <!-- Main content -->
     <div class="row">
         <!-- general form elements -->
@@ -111,7 +111,7 @@
                                         </div>
                                         <div class="form-group col-md-3">
                                             @Html.LabelFor(model => model.CandidateGeneralInfo.DOB)
-                                            @Html.EditorFor(model => model.CandidateGeneralInfo.DOB, new { htmlAttributes = new { @class = "form-control"} })
+                                            @Html.EditorFor(model => model.CandidateGeneralInfo.DOB, new { htmlAttributes = new { @class = "form-control" } })
                                             @Html.ValidationMessageFor(model => model.CandidateGeneralInfo.DOB, "", new { @class = "text-danger" })
                                         </div>
                                         <div class="form-group col-md-3">
@@ -170,86 +170,89 @@
                         <!-- form start -->
 
                         <div class="box-body" id="company-information">
-                            @foreach (var companyinfo in Model.ChecksInfo.Keys)
+                            @if (Model.ChecksInfo.Keys.Count > 0)
                             {
-                                @Html.HiddenFor(model => companyinfo.CompanyInfoId)
-                                <form id="company-base-info" role="form" method="POST">
-                                    <div class="with-border text-center">
-                                        <h3 class="box-title">Company Information</h3>
-                                    </div>
-                                    <div class="cold-md-3 cancel text-right" id="button-remove-company" hidden="hidden">
-                                        <button class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>
-                                    </div>
-                                    <div class="box-body">
-                                        <div class="company-general-information">
-                                            <div class="row">
-                                                <div class="form-group col-md-6">
-                                                    @Html.LabelFor(model => companyinfo.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                    @Html.EditorFor(model => companyinfo.Name, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => companyinfo.Name, "", new { @class = "text-danger" })
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    @Html.LabelFor(model => companyinfo.Country, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                    @Html.EditorFor(model => companyinfo.Country, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => companyinfo.Country, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="form-group col-md-6">
-                                                    @Html.LabelFor(model => companyinfo.Address, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                    @Html.EditorFor(model => companyinfo.Address, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => companyinfo.Address, "", new { @class = "text-danger" })
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    @Html.LabelFor(model => companyinfo.Website, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                    @Html.EditorFor(model => companyinfo.Website, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => companyinfo.Website, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="form-group col-md-6">
-                                                    @Html.LabelFor(model => companyinfo.Jobtitle, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                    @Html.EditorFor(model => companyinfo.Jobtitle, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => companyinfo.Jobtitle, "", new { @class = "text-danger" })
-                                                </div>
-                                                <div class="form-group col-md-3">
-                                                    @Html.LabelFor(model => companyinfo.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                    @Html.TextBoxFor(model => companyinfo.StartDate, "{0:dd-MM-yyyy}", new {@class="form-control"})
-                                                    @Html.ValidationMessageFor(model => companyinfo.StartDate, "", new { @class = "text-danger" })
-                                                </div>
-                                                <div class="form-group col-md-3">
-                                                    @Html.LabelFor(model => companyinfo.StopDate, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                    @Html.TextBoxFor(model => companyinfo.StopDate, "{0:dd-MM-yyyy}", new { @class = "form-control"})
-                                                    @Html.ValidationMessageFor(model => companyinfo.StopDate, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
+                                var indexCom = 0;
+                                foreach (var companyinfo in Model.ChecksInfo.Keys)
+                                {
+                                    @Html.HiddenFor(model => companyinfo.CompanyInfoId)
+                                    <form id="@("company-base-info" + indexCom)" role="form" method="POST">
+                                        <div class="with-border text-center">
+                                            <h3 class="box-title">Company Information</h3>
                                         </div>
-                                        <!--Reference information-->
-                                        @{var referenceInfo1 = Model.ChecksInfo[companyinfo].Reference1;
-                                            var referenceInfo2 = Model.ChecksInfo[companyinfo].Reference2;
-                                        }
-                                        <div id="reference-information">
-                                            <div class="box-body">
+                                        <div class="cold-md-3 cancel text-right" id="button-remove-company" hidden="hidden">
+                                            <button class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                        </div>
+                                        <div class="box-body">
+                                            <div class="@("company-general-information" + indexCom)">
                                                 <div class="row">
-                                                    <div class="col-md-9">
-                                                        <h3>Reference Information</h3>
+                                                    <div class="form-group col-md-6">
+                                                        @Html.LabelFor(model => companyinfo.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        @Html.EditorFor(model => companyinfo.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => companyinfo.Name, "", new { @class = "text-danger" })
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        @Html.LabelFor(model => companyinfo.Country, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        @Html.EditorFor(model => companyinfo.Country, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => companyinfo.Country, "", new { @class = "text-danger" })
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="form-group col-md-6">
-                                                        @Html.LabelFor(model => referenceInfo1.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                        @Html.EditorFor(model => referenceInfo1.FullName, new { htmlAttributes = new { @class = "form-control" } })
-                                                        @Html.ValidationMessageFor(model => referenceInfo1.FullName, "", new { @class = "text-danger" })
+                                                        @Html.LabelFor(model => companyinfo.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        @Html.EditorFor(model => companyinfo.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => companyinfo.Address, "", new { @class = "text-danger" })
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        @Html.LabelFor(model => companyinfo.Website, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        @Html.EditorFor(model => companyinfo.Website, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => companyinfo.Website, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-md-6">
+                                                        @Html.LabelFor(model => companyinfo.Jobtitle, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        @Html.EditorFor(model => companyinfo.Jobtitle, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => companyinfo.Jobtitle, "", new { @class = "text-danger" })
                                                     </div>
                                                     <div class="form-group col-md-3">
-                                                        @Html.LabelFor(model => referenceInfo1.JobTitle, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                        @Html.EditorFor(model => referenceInfo1.JobTitle, new { htmlAttributes = new { @class = "form-control" } })
-                                                        @Html.ValidationMessageFor(model => referenceInfo1.JobTitle, "", new { @class = "text-danger" })
+                                                        @Html.LabelFor(model => companyinfo.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        @Html.TextBoxFor(model => companyinfo.StartDate, "{0:dd-MM-yyyy}", new { @class = "form-control datepicker", @id = "start-date" })
+                                                        @Html.ValidationMessageFor(model => companyinfo.StartDate, "", new { @class = "text-danger" })
                                                     </div>
                                                     <div class="form-group col-md-3">
-                                                        @Html.LabelFor(model => referenceInfo1.RelationShip, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                        @Html.DropDownListFor(model => referenceInfo1.RelationShip,
-                                                           new[] { new SelectListItem
+                                                        @Html.LabelFor(model => companyinfo.StopDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                        @Html.TextBoxFor(model => companyinfo.StopDate, "{0:dd-MM-yyyy}", new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(model => companyinfo.StopDate, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--Reference information-->
+                                            @{var referenceInfo1 = Model.ChecksInfo[companyinfo].Reference1;
+                                                var referenceInfo2 = Model.ChecksInfo[companyinfo].Reference2;
+                                            }
+                                            <div id="reference-information0">
+                                                    <div class="box-body">
+                                                        <div class="row">
+                                                            <div class="col-md-9">
+                                                                <h3>Reference Information</h3>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group col-md-6">
+                                                                @Html.LabelFor(model => referenceInfo1.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                                @Html.EditorFor(model => referenceInfo1.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                                                                @Html.ValidationMessageFor(model => referenceInfo1.FullName, "", new { @class = "text-danger" })
+                                                            </div>
+                                                            <div class="form-group col-md-3">
+                                                                @Html.LabelFor(model => referenceInfo1.JobTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                                @Html.EditorFor(model => referenceInfo1.JobTitle, new { htmlAttributes = new { @class = "form-control" } })
+                                                                @Html.ValidationMessageFor(model => referenceInfo1.JobTitle, "", new { @class = "text-danger" })
+                                                            </div>
+                                                            <div class="form-group col-md-3">
+                                                                @Html.LabelFor(model => referenceInfo1.RelationShip, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                                @Html.DropDownListFor(model => referenceInfo1.RelationShip,
+                                                             new[] { new SelectListItem
                                                            {
                                                                Text = "Superior",
                                                                Value = "Superior",
@@ -266,50 +269,51 @@
                                                                Text = "Other",
                                                                Value = "Other",
                                                            }
-                                                           }, new { id = "Level Type", @class = "form-control" })
-                                                    </div>
+                                                             }, new { id = "Level Type", @class = "form-control" })
+                                                            </div>
 
-                                                </div>
-                                                <div class="row">
-                                                    <div class="form-group col-md-6">
-                                                        @Html.LabelFor(model => referenceInfo1.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                        @Html.EditorFor(model => referenceInfo1.Email, new { htmlAttributes = new { @class = "form-control" } })
-                                                        @Html.ValidationMessageFor(model => referenceInfo1.Email, "", new { @class = "text-danger" })
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group col-md-6">
+                                                                @Html.LabelFor(model => referenceInfo1.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                                @Html.EditorFor(model => referenceInfo1.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                                                @Html.ValidationMessageFor(model => referenceInfo1.Email, "", new { @class = "text-danger" })
+                                                            </div>
+                                                            <div class="form-group col-md-6">
+                                                                @Html.LabelFor(model => referenceInfo1.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                                @Html.EditorFor(model => referenceInfo1.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                                                @Html.ValidationMessageFor(model => referenceInfo1.PhoneNumber, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+
                                                     </div>
-                                                    <div class="form-group col-md-6">
-                                                        @Html.LabelFor(model => referenceInfo1.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                        @Html.EditorFor(model => referenceInfo1.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-                                                        @Html.ValidationMessageFor(model => referenceInfo1.PhoneNumber, "", new { @class = "text-danger" })
-                                                    </div>
-                                                </div>
-                                                
                                             </div>
-                                        </div>
-                                        <div id="reference-information1" hidden>
-                                            <div class="box-body">
-                                                <div class="row">
-                                                    <div class="col-md-9">
-                                                        <h3>Reference Information number 2</h3>
-                                                    </div>
-                                                    <div class="cold-md-3 cancel text-right" id="button-remove-reference" onclick="removeReference(0)">
+
+                                            <div id="reference-information1" hidden>
+                                                <div class="box-body">
+                                                    <div class="cold-md-3 cancel text-right" id="button-remove-reference1" onclick="removeReference(@indexCom); return false;">
                                                         <button class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>
                                                     </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="form-group col-md-6">
-                                                        @Html.LabelFor(model => referenceInfo2.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                        @Html.EditorFor(model => referenceInfo2.FullName, new { htmlAttributes = new { @class = "form-control" } })
-                                                        @Html.ValidationMessageFor(model => referenceInfo2.FullName, "", new { @class = "text-danger" })
+                                                    <div class="row">
+                                                        <div class="col-md-9">
+                                                            <h3>Reference Information number 2</h3>
+                                                        </div>
                                                     </div>
-                                                    <div class="form-group col-md-3">
-                                                        @Html.LabelFor(model => referenceInfo2.JobTitle, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                        @Html.EditorFor(model => referenceInfo2.JobTitle, new { htmlAttributes = new { @class = "form-control" } })
-                                                        @Html.ValidationMessageFor(model => referenceInfo2.JobTitle, "", new { @class = "text-danger" })
-                                                    </div>
-                                                    <div class="form-group col-md-3">
-                                                        @Html.LabelFor(model => referenceInfo2.RelationShip, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                        @Html.DropDownListFor(model => referenceInfo2.RelationShip,
-                                                           new[] { new SelectListItem
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6">
+                                                            @Html.LabelFor(model => referenceInfo2.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                            @Html.EditorFor(model => referenceInfo2.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                                                            @Html.ValidationMessageFor(model => referenceInfo2.FullName, "", new { @class = "text-danger" })
+                                                        </div>
+                                                        <div class="form-group col-md-3">
+                                                            @Html.LabelFor(model => referenceInfo2.JobTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                            @Html.EditorFor(model => referenceInfo2.JobTitle, new { htmlAttributes = new { @class = "form-control" } })
+                                                            @Html.ValidationMessageFor(model => referenceInfo2.JobTitle, "", new { @class = "text-danger" })
+                                                        </div>
+                                                        <div class="form-group col-md-3">
+                                                            @Html.LabelFor(model => referenceInfo2.RelationShip, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                            @Html.DropDownListFor(model => referenceInfo2.RelationShip,
+                                                             new[] { new SelectListItem
                                                            {
                                                                Text = "Superior",
                                                                Value = "Superior",
@@ -326,31 +330,36 @@
                                                                Text = "Other",
                                                                Value = "Other",
                                                            }
-                                                           }, new { id = "Level Type", @class = "form-control" })
-                                                    </div>
+                                                             }, new { id = "Level Type", @class = "form-control" })
+                                                        </div>
 
-                                                </div>
-                                                <div class="row">
-                                                    <div class="form-group col-md-6">
-                                                        @Html.LabelFor(model => referenceInfo2.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                        @Html.EditorFor(model => referenceInfo2.Email, new { htmlAttributes = new { @class = "form-control" } })
-                                                        @Html.ValidationMessageFor(model => referenceInfo2.Email, "", new { @class = "text-danger" })
                                                     </div>
-                                                    <div class="form-group col-md-6">
-                                                        @Html.LabelFor(model => referenceInfo2.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                        @Html.EditorFor(model => referenceInfo2.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-                                                        @Html.ValidationMessageFor(model => referenceInfo2.PhoneNumber, "", new { @class = "text-danger" })
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6">
+                                                            @Html.LabelFor(model => referenceInfo2.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                            @Html.EditorFor(model => referenceInfo2.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                                            @Html.ValidationMessageFor(model => referenceInfo2.Email, "", new { @class = "text-danger" })
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            @Html.LabelFor(model => referenceInfo2.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                            @Html.EditorFor(model => referenceInfo2.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                                            @Html.ValidationMessageFor(model => referenceInfo2.PhoneNumber, "", new { @class = "text-danger" })
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <!--Add reference button-->
+                                            <div class="box-title clickadd">
+                                                <button type="button" class="btn btn-primary" id="@("button-add-reference" + indexCom)" onclick="addReference(@indexCom)">+ Add reference</button>
+                                            </div>
                                         </div>
-                                        <!--Add reference button-->
-                                        <div class="box-title clickadd">
-                                            <button type="button" class="btn btn-primary" id="button-add-reference" onclick="addReference(0)">+ Add reference</button>
-                                        </div>
-                                    </div>
-                                </form>
-                                            }
+                                    </form>
+                                    indexCom++;
+                                }
+                            } else
+                            {
+                                // create new company form
+                            }
                         </div>
                         <div class="box-footer text-right" id="add-company-button">
                             <button type="button" class="btn btn-primary" id="button-add-company" onclick="addCompany()"><i class="fa fa-plus" aria-hidden="true"></i></button>
@@ -372,7 +381,7 @@
                         </div>
                     </div>
                 </div>
-                                            }
+            }
         </div>
     </div>
     <!-- jQuery 3 -->
@@ -392,6 +401,9 @@
 
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
     <script type="text/javascript" src="~/Content/Js/update-info-candidate.js"></script>
+    <script type="text/javascript">
+        updateCompanyCount(@Html.Raw(Json.Encode(Model.ChecksInfo.Count)));
+    </script>
 
 </body>
 

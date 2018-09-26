@@ -249,6 +249,7 @@
     <Content Include="Content\Css\Candidate.css" />
     <Content Include="Content\Css\font-awesome.css" />
     <Content Include="Content\Css\Login.css" />
+    <Content Include="Content\Css\ManageAccount.css" />
     <Content Include="Content\Css\skins\skin-black-light.css" />
     <Content Include="Content\Css\skins\skin-black-light.min.css" />
     <Content Include="Content\Css\skins\skin-black.css" />
@@ -275,6 +276,14 @@
     <Content Include="Content\Css\skins\skin-yellow.min.css" />
     <Content Include="Content\Css\skins\_all-skins.css" />
     <Content Include="Content\Css\skins\_all-skins.min.css" />
+    <Content Include="Content\datatables.net-bs\css\dataTables.bootstrap.css" />
+    <Content Include="Content\datatables.net-bs\css\dataTables.bootstrap.min.css" />
+    <Content Include="Content\datatables.net-bs\js\dataTables.bootstrap.js" />
+    <Content Include="Content\datatables.net-bs\js\dataTables.bootstrap.min.js" />
+    <Content Include="Content\datatables.net-bs\License.txt" />
+    <Content Include="Content\datatables.net\js\jquery.dataTables.js" />
+    <Content Include="Content\datatables.net\js\jquery.dataTables.min.js" />
+    <Content Include="Content\datatables.net\License.txt" />
     <Content Include="Content\font-awesome\css\font-awesome.css" />
     <Content Include="Content\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
@@ -1925,6 +1934,12 @@
     <Content Include="Models\PcsModel.edmx.diagram">
       <DependentUpon>PcsModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\datatables.net-bs\.bower.json" />
+    <Content Include="Content\datatables.net-bs\bower.json" />
+    <Content Include="Content\datatables.net-bs\Readme.md" />
+    <Content Include="Content\datatables.net\.bower.json" />
+    <Content Include="Content\datatables.net\bower.json" />
+    <Content Include="Content\datatables.net\Readme.md" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -2104,6 +2119,7 @@
     <Content Include="Views\ReferenceInfo\Details.cshtml" />
     <Content Include="Views\ReferenceInfo\Edit.cshtml" />
     <Content Include="Views\ReferenceInfo\Index.cshtml" />
+    <Content Include="Views\Client\ManageAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
