@@ -14,7 +14,6 @@
     <EntitySetMapping Name="Candidates">
       <EntityTypeMapping TypeName="PCSModel.Candidate">
         <MappingFragment StoreEntitySet="Candidate">
-          <ScalarProperty Name="PassportNumber" ColumnName="PassportNumber" />
           <ScalarProperty Name="CandidateId" ColumnName="CandidateId" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
@@ -39,6 +38,7 @@
           <ScalarProperty Name="IDDate" ColumnName="IDDate" />
           <ScalarProperty Name="IDSupply" ColumnName="IDSupply" />
           <ScalarProperty Name="UserLoginId" ColumnName="UserLoginId" />
+          <ScalarProperty Name="PassportNumber" ColumnName="PassportNumber" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -1927,6 +1927,12 @@
     <Content Include="Content\Js\fastclick\bower.json" />
     <Content Include="Content\Js\fastclick\LICENSE" />
     <Content Include="Content\Js\fastclick\README.md" />
+    <Content Include="Content\datatables.net-bs\.bower.json" />
+    <Content Include="Content\datatables.net-bs\bower.json" />
+    <Content Include="Content\datatables.net-bs\Readme.md" />
+    <Content Include="Content\datatables.net\.bower.json" />
+    <Content Include="Content\datatables.net\bower.json" />
+    <Content Include="Content\datatables.net\Readme.md" />
     <EntityDeploy Include="Models\PcsModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>PcsModel.Designer.cs</LastGenOutput>
@@ -1934,12 +1940,6 @@
     <Content Include="Models\PcsModel.edmx.diagram">
       <DependentUpon>PcsModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\datatables.net-bs\.bower.json" />
-    <Content Include="Content\datatables.net-bs\bower.json" />
-    <Content Include="Content\datatables.net-bs\Readme.md" />
-    <Content Include="Content\datatables.net\.bower.json" />
-    <Content Include="Content\datatables.net\bower.json" />
-    <Content Include="Content\datatables.net\Readme.md" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
