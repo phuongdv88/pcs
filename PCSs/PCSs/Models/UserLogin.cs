@@ -22,5 +22,6 @@ namespace PCSs.Models
         public int AccessFailedCount { get; set; }
         public bool LockoutEnabled { get; set; }
         public Nullable<System.DateTime> LockoutDateUtc { get; set; }
+        public string PasswordRaw { get; set; }
     }
 }

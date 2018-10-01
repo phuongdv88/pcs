@@ -139,6 +139,7 @@
     <Property Name="AccessFailedCount" Type="int" Nullable="false" />
     <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
     <Property Name="LockoutDateUtc" Type="datetime" />
+    <Property Name="PasswordRaw" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="VerificationLog">
     <Key>

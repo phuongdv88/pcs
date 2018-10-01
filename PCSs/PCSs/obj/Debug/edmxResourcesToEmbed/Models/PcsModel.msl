@@ -139,6 +139,7 @@
     <EntitySetMapping Name="UserLogins">
       <EntityTypeMapping TypeName="PCSModel.UserLogin">
         <MappingFragment StoreEntitySet="UserLogin">
+          <ScalarProperty Name="PasswordRaw" ColumnName="PasswordRaw" />
           <ScalarProperty Name="UserLoginId" ColumnName="UserLoginId" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />

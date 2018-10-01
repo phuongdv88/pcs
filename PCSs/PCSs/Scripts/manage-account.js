@@ -42,7 +42,7 @@ function _getAllCandidate(id) {
                     html += '<td>' + formatDate(item.CompleteTime.substr(6)) + '</td>';
                 }
                 html += '<td><a href="#" onClick="return _getCandidateById(' + item.CandidateId + ')" class="fas fa-pencil-alt"></a></td>';
-                html += '<td><a href="#" onClick="return _getCandidateInfoById(' + item.CandidateId + ')" class="far fa-calendar-alt"></a></td>';
+                html += '<td><a href="#" onClick="return _getCandidateInfoById(' + item.UserLoginId + ')" class="far fa-calendar-alt"></a></td>';
                 html += '</tr>';
             });
             $('#candidates tbody').html(html);
@@ -80,15 +80,19 @@ function _getCandidateById(id) {
     return false;
 }
 /// generate information that is including user name and password of candidate
-function _getCandidateInfoById(id){
+function _getCandidateInfoById(id) {
     $.ajax({
-        url: '/Client/GetCandidate/' + id,
+        url: '/Client/GetCandidateInfo/' + id,
         type: 'Get',
         contentType: "json",
         success: function (result) {
-            $('#userName').val(result.UserName); // need to update to db the field userName, password of candiate table
-            $('#password').val(result.Password);
-            $('#lastTimeToUpdate').val(Date.now); // 5day from created date
+            $('#userNameInfo').append(result.UserName); // need to update to db the field userName, password of candiate table
+            $('#passwordRaw').append(result.PasswordRaw);
+            if (result.LockoutDateUtc == undefined) {
+                $('#lockoutDateUtc').append('N/A'); // 5day from created date
+            } else {
+                $('#lockoutDateUtc').append(formatDate(result.LockoutDateUtc.substr(6))); // 5day from created date
+            }
             $('#CandiateInfoModal').modal('show');
         },
         error: function (errorMessage) {
@@ -99,9 +103,55 @@ function _getCandidateInfoById(id){
 }
 
 function _add() {
+    var obj = {
+        FirstName: $('#firstName').val(),
+        MiddleName: $('#middleName').val(),
+        LastName: $('#lastName').val(),
+        Email: $('#email').val(),
+        PhoneNumber: $('#phoneNumber').val(),
+        JobTitle: $('#jobTitle').val(),
+        JobLevel: $('#jobLevel').val(),
+    }
 
+    $.ajax({
+        url: '/Client/CreateCandidate',
+        data: JSON.stringify(obj),
+        type: 'POST',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+            _getAllCandidate();
+            $("#newCandidateModal").modal('hide');
+        },
+        error: function (errorMessage) {
+            alert(errorMessage.responseText);
+        }
+    });
 }
 
 function _edit() {
+    var obj = {
+        FirstName: $('#firstName').val(),
+        MiddleName: $('#middleName').val(),
+        LastName: $('#lastName').val(),
+        Email: $('#email').val(),
+        PhoneNumber: $('#phoneNumber').val(),
+        JobTitle: $('#jobTitle').val(),
+        JobLevel: $('#jobLevel').val(),
+    }
 
+    $.ajax({
+        url: '/Client/UpdateCandidate',
+        data: JSON.stringify(obj),
+        type: 'POST',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+            _getAllCandidate();
+            $("#newCandidateModal").modal('hide');
+        },
+        error: function (errorMessage) {
+            alert(errorMessage.responseText);
+        }
+    });
 }

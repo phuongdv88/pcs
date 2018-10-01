@@ -44,8 +44,8 @@ namespace PCSs.Controllers
 
         public JsonResult GetCandidateInfo(long id)
         {
-            var can = db.Candidates.FirstOrDefault(x => x.CandidateId == id);
-            return Json(can, JsonRequestBehavior.AllowGet);
+            var user = db.UserLogins.FirstOrDefault(x => x.UserLoginId == id);
+            return Json(user, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult CreateCandidate(Candidate can)
