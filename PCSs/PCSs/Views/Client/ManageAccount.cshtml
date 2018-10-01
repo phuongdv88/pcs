@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = null;
     ViewBag.Title = "Ten cua Recruiter";
 }
@@ -49,91 +48,162 @@
         </div>
     </div>
     <div class="col-md-10 col-sm-10 col-xs-12">
-    <div class="tab-content">
-        <div id="candidate-manager" class="tab-pane fade in active">
-    <div class="wrapper">
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">           
-            <!-- Main content -->
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="box">
-                            <div class="box-header">
-                                <h3 class="box-title">Candidate Information</h3>
-                            </div>
-                            <!-- /.box-header -->
-                            <div class="box-body">
-                                <table id="candidates" class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Phone Number</th>
-                                            <th>Status</th>
-                                            <th>Start Date</th>
-                                            <th>Completed Date</th>
-                                            <th>Edit</th>
-                                            <th>Detail</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-    @{
-        var Name = "Ten";
-        var Email = "Email@gmail.com";
-        var PhoneNumber = "0123456";
-        var Status = "Ready";
-        var StartDate = "2018/09/01";
-        var CompletedDate = DateTime.UtcNow;
-    }
-                                        @for (int i = 0; i < 150; i++)
-                                        {
-                                        <tr>
-                                            <td>@(Name + i)</td>
-                                            <td>@(Email + i)</td>
-                                            <td>@(PhoneNumber + i)</td>
-                                            <td>@Status</td>
-                                            <td>@StartDate</td>
-                                            <td>@CompletedDate</td>
-                                            <td class="edit"><a href="#" class="fas fa-pencil-alt"></a></td>
-                                            <td class="detail"><a href="#" class="far fa-calendar-alt"></a></td>
+        <div class="tab-content">
+            <div id="candidate-manager" class="tab-pane fade in active">
+                <div class="wrapper">
+                    <!-- Content Wrapper. Contains page content -->
+                    <div class="content-wrapper">
+                        <!-- Main content -->
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="box">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Candidate Information</h3>
+                                        <div>
+                                            <button type="button" class="btn btn-primary btn-lg" onclick="return _getAllCandidate(@ViewBag.RecruiterId);"><span class="glyphicon glyphicon-refresh"></span></button>
+                                            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newCandidateModal"><span class="glyphicon glyphicon-plus-sign"></span></button>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <table id="candidates" class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Email</th>
+                                                    <th>Phone Number</th>
+                                                    <th>Status</th>
+                                                    <th>Start Date</th>
+                                                    <th>Completed Date</th>
+                                                    <th>Edit</th>
+                                                    <th>Detail</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="tbody">
+                                                @*@{
+                                                    var Name = "Ten";
+                                                    var Email = "Email@gmail.com";
+                                                    var PhoneNumber = "0123456";
+                                                    var Status = "Ready";
+                                                    var StartDate = "2018/09/01";
+                                                    var CompletedDate = DateTime.UtcNow;
+                                                }
+                                                @for (int i = 0; i < 10; i++)
+                                                {
+                                                <tr>
+                                                    <td>@(Name + i)</td>
+                                                    <td>@(Email + i)</td>
+                                                    <td>@(PhoneNumber + i)</td>
+                                                    <td>@Status</td>
+                                                    <td>@StartDate</td>
+                                                    <td>@CompletedDate</td>
+                                                    <td class="edit"><a href="#" class="fas fa-pencil-alt"></a></td>
+                                                    <td class="detail"><a href="#" class="far fa-calendar-alt"></a></td>
 
-                                        </tr>
-                                        }
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Phone Number</th>
-                                            <th>Status</th>
-                                            <th>Start Date</th>
-                                            <th>Completed Date</th>
-                                            <th>Detail</th>
-                                            <th>Edit</th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
+                                                </tr>
+                                                }*@
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Email</th>
+                                                    <th>Phone Number</th>
+                                                    <th>Status</th>
+                                                    <th>Start Date</th>
+                                                    <th>Completed Date</th>
+                                                    <th>Detail</th>
+                                                    <th>Edit</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                                <!-- /.box -->
                             </div>
-                            <!-- /.box-body -->
+                            <!-- /.col -->
                         </div>
-                        <!-- /.box -->
+                        <!-- /.row -->
+                        <!-- /.content -->
                     </div>
-                    <!-- /.col -->
                 </div>
-                <!-- /.row -->
-            <!-- /.content -->
-        </div>
-       
-        <!-- Add the sidebar's background. This div must be placed
-             immediately after the control sidebar -->
-        <div class="control-sidebar-bg"></div>
-    </div>
             </div>
-        <div id="report-manager" class="tab-pane fade">
-            <h1>Report Manager</h1>
+            <div id="report-manager" class="tab-pane fade">
+                <h1>Report Manager</h1>
+            </div>
         </div>
+
+        <!-- New Candidate Modal -->
+        <div class="modal fade" id="newCandidateModal" tabindex="-1" role="dialog" aria-labelledby="newCandidateModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="newCandidateModalLabel">Create New Candidate</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="Name">First Name</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="Name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Name">Middle Name</label>
+                            <input type="text" class="form-control" id="middleName" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="Name">Last Name</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="Name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Name">Email</label>
+                            <input type="text" class="form-control" id="email" placeholder="Name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Name">Phone number</label>
+                            <input type="text" class="form-control" id="phoneNumber" placeholder="Name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Name">Job Title</label>
+                            <input type="text" class="form-control" id="jobTitle" placeholder="Name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Name">Job Level</label>
+                            <input type="text" class="form-control" id="jobLevel" placeholder="Name">
+                        </div>
+                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="return _add();" id="btnAdd">Add</button>
+                    <button type="button" class="btn btn-primary" onclick="return _edit();" id="btnUpdate" style="display:none">Update</button>
+                </div>
+            </div>
         </div>
+    </div>
+        <!-- Candidate's information Modal -->
+        <div class="modal fade" id="CandiateInfoModal" tabindex="-1" role="dialog" aria-labelledby="newCandidateModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="newCandidateModalLabel">Candidate information</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div> This is login information you can send to candidate via email to require to complete forms</div>
+                        <div>User Name: <span id="userName"></span></div>
+                        <div>Password: <span id="password"></span></div>
+                        <div>Please update information before:<span id="lastTimeToUpdate"></span></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
     <!-- ./wrapper -->
     <!-- jQuery 3 -->
     <script src="~/Scripts/jquery/dist/jquery.min.js"></script>
@@ -150,11 +220,12 @@
     <script src="~/Content/Js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="~/Content/Js/demo.js"></script>
+    <script src="~/Scripts/manage-account.js"></script>
     <!-- page script -->
     <script>
-  $(function () {
-      $('#candidates').DataTable()
-  })
+        $(function () {
+            _getAllCandidate(@ViewBag.RecruiterId);
+        })
     </script>
 </body>
 </html>

@@ -67,7 +67,7 @@ namespace PCSs.Controllers
                             return RedirectToAction("Index", "Admin");
                         case UserRole.CLIENT:
                             // Recruiter
-                            return RedirectToAction("Index", "Client");
+                            return RedirectToAction("ManageAccount", "Client");
 
                         case UserRole.SPECIALIST:
                             // specialist
@@ -173,7 +173,10 @@ namespace PCSs.Controllers
                                     return RedirectToAction("Index", "Admin");
                                 case UserRole.CLIENT:
                                     // Recruiter
-                                    return RedirectToAction("Index", "Client");
+                                    var recruiterId = db.Recruiters.FirstOrDefault(s => s.UserLoginId == userInfo.UserLoginId).RecruiterId;
+                                    Session["RecruiterId"] = recruiterId;
+
+                                    return RedirectToAction("ManageAccount", "Client",new {id =  recruiterId});
 
                                 case UserRole.SPECIALIST:
                                     // specialist

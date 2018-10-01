@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PCSs.Models;
+using System.Data.Entity.Migrations;
 
 namespace PCSs.Controllers
 {
@@ -18,10 +19,56 @@ namespace PCSs.Controllers
 
         // GET: Client Manager
 
-        public ActionResult ManageAccount(long? id)
-        {
+        public ActionResult ManageAccount(long? id) {
+            ViewBag.RecruiterId = id;
             return View();
         }
+        /// <summary>
+        /// Get all Candidate
+        /// </summary>
+        /// <returns></returns>
+        
+            public JsonResult GetAllCandidate(long id)
+        {
+            //if (recruiterId == null)
+            //    return Json(new { msg = "Can't find user id" }, JsonRequestBehavior.AllowGet);
+            var result = Json(db.Candidates.Where(s => s.RecruiterId == id), JsonRequestBehavior.AllowGet);
+            return result;
+        }
+
+        public JsonResult GetCandidate(long id)
+        {
+            var can = db.Candidates.FirstOrDefault(x => x.CandidateId == id);
+            return Json(can, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetCandidateInfo(long id)
+        {
+            var can = db.Candidates.FirstOrDefault(x => x.CandidateId == id);
+            return Json(can, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult CreateCandidate(Candidate can)
+        {
+            db.Candidates.Add(can);
+            var rs = db.SaveChanges();
+            return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult UpdateCandidate(Candidate can)
+        {
+            db.Candidates.AddOrUpdate(can);
+            var rs = db.SaveChanges();
+            return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult Delete(long id)
+        {
+            db.Candidates.Remove(db.Candidates.FirstOrDefault(s => s.CandidateId == id));
+            var rs = db.SaveChanges();
+            return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
+        }
+
         // GET: Clients
         public async Task<ActionResult> Index()
         {
