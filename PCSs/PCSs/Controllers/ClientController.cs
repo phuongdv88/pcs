@@ -16,12 +16,14 @@ namespace PCSs.Controllers
     public class ClientController : Controller
     {
         private PCSEntities db = new PCSEntities();
+        private static long CurrentRecruiterId = -1;
 
         // GET: Client Manager
 
-        public ActionResult ManageAccount(long? id)
+        public ActionResult ManageAccount(long id)
         {
             ViewBag.RecruiterId = id;
+            CurrentRecruiterId = id;
             return View();
         }
         /// <summary>
@@ -51,11 +53,41 @@ namespace PCSs.Controllers
 
         public JsonResult CreateCandidate(CandidateSimpleInfo can)
         {
-            var candidate = new Candidate();
-            var userLogin = new UserLogin();
-            // create user name pass word
-            // create candidate
+            var userLogin = new UserLogin()
+            {
+                UserName = Util.Helper.getRandomAlphaNumeric(6).ToUpper(),
+                PasswordRaw = Util.Helper.getRandomAlphaNumeric(8),
+                SecurityStamp = Util.Helper.getRandomAlphaNumeric(100),
+                Role = (int)UserRole.CANDIDATE,
+                AccessFailedCount = 0,
+                LockoutEnabled = true,
+                LockoutDateUtc = DateTime.UtcNow.AddDays(7)
+            };// create user name pass word
+            while (db.UserLogins.Any(s => s.UserName == userLogin.UserName))
+            {
+                userLogin.UserName = Util.Helper.getRandomAlphaNumeric(6).ToUpper();
+            }
+            userLogin.PasswordHash = Util.Helper.createMD5Hash(userLogin.PasswordRaw, userLogin.UserName, userLogin.SecurityStamp);
 
+            db.UserLogins.Add(userLogin);
+            db.SaveChanges();
+
+            // create candidate
+            var candidate = new Candidate()
+            {
+                UserLoginId = userLogin.UserLoginId,
+                FirstName = can.FirstName,
+                MiddleName = can.MiddleName,
+                LastName = can.LastName,
+                Email = can.Email,
+                PhoneNumber = can.PhoneNumber,
+                JobTitle = can.JobTitle,
+                JobLevel = can.JobTitle,
+                RecruiterId = CurrentRecruiterId,
+                CreatedTime = DateTime.Now,
+                Status = "Initial",
+
+            };
             db.Candidates.Add(candidate);
             var rs = db.SaveChanges();
             return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);

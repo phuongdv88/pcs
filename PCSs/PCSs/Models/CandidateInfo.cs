@@ -7,6 +7,25 @@ using System.Web.Mvc;
 
 namespace PCSs.Models
 {
+    enum JobLevel
+    {
+        Fresher,
+        Junior,
+        Senior,
+        Manager,
+        Higher
+    }
+
+    enum CandidateStatus
+    {
+        Initial,
+        Ready,
+        Processing,
+        MissingInformation,
+        Pending,
+        Completed,
+        Finish
+    }
     public class CandidateSimpleInfo
     {
         public long CandidateId { get; set; }
@@ -17,6 +36,7 @@ namespace PCSs.Models
         public string PhoneNumber { get; set; }
         public string JobTitle { get; set; }
         public string JobLevel { get; set; }
+        public string RecruiterId { get; set; }
     }
     public class CandidateInfo
     {
