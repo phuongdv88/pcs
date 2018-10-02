@@ -7,6 +7,17 @@ using System.Web.Mvc;
 
 namespace PCSs.Models
 {
+    public class CandidateSimpleInfo
+    {
+        public long CandidateId { get; set; }
+        public string FirstName { get; set; }
+        public string MiddleName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        public string JobTitle { get; set; }
+        public string JobLevel { get; set; }
+    }
     public class CandidateInfo
     {
         public Candidate CandidateGeneralInfo { get; set; }

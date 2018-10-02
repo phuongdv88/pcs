@@ -19,7 +19,8 @@ namespace PCSs.Controllers
 
         // GET: Client Manager
 
-        public ActionResult ManageAccount(long? id) {
+        public ActionResult ManageAccount(long? id)
+        {
             ViewBag.RecruiterId = id;
             return View();
         }
@@ -27,8 +28,8 @@ namespace PCSs.Controllers
         /// Get all Candidate
         /// </summary>
         /// <returns></returns>
-        
-            public JsonResult GetAllCandidate(long id)
+
+        public JsonResult GetAllCandidate(long id)
         {
             //if (recruiterId == null)
             //    return Json(new { msg = "Can't find user id" }, JsonRequestBehavior.AllowGet);
@@ -48,16 +49,29 @@ namespace PCSs.Controllers
             return Json(user, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult CreateCandidate(Candidate can)
+        public JsonResult CreateCandidate(CandidateSimpleInfo can)
         {
-            db.Candidates.Add(can);
+            var candidate = new Candidate();
+            var userLogin = new UserLogin();
+            // create user name pass word
+            // create candidate
+
+            db.Candidates.Add(candidate);
             var rs = db.SaveChanges();
             return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult UpdateCandidate(Candidate can)
+        public JsonResult UpdateCandidate(CandidateSimpleInfo can)
         {
-            db.Candidates.AddOrUpdate(can);
+            var candidate = db.Candidates.First(s => s.CandidateId == can.CandidateId);
+            candidate.FirstName = can.FirstName;
+            candidate.MiddleName = can.MiddleName;
+            candidate.LastName = can.LastName;
+            candidate.Email = can.Email;
+            candidate.PhoneNumber = can.PhoneNumber;
+            candidate.JobTitle = can.JobTitle;
+            candidate.JobLevel = can.JobLevel;
+            db.Candidates.AddOrUpdate(candidate);
             var rs = db.SaveChanges();
             return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
         }

@@ -62,6 +62,7 @@ function _getCandidateById(id) {
         type: 'Get',
         contentType: "json",
         success: function (result) {
+            $('#candidateId').val(result.CandidateId);
             $('#firstName').val(result.FirstName);
             $('#middleName').val(result.MiddleName);
             $('#lastName').val(result.LastName);
@@ -104,6 +105,7 @@ function _getCandidateInfoById(id) {
 
 function _add() {
     var obj = {
+        CandidateId:'0',
         FirstName: $('#firstName').val(),
         MiddleName: $('#middleName').val(),
         LastName: $('#lastName').val(),
@@ -131,6 +133,7 @@ function _add() {
 
 function _edit() {
     var obj = {
+        CandidateId: $('#candidateId').val(),
         FirstName: $('#firstName').val(),
         MiddleName: $('#middleName').val(),
         LastName: $('#lastName').val(),
