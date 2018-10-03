@@ -32,8 +32,11 @@ function _getAllCandidate(id) {
         timeout: '3000',
         success: function (result) {
             var html = '';
+            var i = 0;
             $.each(result, function (key, item) {
+                i++;
                 html += '<tr>';
+                html += '<td>' + i + '</td>';
                 html += '<td>' + item.FirstName + " " + item.MiddleName + " " + item.LastName + '</td>';
                 html += '<td>' + item.Email + '</td>';
                 html += '<td>' + item.PhoneNumber + '</td>';
@@ -57,6 +60,61 @@ function _getAllCandidate(id) {
             alert(errorMessage.responseText);
         }
     });
+    return false;
+}
+
+function _getAllCandidateReport(id) {
+    $.ajax({
+        url: '/Client/GetAllCandidateCompleted/' + id,
+        //data: '{id: ' + id + ' }',
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        timeout: '3000',
+        success: function (result) {
+            var html = '';
+            var i = 0;
+            $.each(result, function (key, item) {
+                i++;
+                html += '<tr>';
+                html += '<td>' + i + '</td>';
+                html += '<td>' + item.FirstName + " " + item.MiddleName + " " + item.LastName + '</td>';
+                html += '<td>' + item.Email + '</td>';
+                html += '<td>' + item.PhoneNumber + '</td>';
+                if (item.CompleteTime == undefined) {
+                    html += '<td>N/A</td>';
+                }
+                else {
+                    html += '<td>' + formatDate(item.CompleteTime.substr(6)) + '</td>';
+                }
+                html += '<td><a href="#" onClick="return _getCandidateReportById(' + item.UserLoginId + ')" class="far fa-calendar-alt"></a></td>';
+                html += '</tr>';
+            });
+            $('#report tbody').html(html);
+            $('#report').DataTable()
+
+        },
+        error: function (errorMessage) {
+            alert(errorMessage.responseText);
+        }
+    });
+    return false;
+}
+
+function _getCandidateReportById(id) {
+    $.ajax({
+        url: '/Client/GetCandidateReport/' + id,
+        type: 'Get',
+        contentType: "json",
+        success: function (result) {
+            //$('#candiateInfoModal').modal('show');
+            alert('Show info or view pdf file from' + result.link);
+        },
+        error: function (errorMessage) {
+            alert(errorMessage.responseText);
+        }
+    });
+    return false;
     return false;
 }
 
@@ -91,14 +149,22 @@ function _getCandidateInfoById(id) {
         type: 'Get',
         contentType: "json",
         success: function (result) {
-            $('#userNameInfo').append(result.UserName); // need to update to db the field userName, password of candiate table
-            $('#passwordRaw').append(result.PasswordRaw);
+            //$('#userNameInfo').append(result.UserName); // need to update to db the field userName, password of candiate table
+            //$('#passwordRaw').append(result.PasswordRaw);
+            //if (result.LockoutDateUtc == undefined) {
+            //    $('#lockoutDateUtc').append('N/A'); // 5day from created date
+            //} else {
+            //    $('#lockoutDateUtc').append(formatDate(result.LockoutDateUtc.substr(6))); // 5day from created date
+            //}
+            $('#userNameInfo').text(result.UserName); // need to update to db the field userName, password of candiate table
+            $('#passwordRaw').text(result.PasswordRaw);
             if (result.LockoutDateUtc == undefined) {
-                $('#lockoutDateUtc').append('N/A'); // 5day from created date
+                $('#lockoutDateUtc').text('N/A'); // 5day from created date
             } else {
-                $('#lockoutDateUtc').append(formatDate(result.LockoutDateUtc.substr(6))); // 5day from created date
+                $('#lockoutDateUtc').text(formatDate(result.LockoutDateUtc.substr(6))); // 5day from created date
             }
-            $('#CandiateInfoModal').modal('show');
+            
+            $('#candiateInfoModal').modal('show');
         },
         error: function (errorMessage) {
             alert(errorMessage.responseText);

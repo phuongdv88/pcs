@@ -31,10 +31,22 @@ namespace PCSs.Controllers
         {
             //if (recruiterId == null)
             //    return Json(new { msg = "Can't find user id" }, JsonRequestBehavior.AllowGet);
-            var result = Json(db.Candidates.Where(s => s.RecruiterId == id), JsonRequestBehavior.AllowGet);
+            var result = Json(db.Candidates.Where(s => s.RecruiterId == id).OrderBy(s=>s.CandidateId), JsonRequestBehavior.AllowGet);
+            return result;
+        }
+        public JsonResult GetAllCandidateCompleted(long id)
+        {
+            //if (recruiterId == null)
+            //    return Json(new { msg = "Can't find user id" }, JsonRequestBehavior.AllowGet);
+            var result = Json(db.Candidates.Where(s => s.RecruiterId == id && s.Status == "Completed").OrderBy(s => s.CandidateId), JsonRequestBehavior.AllowGet);
             return result;
         }
 
+        public JsonResult GetCandidateReport(long id)
+        {
+            // return link file of Candidate report
+            return Json(new { link = "link_file_of_report" }, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult GetCandidate(long id)
         {
             var can = db.Candidates.FirstOrDefault(x => x.CandidateId == id);
@@ -80,7 +92,7 @@ namespace PCSs.Controllers
                     PhoneNumber = can.PhoneNumber,
                     JobTitle = can.JobTitle,
                     JobLevel = can.JobLevel,
-                    RecruiterId = can.CurrentCandidateId,
+                    RecruiterId = can.CurrentRecruiterId,
                     CreatedTime = DateTime.Now,
                     Status = "Initial",
 
