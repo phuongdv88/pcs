@@ -25,10 +25,10 @@ namespace PCSs.Models
         public string DOB { get; set; }
         public string JobTitle { get; set; }
         public string JobLevel { get; set; }
-        public long ClientId { get; set; }
+        public Nullable<long> ClientId { get; set; }
         public long RecruiterId { get; set; }
         public System.DateTime CreatedTime { get; set; }
-        public System.DateTime LastUpdateReportTime { get; set; }
+        public Nullable<System.DateTime> LastUpdateReportTime { get; set; }
         public Nullable<System.DateTime> CompleteTime { get; set; }
         public string Note { get; set; }
         public string Status { get; set; }

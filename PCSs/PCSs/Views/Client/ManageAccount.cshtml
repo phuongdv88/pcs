@@ -60,7 +60,7 @@
                                     <div class="box-header">
                                         <h3 class="box-title">Candidate Information</h3>
                                         <div>
-                                            <button type="button" class="btn btn-primary btn-lg" onclick="return _getAllCandidate(@ViewBag.RecruiterId);"><span class="glyphicon glyphicon-refresh"></span></button>
+                                            <button type="button" class="btn btn-primary btn-lg" id="btnRefresh" onclick="return _getAllCandidate(@ViewBag.RecruiterId);"><span class="glyphicon glyphicon-refresh"></span></button>
                                             <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newCandidateModal"><span class="glyphicon glyphicon-plus-sign"></span></button>
                                         </div>
                                     </div>
@@ -143,9 +143,9 @@
                     </div>
                     <div class="modal-body">
                         <div id="candidateId" hidden></div>
-                        <div class="row">
-                            @Html.Label("Candidate's Name")
-                            <br/>
+                        @Html.Label("Candidate's Name")
+                        <br />
+                        <div class="row">                            
                             <div class="col-md-4">
                                 <input type="text" id="firstName" placeholder="First Name">
                             </div>
@@ -174,14 +174,16 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label for="Name">Job Level</label>
-                                <select id="jobLevel">
-                                    <option value="Fresher">Fresher</option>
-                                    <option value="Junior">Junior</option>
-                                    <option value="Senior">Senior</option>
-                                    <option value="Manager">Manager</option>
-                                    <option value="Higher">Higher</option>
-                                </select>
+                                <label>Job Level</label>
+                                <div class="form-group">
+                                    <select class="form-control select2" id="jobLevel">
+                                        <option value="Fresher">Fresher</option>
+                                        <option value="Junior">Junior</option>
+                                        <option value="Senior">Senior</option>
+                                        <option value="Manager">Manager</option>
+                                        <option value="Higher">Higher</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -232,6 +234,7 @@
         <!-- page script -->
         <script>
             $(function () {
+                _setCurrentRecruitId(@ViewBag.RecruiterId);
                 _getAllCandidate(@ViewBag.RecruiterId);
             })
         </script>

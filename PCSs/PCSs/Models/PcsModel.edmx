@@ -25,14 +25,14 @@
           <Property Name="Email" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="PhoneNumber" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="Address" Type="ntext" />
-          <Property Name="Gender" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="DOB" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Gender" Type="varchar" MaxLength="10" />
+          <Property Name="DOB" Type="varchar" MaxLength="150" />
           <Property Name="JobTitle" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="JobLevel" Type="varchar" MaxLength="150" Nullable="false" />
-          <Property Name="ClientId" Type="bigint" Nullable="false" />
+          <Property Name="ClientId" Type="bigint" />
           <Property Name="RecruiterId" Type="bigint" Nullable="false" />
           <Property Name="CreatedTime" Type="datetime" Nullable="false" />
-          <Property Name="LastUpdateReportTime" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdateReportTime" Type="datetime" />
           <Property Name="CompleteTime" Type="datetime" />
           <Property Name="Note" Type="ntext" />
           <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
@@ -196,14 +196,14 @@
           <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DOB" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DOB" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="JobTitle" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="JobLevel" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ClientId" Type="Int64" Nullable="false" />
+          <Property Name="ClientId" Type="Int64" />
           <Property Name="RecruiterId" Type="Int64" Nullable="false" />
           <Property Name="CreatedTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="LastUpdateReportTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdateReportTime" Type="DateTime" Precision="3" />
           <Property Name="CompleteTime" Type="DateTime" Precision="3" />
           <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />

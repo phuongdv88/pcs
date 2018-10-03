@@ -20,14 +20,14 @@
     <Property Name="Email" Type="varchar" MaxLength="150" Nullable="false" />
     <Property Name="PhoneNumber" Type="varchar" MaxLength="15" Nullable="false" />
     <Property Name="Address" Type="ntext" />
-    <Property Name="Gender" Type="varchar" MaxLength="10" Nullable="false" />
-    <Property Name="DOB" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Gender" Type="varchar" MaxLength="10" />
+    <Property Name="DOB" Type="varchar" MaxLength="150" />
     <Property Name="JobTitle" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="JobLevel" Type="varchar" MaxLength="150" Nullable="false" />
-    <Property Name="ClientId" Type="bigint" Nullable="false" />
+    <Property Name="ClientId" Type="bigint" />
     <Property Name="RecruiterId" Type="bigint" Nullable="false" />
     <Property Name="CreatedTime" Type="datetime" Nullable="false" />
-    <Property Name="LastUpdateReportTime" Type="datetime" Nullable="false" />
+    <Property Name="LastUpdateReportTime" Type="datetime" />
     <Property Name="CompleteTime" Type="datetime" />
     <Property Name="Note" Type="ntext" />
     <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />

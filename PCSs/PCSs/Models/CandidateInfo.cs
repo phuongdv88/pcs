@@ -37,6 +37,7 @@ namespace PCSs.Models
         public string JobTitle { get; set; }
         public string JobLevel { get; set; }
         public string RecruiterId { get; set; }
+        public long CurrentCandidateId { get; set; }
     }
     public class CandidateInfo
     {

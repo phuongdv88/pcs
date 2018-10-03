@@ -1,11 +1,13 @@
 ﻿$(document).ready(function () {
     //_getAllCandidate();
 });
+var currentRecruiterId = -1;
 
 Number.prototype.padLeft = function (base, chr) {
     var len = (String(base || 10).length - String(this).length) + 1;
     return len > 0 ? new Array(len).join(chr || '0') + this : this;
 }
+
 
 function formatDate(inputStr) {
     var d = new Date(parseInt(inputStr));
@@ -17,7 +19,9 @@ function formatDate(inputStr) {
                    d.getFullYear().padLeft()].join('/');
     return dformat;
 }
-
+function _setCurrentRecruitId(id) {
+    currentRecruiterId = id;
+}
 function _getAllCandidate(id) {
     $.ajax({
         url: '/Client/GetAllCandidate/' + id,
@@ -113,6 +117,7 @@ function _add() {
         PhoneNumber: $('#phoneNumber').val(),
         JobTitle: $('#jobTitle').val(),
         JobLevel: $('#jobLevel').val(),
+        CurrentRecruiterId: currentRecruiterId
     }
 
     $.ajax({
@@ -122,7 +127,7 @@ function _add() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (result) {
-            _getAllCandidate();
+            $('#btnRefresh').click();
             $("#newCandidateModal").modal('hide');
         },
         error: function (errorMessage) {
@@ -141,6 +146,7 @@ function _edit() {
         PhoneNumber: $('#phoneNumber').val(),
         JobTitle: $('#jobTitle').val(),
         JobLevel: $('#jobLevel').val(),
+        CurrentRecruiterId: currentRecruiterId
     }
 
     $.ajax({
@@ -150,7 +156,7 @@ function _edit() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (result) {
-            _getAllCandidate();
+            $('#btnRefresh').click();
             $("#newCandidateModal").modal('hide');
         },
         error: function (errorMessage) {
