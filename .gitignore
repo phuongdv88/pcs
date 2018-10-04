@@ -3,3 +3,6 @@ PCSs/.vs/PCSs/v14/.suo
 PCSs/PCSs/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 PCSs/.vs/PCSs/v14/.suo
 PCSs/PCSs/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+*.dll
+*.pdb
+PCSs/.vs/PCSs/v14/.suo

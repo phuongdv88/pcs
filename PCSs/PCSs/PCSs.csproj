@@ -249,6 +249,7 @@
     <Content Include="Content\Css\Candidate.css" />
     <Content Include="Content\Css\font-awesome.css" />
     <Content Include="Content\Css\Login.css" />
+    <Content Include="Content\Css\logo.css" />
     <Content Include="Content\Css\ManageAccount.css" />
     <Content Include="Content\Css\skins\skin-black-light.css" />
     <Content Include="Content\Css\skins\skin-black-light.min.css" />

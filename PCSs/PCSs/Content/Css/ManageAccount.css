@@ -85,11 +85,7 @@
 .form-company .form-group:last-child .form-control{
 	width: 100%;
 }
-.fixed{
-	position: fixed;
-}
 .list{
-    position: fixed;
     padding: 0;
     left: 0;
     top: 0;
