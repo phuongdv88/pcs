@@ -1,0 +1,30 @@
+/* .tableSpecialist{
+    background-color: #677371;
+   font-size: 9pt;
+    color: white;
+    height: 2.2em;
+    border: 1px;
+    text-align: center;
+}
+.tableSpecialistborder{
+    border-right:1px solid silver;
+    text-align: center;
+border-bottom: 1px solid silver;
+}
+.btnTrang{
+    height: 2em;
+    width: 2em;
+    border:  1px solid #e1e1e1;
+}
+a img{
+    height: 20px;
+}
+table th{
+    width: auto;
+} */
+/* table */
+td input{
+    background: #3c8dbc;
+    color: #fff;
+    border-radius: 3px;
+}
