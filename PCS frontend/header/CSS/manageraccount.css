@@ -1,0 +1,81 @@
+.clearPaddingMargin{
+padding: 0%;
+margin: 0%;
+}
+.left{
+    padding: 2em 0 0 2em;
+
+}
+.left a{
+    text-decoration: none;
+    color: #3c8dbc;
+    font-size: 20px;
+
+}
+.left a:hover{
+    color: #818181;
+}
+.right{
+    margin-top: 2em;
+
+}
+.right h4{
+    padding-left: 1em;
+}
+/* .right {
+    background-color: #3c8dbc;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    margin-left: 1em;
+    width: 7em;;
+} */
+input[type=password],[type=text],[type=number], select, textarea {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 4px;
+    margin-bottom: 10px;
+    resize: vertical;
+}
+
+input[type=submit] {
+    background-color: #3c8dbc;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 1em;
+}
+.candilatename{
+    padding-right: 0em;
+
+}
+.modal-dialog {
+    max-width: 800px;
+    /* margin: 1.75rem auto; */
+}
+tr td a {
+    display: flex;
+    color: #000;
+    /* padding-left: 1em; */
+}
+tr td a i{
+    margin: auto;
+    font-size: 20px;
+
+}
+tr td a img{
+    height: 1em;
+    margin: auto;
+}
+tr td a:hover {
+   
+    color:#3c8dbc;
+    text-decoration: none;
+    /* padding-left: 1em; */
+}

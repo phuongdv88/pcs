@@ -81,8 +81,10 @@ namespace PCSs.Controllers
                     }
                 }
                 return RedirectToAction("Login  ", "Home");
+              
+
             }
-            catch { throw; }
+            catch {throw;}
         }
 
         private void EnsureLoggedOut()
@@ -205,9 +207,12 @@ namespace PCSs.Controllers
             {
                 TempData["ErrorMSG"] = e.Message;
                 return View(entity);
+            
+
             }
         }
 
+    
 
 
     }

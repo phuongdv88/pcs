@@ -85,12 +85,12 @@
 .form-company .form-group:last-child .form-control{
 	width: 100%;
 }
-.list{
+.list {
     padding: 0;
     left: 0;
     top: 0;
     height: 100vh;
-    background-color: #222d32;
+    background-color: #ececec !important;
 }
 .list .item{
 	width: 100%;
