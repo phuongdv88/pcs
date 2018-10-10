@@ -9,7 +9,7 @@
 .header{
     height: 3em;
     width: 100%;
-    background-color: #3c8dbc;
+    background-color: #464646;
     margin: 0px;
 }
 
@@ -22,7 +22,7 @@
     margin-top: -2px;
 }
 a{
-    color: #fff;
+    color: #b5b5b5;
     text-decoration: none;
 }
 a:hover{
@@ -81,7 +81,7 @@ a:hover{
 .sidenav {
     height: 100%;
     width: 0;
-    color: #3c8dbc;
+    color: #6679a2;
     position: fixed;
     z-index: 1;
     top: 3em;
@@ -97,13 +97,13 @@ a:hover{
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 20px;
-    color: #3c8dbc;
+    color: #6679a2;
     display: block;
     transition: 0.3s;
 }
 
 .sidenav a:hover {
-    color: #818181;
+    color: #464646;
 }
 
 .sidenav .closebtn {
@@ -150,9 +150,10 @@ input[type=submit]:hover {
 }
 .footer{
     height: auto;
-    background: #3c8dbc;
-    color: #fff;
+    background-color: #464646;
+    color: #b5b5b5;
     padding: 0.6em 0 0 2em;
+   
 }
 .footer .logo{
     height: 2em;
