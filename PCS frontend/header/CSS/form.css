@@ -22,8 +22,9 @@
 .btnFinish{
     margin-top: 7px;
     margin-left: 1em;
-    width: 4em;
+    width: auto;
     background-color: #3c8dbc !important;
+float: right;
 }
 .note{
     width: 100%;
