@@ -75,12 +75,12 @@ namespace PCSs.Controllers
 
                         case UserRole.CANDIDATE:
                             // Candidate
-                            return RedirectToAction("Index", "Candidate");
+                            return RedirectToAction("EditProfile", "Candidate");
                         default:
                             return RedirectToAction("Login  ", "Home");
                     }
                 }
-                return RedirectToAction("Login  ", "Home");
+                return RedirectToAction("Login", "Home");
               
 
             }
@@ -114,7 +114,8 @@ namespace PCSs.Controllers
 
                 // Last we redirect to a controller/action that requres authentication to ensure a redirect takes place
                 // this clears the request.isAuthenticated flag since this triggers a new request
-                return RedirectToLocal();
+                return RedirectToAction("Login", "Home");
+                //return RedirectToLocal();
 
             }
             catch { throw; }
@@ -187,10 +188,10 @@ namespace PCSs.Controllers
                                 case UserRole.CANDIDATE:
                                     // Candidate
                                     // get candidate id
-                                    return RedirectToAction("UpdateProfile", "Candidate", new { userLoginId = userInfo.UserLoginId });
+                                    return RedirectToAction("EditProfile", "Candidate", new { userLoginId = userInfo.UserLoginId });
                                     //return RedirectToAction("UpdateProfile", "Candidate", new { query});
                                 default:
-                                    return RedirectToAction("Login  ", "Home");
+                                    return RedirectToAction("Login", "Home");
                             }
                         }
                         return RedirectToLocal(entity.ReturnURL, userInfo.Role);

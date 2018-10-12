@@ -1,0 +1,216 @@
+﻿@model PCSs.Models.Candidate
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title</title>
+
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    <link href="~/Content/Css/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/Ionicons/css/ionicons.min.css" rel="stylesheet" />
+    <link href="~/Content/Css/AdminLTE.min.css" rel="stylesheet" />
+    <link href="~/Content/Css/Candidate.css" rel="stylesheet" />
+    <link href="~/Content/Css/skins/_all-skins.min.css" rel="stylesheet" />
+    <link href="~/Content/iCheck/square/blue.css" rel="stylesheet" />
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+</head>
+<body class="body-candidate">
+    <h1 class="text-center">
+        <!-- Logo -->
+        <img src="~/Content/Image/LogoSample_ByTailorBrands.jpg" alt="Professional Checking System" />
+    </h1>
+    @using (Html.BeginForm("Logout", "Home", FormMethod.Post, new { id = "logoutForm"}))
+    {
+    @Html.AntiForgeryToken()
+    <ul class="nav navbar-nav navbar-left">
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+    </ul>
+    }
+    <!-- Main content -->
+    <div class="row">
+        <!-- general form elements -->
+        <div class="box">
+            <!-- form start -->
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.CandidateId)
+                <div class="tab-content">
+                    <!-- general information tab -->
+                    <div id="candidate" class="tab-pane fade in active">
+                        <div class="col-md-12">
+                            <!-- /.box-header -->
+                            <!-- form start -->
+                            <form role="form">
+                                <div class="box-body">
+                                    <div class="with-border text-center">
+                                        <h3 class="box-title">Basic Information</h3>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            @Html.Label("Name:")
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    @Html.EditorFor(s => s.FirstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "First Name" } })
+                                                </div>
+                                                <div class="col-md-3">
+                                                    @Html.EditorFor(s => s.MiddleName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Middle Name" } })
+                                                </div>
+                                                <div class="col-md-3">
+                                                    @Html.EditorFor(s => s.LastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Last Name" } })
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <label for="">Gender</label>
+                                                    <div class="row gender">
+                                                        <div class="col-md-6">
+                                                            @Html.RadioButtonFor(model => model.Gender, "Male", new { id = "male" })
+                                                            @Html.Label("male", "Male")
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            @Html.RadioButtonFor(model => model.Gender, "Female", new { id = "female" })
+                                                            @Html.Label("female", "Female")
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-3">
+                                            @Html.LabelFor(model => model.Email)
+                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            @Html.LabelFor(model => model.PhoneNumber)
+                                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            @Html.LabelFor(model => model.DOB)
+                                            @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            @Html.LabelFor(model => model.IssuranceNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                                            @Html.EditorFor(model => model.IssuranceNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.IssuranceNumber, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-3" id="idnumber">
+                                            @Html.LabelFor(model => model.IDNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                                            @Html.EditorFor(model => model.IDNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.IDNumber, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group col-md-3" id="iddate">
+                                            @Html.LabelFor(model => model.IDDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                                            @Html.EditorFor(model => model.IDDate, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.IDDate, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group col-md-3" id="idsupply">
+                                            @Html.LabelFor(model => model.IDSupply, htmlAttributes: new { @class = "control-label col-md-2" })
+                                            @Html.EditorFor(model => model.IDSupply, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.IDSupply, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            @Html.LabelFor(model => model.JobTitle)
+                                            @Html.EditorFor(model => model.JobTitle, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.JobTitle, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            @Html.LabelFor(model => model.JobLevel)
+                                            @Html.DropDownListFor(model => model.JobLevel, new SelectList(ViewBag.LevelType, "Value", "Text"), new { id = "Level Type", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            @Html.LabelFor(model => model.Address)
+                                            @Html.TextAreaFor(model => model.Address, new { @class = "form-control col-md-12", @rows = 5 })
+                                            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.box-body -->
+                                <div class="box-footer text-right col-md-12">
+                                    <a href="#company" data-toggle="pill"><button type="submit" class="btn btn-primary">Next</button></a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Company information tab-->
+                    <div id="company" class="tab-pane fade">
+                        <!-- form start -->
+
+                        <div class="box-body" id="company-information">
+
+                        </div>
+                        <div class="box-footer text-right" id="add-company-button">
+                            <button type="button" class="btn btn-primary" id="button-add-company" onclick="addCompany()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                        </div>
+                        <div class="checkbox icheck" id="checkbox">
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" class="minimal">
+                                    I guarantee the above information is true and take full responsibility before the law. The company reserves the right to verify the above information.
+                                </label>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="box-footer">
+                                    <a href="#candidate" data-toggle="pill"><button type="submit" class="btn btn-primary">Back</button></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-footer text-center">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <!-- jQuery 3 -->
+    <script src="~/Scripts/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <!-- Slimscroll -->
+    <script src="~/Content/Js/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="~/Content/Js/fastclick/lib/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Content/Js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="~/Content/Js/demo.js"></script>
+    <script src="~/Content/iCheck/icheck.min.js"></script>
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <script type="text/javascript" src="~/Scripts/edit-profile-candidate.js"></script>
+    <script type="text/javascript">
+    </script>
+
+</body>
+
+</html>

@@ -10,11 +10,10 @@ var limitCompany = 3; // max references
 var countCompany = 1; //counter of references
 var indexCompany = 0; //counter of references
 
-$(document).ready(function ()
-{
+$(document).ready(function () {
 });
 
-function updateCompanyCount(numberCom, indexCom){
+function updateCompanyCount(numberCom, indexCom) {
     countCompany = numberCom;
     indexCompany = indexCom;
 }

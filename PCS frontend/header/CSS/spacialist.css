@@ -28,3 +28,9 @@ td input{
     color: #fff;
     border-radius: 3px;
 }
+.icon{
+    height: 2em;
+}
+tr td a{
+    margin-right: 1em;
+}

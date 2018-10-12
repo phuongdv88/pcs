@@ -1,7 +1,14 @@
 ﻿$(document).ready(function () {
     //_getAllCandidate();
+
+    
 });
 var currentRecruiterId = -1;
+
+modalHtml = $("#newCandidateModal").html();
+$("#newCandidateModal").on('hidden.bs.modal', function(){
+    $("#newCandidateModal").html(modalHtml);
+    })
 
 Number.prototype.padLeft = function (base, chr) {
     var len = (String(base || 10).length - String(this).length) + 1;
@@ -115,10 +122,10 @@ function _getCandidateReportById(id) {
         }
     });
     return false;
-    return false;
 }
 
 function _getCandidateById(id) {
+    modalHtml = $("#newCandidateModal").html();
     $.ajax({
         url: '/Client/GetCandidate/' + id,
         type: 'Get',
@@ -149,13 +156,7 @@ function _getCandidateInfoById(id) {
         type: 'Get',
         contentType: "json",
         success: function (result) {
-            //$('#userNameInfo').append(result.UserName); // need to update to db the field userName, password of candiate table
-            //$('#passwordRaw').append(result.PasswordRaw);
-            //if (result.LockoutDateUtc == undefined) {
-            //    $('#lockoutDateUtc').append('N/A'); // 5day from created date
-            //} else {
-            //    $('#lockoutDateUtc').append(formatDate(result.LockoutDateUtc.substr(6))); // 5day from created date
-            //}
+            
             $('#userNameInfo').text(result.UserName); // need to update to db the field userName, password of candiate table
             $('#passwordRaw').text(result.PasswordRaw);
             if (result.LockoutDateUtc == undefined) {

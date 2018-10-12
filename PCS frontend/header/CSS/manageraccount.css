@@ -3,17 +3,17 @@ padding: 0%;
 margin: 0%;
 }
 .left{
-    padding: 2em 0 0 2em;
+    padding: 2em 0 0 1em;
 
 }
 .left a{
     text-decoration: none;
-    color: #3c8dbc;
+    color: #6679a2;
     font-size: 20px;
 
 }
 .left a:hover{
-    color: #818181;
+    color: #464646;
 }
 .right{
     margin-top: 2em;

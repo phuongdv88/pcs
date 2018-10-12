@@ -2065,6 +2065,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\edit-profile-candidate.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -2124,6 +2125,7 @@
     <Content Include="Views\ReferenceInfo\Edit.cshtml" />
     <Content Include="Views\ReferenceInfo\Index.cshtml" />
     <Content Include="Views\Client\ManageAccount.cshtml" />
+    <Content Include="Views\Candidate\EditProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

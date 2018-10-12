@@ -22,6 +22,30 @@ namespace PCSs.Controllers
             return View(await db.Candidates.ToListAsync());
         }
 
+        public ActionResult EditProfile(long? userLoginId)
+        {
+            if (userLoginId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var can = db.Candidates.FirstOrDefault(s => s.UserLoginId == userLoginId);
+            if (can == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.Title = can.FirstName + " " + can.MiddleName + " " + can.LastName + " 's Information";
+
+            List<SelectListItem> items = new List<SelectListItem>();
+            items.Add(new SelectListItem { Text = "Fresher", Value = "Fresher" });
+            items.Add(new SelectListItem { Text = "Junior", Value = "Junior" });
+            items.Add(new SelectListItem { Text = "Senior", Value = "Senior" });
+            items.Add(new SelectListItem { Text = "Manager", Value = "Manager" });
+            items.Add(new SelectListItem { Text = "Higher", Value = "Higher" });
+            ViewBag.LevelType = items;
+            return View(can);
+        }
+
+        // ajax add, edit, delete company, add, edit, delete reference
         // GET: update form
         public ActionResult UpdateProfile(long? userLoginId)
         {
