@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PCSs.Models;
+using System.Data.Entity.Migrations;
 
 namespace PCSs.Controllers
 {
@@ -46,6 +47,57 @@ namespace PCSs.Controllers
         }
 
         // ajax add, edit, delete company, add, edit, delete reference
+        public JsonResult GetAllCompany(long id)
+        {
+            var result = Json(db.CompanyInfoes.Where(s => s.CandidateId == id).OrderBy(s => s.CompanyInfoId), JsonRequestBehavior.AllowGet);
+            return result;
+        }
+        public JsonResult CreateCompany(CompanyInfo com)
+        {
+            db.CompanyInfoes.Add(com);
+            var rs = db.SaveChanges();
+            return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult EditCompany(CompanyInfo com)
+        {
+            db.CompanyInfoes.AddOrUpdate(com);
+            var rs = db.SaveChanges();
+            return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult DeleteCompany(long id)
+        {
+            db.CompanyInfoes.Remove(db.CompanyInfoes.First(s => s.CompanyInfoId == id));
+            var rs = db.SaveChanges();
+            return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetAllReference(long id)
+        {
+            var result = Json(db.ReferenceInfoes.Where(s => s.CompanyInfoId == id).OrderBy(s => s.ReferenceInfoId), JsonRequestBehavior.AllowGet);
+            return result;
+        }
+        public JsonResult CreateReference(ReferenceInfo refe)
+        {
+            db.ReferenceInfoes.Add(refe);
+            var rs = db.SaveChanges();
+            return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult EditReference(ReferenceInfo refe)
+        {
+            db.ReferenceInfoes.AddOrUpdate(refe);
+            var rs = db.SaveChanges();
+            return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult DeleteReference(long id)
+        {
+            db.ReferenceInfoes.Remove(db.ReferenceInfoes.First(s => s.ReferenceInfoId == id));
+            var rs = db.SaveChanges();
+            return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
+        }
         // GET: update form
         public ActionResult UpdateProfile(long? userLoginId)
         {

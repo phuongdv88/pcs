@@ -116,7 +116,7 @@ namespace PCSs.Controllers
             candidate.PhoneNumber = can.PhoneNumber;
             candidate.JobTitle = can.JobTitle;
             candidate.JobLevel = can.JobLevel;
-            db.Candidates.AddOrUpdate(candidate);
+            //db.Entry(candidate).State = EntityState.Modified;
             var rs = db.SaveChanges();
             return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
         }

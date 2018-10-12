@@ -22,6 +22,7 @@
     <link href="~/Content/Css/Candidate.css" rel="stylesheet" />
     <link href="~/Content/Css/skins/_all-skins.min.css" rel="stylesheet" />
     <link href="~/Content/iCheck/square/blue.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
@@ -31,12 +32,12 @@
         <!-- Logo -->
         <img src="~/Content/Image/LogoSample_ByTailorBrands.jpg" alt="Professional Checking System" />
     </h1>
-    @using (Html.BeginForm("Logout", "Home", FormMethod.Post, new { id = "logoutForm"}))
+    @using (Html.BeginForm("Logout", "Home", FormMethod.Post, new { id = "logoutForm" }))
     {
-    @Html.AntiForgeryToken()
-    <ul class="nav navbar-nav navbar-left">
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-    </ul>
+        @Html.AntiForgeryToken()
+        <ul class="nav navbar-nav navbar-left">
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
     }
     <!-- Main content -->
     <div class="row">
@@ -151,7 +152,7 @@
                                 </div>
                                 <!-- /.box-body -->
                                 <div class="box-footer text-right col-md-12">
-                                    <a href="#company" data-toggle="pill"><button type="submit" class="btn btn-primary">Next</button></a>
+                                    <button type="submit" class="btn btn-primary" href="#company" data-toggle="pill">Next</button>
                                 </div>
                             </form>
                         </div>
@@ -162,29 +163,130 @@
                         <!-- form start -->
 
                         <div class="box-body" id="company-information">
+                            <!-- add company and reference info here-->
+                            <form id="company-base-info" role="form" method="POST">
+                                <div class="with-border text-center">
+                                    <h3 class="box-title">Company Information</h3>
+                                </div>
+                                <div class="cold-md-3 cancel text-right" id="button-remove-company" hidden="hidden">
+                                    <button class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                </div>
+                                <div class="box-body">
+                                    <div class="company-general-information">
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label col-md-2">Name</label>
+                                                <input type="text" class="form-control" placeholder="Company Name..." />
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label col-md-2">Country</label>
+                                                <input type="text" class="form-control" placeholder="Country..." />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label col-md-2">Address</label>
+                                                <input type="text" class="form-control" placeholder="Address..." />
+                                            </div>
+                                            <div class="form-group col-md-6">                                               
+                                                <label class="control-label col-md-2">Website</label>
+                                                <input type="text" class="form-control" placeholder="Website..." />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label col-md-2">Jobtitle</label>
+                                                <input type="text" class="form-control" placeholder="Jobtitle..." />
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <!-- Date range -->
+                                                <div class="form-group">
+                                                    <label>Working Period</label>
+
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </div>
+                                                        <input type="text" class="form-control pull-right" id="workingPeriod">
+                                                    </div>
+                                                    <!-- /.input group -->
+                                                </div>
+                                                <!-- /.form group -->
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Reference information-->
+                                    <div id="reference-information0">
+                                        <div class="box-body">
+                                            <div class="row">
+                                                <div class="col-md-9">
+                                                    <h3>Reference Information</h3>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label class="control-label col-md-2">FullName</label>
+                                                    <input type="text" class="form-control" placeholder="FullName..." />
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <label class="control-label col-md-2">JobTitle</label>
+                                                    <input type="text" class="form-control" placeholder="JobTitle..." />
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <label class="control-label col-md-2">RelationShip</label>
+                                                    <div class="form-group">
+                                                        <select class="form-control select2" id="relationshipLevel">
+                                                            <option value="Superior">Superior</option>
+                                                            <option value="Peer">Peer</option>
+                                                            <option value="Subordinate">Subordinate</option>
+                                                            <option value="Other">Other</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label class="control-label col-md-2">Email</label>
+                                                    <input type="text" class="form-control" placeholder="Email..." />
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label class="control-label col-md-2">PhoneNumber</label>
+                                                    <input type="text" class="form-control" placeholder="PhoneNumber..." />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <!--Add reference button-->
+                                    <div class="box-title clickadd">
+                                        <button type="button" class="btn btn-primary" id="button-add-reference" onclick="addReference(0)">+ Add reference</button>
+                                    </div>
+                                </div>
+                            </form>
 
                         </div>
                         <div class="box-footer text-right" id="add-company-button">
                             <button type="button" class="btn btn-primary" id="button-add-company" onclick="addCompany()"><i class="fa fa-plus" aria-hidden="true"></i></button>
                         </div>
-                        <div class="checkbox icheck" id="checkbox">
-                            <div class="form-group">
-                                <label>
-                                    <input type="checkbox" class="minimal">
-                                    I guarantee the above information is true and take full responsibility before the law. The company reserves the right to verify the above information.
-                                </label>
-                            </div>
-
+                        <div class="checkbox icheck" >
+                            <label id="ConfirmSubmit">
+                                <input type="checkbox" class="minimal" id="cbConfirmSubmit">
+                                I guarantee the above information is true and take full responsibility before the law. The company reserves the right to verify the above information.
+                            </label>
                         </div>
+
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="box-footer">
-                                    <a href="#candidate" data-toggle="pill"><button type="submit" class="btn btn-primary">Back</button></a>
+                                    <button type="submit" class="btn btn-primary" href="#candidate" data-toggle="pill">Back</button>
                                 </div>
                             </div>
                         </div>
                         <div class="box-footer text-center">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary" id="buttonSubmit" disabled="disabled">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -205,12 +307,15 @@
     <!-- AdminLTE for demo purposes -->
     <script src="~/Content/Js/demo.js"></script>
     <script src="~/Content/iCheck/icheck.min.js"></script>
+    <script src="~/Content/bootstrap-daterangepicker/daterangepicker.js"></script>
 
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
     <script type="text/javascript" src="~/Scripts/edit-profile-candidate.js"></script>
-    <script type="text/javascript">
+    <script>
+        $(function () {
+            $('#workingPeriod').daterangepicker();
+        })
     </script>
-
 </body>
 
 </html>

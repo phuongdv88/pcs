@@ -6,17 +6,49 @@
     });
 });
 
+
+
 var limitCompany = 3; // max references
 var countCompany = 1; //counter of references
 var indexCompany = 0; //counter of references
 
 $(document).ready(function () {
+   
 });
+
+$("#ConfirmSubmit").click(function () {
+    $('#buttonSubmit').prop("disabled", $("#cbConfirmSubmit").prop("checked"));
+});
+
+function getAllCompany(id) {
+    $.ajax({
+        url: '/Candidate/GetAllCompany/' + id,
+        type: "GET",
+        contenttype: "application/json; charset=utf-8",
+        dataType: "json",
+        timeout: '3000',
+        success: function (result) {
+            var html = '';
+            var i = 0;
+            $.each(result, function (key, item) {
+                // fill up company info
+                
+                // fill up reference every company
+            });
+        },
+        error: function (errorMessage) {
+            alert(errorMessage.responseText);
+        }
+
+    });
+    return false;
+}
+
 
 function updateCompanyCount(numberCom, indexCom) {
     countCompany = numberCom;
     indexCompany = indexCom;
-}
+};
 
 
 function addReference(indexCompany) {
@@ -26,7 +58,7 @@ function addReference(indexCompany) {
     $('#' + companyId).find("#reference-information1").show();
     // hide add reference button
     $('#' + companyId).find('#' + addrefId).hide();
-}
+};
 
 function removeReference(indexCompany) {
     var companyId = 'company-base-info' + indexCompany
@@ -35,7 +67,7 @@ function removeReference(indexCompany) {
     $('#' + companyId).find('#' + addrefId).show();
     // hide reference 2 form
     $('#' + companyId).find("#reference-information1").hide();
-}
+};
 
 function addCompany() {
     // get company
@@ -58,10 +90,10 @@ function addCompany() {
         $('#' + newFormId).find("#button-add-reference0").attr('id', 'button-add-reference' + indexCompany);
         removeReference(indexCompany);
     }
-}
+};
 function removeCompany(indexCompany) {
     var formId = 'company-base-info' + indexCompany;
     $('#' + formId).remove();
     countCompany--;
     $("#button-add-company").show();
-}
+};

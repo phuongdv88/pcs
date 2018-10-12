@@ -189,7 +189,7 @@ namespace PCSs.Controllers
                                     // Candidate
                                     // get candidate id
                                     return RedirectToAction("EditProfile", "Candidate", new { userLoginId = userInfo.UserLoginId });
-                                    //return RedirectToAction("UpdateProfile", "Candidate", new { query});
+                                    //return RedirectToAction("UpdateProfile", "Candidate", new { userLoginId = userInfo.UserLoginId });
                                 default:
                                     return RedirectToAction("Login", "Home");
                             }
