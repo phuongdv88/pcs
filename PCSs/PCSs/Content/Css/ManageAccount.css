@@ -113,7 +113,7 @@
 
 form{
 	padding: 4%;
-	width: 80%;
+	/*width: 100%;*/
 	padding-left: 20px;
 }
 
@@ -422,4 +422,8 @@ form{
 
 .edit-recruiter .form-group:last-child .form-control{
 	width: 100%;
+}
+.clearPanddingMargin{
+    padding:0px;
+    margin:0px;
 }
