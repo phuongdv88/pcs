@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = null;
+    //Layout = null;
     ViewBag.Title = "Ten cua Recruiter";
 }
 
@@ -13,7 +13,7 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />   
     <!-- Font Awesome -->
     <link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <!-- Ionicons -->
@@ -25,7 +25,6 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link href="~/Content/Css/skins/_all-skins.min.css" rel="stylesheet" />
-
     <link href="~/Content/Css/ManageAccount.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
@@ -39,9 +38,13 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
+
+
+@*"*@
 <body class="hold-transition skin-blue sidebar-mini">
 
-    <div class="slide-bar col-md-2 col-sm-2 col-xs-12">
+
+    <div class="slide-bar col-md-2 col-sm-2 col-xs-12" style="padding:0px">
         <div class="list">
             <div class="candidate-manager item"><a href="#candidate-manager" data-toggle="pill">Candidate Manager</a></div>
             <div class="Report-manager item"><a href="#report-manager" data-toggle="pill">Report Manager</a></div>
@@ -162,8 +165,8 @@
 
         <!-- New Candidate Modal -->
         <div class="modal fade" id="newCandidateModal" tabindex="-1" role="dialog" aria-labelledby="newCandidateModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
+            <div class="modal-dialog modal-lg"style="position:unset">
+                <div class="modal-content" style="position:unset">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                         <h4 class="modal-title" id="newCandidateModalLabel">Create New Candidate</h4>
@@ -223,7 +226,7 @@
         </div>
         <!-- Candidate's information Modal -->
         <div class="modal fade" id="candiateInfoModal" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog modal-lg"style="position:unset">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>

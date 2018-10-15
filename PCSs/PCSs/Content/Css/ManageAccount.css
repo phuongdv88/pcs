@@ -4,7 +4,9 @@
     margin-left:0px;
 }
 .header .logo{
-	padding: 20px 0;
+	/*padding: 20px 0;*/
+    padding:0px;
+
 }
 .header .logo img{
 	height: 100px;
@@ -12,7 +14,9 @@
 }
 
 .header{
-	background: #2f829e;
+	/*background: #2f829e;*/
+    height:3em;
+
 }
 
 .header .name-company{

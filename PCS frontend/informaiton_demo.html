@@ -31,6 +31,132 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="body-candidate">
+  <!-- header -->
+<div class="row col-md-12 header ">
+    <div class="col-md-3  ">
+        <img src="img/logotrang.png" class="logo">
+    </div>
+    <div class="col-md-9" style=" background-color: #464646;padding: 0px">
+
+        <!-- Control Sidebar Toggle Button -->
+        <div style="float: right;padding-top: 15px;padding-left: 15px;">
+            <a href="#" data-toggle="control-sidebar" onclick="openNav()">
+                <i class="fa fa-gears"></i>
+            </a>
+        </div>
+
+        <div id="mySidenav" class="sidenav">
+            <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
+            <a href="#" data-toggle="modal" data-target="#changeProfile">
+                <b>
+                    <i class="fa fa-user"></i> Change profile</a>
+            </b>
+            <a href="#" data-toggle="modal" data-target="#changePass">
+                <b>
+                    <i class="fa fa-edit"></i>Edit Password </a>
+            </b>
+            <a href="#">
+                <b>
+                    <i class="fa fa-sign-out"></i>Log out</a>
+            </b>
+
+        </div>
+        <!-- form edit pass -->
+        <div class="modal fade" id="changePass" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content" style="width: 100%;padding: 2em">
+                    <div class="modal-header" style="padding-left: 0px;">
+                        <h4 class="modal-title">Change PassWord</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times; </button>
+
+                    </div>
+                    <form>
+                        <label>Password old</label>
+                        <input type="password" id="passOld" name="passwordold" placeholder="Password old..">
+
+                        <label>Password new</label>
+                        <input type="password" id="passNew" name="passwordnew" placeholder="Password new..">
+                        <label>Verification password</label>
+                        <input type="password" id="passNew" name="verificationpassword" placeholder="Verification password..">
+
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <!-- end form edit pass -->
+        <!-- form edit information -->
+        <div class="modal fade" id="changeProfile" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content" style="width: 100%;padding: 2em">
+                    <div class="modal-header" style="padding-left: 0px;">
+                        <h4 class="modal-title">Change Profile</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times; </button>
+
+                    </div>
+                    <form action="/action_page.php">
+                        <label>First name</label>
+                        <input type="text" id="fname" name="firstname" placeholder="Firstname..">
+
+                        <label>Last name</label>
+                        <input type="text" id="lname" name="lastname" placeholder="Lastname..">
+                        <label> Email</label>
+                        <input type="text" id="email" name="email" placeholder="Email..">
+                        <label>Phone number</label>
+                        <input type="number" id="phone" name="phone" placeholder="Phone number..">
+                        <label>Address</label>
+                        <input type="text" id="address" name="address" placeholder="Address..">
+
+
+
+
+                        <input type="submit" value="Submit">
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- end form edit information -->
+        <script>
+
+
+            function openNav() {
+                document.getElementById("mySidenav").style.width = "250px";
+            }
+
+            function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+            }
+
+            $(document.body).click(function (e) {
+                var a = document.getElementById("mySidenav").clientWidth;
+                if (a == 250) {
+
+                    document.getElementById("mySidenav").style.width = "0";
+                }
+
+            });
+        </script>
+        <!-- end sidebar -->
+        <div style="float: right;padding-top: 13px;height: 100%;">
+            <a href="#">
+                <!-- The user image in the navbar-->
+                <img src="img/user2-160x160.jpg" class="user-image" alt="User Image">
+                <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                <span class="hidden-xs">Wellcome Alexander Pierce</span>
+            </a>
+
+        </div>
+
+
+    </div>
+</div>
   <header class="text-center">
     <!-- Logo -->
     <img src="img/LogoSample_ByTailorBrands.jpg" alt="">

@@ -9,7 +9,7 @@
 .header{
     height: 3em;
     width: 100%;
-    background-color: #3c8dbc;
+    background-color: #464646;
     margin: 0px;
 }
 
@@ -156,4 +156,7 @@ input[type=submit]:hover {
 }
 .footer .logo{
     height: 2em;
+}
+.modal-dialog{
+    position:unset !important;
 }
