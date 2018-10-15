@@ -5,6 +5,18 @@
         increaseArea: '20%' // optional
     });
 });
+Number.prototype.padLeft = function (base, chr) {
+    var len = (String(base || 10).length - String(this).length) + 1;
+    return len > 0 ? new Array(len).join(chr || '0') + this : this;
+}
+
+
+function formatDate(inputStr) {
+    var d = new Date(parseInt(inputStr));
+    dformat = [(d.getMonth() + 1).padLeft(),
+                   d.getFullYear().padLeft()].join('/');
+    return dformat;
+}
 
 var limitCompany = 3; // max company
 var countCompany = 1; //counter of company
@@ -46,6 +58,19 @@ function addCompany() {
     var comHtml = generateCompanyHtml(lastIndexCompany);
     $("#company-information").append(comHtml);
     $("#company-information").find('#' + comFormId).prop("hidden", false); // show
+    //Date picker
+    $("#company-information").find('#' + comFormId).find('#startDate').datepicker({
+        autoclose: true,
+        format: "mm-yyyy",
+        startView: "years",
+        minViewMode: "months"
+    });
+    $("#company-information").find('#' + comFormId).find('#stopDate').datepicker({
+        autoclose: true,
+        format: "mm-yyyy",
+        startView: "years",
+        minViewMode: "months"
+    })
     return comFormId;
 }
 function removeCompany(comId) {
@@ -101,8 +126,8 @@ function getAllCompany(id) {
                 $('#' + comFormId).find("#companyAddress").val(item.Address);
                 $('#' + comFormId).find("#companyWebsite").val(item.Website);
                 $('#' + comFormId).find("#companyJobTitle").val(item.Jobtitle);
-                $('#' + comFormId).find("#companyStartDate").val(item.StartDate);
-                $('#' + comFormId).find("#companyStopDate").val(item.StopDate);
+                $('#' + comFormId).find("#startDate").val(formatDate(item.StartDate.substr(6)));
+                $('#' + comFormId).find("#stopDate").val(formatDate(item.StopDate.substr(6)));
                 // fill up reference every company
 
             });
