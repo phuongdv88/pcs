@@ -6,3 +6,9 @@ PCSs/PCSs/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 *.dll
 *.pdb
 PCSs/.vs/PCSs/v14/.suo
+PCSs/PCSs/bin/Models/PcsModel.csdl
+PCSs/PCSs/bin/Models/PcsModel.msl
+PCSs/PCSs/bin/Models/PcsModel.ssdl
+PCSs/PCSs/bin/PCSs.dll
+PCSs/PCSs/bin/PCSs.dll.config
+PCSs/PCSs/bin/PCSs.pdb
