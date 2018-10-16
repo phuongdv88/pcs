@@ -25,6 +25,7 @@ var currentCandidateId = -1;
 var limitReference = 2;
 var countReferenceArray = {};
 var lastIndexReferenceArray = {};
+var listComId = {};
 
 $(document).ready(function () {
     // load company
@@ -82,7 +83,7 @@ function removeCompany(comId) {
     return false;
 }
 function addReference(comId) {
-    lastIndexReferenceArray[comId]++; // maybe incorrect
+    lastIndexReferenceArray[comId]++;
     countReferenceArray[comId]++;
     if (countReferenceArray[comId] >= limitReference) {
         $('#' + comId).find("#addReferenceButton").prop("hidden", true);
@@ -92,7 +93,7 @@ function addReference(comId) {
     $('#' + comId).find('#referenceInformation').append(refeHtml);
     $('#' + comId).find("#" + refeFormId).find('#btnRemoveReference').prop("hidden", false); // show remove reference button
     $('#' + comId).find("#" + refeFormId).prop("hidden", false);
-    
+
     return refeFormId;
 }
 function removeReference(refeId, comId) {
@@ -119,7 +120,6 @@ function getAllCompany(id) {
                 // fill up company info
                 // generate html of company form
                 var comFormId = addCompany();
-                $('#' + comFormId).removeAttr("hidden");
                 // fill data to the form
                 $('#' + comFormId).find("#companyId").val(item.CompanyInfoId);
                 $('#' + comFormId).find("#companyName").val(item.Name);
@@ -129,13 +129,53 @@ function getAllCompany(id) {
                 $('#' + comFormId).find("#startDate").val(formatDate(item.StartDate.substr(6)));
                 $('#' + comFormId).find("#stopDate").val(formatDate(item.StopDate.substr(6)));
                 // fill up reference every company
-
+                listComId[item.CompanyInfoId] = comFormId;
+                
             });
         },
         error: function (errorMessage) {
             alert(errorMessage.responseText);
+        },
+        complete: function () {
+            $.each(listComId, function (key, item) {
+                getAllReference(key, item);
+            });
         }
 
     });
     return false;
 };
+
+function getAllReference(id, comFormId) {
+    $.ajax({
+        url: '/Candidate/GetAllReference/' + id,
+        type: "GET",
+        contenttype: "application/json; charset=utf-8",
+        dataType: "json",
+        timeout: '3000',
+        success: function (result) {
+            var html = '';
+            var i = 0;
+            listComId.lenth = 0;
+            $.each(result, function (key, item) {
+                // generate html of reference form
+                var refeFormId = addReference(comFormId);
+                // fill data to the form
+                $('#' + comFormId).find("#" + refeFormId).find("#refeId").val(item.ReferenceInfoId);
+                $('#' + comFormId).find("#" + refeFormId).find("#refeFullName").val(item.FullName);
+                $('#' + comFormId).find("#" + refeFormId).find("#refeJobTitle").val(item.JobTitle);
+                $('#' + comFormId).find("#" + refeFormId).find("#refeRelationship").val(item.RelationShip);
+                $('#' + comFormId).find("#" + refeFormId).find("#refeEmail").val(item.Email);
+                $('#' + comFormId).find("#" + refeFormId).find("#refePhoneNumber").val(item.PhoneNumber);
+            });
+        },
+        error: function (errorMessage) {
+            alert(errorMessage.responseText);
+        },
+        complete: function () {
+
+        }
+
+    });
+    return false;
+}

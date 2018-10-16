@@ -12,3 +12,13 @@ PCSs/PCSs/bin/Models/PcsModel.ssdl
 PCSs/PCSs/bin/PCSs.dll
 PCSs/PCSs/bin/PCSs.dll.config
 PCSs/PCSs/bin/PCSs.pdb
+*.cache
+*.dll
+*.pdb
+PCSs/PCSs/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+PCSs/PCSs/obj/Debug/PCSs.csprojResolveAssemblyReference.cache
+PCSs/PCSs/obj/Debug/PCSs.dll
+PCSs/PCSs/obj/Debug/PCSs.pdb
+PCSs/PCSs/bin/PCSs.pdb
+PCSs/PCSs/bin/PCSs.dll
+PCSs/.vs/PCSs/v14/.suo
