@@ -171,11 +171,17 @@ function getAllReference(id, comFormId) {
         },
         error: function (errorMessage) {
             alert(errorMessage.responseText);
-        },
-        complete: function () {
-
-        }
-
+        }        
     });
+    return false;
+}
+function submitData(){
+    // add new company
+    // update company
+    // delete company
+
+    // add new reference
+    // update reference
+    // delete reference
     return false;
 }
