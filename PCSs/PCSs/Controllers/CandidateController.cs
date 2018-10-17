@@ -45,7 +45,21 @@ namespace PCSs.Controllers
             ViewBag.LevelType = items;
             return View(can);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditProfile([Bind(Include = "CandidateId,FirstName,MiddleName,LastName,Email,PhoneNumber,Address,Gender,DOB,JobTitle,JobLevel,IDNumber")] Candidate candidate)
+        {
+            // what happen if user change candidateid and post data then?
 
+            
+            if (ModelState.IsValid)
+            {
+                db.Entry(candidate).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction("Login", "Home");
+            }
+            return View(candidate);
+        }
         // ajax add, edit, delete company, add, edit, delete reference
         public JsonResult GetAllCompany(long id)
         {

@@ -19,7 +19,7 @@ function formatDate(inputStr) {
 }
 
 var limitCompany = 3; // max company
-var countCompany = 1; //counter of company
+var countCompany = 0; //counter of company
 var lastIndexCompany = 0; // index of company to manage add, remove company
 var currentCandidateId = -1;
 var limitReference = 2;
