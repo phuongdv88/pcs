@@ -2127,6 +2127,7 @@
     <Content Include="Content\bootstrap-datepicker\less\datepicker.less" />
     <Content Include="Content\bootstrap-datepicker\less\datepicker3.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

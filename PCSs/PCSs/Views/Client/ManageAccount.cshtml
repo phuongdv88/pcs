@@ -44,208 +44,352 @@
 @*"*@
 <body class="hold-transition skin-blue sidebar-mini">
 
-
-    <div class="slide-bar col-md-2 col-sm-2 col-xs-12" style="padding:0px">
-        <div class="list">
-            <div class="candidate-manager item"><a href="#candidate-manager" data-toggle="pill">Candidate Manager</a></div>
-            <div class="Report-manager item"><a href="#report-manager" data-toggle="pill">Report Manager</a></div>
+    <div class="row col-md-12 clearPanddingMargin" style="display:flex">
+        <div class="slide-bar col-md-2 col-sm-2 col-xs-12" style="padding:0px">
+            <div class="list">
+                <div class="candidate-manager item"><a href="#candidate-manager" data-toggle="tab">Candidate Manager</a></div>
+                <div class="Report-manager item"><a href="#report-manager" data-toggle="tab">Report Manager</a></div>
+            </div>
         </div>
-    </div>
-    <div class="col-md-10 col-sm-10 col-xs-12" style="padding-top:1em">
-        <div class="tab-content">
-            <div id="candidate-manager" class="tab-pane fade in active">
-                <div class="wrapper">
-                    <!-- Content Wrapper. Contains page content -->
-                    <div class="content-wrapper">
-                        <!-- Main content -->
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="box">
-                                    <div class="box-header">
-                                        <h3 class="box-title">Candidate Information</h3>
-                                        <div>
-                                            <button type="button" class="btn btn-primary btn-lg" id="btnRefresh" onclick="return _getAllCandidate(@ViewBag.RecruiterId);"><span class="glyphicon glyphicon-refresh"></span></button>
-                                            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newCandidateModal"><span class="glyphicon glyphicon-plus-sign"></span></button>
+        <div class="col-md-10 col-sm-10 col-xs-12" style="padding-top:1em">
+
+            <div class="tab-content">
+                <div id="candidate-manager" class="tab-pane fade in active">
+                    <!--chart-->
+                    <!--end chart-->
+
+                    <div class="wrapper">
+                        <!-- Content Wrapper. Contains page content -->
+                        <div class="content-wrapper">
+                            <!-- Main content -->
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="box">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Candidate Information</h3>
+                                            <div>
+                                                <button type="button" class="btn btn-primary btn-lg" id="btnRefresh" onclick="return _getAllCandidate(@ViewBag.RecruiterId);"><span class="glyphicon glyphicon-refresh"></span></button>
+                                                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newCandidateModal"><span class="glyphicon glyphicon-plus-sign"></span></button>
+                                            </div>
+                                        </div>
+                                        <!-- /.box-header -->
+                                        <div class="box-body">
+                                            <table id="candidates" class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Index</th>
+                                                        <th>Name</th>
+                                                        <th>Email</th>
+                                                        <th>Phone Number</th>
+                                                        <th>Status</th>
+                                                        <th>Start Date</th>
+                                                        <th>Completed Date</th>
+                                                        <th>Edit</th>
+                                                        <th>Detail</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="tbody"></tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>Index</th>
+                                                        <th>Name</th>
+                                                        <th>Email</th>
+                                                        <th>Phone Number</th>
+                                                        <th>Status</th>
+                                                        <th>Start Date</th>
+                                                        <th>Completed Date</th>
+                                                        <th>Detail</th>
+                                                        <th>Edit</th>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                        <!-- /.box-body -->
+                                    </div>
+                                    <!-- /.box -->
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
+                            <!-- /.content -->
+                        </div>
+                    </div>
+                </div>
+                <div id="report-manager" class="tab-pane fade in">
+                    <!--chart-->
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#home">Statistics by Year</a></li>
+                        <li><a data-toggle="tab" href="#menu1">Statistics by Month</a></li>
+                        <li><a data-toggle="tab" href="#menu2">Statistics by Week</a></li>
+
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="home" class="tab-pane fade in active">
+                            <div style="padding-top: 3em;">
+                                <div class=" box box-success" style="width:50%">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Bar Chart</h3>
+
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-box-tool" data-widget="remove">
+                                                <i class="fa fa-times"></i>
+                                            </button>
                                         </div>
                                     </div>
-                                    <!-- /.box-header -->
                                     <div class="box-body">
-                                        <table id="candidates" class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Index</th>
-                                                    <th>Name</th>
-                                                    <th>Email</th>
-                                                    <th>Phone Number</th>
-                                                    <th>Status</th>
-                                                    <th>Start Date</th>
-                                                    <th>Completed Date</th>
-                                                    <th>Edit</th>
-                                                    <th>Detail</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="tbody"></tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <th>Index</th>
-                                                    <th>Name</th>
-                                                    <th>Email</th>
-                                                    <th>Phone Number</th>
-                                                    <th>Status</th>
-                                                    <th>Start Date</th>
-                                                    <th>Completed Date</th>
-                                                    <th>Detail</th>
-                                                    <th>Edit</th>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
+                                        <div class="chart">
+                                            <canvas id="barChart" style="height:230px"></canvas>
+
+                                            <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    <div class="col-md-3" style="height: 2em;width: 2em;background-color: rgb(255, 51, 102) ">
+
+                                                    </div>
+                                                    <div class="col-md-9"> Register </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="col-md-3" style="height: 2em;width: 2em;background-color:#3366ff">
+
+                                                    </div>
+                                                    <div class="col-md-9"> Complete </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
+
                                     <!-- /.box-body -->
                                 </div>
-                                <!-- /.box -->
                             </div>
-                            <!-- /.col -->
                         </div>
-                        <!-- /.row -->
-                        <!-- /.content -->
+                        <div id="menu1" class="tab-pane fade">
+                            <div style="padding-top: 3em;">
+                                <div class=" box box-success" style="width:50%">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Bar Chart</h3>
+
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-box-tool" data-widget="remove">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="box-body">
+                                        <div class="chart">
+                                            <canvas id="barChart1" style="height:230px"></canvas>
+
+                                            <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    <div class="col-md-3" style="height: 2em;width: 2em;background-color: rgb(255, 51, 102) ">
+
+                                                    </div>
+                                                    <div class="col-md-9"> Register </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="col-md-3" style="height: 2em;width: 2em;background-color:#3366ff">
+
+                                                    </div>
+                                                    <div class="col-md-9"> Complete </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- /.box-body -->
+                                </div>
+                            </div>
+                        </div>
+                        <div id="menu2" class="tab-pane fade">
+                            <div style="padding-top: 3em;">
+                                <div class=" box box-success" style="width:50%">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Bar Chart</h3>
+
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-box-tool" data-widget="remove">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="box-body">
+                                        <div class="chart">
+                                            <canvas id="barChart2" style="height:230px"></canvas>
+
+                                            <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    <div class="col-md-3" style="height: 2em;width: 2em;background-color: rgb(255, 51, 102) ">
+
+                                                    </div>
+                                                    <div class="col-md-9"> Register </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="col-md-3" style="height: 2em;width: 2em;background-color:#3366ff">
+
+                                                    </div>
+                                                    <div class="col-md-9"> Complete </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- /.box-body -->
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <!--end chart-->
+
+                    <div class="wrapper">
+                        <!-- Content Wrapper. Contains page content -->
+                        <div class="content-wrapper">
+                            <!-- Main content -->
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="box">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Report</h3>
+                                            <div>
+                                                <button type="button" class="btn btn-primary btn-lg" id="btnRefreshReport" onclick="return _getAllCandidateReport(@ViewBag.RecruiterId);"><span class="glyphicon glyphicon-refresh"></span></button>
+                                            </div>
+                                        </div>
+                                        <!-- /.box-header -->
+                                        <div class="box-body">
+                                            <table id="report" class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Index</th>
+                                                        <th>Full Name</th>
+                                                        <th>Email</th>
+                                                        <th>Phone Number</th>
+                                                        <th>Completed Date</th>
+                                                        <th>View Report</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="tbody"></tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>Index</th>
+                                                        <th>Full Name</th>
+                                                        <th>Email</th>
+                                                        <th>Phone Number</th>
+                                                        <th>Completed Date</th>
+                                                        <th>View Report</th>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                        <!-- /.box-body -->
+                                    </div>
+                                    <!-- /.box -->
+                                </div>
+                                <!-- /.col -->
+                            </div>
+                            <!-- /.row -->
+                            <!-- /.content -->
+                        </div>
                     </div>
                 </div>
             </div>
-            <div id="report-manager" class="tab-pane fade">
-                <div class="wrapper">
-                    <!-- Content Wrapper. Contains page content -->
-                    <div class="content-wrapper">
-                        <!-- Main content -->
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="box">
-                                    <div class="box-header">
-                                        <h3 class="box-title">Report</h3>
-                                        <div>
-                                            <button type="button" class="btn btn-primary btn-lg" id="btnRefreshReport" onclick="return _getAllCandidateReport(@ViewBag.RecruiterId);"><span class="glyphicon glyphicon-refresh"></span></button>
-                                        </div>
-                                    </div>
-                                    <!-- /.box-header -->
-                                    <div class="box-body">
-                                        <table id="report" class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Index</th>
-                                                    <th>Full Name</th>
-                                                    <th>Email</th>
-                                                    <th>Phone Number</th>
-                                                    <th>Completed Date</th>
-                                                    <th>View Report</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="tbody"></tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <th>Index</th>
-                                                    <th>Full Name</th>
-                                                    <th>Email</th>
-                                                    <th>Phone Number</th>
-                                                    <th>Completed Date</th>
-                                                    <th>View Report</th>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
-                                    <!-- /.box-body -->
-                                </div>
-                                <!-- /.box -->
-                            </div>
-                            <!-- /.col -->
+
+            <!-- New Candidate Modal -->
+            <div class="modal fade" id="newCandidateModal" tabindex="-1" role="dialog" aria-labelledby="newCandidateModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" style="position:unset">
+                    <div class="modal-content" style="position:unset">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            <h4 class="modal-title" id="newCandidateModalLabel">Create New Candidate</h4>
                         </div>
-                        <!-- /.row -->
-                        <!-- /.content -->
+                        <div class="modal-body">
+                            <div id="candidateId" hidden></div>
+                            @Html.Label("Candidate's Name")
+                            <br />
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <input type="text" id="firstName" placeholder="First Name">
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" id="middleName" placeholder="Middle Name">
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" id="lastName" placeholder="Last Name">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="Name">Email</label>
+                                    <input type="text" class="form-control" id="email" placeholder="Email">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="Name">Phone number</label>
+                                    <input type="text" class="form-control" id="phoneNumber" placeholder="Phone Number">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="Name">Job Title</label>
+                                    <input type="text" class="form-control" id="jobTitle" placeholder="Job Title">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Job Level</label>
+                                    <div class="form-group">
+                                        <select class="form-control select2" id="jobLevel">
+                                            <option value="Fresher">Fresher</option>
+                                            <option value="Junior">Junior</option>
+                                            <option value="Senior">Senior</option>
+                                            <option value="Manager">Manager</option>
+                                            <option value="Higher">Higher</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" onclick="return _add();" id="btnAdd">Add</button>
+                                <button type="button" class="btn btn-primary" onclick="return _edit();" id="btnUpdate" style="display:none">Update</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- New Candidate Modal -->
-        <div class="modal fade" id="newCandidateModal" tabindex="-1" role="dialog" aria-labelledby="newCandidateModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg"style="position:unset">
-                <div class="modal-content" style="position:unset">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <h4 class="modal-title" id="newCandidateModalLabel">Create New Candidate</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div id="candidateId" hidden></div>
-                        @Html.Label("Candidate's Name")
-                        <br />
-                        <div class="row">
-                            <div class="col-md-4">
-                                <input type="text" id="firstName" placeholder="First Name">
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" id="middleName" placeholder="Middle Name">
-                            </div>
-                            <div class="col-md-4">
-                                <input type="text" id="lastName" placeholder="Last Name">
-                            </div>
+            <!-- Candidate's information Modal -->
+            <div class="modal fade" id="candiateInfoModal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg" style="position:unset">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            <h4 class="modal-title" id="infoCandidateModalLabel">Candidate information</h4>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label for="Name">Email</label>
-                                <input type="text" class="form-control" id="email" placeholder="Email">
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="Name">Phone number</label>
-                                <input type="text" class="form-control" id="phoneNumber" placeholder="Phone Number">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label for="Name">Job Title</label>
-                                <input type="text" class="form-control" id="jobTitle" placeholder="Job Title">
-                            </div>
-
-                            <div class="col-md-6">
-                                <label>Job Level</label>
-                                <div class="form-group">
-                                    <select class="form-control select2" id="jobLevel">
-                                        <option value="Fresher">Fresher</option>
-                                        <option value="Junior">Junior</option>
-                                        <option value="Senior">Senior</option>
-                                        <option value="Manager">Manager</option>
-                                        <option value="Higher">Higher</option>
-                                    </select>
-                                </div>
-                            </div>
+                        <div class="modal-body">
+                            <div> This is login information you can send to candidate via email to require to complete forms</div>
+                            <div>User Name:&nbsp;<span id="userNameInfo"></span></div>
+                            <div>Password:&nbsp;<span id="passwordRaw"></span></div>
+                            <div>Please update information before:&nbsp;<span id="lockoutDateUtc"></span></div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" onclick="return _add();" id="btnAdd">Add</button>
-                            <button type="button" class="btn btn-primary" onclick="return _edit();" id="btnUpdate" style="display:none">Update</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Candidate's information Modal -->
-        <div class="modal fade" id="candiateInfoModal" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-lg"style="position:unset">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <h4 class="modal-title" id="infoCandidateModalLabel">Candidate information</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div> This is login information you can send to candidate via email to require to complete forms</div>
-                        <div>User Name:&nbsp;<span id="userNameInfo"></span></div>
-                        <div>Password:&nbsp;<span id="passwordRaw"></span></div>
-                        <div>Please update information before:&nbsp;<span id="lockoutDateUtc"></span></div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
+
     <!-- ./wrapper -->
     <!-- jQuery 3 -->
     <script src="~/Scripts/jquery/dist/jquery.min.js"></script>
@@ -263,6 +407,9 @@
     <!-- AdminLTE for demo purposes -->
     <script src="~/Content/Js/demo.js"></script>
     <script src="~/Scripts/manage-account.js"></script>
+    <!--chart-->
+    <script src="~/Scripts/Chart.js"></script>
+
     <!-- page script -->
     <script>
         $(function () {
@@ -271,5 +418,258 @@
             _getAllCandidateReport(@ViewBag.RecruiterId);
         })
     </script>
+    <script>
+        function chart() {
+            
+            var areaChartData = {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [
+                    {
+                        label: 'Electronics',
+                        fillColor: 'rgb(255, 51, 102)',
+                        strokeColor: 'rgb(255, 51, 102)',
+                        pointColor: 'rgb(255, 51, 102)',
+                        pointStrokeColor: '#c1c7d1',
+                        pointHighlightFill: '#fff',
+                        pointHighlightStroke: 'rgba(220,220,220,1)',
+                        data: [65, 59, 80, 81, 56, 55, 80]
+                    },
+                    {
+                        label: 'Digital Goods',
+                        fillColor: 'rgba(60,141,188,0.9)',
+                        strokeColor: 'rgba(60,141,188,0.8)',
+                        pointColor: '#3b8bba',
+                        pointStrokeColor: 'rgba(60,141,188,1)',
+                        pointHighlightFill: '#fff',
+                        pointHighlightStroke: 'rgba(60,141,188,1)',
+                        data: [28, 48, 40, 19, 86, 27, 90]
+                    }
+                ]
+            }
+            var barChartOptions = {
+                //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+                scaleBeginAtZero: true,
+                //Boolean - Whether grid lines are shown across the chart
+                scaleShowGridLines: true,
+                //String - Colour of the grid lines
+                scaleGridLineColor: 'rgba(0,0,0,.05)',
+                //Number - Width of the grid lines
+                scaleGridLineWidth: 1,
+                //Boolean - Whether to show horizontal lines (except X axis)
+                scaleShowHorizontalLines: true,
+                //Boolean - Whether to show vertical lines (except Y axis)
+                scaleShowVerticalLines: true,
+                //Boolean - If there is a stroke on each bar
+                barShowStroke: true,
+                //Number - Pixel width of the bar stroke
+                barStrokeWidth: 2,
+                //Number - Spacing between each of the X value sets
+                barValueSpacing: 5,
+                //Number - Spacing between data sets within X values
+                barDatasetSpacing: 1,
+                //String - A legend template
+                legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
+                //Boolean - whether to make the chart responsive
+                responsive: true,
+                maintainAspectRatio: true
+            }
+
+            //-------------
+
+
+            //  var barChartCanvas = document.getElementById("barChart").get(0).getContext('2d')
+            var barChartCanvas = $('#barChart').get(0).getContext('2d')
+            var barChart = new Chart(barChartCanvas)
+            var barChartData = areaChartData
+            barChartData.datasets[1].fillColor = '#3366ff'
+            barChartData.datasets[1].strokeColor = '#3366ff'
+            barChartData.datasets[1].pointColor = '#3366ff'
+            barChartOptions.datasetFill = false
+            barChart.Bar(barChartData, barChartOptions)
+            //  barChart.clear();
+          
+            console.log("chart");
+
+        }
+        function chart1() {
+
+            var areaChartData = {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [
+                    {
+                        label: 'Electronics',
+                        fillColor: 'rgb(255, 51, 102)',
+                        strokeColor: 'rgb(255, 51, 102)',
+                        pointColor: 'rgb(255, 51, 102)',
+                        pointStrokeColor: '#c1c7d1',
+                        pointHighlightFill: '#fff',
+                        pointHighlightStroke: 'rgba(220,220,220,1)',
+                        data: [65, 59, 80, 81, 56, 55, 80]
+                    },
+                    {
+                        label: 'Digital Goods',
+                        fillColor: 'rgba(60,141,188,0.9)',
+                        strokeColor: 'rgba(60,141,188,0.8)',
+                        pointColor: '#3b8bba',
+                        pointStrokeColor: 'rgba(60,141,188,1)',
+                        pointHighlightFill: '#fff',
+                        pointHighlightStroke: 'rgba(60,141,188,1)',
+                        data: [28, 48, 40, 19, 86, 27, 90]
+                    }
+                ]
+            }
+            var barChartOptions = {
+                //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+                scaleBeginAtZero: true,
+                //Boolean - Whether grid lines are shown across the chart
+                scaleShowGridLines: true,
+                //String - Colour of the grid lines
+                scaleGridLineColor: 'rgba(0,0,0,.05)',
+                //Number - Width of the grid lines
+                scaleGridLineWidth: 1,
+                //Boolean - Whether to show horizontal lines (except X axis)
+                scaleShowHorizontalLines: true,
+                //Boolean - Whether to show vertical lines (except Y axis)
+                scaleShowVerticalLines: true,
+                //Boolean - If there is a stroke on each bar
+                barShowStroke: true,
+                //Number - Pixel width of the bar stroke
+                barStrokeWidth: 2,
+                //Number - Spacing between each of the X value sets
+                barValueSpacing: 5,
+                //Number - Spacing between data sets within X values
+                barDatasetSpacing: 1,
+                //String - A legend template
+                legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
+                //Boolean - whether to make the chart responsive
+                responsive: true,
+                maintainAspectRatio: true
+            }
+
+            //-------------
+
+
+            //  var barChartCanvas = document.getElementById("barChart").get(0).getContext('2d')
+            var barChartCanvas = $('#barChart1').get(0).getContext('2d')
+            var barChart = new Chart(barChartCanvas)
+            var barChartData = areaChartData
+            barChartData.datasets[1].fillColor = '#3366ff'
+            barChartData.datasets[1].strokeColor = '#3366ff'
+            barChartData.datasets[1].pointColor = '#3366ff'
+            barChartOptions.datasetFill = false
+            barChart.Bar(barChartData, barChartOptions)
+
+
+        }
+        function chart2() {
+
+            var areaChartData = {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [
+                    {
+                        label: 'Electronics',
+                        fillColor: 'rgb(255, 51, 102)',
+                        strokeColor: 'rgb(255, 51, 102)',
+                        pointColor: 'rgb(255, 51, 102)',
+                        pointStrokeColor: '#c1c7d1',
+                        pointHighlightFill: '#fff',
+                        pointHighlightStroke: 'rgba(220,220,220,1)',
+                        data: [65, 59, 80, 81, 56, 55, 80]
+                    },
+                    {
+                        label: 'Digital Goods',
+                        fillColor: 'rgba(60,141,188,0.9)',
+                        strokeColor: 'rgba(60,141,188,0.8)',
+                        pointColor: '#3b8bba',
+                        pointStrokeColor: 'rgba(60,141,188,1)',
+                        pointHighlightFill: '#fff',
+                        pointHighlightStroke: 'rgba(60,141,188,1)',
+                        data: [28, 48, 40, 19, 86, 27, 90]
+                    }
+                ]
+            }
+            var barChartOptions = {
+                //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+                scaleBeginAtZero: true,
+                //Boolean - Whether grid lines are shown across the chart
+                scaleShowGridLines: true,
+                //String - Colour of the grid lines
+                scaleGridLineColor: 'rgba(0,0,0,.05)',
+                //Number - Width of the grid lines
+                scaleGridLineWidth: 1,
+                //Boolean - Whether to show horizontal lines (except X axis)
+                scaleShowHorizontalLines: true,
+                //Boolean - Whether to show vertical lines (except Y axis)
+                scaleShowVerticalLines: true,
+                //Boolean - If there is a stroke on each bar
+                barShowStroke: true,
+                //Number - Pixel width of the bar stroke
+                barStrokeWidth: 2,
+                //Number - Spacing between each of the X value sets
+                barValueSpacing: 5,
+                //Number - Spacing between data sets within X values
+                barDatasetSpacing: 1,
+                //String - A legend template
+                legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
+                //Boolean - whether to make the chart responsive
+                responsive: true,
+                maintainAspectRatio: true
+            }
+
+            //-------------
+
+
+            //  var barChartCanvas = document.getElementById("barChart").get(0).getContext('2d')
+            var barChartCanvas = $('#barChart2').get(0).getContext('2d')
+            var barChart = new Chart(barChartCanvas)
+            var barChartData = areaChartData
+            barChartData.datasets[1].fillColor = '#3366ff'
+            barChartData.datasets[1].strokeColor = '#3366ff'
+            barChartData.datasets[1].pointColor = '#3366ff'
+            barChartOptions.datasetFill = false
+            barChart.Bar(barChartData, barChartOptions)
+
+
+        }
+        $('a[data-toggle="pill"]').on('shown.bs.tab', function (e) {
+            var target = $(e.target).attr("href") // activated tab
+
+            switch (target) {
+                case "#report-manager":
+                    console.log(target);
+                    //chart();
+                    // chart1();
+                    break;
+
+            }
+        })
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            var target = $(e.target).attr("href") // activated tab
+
+            switch (target) {
+                case "#home":
+
+                    chart();
+                   
+                    break;
+                case "#menu1":
+
+                   chart1();
+                    break;
+                case "#menu2":
+
+                    chart2();
+                    break;
+                case "#report-manager":
+                    //chart();
+
+                  
+                   // chart();
+                    break;
+            }
+        })
+    </script>
+
+   
 </body>
 </html>
