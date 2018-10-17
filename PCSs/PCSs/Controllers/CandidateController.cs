@@ -75,7 +75,8 @@ namespace PCSs.Controllers
 
         public JsonResult GetAllReference(long id)
         {
-            var result = Json(db.ReferenceInfoes.Where(s => s.CompanyInfoId == id).OrderBy(s => s.ReferenceInfoId), JsonRequestBehavior.AllowGet);
+            var test = db.ReferenceInfoes.Where(s => s.CompanyInfoId == id).OrderBy(s => s.ReferenceInfoId);
+            var result = Json(db.ReferenceInfoes.Where(s => s.CompanyInfoId == id), JsonRequestBehavior.AllowGet);
             return result;
         }
         public JsonResult CreateReference(ReferenceInfo refe)
