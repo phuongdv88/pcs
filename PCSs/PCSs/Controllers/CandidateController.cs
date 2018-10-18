@@ -91,12 +91,11 @@ namespace PCSs.Controllers
             long candidateId = -1;
             if (long.TryParse(Session["CandidateId"].ToString(), out candidateId))
             {
-                if (com.CandidateId == candidateId)
-                {
-                    db.CompanyInfoes.Add(com);
-                    var rs = db.SaveChanges();
-                    return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
-                }
+                com.CandidateId = candidateId;
+                com.isChecked = false;
+                db.CompanyInfoes.Add(com);
+                var rs = db.SaveChanges();
+                return Json(new { msg = com.CompanyInfoId }, JsonRequestBehavior.AllowGet);
             }
             return Json(new { msg = "Error: You don't have permittion to change this candidate" }, JsonRequestBehavior.AllowGet);
         }
@@ -106,9 +105,16 @@ namespace PCSs.Controllers
             long candidateId = -1;
             if (long.TryParse(Session["CandidateId"].ToString(), out candidateId))
             {
-                if (com.CandidateId == candidateId)
+                var company = db.CompanyInfoes.First(s => s.CompanyInfoId == com.CompanyInfoId && s.CandidateId == candidateId);
+                if(company != null)
                 {
-                    db.CompanyInfoes.AddOrUpdate(com);
+                    company.StartDate = com.StartDate;
+                    company.StopDate = com.StopDate;
+                    company.Jobtitle = com.Jobtitle;
+                    company.Name = com.Name;
+                    company.Address = com.Address;
+                    company.Website = com.Website;
+                    db.Entry(company).State = EntityState.Modified;
                     var rs = db.SaveChanges();
                     return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
                 }
@@ -124,13 +130,13 @@ namespace PCSs.Controllers
                 var com = db.CompanyInfoes.First(s => s.CompanyInfoId == id && s.CandidateId == candidateId);
                 if (com != null)
                 {
-                    db.CompanyInfoes.Remove(com));
+                    db.CompanyInfoes.Remove(com);
                     var rs = db.SaveChanges();
                     return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
                 }
             }
             return Json(new { msg = "Error: You don't have permittion to change this candidate" }, JsonRequestBehavior.AllowGet);
-            
+
         }
 
         public JsonResult GetAllReference(long id)
@@ -163,9 +169,18 @@ namespace PCSs.Controllers
                 var com = db.CompanyInfoes.First(s => s.CompanyInfoId == refe.CompanyInfoId && s.CandidateId == candidateId);
                 if (com != null)
                 {
-                    db.ReferenceInfoes.AddOrUpdate(refe);
-                    var rs = db.SaveChanges();
-                    return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
+                    var reference = db.ReferenceInfoes.First(s => s.ReferenceInfoId == refe.ReferenceInfoId);
+                    if (reference != null)
+                    {
+                        reference.FullName = refe.FullName;
+                        reference.RelationShip = refe.RelationShip;
+                        reference.JobTitle = refe.JobTitle;
+                        reference.Email = refe.Email;
+                        reference.PhoneNumber = refe.PhoneNumber;
+                        db.Entry(reference).State = EntityState.Modified;
+                        var rs = db.SaveChanges();
+                        return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
+                    }
                 }
             }
             return Json(new { msg = "Error: You don't have permittion to change this candidate" }, JsonRequestBehavior.AllowGet);
@@ -188,7 +203,7 @@ namespace PCSs.Controllers
                     }
                 }
             }
-            return Json(new { msg = "Error: You don't have permittion to change this candidate" }, JsonRequestBehavior.AllowGet);            
+            return Json(new { msg = "Error: You don't have permittion to change this candidate" }, JsonRequestBehavior.AllowGet);
         }
         // GET: update form
         public ActionResult UpdateProfile(long? userLoginId)

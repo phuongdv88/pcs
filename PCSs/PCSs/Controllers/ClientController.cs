@@ -132,7 +132,7 @@ namespace PCSs.Controllers
 
         public JsonResult Delete(long id)
         {
-            db.Candidates.Remove(db.Candidates.FirstOrDefault(s => s.CandidateId == id) && s.RecruiterId == long.Parse(Session["RecruiterId"].ToString()));
+            db.Candidates.Remove(db.Candidates.FirstOrDefault(s => s.CandidateId == id && s.RecruiterId == long.Parse(Session["RecruiterId"].ToString())));
             var rs = db.SaveChanges();
             return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
         }

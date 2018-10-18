@@ -26,6 +26,10 @@ var limitReference = 2;
 var countReferenceArray = {};
 var lastIndexReferenceArray = {};
 var listComId = {};
+var listCompanyFormId = [];
+var listDeleteCompanyId = [];
+var listRererenceFormId = [];
+var listDeleteReferenceId = [];
 
 $(document).ready(function () {
     // load company
@@ -40,10 +44,10 @@ function generateCompanyHtml(comIndex) {
     return comHtml;
 }
 
-function generateReferenceHtml(refeIndex, comId) {
+function generateReferenceHtml(refeIndex, comFormId) {
     var refeHtml = $("#baseReference").html();
     refeHtml = refeHtml.replace(/_refeId/g, refeIndex);
-    refeHtml = refeHtml.replace(/company-base-info_comId/g, comId);
+    refeHtml = refeHtml.replace(/company-base-info_comId/g, comFormId);
     return refeHtml;
 }
 
@@ -54,6 +58,7 @@ function addCompany() {
         $("#add-company-button").prop("hidden", true);
     }
     var comFormId = "company-base-info" + lastIndexCompany;
+    listCompanyFormId.push(comFormId); // add company form id to list
     countReferenceArray[comFormId] = 0;
     lastIndexReferenceArray[comFormId] = 0;
     var comHtml = generateCompanyHtml(lastIndexCompany);
@@ -74,33 +79,51 @@ function addCompany() {
     })
     return comFormId;
 }
-function removeCompany(comId) {
-    $("#" + comId).remove(); // todo: need to confirm first
+function removeCompany(comFormId) {
+    // add to list of deleted company
+    id = $("#" + comFormId).find("#companyId").val();
+    if (id !== '-1') {
+        listDeleteCompanyId.push(id);
+    }
+    $("#" + comFormId).remove(); // todo: need to confirm first
     countCompany--;
+    // remove comFormId:
+    var index = listCompanyFormId.indexOf(comFormId);
+    if (index > -1) {
+        listCompanyFormId.splice(index, 1);
+    }
     if (countCompany < limitCompany) {
         $("#add-company-button").prop("hidden", false);
     }
     return false;
 }
-function addReference(comId) {
-    lastIndexReferenceArray[comId]++;
-    countReferenceArray[comId]++;
-    if (countReferenceArray[comId] >= limitReference) {
-        $('#' + comId).find("#addReferenceButton").prop("hidden", true);
+function addReference(comFormId) {
+    lastIndexReferenceArray[comFormId]++;
+    countReferenceArray[comFormId]++;
+    if (countReferenceArray[comFormId] >= limitReference) {
+        $('#' + comFormId).find("#addReferenceButton").prop("hidden", true);
     }
-    var refeFormId = "reference-information" + lastIndexReferenceArray[comId];
-    var refeHtml = generateReferenceHtml(lastIndexReferenceArray[comId], comId);
-    $('#' + comId).find('#referenceInformation').append(refeHtml);
-    $('#' + comId).find("#" + refeFormId).find('#btnRemoveReference').prop("hidden", false); // show remove reference button
-    $('#' + comId).find("#" + refeFormId).prop("hidden", false);
+    var refeFormId = "reference-information" + lastIndexReferenceArray[comFormId];
+    listRererenceFormId.push({ 'companyFormId': comFormId, 'referenceFormId': refeFormId }); // add new refeFormId to list
+    var refeHtml = generateReferenceHtml(lastIndexReferenceArray[comFormId], comFormId);
+    $('#' + comFormId).find('#referenceInformation').append(refeHtml);
+    $('#' + comFormId).find("#" + refeFormId).find('#btnRemoveReference').prop("hidden", false); // show remove reference button
+    $('#' + comFormId).find("#" + refeFormId).prop("hidden", false);
 
     return refeFormId;
 }
-function removeReference(refeId, comId) {
-    $('#' + refeId).remove();
-    countReferenceArray[comId]--;
-    if (countReferenceArray[comId] < limitReference) {
-        $('#' + comId).find("#addReferenceButton").prop("hidden", false);
+function removeReference(refeFormId, comFormId) {
+    var referenceId = $('#' + comFormId).find("#" + refeFormId).find("#referenceId").val();
+    if (referenceId !== -1) {
+        listDeleteReferenceId.push(referenceId);
+    }
+    $('#' + refeFormId).remove();
+    countReferenceArray[comFormId]--;
+    // remove from list reference form id
+    //listRererenceFormId = listRererenceFormId.filter(function (obj) { return obj.companyFormId !== comFormId || obj.referenceFormId !== refeFormId });
+    listRererenceFormId = listRererenceFormId.filter(obj => obj.companyFormId !== comFormId && obj.referenceFormId !== refeFormId);
+    if (countReferenceArray[comFormId] < limitReference) {
+        $('#' + comFormId).find("#addReferenceButton").prop("hidden", false);
     }
     return false;
 }
@@ -130,7 +153,7 @@ function getAllCompany(id) {
                 $('#' + comFormId).find("#stopDate").val(formatDate(item.StopDate.substr(6)));
                 // fill up reference every company
                 listComId[item.CompanyInfoId] = comFormId;
-                
+
             });
         },
         error: function (errorMessage) {
@@ -156,7 +179,7 @@ function getAllReference(id, comFormId) {
         success: function (result) {
             var html = '';
             var i = 0;
-            listComId.lenth = 0;
+            listComId.length = 0;
             $.each(result, function (key, item) {
                 // generate html of reference form
                 var refeFormId = addReference(comFormId);
@@ -171,12 +194,143 @@ function getAllReference(id, comFormId) {
         },
         error: function (errorMessage) {
             alert(errorMessage.responseText);
-        }        
+        }
     });
     return false;
 }
-function submitData(){
+
+function newCompany(comFormId) {
+    var obj = {
+        StartDate: $("#" + comFormId).find('#startDate').val(),
+        StopDate: $("#" + comFormId).find('#stopDate').val(),
+        Jobtitle: $("#" + comFormId).find('#companyJobTitle').val(),
+        Name: $("#" + comFormId).find('#companyName').val(),
+        Address: $("#" + comFormId).find('#companyAddress').val(),
+        Website: $("#" + comFormId).find('#companyWebsite').val(),
+    };
+    $.ajax({
+        url: '/Home/CreateCompany/',
+        data: JSON.stringify(obj),
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (rs) {
+            return rs.responseText;
+        },
+        error: function (rs) {
+            alert(rs.responseText);
+        }
+    });
+}
+function editCompany(comFormId) {
+    var obj = {
+        CompanyInfoId: $("#" + comFormId).find('#companyId').val(),
+        StartDate: $("#" + comFormId).find('#startDate').val(),
+        StopDate: $("#" + comFormId).find('#stopDate').val(),
+        Jobtitle: $("#" + comFormId).find('#companyJobTitle').val(),
+        Name: $("#" + comFormId).find('#companyName').val(),
+        Address: $("#" + comFormId).find('#companyAddress').val(),
+        Website: $("#" + comFormId).find('#companyWebsite').val(),
+    };
+    $.ajax({
+        url: '/Home/EditCompany/',
+        data: JSON.stringify(obj),
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (rs) {
+
+        },
+        error: function (rs) {
+            alert(rs.responseText);
+        }
+    });
+}
+function deleteCompany(comId) {
+    //var cf = confirm('Are you sure want to delete this company?')
+    //if (cf) {
+    $.ajax({
+        url: '/Candidate/DeleteCompany/' + comId,
+        type: 'POST',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        async: true,
+        success: function (result) {
+
+        },
+        error: function (errorMessage) {
+            alert(errorMessage.responseText);
+        }
+    });
+    //}
+}
+
+function newReference(refeFormId, comFormId, comId) {
+    var obj = {
+        FullName: $("#" + comFormId).find("#" + refeFormId).find("#refeFullName").val(),
+        RelationShip: $("#" + comFormId).find("#" + refeFormId).find("#refeRelationship").val(),
+        JobTitle: $("#" + comFormId).find("#" + refeFormId).find("#refeJobTitle").val(),
+        Email: $("#" + comFormId).find("#" + refeFormId).find("#refeEmail").val(),
+        PhoneNumber: $("#" + comFormId).find("#" + refeFormId).find("#refePhoneNumber").val(),
+        CompanyInfoId: comId,
+    };
+    $.ajax({
+        url: '/Home/CreateReference/',
+        data: JSON.stringify(obj),
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (rs) {
+
+        },
+        error: function (rs) {
+            alert(rs.responseText);
+        }
+    });
+}
+function editReference(refeFormId, comFormId) {
+    var obj = {
+        ReferenceInfoId: $("#" + comFormId).find("#" + refeFormId).find("#referenceId").val(),
+        FullName: $("#" + comFormId).find("#" + refeFormId).find("#refeFullName").val(),
+        RelationShip: $("#" + comFormId).find("#" + refeFormId).find("#refeRelationship").val(),
+        JobTitle: $("#" + comFormId).find("#" + refeFormId).find("#refeJobTitle").val(),
+        Email: $("#" + comFormId).find("#" + refeFormId).find("#refeEmail").val(),
+        PhoneNumber: $("#" + comFormId).find("#" + refeFormId).find("#refePhoneNumber").val(),
+        CompanyInfoId: comId,
+    };
+    $.ajax({
+        url: '/Home/EditReference/',
+        data: JSON.stringify(obj),
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (rs) {
+
+        },
+        error: function (rs) {
+            alert(rs.responseText);
+        }
+    });
+}
+function deleteReference(refeId) {
+    $.ajax({
+        url: '/Candidate/DeleteReference/' + refeId,
+        type: 'POST',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        async: true,
+        success: function (result) {
+
+        },
+        error: function (errorMessage) {
+            alert(errorMessage.responseText);
+        }
+    });
+}
+$("#updateCandidateForm").submit(function () {
+
     // add new company
+    
     // update company
     // delete company
 
@@ -184,4 +338,4 @@ function submitData(){
     // update reference
     // delete reference
     return false;
-}
+});

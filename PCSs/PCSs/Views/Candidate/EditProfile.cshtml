@@ -45,7 +45,7 @@
         <!-- general form elements -->
         <div class="box">
             <!-- form start -->
-            @using (Html.BeginForm())
+            @using (Html.BeginForm("EditProfile", "Candidate", FormMethod.Post, new { id = "updateCandidateForm" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.HiddenFor(model => model.CandidateId)

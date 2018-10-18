@@ -54,41 +54,32 @@ namespace PCSs.Models
         // generate CandidateInfo by candidateId
         public CandidateInfo(long? userLoginId)
         {
-            try
+            using (var db = new PCSEntities())
             {
-                using(var db = new PCSEntities())
+                CandidateGeneralInfo = db.Candidates.FirstOrDefault(s => s.UserLoginId == userLoginId);
+                ChecksInfo = new Dictionary<CompanyInfo, ReferencesInformation>();
+                // get checks info
+                if (CandidateGeneralInfo != null)
                 {
-                    CandidateGeneralInfo = db.Candidates.FirstOrDefault(s => s.UserLoginId == userLoginId);
-                    ChecksInfo = new Dictionary<CompanyInfo, ReferencesInformation>();
-                    // get checks info
-                    if(CandidateGeneralInfo != null)
+                    List<CompanyInfo> coms = db.CompanyInfoes.Where(s => s.CandidateId == CandidateGeneralInfo.CandidateId).ToList();
+                    if (coms != null)
                     {
-                        List<CompanyInfo> coms = db.CompanyInfoes.Where(s => s.CandidateId == CandidateGeneralInfo.CandidateId).ToList();
-                        if(coms != null)
+                        foreach (var com in coms)
                         {
-                            foreach(var com in coms)
-                            {
-                                var refer = new ReferencesInformation(com.CompanyInfoId);
-                                ChecksInfo.Add(com, refer);
-                            }
+                            var refer = new ReferencesInformation(com.CompanyInfoId);
+                            ChecksInfo.Add(com, refer);
                         }
-                        NumberOfCompany = ChecksInfo.Count;
-
                     }
+                    NumberOfCompany = ChecksInfo.Count;
 
                 }
-            }
-            catch(Exception e)
-            {
-                // log error
-                int i = 0;
 
             }
         }
 
         public void Create(CandidateInfo canInfo)
         {
-            if(canInfo!= null)
+            if (canInfo != null)
             {
                 try
                 {
