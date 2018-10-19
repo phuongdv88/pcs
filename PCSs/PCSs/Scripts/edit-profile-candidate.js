@@ -26,9 +26,7 @@ var limitReference = 2;
 var countReferenceArray = {};
 var lastIndexReferenceArray = {};
 var listComId = {};
-var listCompanyFormId = [];
 var listDeleteCompanyId = [];
-var listRererenceFormId = [];
 var listDeleteReferenceId = [];
 
 $(document).ready(function () {
@@ -58,12 +56,12 @@ function addCompany() {
         $("#add-company-button").prop("hidden", true);
     }
     var comFormId = "company-base-info" + lastIndexCompany;
-    listCompanyFormId.push(comFormId); // add company form id to list
     countReferenceArray[comFormId] = 0;
     lastIndexReferenceArray[comFormId] = 0;
     var comHtml = generateCompanyHtml(lastIndexCompany);
     $("#company-information").append(comHtml);
     $("#company-information").find('#' + comFormId).prop("hidden", false); // show
+    $("#company-information").find('#' + comFormId).addClass("companyClass"); // add class for company base form
     //Date picker
     $("#company-information").find('#' + comFormId).find('#startDate').datepicker({
         autoclose: true,
@@ -87,11 +85,6 @@ function removeCompany(comFormId) {
     }
     $("#" + comFormId).remove(); // todo: need to confirm first
     countCompany--;
-    // remove comFormId:
-    var index = listCompanyFormId.indexOf(comFormId);
-    if (index > -1) {
-        listCompanyFormId.splice(index, 1);
-    }
     if (countCompany < limitCompany) {
         $("#add-company-button").prop("hidden", false);
     }
@@ -104,11 +97,11 @@ function addReference(comFormId) {
         $('#' + comFormId).find("#addReferenceButton").prop("hidden", true);
     }
     var refeFormId = "reference-information" + lastIndexReferenceArray[comFormId];
-    listRererenceFormId.push({ 'companyFormId': comFormId, 'referenceFormId': refeFormId }); // add new refeFormId to list
     var refeHtml = generateReferenceHtml(lastIndexReferenceArray[comFormId], comFormId);
     $('#' + comFormId).find('#referenceInformation').append(refeHtml);
     $('#' + comFormId).find("#" + refeFormId).find('#btnRemoveReference').prop("hidden", false); // show remove reference button
     $('#' + comFormId).find("#" + refeFormId).prop("hidden", false);
+    $('#' + comFormId).find("#" + refeFormId).addClass("referenceClass"); // add class for reference form
 
     return refeFormId;
 }
@@ -119,9 +112,6 @@ function removeReference(refeFormId, comFormId) {
     }
     $('#' + refeFormId).remove();
     countReferenceArray[comFormId]--;
-    // remove from list reference form id
-    //listRererenceFormId = listRererenceFormId.filter(function (obj) { return obj.companyFormId !== comFormId || obj.referenceFormId !== refeFormId });
-    listRererenceFormId = listRererenceFormId.filter(obj => obj.companyFormId !== comFormId && obj.referenceFormId !== refeFormId);
     if (countReferenceArray[comFormId] < limitReference) {
         $('#' + comFormId).find("#addReferenceButton").prop("hidden", false);
     }
@@ -329,13 +319,17 @@ function deleteReference(refeId) {
 }
 $("#updateCandidateForm").submit(function () {
 
-    // add new company
-    
-    // update company
-    // delete company
+    // Get all company id by class
+    var comFormIdArray = $(".companyClass").map(function () { return this.id });
+    // if company id == -1 => Create new, return id, else update company
+    $.each(comFormIdArray, function (index, value) {
+    });
+    // for every company:
+    // get all reference of company by class
 
-    // add new reference
-    // update reference
-    // delete reference
+    // if reference id == -1 -> create new, else update reference
+
+    // delete company in list
+    // delete reference in list
     return false;
 });
