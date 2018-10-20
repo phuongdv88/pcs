@@ -20,7 +20,7 @@
     width: 100%;
 }
 .btnFinish{
-    margin-top: 7px;
+    /* margin-top: 7px; */
     margin-left: 1em;
     width: auto;
     background-color: #3c8dbc !important;
@@ -29,4 +29,16 @@ float: right;
 .note{
     width: 100%;
     
+}
+.iconcheck{
+    color: red ;
+    display: contents;
+}
+.iconinfor{
+    color: red;
+    display: contents;
+}
+label{
+    min-width: 5em;
+    font-weight: 100;
 }
