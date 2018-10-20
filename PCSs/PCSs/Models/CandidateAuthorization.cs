@@ -25,6 +25,7 @@ namespace PCSs.Models
             }
             else
             {
+
                 var tmp = UserRole.CANDIDATE.ToString("D");
                 //Code HERE for page level authorization
                 if (HttpContext.Current.Session["Role"] == null
@@ -38,15 +39,23 @@ namespace PCSs.Models
                     // verify candidate id only able to see his profile
                     var requestId = HttpContext.Current.Request.QueryString["userLoginId"];
                     var userId = HttpContext.Current.Session["UserId"];
-                    if ( requestId!= null)
+                    if (requestId != null)
                     {
                         if (userId.ToString() != requestId.ToString())
                         {
-                            filterContext.Result = new RedirectResult("~/Error/ErrorDontHavePermission");
+                            if (filterContext.HttpContext.Request.IsAjaxRequest())
+                            {
+                                filterContext.HttpContext.Response.StatusCode = 302; //Found Redirection to another page. Here- login page. Check Layout ajaxError() script.
+                                filterContext.HttpContext.Response.End();
+                            }
+                            else
+                            {
+                                filterContext.Result = new RedirectResult("~/Error/ErrorDontHavePermission");
+                            }
                         }
                     }
                 }
-                
+
             }
         }
     }

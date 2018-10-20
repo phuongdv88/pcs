@@ -34,6 +34,7 @@ namespace PCSs.Controllers
             {
                 return HttpNotFound();
             }
+            Session["CandidateId"] = can.CandidateId;
             ViewBag.Title = can.FirstName + " " + can.MiddleName + " " + can.LastName + " 's Information";
 
             List<SelectListItem> items = new List<SelectListItem>();
@@ -45,7 +46,40 @@ namespace PCSs.Controllers
             ViewBag.LevelType = items;
             return View(can);
         }
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditProfile([Bind(Include = "CandidateId,FirstName,MiddleName,LastName,Email,PhoneNumber,Address,Gender,DOB,JobTitle,JobLevel,IDNumber")] Candidate candidate)
+        {
+            long userId = -1;
+            if (!long.TryParse(Session["UserId"].ToString(), out userId))
+            {
+                return RedirectToAction("Error", "Error");
+            }
+            var can = db.Candidates.First(s => s.CandidateId == candidate.CandidateId && s.UserLoginId == userId);
+            if (candidate == null)
+            {
+                return RedirectToAction("Error", "Error");
+            }
+            can.FirstName = candidate.FirstName;
+            can.MiddleName = candidate.MiddleName;
+            can.LastName = candidate.LastName;
+            can.Email = candidate.Email;
+            can.PhoneNumber = candidate.PhoneNumber;
+            can.Address = candidate.Address;
+            can.Gender = candidate.Gender;
+            can.DOB = candidate.DOB;
+            can.JobLevel = candidate.JobLevel;
+            can.JobTitle = candidate.JobTitle;
+            can.IDNumber = candidate.IDNumber;
+            if (ModelState.IsValid)
+            {
+                db.Entry(can).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                // log out
+                return RedirectToAction("Login", "Home");
+            }
+            return View(candidate);
+        }
         // ajax add, edit, delete company, add, edit, delete reference
         public JsonResult GetAllCompany(long id)
         {
@@ -54,23 +88,55 @@ namespace PCSs.Controllers
         }
         public JsonResult CreateCompany(CompanyInfo com)
         {
-            db.CompanyInfoes.Add(com);
-            var rs = db.SaveChanges();
-            return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
+            long candidateId = -1;
+            if (long.TryParse(Session["CandidateId"].ToString(), out candidateId))
+            {
+                com.CandidateId = candidateId;
+                com.isChecked = false;
+                db.CompanyInfoes.Add(com);
+                var rs = db.SaveChanges();
+                return Json(new { msg = com.CompanyInfoId }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { msg = "Error: You don't have permittion to change this candidate" }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult EditCompany(CompanyInfo com)
         {
-            db.CompanyInfoes.AddOrUpdate(com);
-            var rs = db.SaveChanges();
-            return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
+            long candidateId = -1;
+            if (long.TryParse(Session["CandidateId"].ToString(), out candidateId))
+            {
+                var company = db.CompanyInfoes.First(s => s.CompanyInfoId == com.CompanyInfoId && s.CandidateId == candidateId);
+                if(company != null)
+                {
+                    company.StartDate = com.StartDate;
+                    company.StopDate = com.StopDate;
+                    company.Jobtitle = com.Jobtitle;
+                    company.Name = com.Name;
+                    company.Address = com.Address;
+                    company.Website = com.Website;
+                    db.Entry(company).State = EntityState.Modified;
+                    var rs = db.SaveChanges();
+                    return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            return Json(new { msg = "Error: You don't have permittion to change this candidate" }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult DeleteCompany(long id)
         {
-            db.CompanyInfoes.Remove(db.CompanyInfoes.First(s => s.CompanyInfoId == id));
-            var rs = db.SaveChanges();
-            return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
+            long candidateId = -1;
+            if (long.TryParse(Session["CandidateId"].ToString(), out candidateId))
+            {
+                var com = db.CompanyInfoes.First(s => s.CompanyInfoId == id && s.CandidateId == candidateId);
+                if (com != null)
+                {
+                    db.CompanyInfoes.Remove(com);
+                    var rs = db.SaveChanges();
+                    return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            return Json(new { msg = "Error: You don't have permittion to change this candidate" }, JsonRequestBehavior.AllowGet);
+
         }
 
         public JsonResult GetAllReference(long id)
@@ -81,23 +147,63 @@ namespace PCSs.Controllers
         }
         public JsonResult CreateReference(ReferenceInfo refe)
         {
-            db.ReferenceInfoes.Add(refe);
-            var rs = db.SaveChanges();
-            return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
+            long candidateId = -1;
+            if (long.TryParse(Session["CandidateId"].ToString(), out candidateId))
+            {
+                var com = db.CompanyInfoes.First(s => s.CompanyInfoId == refe.CompanyInfoId && s.CandidateId == candidateId);
+                if (com != null)
+                {
+                    db.ReferenceInfoes.Add(refe);
+                    var rs = db.SaveChanges();
+                    return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            return Json(new { msg = "Error: You don't have permittion to change this candidate" }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult EditReference(ReferenceInfo refe)
         {
-            db.ReferenceInfoes.AddOrUpdate(refe);
-            var rs = db.SaveChanges();
-            return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
+            long candidateId = -1;
+            if (long.TryParse(Session["CandidateId"].ToString(), out candidateId))
+            {
+                var com = db.CompanyInfoes.First(s => s.CompanyInfoId == refe.CompanyInfoId && s.CandidateId == candidateId);
+                if (com != null)
+                {
+                    var reference = db.ReferenceInfoes.First(s => s.ReferenceInfoId == refe.ReferenceInfoId);
+                    if (reference != null)
+                    {
+                        reference.FullName = refe.FullName;
+                        reference.RelationShip = refe.RelationShip;
+                        reference.JobTitle = refe.JobTitle;
+                        reference.Email = refe.Email;
+                        reference.PhoneNumber = refe.PhoneNumber;
+                        db.Entry(reference).State = EntityState.Modified;
+                        var rs = db.SaveChanges();
+                        return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
+                    }
+                }
+            }
+            return Json(new { msg = "Error: You don't have permittion to change this candidate" }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult DeleteReference(long id)
         {
-            db.ReferenceInfoes.Remove(db.ReferenceInfoes.First(s => s.ReferenceInfoId == id));
-            var rs = db.SaveChanges();
-            return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
+            long candidateId = -1;
+            if (long.TryParse(Session["CandidateId"].ToString(), out candidateId))
+            {
+                var refe = db.ReferenceInfoes.First(s => s.ReferenceInfoId == id);
+                if (refe != null)
+                {
+                    var com = db.CompanyInfoes.First(s => s.CompanyInfoId == refe.CompanyInfoId && s.CandidateId == candidateId);
+                    if (com != null)
+                    {
+                        db.ReferenceInfoes.Remove(refe);
+                        var rs = db.SaveChanges();
+                        return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
+                    }
+                }
+            }
+            return Json(new { msg = "Error: You don't have permittion to change this candidate" }, JsonRequestBehavior.AllowGet);
         }
         // GET: update form
         public ActionResult UpdateProfile(long? userLoginId)

@@ -108,7 +108,16 @@ namespace PCSs.Controllers
 
         public JsonResult UpdateCandidate(CandidateSimpleInfo can)
         {
-            var candidate = db.Candidates.First(s => s.CandidateId == can.CandidateId);
+            long recruitID = -1;
+            if(!long.TryParse(Session["RecruiterId"].ToString(), out recruitID))
+            {
+                return Json(new { msg = "Error: You don't have permittion to change this candidate" }, JsonRequestBehavior.AllowGet);
+            }
+            var candidate = db.Candidates.First(s => s.CandidateId == can.CandidateId && s.RecruiterId == recruitID);
+            if(candidate == null)
+            {
+                return Json(new { msg = "Error: You don't have permittion to change this candidate" }, JsonRequestBehavior.AllowGet);
+            }
             candidate.FirstName = can.FirstName;
             candidate.MiddleName = can.MiddleName;
             candidate.LastName = can.LastName;
@@ -123,7 +132,7 @@ namespace PCSs.Controllers
 
         public JsonResult Delete(long id)
         {
-            db.Candidates.Remove(db.Candidates.FirstOrDefault(s => s.CandidateId == id));
+            db.Candidates.Remove(db.Candidates.FirstOrDefault(s => s.CandidateId == id && s.RecruiterId == long.Parse(Session["RecruiterId"].ToString())));
             var rs = db.SaveChanges();
             return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
         }
