@@ -422,6 +422,7 @@
     <Content Include="Content\Css\bootstrap\js\transition.js" />
     <Content Include="Content\Css\bootstrap\package.js" />
     <Content Include="Content\Css\Candidate.css" />
+    <Content Include="Content\Css\error.css" />
     <Content Include="Content\Css\font-awesome.css" />
     <Content Include="Content\Css\Login.css" />
     <Content Include="Content\Css\logo.css" />
