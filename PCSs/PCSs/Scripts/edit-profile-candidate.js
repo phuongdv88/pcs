@@ -83,6 +83,15 @@ function removeCompany(comFormId) {
     if (id !== '-1') {
         listDeleteCompanyId.push(id);
     }
+    // remove related reference
+    var refeFormIdArray = $("#" + comFormId).find(".referenceClass").map(function () { return this.id });
+    $.each(refeFormIdArray, function (index, value) {
+        var referenceId = $('#' + comFormId).find("#" + value).find("#referenceId").val();
+        if (referenceId !== -1) {
+            listDeleteReferenceId.push(referenceId);
+        }
+    })
+
     $("#" + comFormId).remove(); // todo: need to confirm first
     countCompany--;
     if (countCompany < limitCompany) {
@@ -199,7 +208,7 @@ function newCompany(comFormId) {
         Website: $("#" + comFormId).find('#companyWebsite').val(),
     };
     $.ajax({
-        url: '/Home/CreateCompany/',
+        url: '/Candidate/CreateCompany/',
         data: JSON.stringify(obj),
         type: "POST",
         contentType: "application/json; charset=utf-8",
@@ -223,7 +232,7 @@ function editCompany(comFormId) {
         Website: $("#" + comFormId).find('#companyWebsite').val(),
     };
     $.ajax({
-        url: '/Home/EditCompany/',
+        url: '/Candidate/EditCompany/',
         data: JSON.stringify(obj),
         type: "POST",
         contentType: "application/json; charset=utf-8",
@@ -265,7 +274,7 @@ function newReference(refeFormId, comFormId, comId) {
         CompanyInfoId: comId,
     };
     $.ajax({
-        url: '/Home/CreateReference/',
+        url: '/Candidate/CreateReference/',
         data: JSON.stringify(obj),
         type: "POST",
         contentType: "application/json; charset=utf-8",
@@ -286,10 +295,10 @@ function editReference(refeFormId, comFormId) {
         JobTitle: $("#" + comFormId).find("#" + refeFormId).find("#refeJobTitle").val(),
         Email: $("#" + comFormId).find("#" + refeFormId).find("#refeEmail").val(),
         PhoneNumber: $("#" + comFormId).find("#" + refeFormId).find("#refePhoneNumber").val(),
-        CompanyInfoId: comId,
+        CompanyInfoId: -1,
     };
     $.ajax({
-        url: '/Home/EditReference/',
+        url: '/Candidate/EditReference/',
         data: JSON.stringify(obj),
         type: "POST",
         contentType: "application/json; charset=utf-8",
@@ -317,19 +326,45 @@ function deleteReference(refeId) {
         }
     });
 }
+
+function submitCompany(comFormId) {
+    var comId = $("#" + comFormId).find("#companyId").val();
+    if (comId === -1) {
+        comId = newCompany(comFormId);
+    } else {
+        editCompany(comFormId);
+    }
+    // get all reference of company by class
+    var refeFormIdArray = $("#" + comFormId).find(".referenceClass").map(function () { return this.id });
+    $.each(refeFormIdArray, function (index, value) {
+        submitReference(value, comFormId, comId);
+    })
+}
+
+function submitReference(refeFormId, comFormId, comId) {
+    if ($("#" + comFormId).find("#" + refeFormId).find("#referenceId").val() === -1) {
+        newReference(refeFormId, comFormId, comId);
+    } else {
+        editReference(refeFormId, comFormId);
+    }
+}
+
+
 $("#updateCandidateForm").submit(function () {
 
     // Get all company id by class
     var comFormIdArray = $(".companyClass").map(function () { return this.id });
-    // if company id == -1 => Create new, return id, else update company
     $.each(comFormIdArray, function (index, value) {
+        submitCompany(value);
     });
-    // for every company:
-    // get all reference of company by class
-
-    // if reference id == -1 -> create new, else update reference
-
-    // delete company in list
-    // delete reference in list
+    
+    for (id in listDeleteReferenceId) {
+        deleteReference(id);
+    }
+    listDeleteReferenceId.length = 0;
+    for (id in listDeleteCompanyId) {
+        deleteCompany(id);
+    }
+    listDeleteCompanyId.length = 0;
     return false;
 });
