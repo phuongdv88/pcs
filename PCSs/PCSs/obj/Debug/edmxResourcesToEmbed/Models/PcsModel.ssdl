@@ -62,12 +62,12 @@
     <Property Name="StopDate" Type="date" Nullable="false" />
     <Property Name="Jobtitle" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
-    <Property Name="Country" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Country" Type="nvarchar" MaxLength="255" />
     <Property Name="Description" Type="ntext" />
     <Property Name="Address" Type="nvarchar" MaxLength="500" />
     <Property Name="Website" Type="varchar" MaxLength="500" />
     <Property Name="Note" Type="ntext" />
-    <Property Name="CheckingStatus" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CheckingStatus" Type="varchar" MaxLength="50" />
     <Property Name="CandidateId" Type="bigint" Nullable="false" />
     <Property Name="CheckingTime" Type="datetime" />
     <Property Name="isChecked" Type="bit" Nullable="false" />

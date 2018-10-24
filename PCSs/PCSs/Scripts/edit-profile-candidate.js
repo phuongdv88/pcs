@@ -36,6 +36,9 @@ $(document).ready(function () {
 $("#ConfirmSubmit").click(function () {
     $('#buttonSubmit').prop("disabled", $("#cbConfirmSubmit").prop("checked"));
 });
+$("#cbConfirmSubmit").click(function () {
+    $('#buttonSubmit').prop("disabled", $("#cbConfirmSubmit").prop("checked"));
+});
 function generateCompanyHtml(comIndex) {
     var comHtml = $("#baseFormCompany").html();
     comHtml = comHtml.replace(/_comId/g, comIndex);
@@ -87,7 +90,7 @@ function removeCompany(comFormId) {
     var refeFormIdArray = $("#" + comFormId).find(".referenceClass").map(function () { return this.id });
     $.each(refeFormIdArray, function (index, value) {
         var referenceId = $('#' + comFormId).find("#" + value).find("#referenceId").val();
-        if (referenceId !== -1) {
+        if (referenceId !== '-1') {
             listDeleteReferenceId.push(referenceId);
         }
     })
@@ -116,7 +119,7 @@ function addReference(comFormId) {
 }
 function removeReference(refeFormId, comFormId) {
     var referenceId = $('#' + comFormId).find("#" + refeFormId).find("#referenceId").val();
-    if (referenceId !== -1) {
+    if (referenceId !== '-1') {
         listDeleteReferenceId.push(referenceId);
     }
     $('#' + refeFormId).remove();
@@ -329,7 +332,7 @@ function deleteReference(refeId) {
 
 function submitCompany(comFormId) {
     var comId = $("#" + comFormId).find("#companyId").val();
-    if (comId === -1) {
+    if (comId === '-1') {
         comId = newCompany(comFormId);
     } else {
         editCompany(comFormId);
@@ -342,7 +345,7 @@ function submitCompany(comFormId) {
 }
 
 function submitReference(refeFormId, comFormId, comId) {
-    if ($("#" + comFormId).find("#" + refeFormId).find("#referenceId").val() === -1) {
+    if ($("#" + comFormId).find("#" + refeFormId).find("#referenceId").val() === '-1') {
         newReference(refeFormId, comFormId, comId);
     } else {
         editReference(refeFormId, comFormId);
@@ -358,13 +361,14 @@ $("#updateCandidateForm").submit(function () {
         submitCompany(value);
     });
     
-    for (id in listDeleteReferenceId) {
-        deleteReference(id);
-    }
+    $.each(listDeleteReferenceId, function (index, value) {
+        deleteReference(value);
+    });
     listDeleteReferenceId.length = 0;
-    for (id in listDeleteCompanyId) {
-        deleteCompany(id);
-    }
+
+    $.each(listDeleteCompanyId, function (index, value) {
+        deleteCompany(value);
+    });
     listDeleteCompanyId.length = 0;
     return false;
 });
