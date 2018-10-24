@@ -45,17 +45,31 @@
 <body class="hold-transition skin-blue sidebar-mini">
 
     <div class=" col-md-12 col-sm-12 col-xs-12 clearPanddingMargin" style="display:flex">
-        <div class=" col-md-2 col-sm-12 col-xs-12 col-12 slide-bar" style="padding:0px">
+        <div class=" col-md-2 col-sm-2 col-xs-12  slide-bar" style="padding:0px">
             <div class="col-md-12  col-sm-12 col-xs-12 list">
-                <div class=" candidate-manager item"><a href="#candidate-manager" data-toggle="tab">Candidate Manager</a></div>
-                <div class="Report-manager item"><a href="#report-manager" data-toggle="tab">Report Manager</a></div>
+
+                <a href="#candidate-manager" data-toggle="tab">
+                    <div class="col-md-12 col-sm-12 candidate-manager item">
+                        <img src="~/Content/Image/iconmanager.png" />
+                        Candidate Manager
+                    </div>
+                </a>
+
+
+                <a href="#report-manager" data-toggle="tab">
+                    <div class="col-md-12 col-sm-12 Report-manager item">
+                        <img src="~/Content/Image/iconreport.png" />
+                        Report Manager
+                    </div>
+                </a>
+
             </div>
         </div>
-        <div class=" col-md-10 col-sm-12 col-xs-12 col-12 " style="padding-top:1em">
+        <div class=" col-md-10 col-sm-10 col-xs-12  " style="padding-top:1em">
 
-            <div class="tab-content" >
+            <div class="tab-content">
                 <div id="candidate-manager" class="tab-pane fade in active">
-                    
+
 
                     <div class="wrapper">
                         <!-- Content Wrapper. Contains page content -->
@@ -117,15 +131,21 @@
                 <div id="report-manager" class="tab-pane fade in">
                     <!--chart-->
                     <div class=" col-md-12">
-
-                        <a data-toggle="tab" href="#StatisticsByYear" style="padding:0.6em;border:1px solid rgb(235, 189, 201);margin-right:1em;border-radius:5px">Statistics by Year</a>
-
-
-                        <a data-toggle="tab" href="#StatisticsByMonth" style="padding:0.6em;border:1px solid rgb(235, 189, 201);margin-right:1em;border-radius:5px">Statistics by Month</a>
-
-
-                        <a data-toggle="tab" href="#StatisticsByWeek" style="padding:0.6em;border:1px solid rgb(235, 189, 201);margin-right:1em;border-radius:5px">Statistics by Week</a>
-
+                        <a data-toggle="tab" href="#StatisticsByYear">
+                            <div class="col-md-3 col-sm-3" style="margin-right:1em;padding:0.6em;border:1px solid rgb(235, 189, 201);border-radius:5px">
+                                Statistics by Year
+                            </div>
+                        </a>
+                        <a data-toggle="tab" href="#StatisticsByMonth">
+                            <div class="col-md-3 col-sm-3" style="margin-right:1em;padding:0.6em;border:1px solid rgb(235, 189, 201);border-radius:5px">
+                                Statistics by Month
+                            </div>
+                        </a>
+                        <a data-toggle="tab" href="#StatisticsByWeek">
+                            <div class="col-md-3 col-sm-3" style="margin-right:1em;padding:0.6em;border:1px solid rgb(235, 189, 201);border-radius:5px">
+                                Statistics by Week
+                            </div>
+                        </a>
                     </div>
                     <div class="col-md-12 col-sm-12 col-xs-12" style="padding-top: 3em;">
                         <div class=" box box-success barchart" @*style="width:50%"*@>
@@ -136,9 +156,7 @@
                                     <button type="button" class="btn btn-box-tool" data-widget="collapse">
                                         <i class="fa fa-minus"></i>
                                     </button>
-                                    <button type="button" class="btn btn-box-tool" data-widget="remove">
-                                        <i class="fa fa-times"></i>
-                                    </button>
+
                                 </div>
                             </div>
                             <div class="box-body">
@@ -388,7 +406,7 @@
                 maintainAspectRatio: true
             }
             //-------------
-           
+
             var barChartCanvas = $('#barChart').get(0).getContext('2d')
             var barChart = new Chart(barChartCanvas)
             var barChartData = areaChartData
@@ -397,7 +415,7 @@
             barChartData.datasets[1].pointColor = '#3366ff'
             barChartOptions.datasetFill = false
             barChart.Bar(barChartData, barChartOptions)
-           
+
         }
 
 

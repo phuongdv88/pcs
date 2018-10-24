@@ -582,6 +582,8 @@
     <Content Include="Content\Image\b2.jpg" />
     <Content Include="Content\Image\e-mail.png" />
     <Content Include="Content\Image\facebook-icon.png" />
+    <Content Include="Content\Image\iconmanager.png" />
+    <Content Include="Content\Image\iconreport.png" />
     <Content Include="Content\Image\icons8-view-50.png" />
     <Content Include="Content\Image\LogoSample_ByTailorBrands.jpg" />
     <Content Include="Content\Image\logotrang.png" />

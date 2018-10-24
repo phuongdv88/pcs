@@ -99,16 +99,26 @@
 .list .item{
 	width: 100%;
 	cursor: pointer;
-	color: #fff;
+	/*color: #fff;*/
 	font-size: 16px;
-	text-align: center;
+	/*text-align: center;*/
 	margin: auto;
-	height: 40px;
+	min-height: 40px;
 	line-height: 40px;
+    padding-left:1em;
+    
 }
-.list .item:hover{
-	background: #1e282c;
-}
+    .list .item img {
+        width: 1.5em;
+        margin-right: 1em;
+       
+        
+    }
+    .list .item:hover {
+        background: #1e282c;
+        /*filter: contrast(1000%);*/
+    }
+  
 
 
 form{
@@ -391,7 +401,7 @@ form{
 	}
 
 	.list .item {
-		width: 33.33%;
+		/*width: 33.33%;*/
 		float: left;
 	}
 
