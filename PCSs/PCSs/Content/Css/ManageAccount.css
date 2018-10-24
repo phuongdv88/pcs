@@ -348,11 +348,16 @@ form{
 	width: 100%;
 	text-transform: capitalize;
 }
-    
+.barchart {
+    width: 50%;
+}   
 @media (max-width: 1200px){
 	.container{
 		width: 100%;
 	}
+    .barchart {
+        width: 50%;
+    }
 }
 
 @media (max-width: 991px){
@@ -362,12 +367,15 @@ form{
 	}
 
 	.list {
-	    width: 180px;
+	    /*width: 180px;*/
 	}
 
 	.form-group .form-control{
 	    width: 55%;
 	}
+    .barchart {
+        width: 50%;
+    }
 }
 
 @media (max-width: 767px){
@@ -394,6 +402,9 @@ form{
 	.form-candidate .form-group:first-child{
 		margin-right: 4%;
 	}
+    .barchart {
+        width: 100%;
+    }
 }
 
 @media (max-width: 640px){
@@ -409,6 +420,9 @@ form{
 	.list .item {
 	    font-size: 10px;
 	}
+    .barchart {
+        width: 100%;
+    }
 }
 
 

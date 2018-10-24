@@ -29,8 +29,9 @@ td input{
     border-radius: 3px;
 }
 .icon{
-    height: 2em;
+    height: 1em;
 }
 tr td a{
     margin-right: 1em;
+margin-left:1em;
 }

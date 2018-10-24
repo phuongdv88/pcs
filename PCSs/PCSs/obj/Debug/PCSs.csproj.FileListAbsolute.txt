@@ -230,8 +230,8 @@ D:\tailieu\Swilife\pcs\PCSs\PCSs\bin\VectorIcon.FormsPlugin.Abstractions.pdb
 D:\tailieu\Swilife\pcs\PCSs\PCSs\bin\VectorIcon.FormsPlugin.Abstractions.xml
 D:\tailieu\Swilife\pcs\PCSs\PCSs\bin\Antlr3.Runtime.pdb
 D:\tailieu\Swilife\pcs\PCSs\PCSs\bin\Newtonsoft.Json.xml
-D:\tailieu\Swilife\pcs\PCSs\PCSs\obj\Debug\PCSs.csprojAssemblyReference.cache
 D:\tailieu\Swilife\pcs\PCSs\PCSs\obj\Debug\PCSs.csproj.CoreCompileInputs.cache
 D:\tailieu\Swilife\pcs\PCSs\PCSs\obj\Debug\PCSs.csproj.CopyComplete
 D:\tailieu\Swilife\pcs\PCSs\PCSs\obj\Debug\PCSs.dll
 D:\tailieu\Swilife\pcs\PCSs\PCSs\obj\Debug\PCSs.pdb
+D:\tailieu\Swilife\pcs\PCSs\PCSs\obj\Debug\PCSs.csprojAssemblyReference.cache
