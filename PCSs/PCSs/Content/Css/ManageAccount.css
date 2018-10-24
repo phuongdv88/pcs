@@ -99,16 +99,26 @@
 .list .item{
 	width: 100%;
 	cursor: pointer;
-	color: #fff;
+	/*color: #fff;*/
 	font-size: 16px;
-	text-align: center;
+	/*text-align: center;*/
 	margin: auto;
-	height: 40px;
+	min-height: 40px;
 	line-height: 40px;
+    padding-left:1em;
+    
 }
-.list .item:hover{
-	background: #1e282c;
-}
+    .list .item img {
+        width: 1.5em;
+        margin-right: 1em;
+       
+        
+    }
+    .list .item:hover {
+        background: #1e282c;
+        /*filter: contrast(1000%);*/
+    }
+  
 
 
 form{
@@ -348,11 +358,16 @@ form{
 	width: 100%;
 	text-transform: capitalize;
 }
-    
+.barchart {
+    width: 50%;
+}   
 @media (max-width: 1200px){
 	.container{
 		width: 100%;
 	}
+    .barchart {
+        width: 50%;
+    }
 }
 
 @media (max-width: 991px){
@@ -362,12 +377,15 @@ form{
 	}
 
 	.list {
-	    width: 180px;
+	    /*width: 180px;*/
 	}
 
 	.form-group .form-control{
 	    width: 55%;
 	}
+    .barchart {
+        width: 50%;
+    }
 }
 
 @media (max-width: 767px){
@@ -383,7 +401,7 @@ form{
 	}
 
 	.list .item {
-		width: 33.33%;
+		/*width: 33.33%;*/
 		float: left;
 	}
 
@@ -394,6 +412,9 @@ form{
 	.form-candidate .form-group:first-child{
 		margin-right: 4%;
 	}
+    .barchart {
+        width: 100%;
+    }
 }
 
 @media (max-width: 640px){
@@ -409,6 +430,9 @@ form{
 	.list .item {
 	    font-size: 10px;
 	}
+    .barchart {
+        width: 100%;
+    }
 }
 
 

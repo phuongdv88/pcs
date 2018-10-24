@@ -1,0 +1,57 @@
+.menuleft{
+    background-color: #ececec !important;
+    height: auto;
+    font-size: 1.5em;
+    /* text-align: center; */
+    
+    
+}
+.clearPaddingMargin{
+    padding: 0;
+    margin: 0;
+}
+table tr td a{
+    margin-right: 1em;
+    text-decoration: none;
+
+}
+a :hover{
+    text-decoration: none;
+    
+}
+.modal-dialog{
+    min-width: 700px;
+}
+.menuleft .category:hover,.menuleft a:hover{
+background: #404040;
+color: #fff;
+text-decoration: none;
+}
+a:focus .category{
+    text-decoration: none;
+    background: #404040;
+color: #fff;
+}
+a .category{
+    padding: 0.5em;
+}
+@media only screen and (max-width: 600px) {
+  .menuleft{
+      font-size: 1em;
+  }
+}
+.category i, img{
+    width: 1em;
+    margin-right: 1em;
+    /* height: 100%; */
+    /* padding-right: 1em; */
+}
+.borderbox{
+    margin-top: 2em;
+    border: 1px solid silver;
+    border-radius: 5px;
+    padding-top: 1em;
+    border-top: 3px solid silver;;
+    
+
+}
