@@ -115,7 +115,7 @@
           <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="PhoneNumber" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="Note" Type="ntext" />
-          <Property Name="CheckingStatus" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CheckingStatus" Type="varchar" MaxLength="50" />
           <Property Name="CheckingTime" Type="datetime" />
           <Property Name="CompanyInfoId" Type="bigint" Nullable="false" />
         </EntityType>
@@ -286,7 +286,7 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CheckingStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CheckingStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CheckingTime" Type="DateTime" Precision="3" />
           <Property Name="CompanyInfoId" Type="Int64" Nullable="false" />
         </EntityType>

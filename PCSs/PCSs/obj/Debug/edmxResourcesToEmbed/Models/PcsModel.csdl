@@ -110,7 +110,7 @@
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="CheckingStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CheckingStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="CheckingTime" Type="DateTime" Precision="3" />
     <Property Name="CompanyInfoId" Type="Int64" Nullable="false" />
   </EntityType>

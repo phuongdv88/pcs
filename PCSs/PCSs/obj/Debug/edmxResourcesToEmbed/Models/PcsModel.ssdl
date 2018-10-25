@@ -110,7 +110,7 @@
     <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="PhoneNumber" Type="varchar" MaxLength="15" Nullable="false" />
     <Property Name="Note" Type="ntext" />
-    <Property Name="CheckingStatus" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CheckingStatus" Type="varchar" MaxLength="50" />
     <Property Name="CheckingTime" Type="datetime" />
     <Property Name="CompanyInfoId" Type="bigint" Nullable="false" />
   </EntityType>

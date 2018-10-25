@@ -33,13 +33,13 @@
         <!-- Logo -->
         <img src="~/Content/Image/LogoSample_ByTailorBrands.jpg" alt="Professional Checking System" />
     </h1>
-    @using (Html.BeginForm("Logout", "Home", FormMethod.Post, new { id = "logoutForm" }))
+    @*@using (Html.BeginForm("Logout", "Home", FormMethod.Post, new { id = "logoutForm" }))
     {
         @Html.AntiForgeryToken()
         <ul class="nav navbar-nav navbar-left">
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
         </ul>
-    }
+    }*@
     <!-- Main content -->
     <div class="row">
         <!-- general form elements -->
@@ -215,7 +215,6 @@
                                                                 <h3>Reference Information</h3>
                                                             </div>
                                                         </div>
-                                                        <div id="refeId" hidden>-1</div>
                                                         <div class="row">
                                                             <div class="form-group col-md-6">
                                                                 <label class="control-label  col-md-6">Full Name</label>
@@ -263,7 +262,7 @@
                         </div>
                         <!--/.Company info-->
                         <div class="box-footer text-right" id="add-company-button">
-                            <button type="button" class="btn btn-primary" onclick="addCompany()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                            <button type="button" class="btn btn-primary" onclick="addCompany(true)"><i class="fa fa-plus" aria-hidden="true"></i></button>
                         </div>
                         <div class="checkbox icheck">
                             <label id="ConfirmSubmit">
