@@ -23,6 +23,7 @@
     <link href="~/Content/Css/skins/_all-skins.min.css" rel="stylesheet" />
     <link href="~/Content/iCheck/square/blue.css" rel="stylesheet" />
     <link href="~/Content/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <link href="~/Content/iCheck/all.css" rel="stylesheet" />
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -270,6 +271,13 @@
                                 I guarantee the above information is true and take full responsibility before the law. The company reserves the right to verify the above information.
                             </label>
                         </div>
+                        @*<div class="form-group" id="ConfirmSubmit">
+                            <label>
+                                <input type="checkbox" class="minimal-red" id="cbConfirmSubmit">
+                                I guarantee the above information is true and take full responsibility before the law. The company reserves the right to verify the above information.
+
+                            </label>
+                        </div>*@
 
                         <div class="row">
                             <div class="col-md-12">
@@ -306,7 +314,6 @@
     <script>
         $(function () {
             getAllCompany(@Model.CandidateId);
-
         })
     </script>
 </body>

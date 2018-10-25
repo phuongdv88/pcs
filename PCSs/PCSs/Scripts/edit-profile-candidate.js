@@ -4,6 +4,10 @@
         radioClass: 'iradio_square-blue',
         increaseArea: '20%' // optional
     });
+    ////Red color scheme for iCheck
+    //$('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+    //    checkboxClass: 'icheckbox_minimal-red',
+    //})
 });
 Number.prototype.padLeft = function (base, chr) {
     var len = (String(base || 10).length - String(this).length) + 1;
@@ -34,15 +38,13 @@ $(document).ready(function () {
     // load company
 });
 
-$("#ConfirmSubmit").click(function () {
-    $('#buttonSubmit').prop("disabled", $("#cbConfirmSubmit").prop("checked"));
+$('input').on('ifChecked', function (event) {
+    $('#buttonSubmit').prop("disabled", false);
 });
-//$(".checkbox").change(function () {
-//    $('#buttonSubmit').prop("disabled", $("#cbConfirmSubmit").prop("checked"));
-//});
-$(document).on('change', '.checkbox', function () {
-    $('#buttonSubmit').prop("disabled", $("#cbConfirmSubmit").prop("checked"));
+$('input').on('ifUnchecked', function (event) {
+    $('#buttonSubmit').prop("disabled", true);
 });
+
 function generateCompanyHtml(comIndex) {
     var comHtml = $("#baseFormCompany").html();
     comHtml = comHtml.replace(/_comId/g, comIndex);
