@@ -71,13 +71,13 @@
                         <form>
 
                             <label>Password old</label><br />
-                            <input type="password" id="passOld" name="passwordold" placeholder="Password old..">
+                            <input type="password" id="passOld" name="passwordold" placeholder="Password old.." required>
 
                             <label>Password new</label><br />
-                            <input type="password" id="passNew" name="passwordnew" placeholder="Password new..">
+                            <input type="password" id="passNew" name="passwordnew" placeholder="Password new.." required>
 
                             <label>Verification password</label><br />
-                            <input type="password" id="" name="verificationpassword" placeholder="Verification password..">
+                            <input type="password" id="" name="verificationpassword" placeholder="Verification password.."required>
 
                             <input type="submit" value="Submit">
 
@@ -101,20 +101,16 @@
                         </div>
                         <form action="/action_page.php">
                             <label>First name</label><br />
-                            <input type="text" id="fname" name="firstname" placeholder="Firstname..">
+                            <input type="text" id="fname" name="firstname" placeholder="Firstname.." required>
 
                             <label>Last name</label><br />
-                            <input type="text" id="lname" name="lastname" placeholder="Lastname..">
+                            <input type="text" id="lname" name="lastname" placeholder="Lastname.."required>
                             <label> Email</label><br />
-                            <input type="text" id="email1" name="email" placeholder="Email..">
+                            <input type="text" id="email1" name="email" placeholder="Email.."required>
                             <label>Phone number</label><br />
-                            <input type="number" id="phone" name="phone" placeholder="Phone number..">
+                            <input type="number" id="phone" name="phone" maxlength="11" pattern="[0][0-9]{7-9}" placeholder="Phone number.."required>
                             <label>Address</label><br />
-                            <input type="text" id="address" name="address" placeholder="Address..">
-
-
-
-
+                            <input type="text" id="address" name="address" placeholder="Address.."required>
                             <input type="submit" value="Submit">
                         </form>
                     </div>

@@ -26,6 +26,7 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link href="~/Content/Css/skins/_all-skins.min.css" rel="stylesheet" />
+
     <link href="~/Content/Css/ManageAccount.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
@@ -240,6 +241,10 @@
 
             <!-- New Candidate Modal -->
             <div class="modal fade" id="newCandidateModal" tabindex="-1" role="dialog" aria-labelledby="newCandidateModalLabel" aria-hidden="true">
+
+
+
+
                 <div class="modal-dialog modal-lg" style="position:unset">
                     <div class="modal-content" style="position:unset">
                         <div class="modal-header">
@@ -250,51 +255,55 @@
                             <div id="candidateId" hidden></div>
                             @Html.Label("Candidate's Name")
                             <br />
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <input type="text" id="firstName" placeholder="First Name">
-                                </div>
-                                <div class="col-md-4">
-                                    <input type="text" id="middleName" placeholder="Middle Name">
-                                </div>
-                                <div class="col-md-4">
-                                    <input type="text" id="lastName" placeholder="Last Name">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="Name">Email</label>
-                                    <input type="text" class="form-control" id="email" placeholder="Email">
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label for="Name">Phone number</label>
-                                    <input type="text" class="form-control" id="phoneNumber" placeholder="Phone Number">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="Name">Job Title</label>
-                                    <input type="text" class="form-control" id="jobTitle" placeholder="Job Title">
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label>Job Level</label>
-                                    <div class="form-group">
-                                        <select class="form-control select2" id="jobLevel">
-                                            <option value="Fresher">Fresher</option>
-                                            <option value="Junior">Junior</option>
-                                            <option value="Senior">Senior</option>
-                                            <option value="Manager">Manager</option>
-                                            <option value="Higher">Higher</option>
-                                        </select>
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <input type="text" id="firstName" placeholder="First Name" required>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" id="middleName" placeholder="Middle Name" required>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" id="lastName" placeholder="Last Name" required>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" onclick="return _add();" id="btnAdd">Add</button>
-                                <button type="button" class="btn btn-primary" onclick="return _edit();" id="btnUpdate" style="display:none">Update</button>
-                            </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="Name">Email</label>
+                                        <input type="text" class="form-control" id="email" placeholder="Email" required>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="Name">Phone number</label>
+                                        <input type="text" class="form-control" id="phoneNumber" maxlength="11" pattern="[0][0-9]{7-9}" placeholder="Phone Number" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="Name">Job Title</label>
+                                        <input type="text" class="form-control" id="jobTitle" placeholder="Job Title" required>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label>Job Level</label>
+                                        <div class="form-group">
+                                            <select class="form-control select2" id="jobLevel" required>
+                                                <option value="Fresher">Fresher</option>
+                                                <option value="Junior">Junior</option>
+                                                <option value="Senior">Senior</option>
+                                                <option value="Manager">Manager</option>
+                                                <option value="Higher">Higher</option>s
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary" onclick="return _add();" id="btnAdd">Add</button>
+                                    <button type="submit" class="btn btn-primary" onclick="return _edit();" id="btnUpdate" style="display:none">Update</button>
+                                    @*<input type="submit" class="btn btn-primary" onclick="return _add();" id="btnAdd" value="Add" />
+                                    <input type="submit" class="btn btn-primary" onclick="return _edit();" id="btnUpdate" style="display:none" value="Update"/>*@
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
