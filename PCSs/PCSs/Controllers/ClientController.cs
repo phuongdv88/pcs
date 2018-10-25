@@ -20,6 +20,11 @@ namespace PCSs.Controllers
         public ActionResult ManageAccount(long id)
         {
             ViewBag.RecruiterId = id;
+            var recruiter = db.Recruiters.FirstOrDefault(s => s.RecruiterId == id);
+            if (recruiter != null)
+            {
+                ViewBag.Title = recruiter.FirstName + " " + recruiter.MiddleName + " " + recruiter.LastName;
+            }
             return View();
         }
         /// <summary>
@@ -31,7 +36,7 @@ namespace PCSs.Controllers
         {
             //if (recruiterId == null)
             //    return Json(new { msg = "Can't find user id" }, JsonRequestBehavior.AllowGet);
-            var result = Json(db.Candidates.Where(s => s.RecruiterId == id).OrderBy(s=>s.CandidateId), JsonRequestBehavior.AllowGet);
+            var result = Json(db.Candidates.Where(s => s.RecruiterId == id).OrderBy(s => s.CandidateId), JsonRequestBehavior.AllowGet);
             return result;
         }
         public JsonResult GetAllCandidateCompleted(long id)
@@ -61,7 +66,8 @@ namespace PCSs.Controllers
 
         public JsonResult CreateCandidate(CandidateSimpleInfo can)
         {
-            try {
+            try
+            {
                 var userLogin = new UserLogin()
                 {
                     UserName = Util.Helper.getRandomAlphaNumeric(6).ToUpper(),
@@ -100,7 +106,8 @@ namespace PCSs.Controllers
                 db.Candidates.Add(candidate);
                 var rs = db.SaveChanges();
                 return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return Json(new { msg = e.Message }, JsonRequestBehavior.AllowGet);
             }
@@ -109,12 +116,12 @@ namespace PCSs.Controllers
         public JsonResult UpdateCandidate(CandidateSimpleInfo can)
         {
             long recruitID = -1;
-            if(!long.TryParse(Session["RecruiterId"].ToString(), out recruitID))
+            if (!long.TryParse(Session["RecruiterId"].ToString(), out recruitID))
             {
                 return Json(new { msg = "Error: You don't have permittion to change this candidate" }, JsonRequestBehavior.AllowGet);
             }
             var candidate = db.Candidates.First(s => s.CandidateId == can.CandidateId && s.RecruiterId == recruitID);
-            if(candidate == null)
+            if (candidate == null)
             {
                 return Json(new { msg = "Error: You don't have permittion to change this candidate" }, JsonRequestBehavior.AllowGet);
             }
@@ -137,6 +144,62 @@ namespace PCSs.Controllers
             return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
         }
 
+
+        public JsonResult GetRecruiterProfile()
+        {
+            long recruitID = -1;
+            if (!long.TryParse(Session["RecruiterId"].ToString(), out recruitID))
+            {
+                return Json(new { msg = "Error: Can't get recruiter's profile" }, JsonRequestBehavior.AllowGet);
+            }
+            var recruiter = db.Recruiters.FirstOrDefault(x => x.RecruiterId == recruitID);
+            return Json(recruiter, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult UpdateRecruiterProfile(Recruiter newRecruiter)
+        {
+            long recruitID = -1;
+            if (!long.TryParse(Session["RecruiterId"].ToString(), out recruitID))
+            {
+                return Json(new { msg = "Error: Can't get recruiter's profile" }, JsonRequestBehavior.AllowGet);
+            }
+            var recruiter = db.Recruiters.FirstOrDefault(x => x.RecruiterId == recruitID);
+            if (recruiter != null)
+            {
+                if (recruiter.FirstName != newRecruiter.FirstName ||
+                recruiter.MiddleName != newRecruiter.MiddleName ||
+                recruiter.LastName != newRecruiter.LastName ||
+                recruiter.Email != newRecruiter.Email ||
+                recruiter.PhoneNumber != newRecruiter.PhoneNumber)
+                {
+                    recruiter.FirstName = newRecruiter.FirstName;
+                    recruiter.MiddleName = newRecruiter.MiddleName;
+                    recruiter.LastName = newRecruiter.LastName;
+                    recruiter.Email = newRecruiter.Email;
+                    recruiter.PhoneNumber = newRecruiter.PhoneNumber;
+                    db.Entry(recruiter).State = EntityState.Modified;
+                    var rs = db.SaveChanges();
+                    return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            return Json(new { msg = "1" }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult UpdatePassword()
+        {
+            long recruitID = -1;
+            if (!long.TryParse(Session["RecruiterId"].ToString(), out recruitID))
+            {
+                return Json(new { msg = "Error: Can't get recruiter's profile" }, JsonRequestBehavior.AllowGet);
+            }
+            var recruiter = db.Recruiters.FirstOrDefault(x => x.RecruiterId == recruitID);
+            if (recruiter != null)
+            {
+                //updatePassword 
+            }
+                
+            return Json(new { msg = "1" }, JsonRequestBehavior.AllowGet);
+        }
         // GET: Clients
         public async Task<ActionResult> Index()
         {

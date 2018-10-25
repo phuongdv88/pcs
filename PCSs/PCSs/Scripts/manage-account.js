@@ -6,6 +6,7 @@
 var currentRecruiterId = -1;
 
 modalHtml = $("#newCandidateModal").html();
+// reset modal when hidden them
 $("#newCandidateModal").on('hidden.bs.modal', function(){
     $("#newCandidateModal").html(modalHtml);
     })
@@ -42,9 +43,10 @@ function _getAllCandidate(id) {
             var i = 0;
             $.each(result, function (key, item) {
                 i++;
+                var candidateName = item.FirstName + " " + item.MiddleName + " " + item.LastName;
                 html += '<tr>';
                 html += '<td>' + i + '</td>';
-                html += '<td>' + item.FirstName + " " + item.MiddleName + " " + item.LastName + '</td>';
+                html += '<td>' + candidateName + '</td>';
                 html += '<td>' + item.Email + '</td>';
                 html += '<td>' + item.PhoneNumber + '</td>';
                 html += '<td>' + item.Status + '</td>';
@@ -56,7 +58,7 @@ function _getAllCandidate(id) {
                     html += '<td>' + formatDate(item.CompleteTime.substr(6)) + '</td>';
                 }
                 html += '<td><a href="#" onClick="return _getCandidateById(' + item.CandidateId + ')" class="fas fa-pencil-alt"></a></td>';
-                html += '<td><a href="#" onClick="return _getCandidateInfoById(' + item.UserLoginId + ')" class="far fa-calendar-alt"></a></td>';
+                html += '<td><a href="#" onClick="return _getCandidateInfoById(' + item.UserLoginId + ' , \'' + candidateName + '\')" class="far fa-calendar-alt"></a></td>';
                 html += '</tr>';
             });
             $('#candidates tbody').html(html);
@@ -83,9 +85,10 @@ function _getAllCandidateReport(id) {
             var i = 0;
             $.each(result, function (key, item) {
                 i++;
+                var candidateName = item.FirstName + " " + item.MiddleName + " " + item.LastName;
                 html += '<tr>';
                 html += '<td>' + i + '</td>';
-                html += '<td>' + item.FirstName + " " + item.MiddleName + " " + item.LastName + '</td>';
+                html += '<td>' + candidateName + '</td>';
                 html += '<td>' + item.Email + '</td>';
                 html += '<td>' + item.PhoneNumber + '</td>';
                 if (item.CompleteTime == undefined) {
@@ -150,13 +153,13 @@ function _getCandidateById(id) {
     return false;
 }
 /// generate information that is including user name and password of candidate
-function _getCandidateInfoById(id) {
+function _getCandidateInfoById(id, candidateName) {
     $.ajax({
         url: '/Client/GetCandidateInfo/' + id,
         type: 'Get',
         contentType: "json",
         success: function (result) {
-            
+            $('#candidateName').text(candidateName);
             $('#userNameInfo').text(result.UserName); // need to update to db the field userName, password of candiate table
             $('#passwordRaw').text(result.PasswordRaw);
             if (result.LockoutDateUtc == undefined) {
@@ -218,6 +221,71 @@ function _edit() {
 
     $.ajax({
         url: '/Client/UpdateCandidate',
+        data: JSON.stringify(obj),
+        type: 'POST',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+            $('#btnRefresh').click();
+            $("#newCandidateModal").modal('hide');
+        },
+        error: function (errorMessage) {
+            alert(errorMessage.responseText);
+        }
+    });
+}
+
+function getProfile() {
+    $.ajax({
+        url: '/Client/GetRecruiterProfile',
+        type: 'Get',
+        contentType: "json",
+        success: function (result) {
+            $('#recruiterFirstName').val(result.FirstName);
+            $('#recruiterMiddleName').val(result.MiddleName);
+            $('#recruiterLastName').val(result.LastName);
+            $('#recruiterEmail').val(result.Email);
+            $('#recruiterPhoneNumber').val(result.PhoneNumber);
+            $('#changeProfile').modal('show');
+        },
+        error: function (errorMessage) {
+            alert(errorMessage.responseText);
+        }
+    });
+}
+
+function editProfile() {
+    var obj = {
+        FirstName: $('#recruiterFirstName').val(),
+        MiddleName: $('#recruiterMiddleName').val(),
+        LastName: $('#recruiterLastName').val(),
+        Email: $('#recruiterEmail').val(),
+        PhoneNumber: $('#recruiterPhoneNumber').val(),
+    }
+
+    $.ajax({
+        url: '/Client/UpdateRecruiterProfile',
+        data: JSON.stringify(obj),
+        type: 'POST',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+            $("#changeProfile").modal('hide');
+        },
+        error: function (errorMessage) {
+            alert(errorMessage.responseText);
+        }
+    });
+}
+
+function updatePassword() {
+    var obj = {
+        OldPassWord: $('#oldPassword').val(),
+        NewPassWord: $('#newPassword').val(),
+    }
+
+    $.ajax({
+        url: '/Client/UpdatePassword',
         data: JSON.stringify(obj),
         type: 'POST',
         contentType: "application/json; charset=utf-8",
