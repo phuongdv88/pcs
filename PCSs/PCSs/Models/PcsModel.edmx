@@ -137,7 +137,7 @@
             <PropertyRef Name="UserLoginId" />
           </Key>
           <Property Name="UserLoginId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="UserName" Type="varchar(max)" Nullable="false" />
           <Property Name="PasswordHash" Type="nvarchar(max)" Nullable="false" />
           <Property Name="SecurityStamp" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Role" Type="int" Nullable="false" />
@@ -308,7 +308,7 @@
             <PropertyRef Name="UserLoginId" />
           </Key>
           <Property Name="UserLoginId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Role" Type="Int32" Nullable="false" />

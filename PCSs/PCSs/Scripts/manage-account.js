@@ -246,7 +246,7 @@ function getProfile() {
             $('#recruiterLastName').val(result.LastName);
             $('#recruiterEmail').val(result.Email);
             $('#recruiterPhoneNumber').val(result.PhoneNumber);
-            $('#changeProfile').modal('show');
+            $('#changeProfileModal').modal('show');
         },
         error: function (errorMessage) {
             alert(errorMessage.responseText);
@@ -270,7 +270,10 @@ function editProfile() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (result) {
-            $("#changeProfile").modal('hide');
+            $("#changeProfileModal").modal('hide');
+            // update profile and title
+            $("#welcomeUser").text("Welcome " + result.msg);
+            $("#title").text(result.msg);
         },
         error: function (errorMessage) {
             alert(errorMessage.responseText);
@@ -280,8 +283,8 @@ function editProfile() {
 
 function updatePassword() {
     var obj = {
-        OldPassWord: $('#oldPassword').val(),
-        NewPassWord: $('#newPassword').val(),
+        OldPassword: $('#oldPassword').val(),
+        NewPassword: $('#newPassword').val(),
     }
 
     $.ajax({
@@ -290,9 +293,13 @@ function updatePassword() {
         type: 'POST',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        success: function (result) {
-            $('#btnRefresh').click();
-            $("#newCandidateModal").modal('hide');
+        success: function (rs) {
+            if (rs.result == -1) {
+                // show error
+                $("#changePasswordMessage").text(rs.msg);
+            } else {
+                $("#changePassModal").modal('hide');
+            }
         },
         error: function (errorMessage) {
             alert(errorMessage.responseText);

@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>@ViewBag.Title</title>
+    <title id="title">@ViewBag.Title</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!--for header-->
@@ -72,10 +72,10 @@
                     </b>
                 </a>
 
-                <a href="#" data-toggle="modal" data-target="#changePass">
+                <a href="#" data-toggle="modal" data-target="#changePassModal">
 
                     <b>
-                        <i class="fa fa-edit"></i>Edit Password
+                        <i class="fa fa-edit"></i>Change Password
                     </b>
                 </a>
 
@@ -88,15 +88,13 @@
 
             </div>
             <!-- form edit pass -->
-            <div class="modal fade" id="changePass" role="dialog" tabindex="-1">
+            <div class="modal fade" id="changePassModal" role="dialog" tabindex="-1">
                 <div class="modal-dialog" style="position:unset">
 
                     <!-- Modal content-->
                     <div class="modal-content" style="width: 100%;padding: 2em">
                         <div class="modal-header" style="padding-left: 0px;">
                             <h4>Change PassWord</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times; </button>
-
                         </div>
                         <div class="modal-body">
                             <label>Old Password</label><br />
@@ -105,6 +103,7 @@
                             <input type="password" id="newPassword" name="passwordnew" placeholder="Password new..">
                             <label>Confirm Password</label><br />
                             <input type="password" id="" name="confirmPassword" placeholder="Confirm password..">
+                            <div id="changePasswordMessage"></div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-primary" onclick="return updatePassword();" id="btnEditProfile">Save</button>
                             </div>
@@ -116,7 +115,7 @@
             <!-- end form edit pass -->
             
             <!-- form edit information -->
-            <div class="modal fade" id="changeProfile" role="dialog" tabindex="-1">
+            <div class="modal fade" id="changeProfileModal" role="dialog" tabindex="-1">
                 <div class="modal-dialog modal-lg" style="position:unset">
                     <!-- Modal content-->
                     <div class="modal-content" style="width: 100%;padding: 2em">
@@ -166,7 +165,7 @@
             <!-- end sidebar -->
             <div style="float: right;padding-top: 13px;height: 100%;width:auto">
                 <!-- The user image in the navbar-->
-                <i class="fa fa-user" style="color:aquamarine" onclick="openNav()"> Welcome @ViewBag.Title</i>
+                <i class="fa fa-user" style="color:aquamarine" onclick="openNav()" id="welcomeUser"> Welcome @ViewBag.Title</i>
                 <span></span>
             </div>
         </div>

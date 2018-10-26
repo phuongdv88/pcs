@@ -19,4 +19,10 @@ namespace PCSs.Models
         public string ReturnURL { get; set; }
         public bool  IsRemember { get; set; }
     }
+
+    public class PasswordToChange
+    {
+        public string OldPassword { get; set; }
+        public string NewPassword { get; set; }
+    }
 }

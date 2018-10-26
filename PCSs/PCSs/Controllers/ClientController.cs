@@ -161,7 +161,7 @@ namespace PCSs.Controllers
             long recruitID = -1;
             if (!long.TryParse(Session["RecruiterId"].ToString(), out recruitID))
             {
-                return Json(new { msg = "Error: Can't get recruiter's profile" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Error: Can't get recruiter's profile" }, JsonRequestBehavior.AllowGet);
             }
             var recruiter = db.Recruiters.FirstOrDefault(x => x.RecruiterId == recruitID);
             if (recruiter != null)
@@ -178,27 +178,44 @@ namespace PCSs.Controllers
                     recruiter.Email = newRecruiter.Email;
                     recruiter.PhoneNumber = newRecruiter.PhoneNumber;
                     db.Entry(recruiter).State = EntityState.Modified;
-                    var rs = db.SaveChanges();
-                    return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
+                    var r = db.SaveChanges();
+                    return Json(new { rs = r, msg = recruiter.FirstName + " " + recruiter.MiddleName + " " + recruiter.LastName }, JsonRequestBehavior.AllowGet);
                 }
             }
-            return Json(new { msg = "1" }, JsonRequestBehavior.AllowGet);
+            return Json(new { rs = -1, msg = "1" }, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult UpdatePassword()
+        public JsonResult UpdatePassword(PasswordToChange passwordTochange)
         {
             long recruitID = -1;
             if (!long.TryParse(Session["RecruiterId"].ToString(), out recruitID))
             {
-                return Json(new { msg = "Error: Can't get recruiter's profile" }, JsonRequestBehavior.AllowGet);
+                return Json(new { result = -1, msg = "Can't get recruiter's profile" }, JsonRequestBehavior.AllowGet);
             }
             var recruiter = db.Recruiters.FirstOrDefault(x => x.RecruiterId == recruitID);
             if (recruiter != null)
             {
-                //updatePassword 
+                var userLogin = db.UserLogins.FirstOrDefault(x => x.UserLoginId == recruiter.UserLoginId);
+                if(userLogin != null)
+                {
+                    // check old password
+                    bool isMatch = PCSs.Util.Helper.CompareMD5HashValue(passwordTochange.OldPassword, userLogin.UserName, userLogin.SecurityStamp, userLogin.PasswordHash);
+                    if (isMatch)
+                    {
+                        //updatePassword 
+                        userLogin.SecurityStamp = Util.Helper.getRandomAlphaNumeric(100);
+                        userLogin.PasswordHash = Util.Helper.createMD5Hash(passwordTochange.NewPassword, userLogin.UserName, userLogin.SecurityStamp);
+                        db.Entry(userLogin).State = EntityState.Modified;
+                        var rs = db.SaveChanges();
+                        return Json(new { result = rs, msg = "Update password successfully" }, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Json(new { result = -1, msg = "Old password is incorrect." }, JsonRequestBehavior.AllowGet);
+                    }
+                }
             }
-                
-            return Json(new { msg = "1" }, JsonRequestBehavior.AllowGet);
+            return Json(new { result = -1, msg = "Can't get recruiter's profile" }, JsonRequestBehavior.AllowGet);
         }
         // GET: Clients
         public async Task<ActionResult> Index()

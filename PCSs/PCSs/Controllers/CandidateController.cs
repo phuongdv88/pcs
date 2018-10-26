@@ -265,31 +265,6 @@ namespace PCSs.Controllers
                 return Json(new { msg = e.Message }, JsonRequestBehavior.AllowGet);
             }
         }
-        // GET: update form
-        public ActionResult UpdateProfile(long? userLoginId)
-        {
-            if (userLoginId == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CandidateInfo can = new CandidateInfo(userLoginId);
-            if (can == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.Title = can.CandidateGeneralInfo.FirstName + " " + can.CandidateGeneralInfo.MiddleName + " " + can.CandidateGeneralInfo.LastName + " 's Information";
-
-            List<SelectListItem> items = new List<SelectListItem>();
-            items.Add(new SelectListItem { Text = "Fresher", Value = "Fresher" });
-            items.Add(new SelectListItem { Text = "Junior", Value = "Junior" });
-            items.Add(new SelectListItem { Text = "Senior", Value = "Senior" });
-            items.Add(new SelectListItem { Text = "Manager", Value = "Manager" });
-            items.Add(new SelectListItem { Text = "Higher", Value = "Higher" });
-            ViewBag.LevelType = items;
-
-            return View(can);
-        }
-
         // GET: Candidates/Details/5
         public async Task<ActionResult> Details(long? id)
         {
