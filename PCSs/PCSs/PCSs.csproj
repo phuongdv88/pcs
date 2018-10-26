@@ -2300,7 +2300,6 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\General\ForgetPassword.cshtml" />
     <Content Include="Views\Error\ErrorCantVerifyAccount.cshtml" />
-    <Content Include="Views\Candidate\UpdateProfile.cshtml" />
     <Content Include="Views\CompanyInfo\Create.cshtml" />
     <Content Include="Views\CompanyInfo\Delete.cshtml" />
     <Content Include="Views\CompanyInfo\Details.cshtml" />
