@@ -143,8 +143,8 @@ function _getCandidateById(id) {
             $('#jobTitle').val(result.JobTitle);
             $('#jobLevel').val(result.JobLevel);
             $('#newCandidateModal').modal('show');
-            $('#btnUpdate').show();
-            $('#btnAdd').hide();
+            $('#btnAdd').text("Update");
+            $("#formNewEditCandidate").attr("onsubmit", "return _edit()");
         },
         error: function (errorMessage) {
             alert(errorMessage.responseText);

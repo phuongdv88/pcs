@@ -1,5 +1,8 @@
 ﻿body {
 }
+.form-edit{
+    padding:0;
+}
 #footer {
    position:absolute;
    bottom:0;

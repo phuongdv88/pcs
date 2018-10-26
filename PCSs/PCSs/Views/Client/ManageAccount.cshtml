@@ -51,22 +51,23 @@
 <body class="hold-transition skin-blue sidebar-mini" style="padding-top:0px">
     <!--Header menu-->
     <div class="row col-md-12 col-sm-12 col-xs-12  header" style="margin:0;padding:0">
-        <div class="col-md-3 col-sm-3 col-xs-3 " style=" background-color: #464646;padding: 0px;height:100%">
-
-            <img src="~/Content/Image/logotrang.png" style="height:100%" />
+        <div class="col-md-3 col-sm-3 col-xs-3 " style=" background-color: #464646;padding: 0px;height:100%;">
+            @*<img src="~/Content/Image/logo PCS.png" />*@
+            @*<img src="~/Content/Image/logo PCS trang.png" />*@
+            <img src="~/Content/Image/logo PCS trang.png" style="height:100%" />
         </div>
         <div class="col-md-9 col-sm-9 col-xs-9 " style=" background-color: #464646;padding: 0px;height:100%">
 
             <!-- Control Sidebar Toggle Button -->
             <div style="float: right;padding-top: 15px;padding-left: 15px;padding-right:1em">
-                <a href="#" data-toggle="control-sidebar" onclick="openNav()">
+                <a href="#" data-toggle="control-sidebar" onclick="openNav()" >
                     <i class="fa fa-gears"></i>
                 </a>
             </div>
 
             <div id="mySidenav" class="sidenav">
                 <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
-                <a href="#" data-toggle="modal" onclick="return getProfile()">
+                <a href="#" data-toggle="modal" data-target="#changeProfileModal" onclick="return getProfile()">
                     <b>
                         <i class="fa fa-user"></i> Change profile
                     </b>
@@ -92,11 +93,11 @@
                 <div class="modal-dialog" style="position:unset">
 
                     <!-- Modal content-->
-                    <div class="modal-content" style="width: 100%;padding: 2em">
+                    <div class="modal-content" style="width: 100%;padding: 2em 2em 0 2em">
                         <div class="modal-header" style="padding-left: 0px;">
                             <h4>Change PassWord</h4>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body form-edit">
                             <label>Old Password</label><br />
                             <input type="password" id="oldPassword" name="passwordold" placeholder="Password old..">
                             <label>New Password</label><br />
@@ -118,23 +119,24 @@
             <div class="modal fade" id="changeProfileModal" role="dialog" tabindex="-1">
                 <div class="modal-dialog modal-lg" style="position:unset">
                     <!-- Modal content-->
-                    <div class="modal-content" style="width: 100%;padding: 2em">
+                    <div class="modal-content" style="width: 100%;padding:  2em 2em 0 2em">
                         <div class="modal-header" style="padding-left: 0px;">
                             <h4 class="modal-title">Change Profile</h4>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body form-edit" >
                             <label>First name</label><br />
-                            <input type="text" id="recruiterFirstName" placeholder="Firstname..">
+                            <input type="text" id="recruiterFirstName" placeholder="Firstname.." required>
                             <label>Middle name</label><br />
-                            <input type="text" id="recruiterMiddleName" placeholder="Firstname..">
+                            <input type="text" id="recruiterMiddleName" placeholder="Firstname.."required>
                             <label>Last name</label><br />
-                            <input type="text" id="recruiterLastName" placeholder="Lastname..">
+                            <input type="text" id="recruiterLastName" placeholder="Lastname.."required>
                             <label> Email</label><br />
-                            <input type="text" id="recruiterEmail" placeholder="Email..">
+                            <input type="text" id="recruiterEmail" placeholder="Email.."required>
                             <label>Phone number</label><br />
-                            <input type="number" id="recruiterPhoneNumber" placeholder="Phone number..">
+                            <input type="number" id="recruiterPhoneNumber" placeholder="Phone number.."required>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" onclick="return editProfile();" id="btnEditProfile">Save</button>
+                                <button type="submit" class="btn btn-primary" onsubmit="return editProfile();" id="btnEditProfile">Save</button>
+                                @*<input />*@
                             </div>
                         </div>
                     </div>
@@ -171,7 +173,7 @@
         </div>
     </div>
     <!-- body-->
-    <div class=" col-md-12 col-sm-12 col-xs-12 clearPanddingMargin" style="display:flex">
+    <div class=" col-md-12 col-sm-12 col-xs-12 clearPanddingMargin" style="display:flex;min-height:890px">
         <div class=" col-md-2 col-sm-2 col-xs-12  slide-bar" style="padding:0px">
             <div class="col-md-12  col-sm-12 col-xs-12 list">
 
@@ -379,7 +381,7 @@
                             <div id="candidateId" hidden></div>
                             @Html.Label("Candidate's Name")
                             <br />
-                            <form>
+                            <form id="formNewEditCandidate" onsubmit=" return _add()">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <input type="text" id="firstName" placeholder="First Name" required>
@@ -422,10 +424,10 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    @*<button type="submit" class="btn btn-primary"  onsubmit="return _add();" id="btnAdd">Add</button>*@
+                                    <button type="submit" class="btn btn-primary" id="btnAdd">Add</button>
                                     @*<button type="submit" class="btn btn-primary" onsubmit="return _edit();" id="btnUpdate" style="display:none">Update</button>*@
-                                    <input type="submit" class="btn btn-primary" onclick="return _add();"  id="btnAdd" value="Add" />
-                                    <input type="submit" class="btn btn-primary" onclick="return _edit();" id="btnUpdate" style="display:none" value="Update"/>
+                                    @*<input type="submit" class="btn btn-primary" onclick="return _add();"  id="btnAdd" value="Add" />*@
+                                    @*<input type="submit" class="btn btn-primary" onclick="return _edit();" id="btnUpdate" style="display:none" value="Update"/>*@
                                 </div>
                             </form>
                         </div>
@@ -471,7 +473,7 @@
             02439942285
         </div>
         <div class="col-md-2 col-sm-12 col-xs-12">
-            <img src="~/Content/Image/logotrang.png" class="logo">
+            <img src="~/Content/Image/logo PCS trang.png" class="logo">
         </div>
 
     </div>

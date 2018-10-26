@@ -155,9 +155,9 @@ input[type=submit]:hover {
 }
 .footer {
     min-height: 3em;
-    height:auto;
+    height: auto;
     background: #464646;
-    color: aquamarine;
+    color:silver;
     padding: 0.6em 0 0 2em;
 }
 .footer .logo{

@@ -585,6 +585,11 @@
     <Content Include="Content\Image\iconmanager.png" />
     <Content Include="Content\Image\iconreport.png" />
     <Content Include="Content\Image\icons8-view-50.png" />
+    <Content Include="Content\Image\logo PCS den full.png" />
+    <Content Include="Content\Image\logo PCS den.png" />
+    <Content Include="Content\Image\logo PCS trang full.png" />
+    <Content Include="Content\Image\logo PCS trang.png" />
+    <Content Include="Content\Image\logo PCS.png" />
     <Content Include="Content\Image\LogoSample_ByTailorBrands.jpg" />
     <Content Include="Content\Image\logotrang.png" />
     <Content Include="Content\Image\password.png" />
