@@ -1,15 +1,47 @@
-.logo{
+.logo {
     /* font-size: 25px; */
-   height:  3em;
-   text-align: center;
-   line-height: 2;
-   /* font-family: cursive; */
+    height: 3em;
+    text-align: center;
+    line-height: 2;
+    /* font-family: cursive; */
+}
 
+.dropdown {
+    position: relative;
+    display: inline-block;
+    height: 100%;
 }
-clearPanddingMargin{
-    padding:0px;
-    margin:0px;
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 260px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    /*margin-top: 7px;*/
 }
+
+    .dropdown-content a {
+        /*color: black;*/
+        /*padding: 12px 16px;*/
+        text-decoration: none;
+        display: block;
+    }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+clearPanddingMargin {
+    padding: 0px;
+    margin: 0px;
+}
+
 .header {
     height: 3em;
     width: 100%;
@@ -17,7 +49,11 @@ clearPanddingMargin{
     margin: 0px;
 }
 
-.user-image{
+    .header a i {
+        color: silver;
+    }
+
+.user-image {
     float: left;
     width: 25px;
     height: 25px;
@@ -25,32 +61,37 @@ clearPanddingMargin{
     margin-right: 10px;
     margin-top: -2px;
 }
-a{
+
+a {
     color: #fff;
     text-decoration: none;
 }
-a:hover{
-    text-decoration: none;
-    color:black;
- 
-}
+
+    a:hover {
+        text-decoration: none;
+        color: black;
+    }
+
 .img-circle {
     border-radius: 50%;
 }
-.user-header{
+
+.user-header {
     text-align: center;
     background-color: #3c8dbc;
 }
-.dropdown-menu{
-    top:10px;
+
+.dropdown-menu {
+    top: 10px;
     right: 0;
     left: auto;
     padding: 0px;
     margin-top: 13px;
     /* background: #3c8dbc; */
     -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
-     width: 310px;
+    width: 310px;
 }
+
 .btn {
     display: inline-block;
     padding: 6px 12px;
@@ -72,12 +113,14 @@ a:hover{
     border: 1px solid transparent;
     border-radius: 4px;
 }
+
 .btn-default {
     background-color: #f4f4f4;
     color: #444;
     border-color: #ddd;
 }
-.user-footer{
+
+.user-footer {
     padding: 10px;
     height: 100%;
 }
@@ -94,36 +137,40 @@ a:hover{
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
-    
-    
 }
 
-.sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 20px;
-    color: #3c8dbc;
-    display: block;
-    transition: 0.3s;
-}
+    .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 20px;
+        color: #3c8dbc;
+        display: block;
+        transition: 0.3s;
+    }
 
-.sidenav a:hover {
-    color: #818181;
-}
+        .sidenav a:hover {
+            color: #818181;
+        }
 
-.sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    /* left: 25px; */
-    font-size: 36px;
-    /* margin-left: 50px; */
-}
+    .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        /* left: 25px; */
+        font-size: 36px;
+        /* margin-left: 50px; */
+    }
 
 @media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+    .sidenav {
+        padding-top: 15px;
+    }
+
+        .sidenav a {
+            font-size: 18px;
+        }
 }
-.sidenav a i{
+
+.sidenav a i {
     padding-right: 0.5em;
 }
 /* form edit pass */
@@ -147,22 +194,42 @@ input[type=submit] {
     cursor: pointer;
 }
 
-input[type=submit]:hover {
-    background-color: #45a049;
-}
-.col-md-6 input{
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
+
+.col-md-6 input {
     padding: 6px;
 }
+
 .footer {
     min-height: 3em;
     height: auto;
     background: #464646;
-    color:silver;
+    color: silver;
     padding: 0.6em 0 0 2em;
 }
-.footer .logo{
-    height: 2em;
+
+    .footer .logo {
+        height: 2em;
+    }
+
+.footerright i {
+    padding-right: 1.5em;
+    padding-left: 1em;
 }
-.modal-dialog{
-    position:unset !important;
+
+.footerright {
+    text-align: right;
+}
+
+@media screen and (max-width: 770px) {
+    .footerright {
+        text-align: left;
+    }
+}
+
+
+.modal-dialog {
+    position: unset !important;
 }

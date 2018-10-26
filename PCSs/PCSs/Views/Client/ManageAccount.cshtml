@@ -59,118 +59,148 @@
         <div class="col-md-9 col-sm-9 col-xs-9 " style=" background-color: #464646;padding: 0px;height:100%">
 
             <!-- Control Sidebar Toggle Button -->
-            <div style="float: right;padding-top: 15px;padding-left: 15px;padding-right:1em">
-                <a href="#" data-toggle="control-sidebar" onclick="openNav()" >
+            <div style="float: right;padding-top: 15px;padding-left: 15px;padding-right:1em" class="dropdown">
+                <a href="#" data-toggle="control-sidebar">
                     <i class="fa fa-gears"></i>
                 </a>
-            </div>
+                <div class="dropdown-content sidenav">
+                    <a href="#" data-toggle="modal" data-target="#changeProfileModal" onclick="return getProfile()">
+                        <b>
+                            <i class="fa fa-user"></i> Change profile
+                        </b>
+                    </a>
 
-            <div id="mySidenav" class="sidenav">
-                <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
-                <a href="#" data-toggle="modal" data-target="#changeProfileModal" onclick="return getProfile()">
-                    <b>
-                        <i class="fa fa-user"></i> Change profile
-                    </b>
-                </a>
+                    <a href="#" data-toggle="modal" data-target="#changePassModal">
 
-                <a href="#" data-toggle="modal" data-target="#changePassModal">
+                        <b>
+                            <i class="fa fa-edit"></i>Change Password
+                        </b>
+                    </a>
 
-                    <b>
-                        <i class="fa fa-edit"></i>Change Password
-                    </b>
-                </a>
-
-                <a href=@Url.Action("Login", "Home")>
-                    <b>
-                        <i class="glyphicon glyphicon-log-out"></i>Log out
-                    </b>
-                </a>
-
-
-            </div>
-            <!-- form edit pass -->
-            <div class="modal fade" id="changePassModal" role="dialog" tabindex="-1">
-                <div class="modal-dialog" style="position:unset">
-
-                    <!-- Modal content-->
-                    <div class="modal-content" style="width: 100%;padding: 2em 2em 0 2em">
-                        <div class="modal-header" style="padding-left: 0px;">
-                            <h4>Change PassWord</h4>
-                        </div>
-                        <div class="modal-body form-edit">
-                            <label>Old Password</label><br />
-                            <input type="password" id="oldPassword" name="passwordold" placeholder="Password old..">
-                            <label>New Password</label><br />
-                            <input type="password" id="newPassword" name="passwordnew" placeholder="Password new..">
-                            <label>Confirm Password</label><br />
-                            <input type="password" id="" name="confirmPassword" placeholder="Confirm password..">
-                            <div id="changePasswordMessage"></div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" onclick="return updatePassword();" id="btnEditProfile">Save</button>
-                            </div>
-                        </div>
-                    </div>
-
+                    <a href=@Url.Action("Login", "Home")>
+                        <b>
+                            <i class="glyphicon glyphicon-log-out"></i>Log out
+                        </b>
+                    </a>
                 </div>
             </div>
-            <!-- end form edit pass -->
-            
-            <!-- form edit information -->
-            <div class="modal fade" id="changeProfileModal" role="dialog" tabindex="-1">
-                <div class="modal-dialog modal-lg" style="position:unset">
-                    <!-- Modal content-->
-                    <div class="modal-content" style="width: 100%;padding:  2em 2em 0 2em">
-                        <div class="modal-header" style="padding-left: 0px;">
-                            <h4 class="modal-title">Change Profile</h4>
+        
+
+
+
+            <!--<div id="mySidenav" class="sidenav">
+        
+            <a href="#" data-toggle="modal" data-target="#changeProfileModal" onclick="return getProfile()">
+                <b>
+                    <i class="fa fa-user"></i> Change profile
+                </b>
+            </a>
+
+            <a href="#" data-toggle="modal" data-target="#changePassModal">
+
+                <b>
+                    <i class="fa fa-edit"></i>Change Password
+                </b>
+            </a>
+
+            <a href=@Url.Action("Login", "Home")>
+                <b>
+                    <i class="glyphicon glyphicon-log-out"></i>Log out
+                </b>
+            </a>
+
+
+        </div>-->
+        <!-- form edit pass -->
+        <div class="modal fade" id="changePassModal" role="dialog" tabindex="-1">
+            <div class="modal-dialog" style="position:unset">
+
+                <!-- Modal content-->
+                <div class="modal-content" style="width: 100%;padding: 2em 2em 0 2em">
+                    <div class="modal-header" style="padding-left: 0px;">
+                        <h4>Change PassWord</h4>
+                    </div>
+                    <form onsubmit="return updatePassword();">
+
+
+                        <div class="modal-body form-edit">
+                            <label>Old Password</label><br />
+                            <input type="password" id="oldPassword" name="passwordold" placeholder="Password old.." required>
+                            <label>New Password</label><br />
+                            <input type="password" id="newPassword" name="passwordnew" placeholder="Password new.." required>
+                            <label>Confirm Password</label><br />
+                            <input type="password" id="" name="confirmPassword" placeholder="Confirm password.." required>
+                            <div id="changePasswordMessage"></div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary" id="btnEditPass">Save</button>
+                            </div>
                         </div>
-                        <div class="modal-body form-edit" >
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <!-- end form edit pass -->
+        <!-- form edit information -->
+        <div class="modal fade" id="changeProfileModal" role="dialog" tabindex="-1">
+            <div class="modal-dialog modal-lg" style="position:unset">
+                <!-- Modal content-->
+                <div class="modal-content" style="width: 100%;padding:  2em 2em 0 2em">
+                    <div class="modal-header" style="padding-left: 0px;">
+                        <h4 class="modal-title">Change Profile</h4>
+                    </div>
+                    <form onsubmit="return editProfile();">
+
+                        <div class="modal-body form-edit">
                             <label>First name</label><br />
                             <input type="text" id="recruiterFirstName" placeholder="Firstname.." required>
                             <label>Middle name</label><br />
-                            <input type="text" id="recruiterMiddleName" placeholder="Firstname.."required>
+                            <input type="text" id="recruiterMiddleName" placeholder="Firstname.." required>
                             <label>Last name</label><br />
-                            <input type="text" id="recruiterLastName" placeholder="Lastname.."required>
+                            <input type="text" id="recruiterLastName" placeholder="Lastname.." required>
                             <label> Email</label><br />
-                            <input type="text" id="recruiterEmail" placeholder="Email.."required>
+                            <input type="text" id="recruiterEmail" placeholder="Email.." required>
                             <label>Phone number</label><br />
-                            <input type="number" id="recruiterPhoneNumber" placeholder="Phone number.."required>
+                            <input type="number" id="recruiterPhoneNumber" pattern="[0][0-9]{7-9}" placeholder="Phone number.." required>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary" onsubmit="return editProfile();" id="btnEditProfile">Save</button>
+                                <button type="submit" class="btn btn-primary" id="btnEditProfile">Save</button>
                                 @*<input />*@
                             </div>
                         </div>
-                    </div>
+
+                    </form>
                 </div>
             </div>
-
-            <!-- end form edit information -->
-            <script>
-
-
-                function openNav() {
-                    document.getElementById("mySidenav").style.width = "250px";
-                }
-
-                function closeNav() {
-                    document.getElementById("mySidenav").style.width = "0";
-                }
-
-                $(document.body).click(function (e) {
-                    var a = document.getElementById("mySidenav").clientWidth;
-                    if (a == 250) {
-
-                        document.getElementById("mySidenav").style.width = "0";
-                    }
-
-                });
-            </script>
-            <!-- end sidebar -->
-            <div style="float: right;padding-top: 13px;height: 100%;width:auto">
-                <!-- The user image in the navbar-->
-                <i class="fa fa-user" style="color:aquamarine" onclick="openNav()" id="welcomeUser"> Welcome @ViewBag.Title</i>
-                <span></span>
-            </div>
         </div>
+
+        <!-- end form edit information -->
+        <script>
+
+
+            //function openNav() {
+            //    document.getElementById("mySidenav").style.width = "250px";
+            //}
+
+            //function closeNav() {
+            //    document.getElementById("mySidenav").style.width = "0";
+            //}
+
+            //$(document.body).click(function (e) {
+            //    var a = document.getElementById("mySidenav").clientWidth;
+            //    if (a == 250) {
+
+            //        document.getElementById("mySidenav").style.width = "0";
+            //    }
+
+            //});
+        </script>
+        <!-- end sidebar -->
+        <div style="float: right;padding-top: 13px;height: 100%;width:auto">
+            <!-- The user image in the navbar-->
+            <i class="fa fa-user" style="color:silver"  id="welcomeUser"> Welcome @ViewBag.Title</i>
+            <span></span>
+        </div>
+    </div>
     </div>
     <!-- body-->
     <div class=" col-md-12 col-sm-12 col-xs-12 clearPanddingMargin" style="display:flex;min-height:890px">
@@ -460,12 +490,24 @@
 
     <!--fooder-->
     <div class="row col-md-12 col-sm-12 col-xs-12 footer" style="margin:0px">
-        <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="col-md-6 col-sm-6 col-xs-12">
             <i class="fa fa-map-marker"></i>
             No 12, 641 Lane, Pham Van Dong Street, Ha Noi, Viet Nam
         </div>
+        <div class="row col-md-6 col-sm-6 col-xs-12 footerright">
+            <i>
+                <img src="~/Content/Image/e-mail.png" style="filter:white;height:1em"> contact@swilife.com
 
-        <div class="col-md-2 col-sm-12 col-xs-12">
+            </i>
+
+
+            <i class="fa fa-phone"> 02439942285</i>
+
+            <i><img src="~/Content/Image/logo PCS trang.png" class="logo"></i>
+
+
+        </div>
+        @*<div class="col-md-2 col-sm-12 col-xs-12">
             <img src="~/Content/Image/e-mail.png" style="filter:white;height:1em"> contact@swilife.com
         </div>
         <div class="col-md-2 col-sm-12 col-xs-12">
@@ -474,7 +516,7 @@
         </div>
         <div class="col-md-2 col-sm-12 col-xs-12">
             <img src="~/Content/Image/logo PCS trang.png" class="logo">
-        </div>
+        </div>*@
 
     </div>
     <!-- ./wrapper -->
