@@ -1,7 +1,7 @@
 ﻿@model PCSs.Models.Candidate
 
 @{
-    Layout = null;
+   // Layout = null;
 }
 
 <!DOCTYPE html>
@@ -161,21 +161,21 @@
                                             <div class="row">
                                                 <div class="form-group col-md-6">
                                                     <label class="control-label  col-md-6">Name</label>
-                                                    <input type="text" class="form-control" placeholder="Company Name..." id="companyName" />
+                                                    <input type="text" class="form-control" placeholder="Company Name..." id="companyName" required/>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label class="control-label  col-md-6">Address</label>
-                                                    <input type="text" class="form-control" placeholder="Address..." id="companyAddress" />
+                                                    <input type="text" class="form-control" placeholder="Address..." id="companyAddress" required/>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="form-group col-md-6">
                                                     <label class="control-label col-md-6">Website</label>
-                                                    <input type="text" class="form-control" placeholder="Website..." id="companyWebsite" />
+                                                    <input type="text" class="form-control" placeholder="Website..." id="companyWebsite" required/>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label class="control-label col-md-6">Job Title</label>
-                                                    <input type="text" class="form-control" placeholder="Job title..." id="companyJobTitle" />
+                                                    <input type="text" class="form-control" placeholder="Job title..." id="companyJobTitle" required/>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -185,7 +185,7 @@
                                                         <div class="input-group-addon">
                                                             <i class="fa fa-calendar"></i>
                                                         </div>
-                                                        <input type="text" class="form-control pull-right" id="startDate">
+                                                        <input type="text" class="form-control pull-right" id="startDate"required>
                                                     </div>
 
                                                 </div>
@@ -195,7 +195,7 @@
                                                         <div class="input-group-addon">
                                                             <i class="fa fa-calendar"></i>
                                                         </div>
-                                                        <input type="text" class="form-control pull-right col-md-6" id="stopDate">
+                                                        <input type="text" class="form-control pull-right col-md-6" id="stopDate"required>
                                                     </div>
 
                                                 </div>
@@ -219,16 +219,16 @@
                                                         <div class="row">
                                                             <div class="form-group col-md-6">
                                                                 <label class="control-label  col-md-6">Full Name</label>
-                                                                <input type="text" class="form-control" placeholder="Full Name..." id="refeFullName" />
+                                                                <input type="text" class="form-control" placeholder="Full Name..." id="refeFullName"required />
                                                             </div>
                                                             <div class="form-group col-md-3">
                                                                 <label class="control-label col-md-12">Job Title</label>
-                                                                <input type="text" class="form-control" placeholder="Job Title..." id="refeJobTitle" />
+                                                                <input type="text" class="form-control" placeholder="Job Title..." id="refeJobTitle" required/>
                                                             </div>
                                                             <div class="form-group col-md-3">
                                                                 <label class="control-label  col-md-12">Relationship</label>
                                                                 <div class="form-group">
-                                                                    <select class="form-control select2" id="refeRelationship">
+                                                                    <select class="form-control select2" id="refeRelationship" required>
                                                                         <option value="Superior">Superior</option>
                                                                         <option value="Peer">Peer</option>
                                                                         <option value="Subordinate">Subordinate</option>
@@ -241,11 +241,11 @@
                                                         <div class="row">
                                                             <div class="form-group col-md-6">
                                                                 <label class="control-label  col-md-6">Email</label>
-                                                                <input type="text" class="form-control" placeholder="Email..." id="refeEmail" />
+                                                                <input type="text" class="form-control" placeholder="Email..." id="refeEmail"required />
                                                             </div>
                                                             <div class="form-group col-md-6">
                                                                 <label class="control-label  col-md-6">Phone Number</label>
-                                                                <input type="text" class="form-control" placeholder="Phone Number..." id="refePhoneNumber" />
+                                                                <input type="text" class="form-control" placeholder="Phone Number..." id="refePhoneNumber"required />
                                                             </div>
                                                         </div>
 
