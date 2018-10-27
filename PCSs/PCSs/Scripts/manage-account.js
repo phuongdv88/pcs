@@ -204,6 +204,7 @@ function _add() {
             alert(errorMessage.responseText);
         }
     });
+    return false;
 }
 
 function _edit() {
@@ -233,6 +234,7 @@ function _edit() {
             alert(errorMessage.responseText);
         }
     });
+    return false;
 }
 
 function getProfile() {
@@ -279,6 +281,7 @@ function editProfile() {
             alert(errorMessage.responseText);
         }
     });
+    return false;
 }
 
 function updatePassword() {
@@ -305,4 +308,5 @@ function updatePassword() {
             alert(errorMessage.responseText);
         }
     });
+    return false;
 }
