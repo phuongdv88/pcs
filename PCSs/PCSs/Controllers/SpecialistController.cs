@@ -16,6 +16,23 @@ namespace PCSs.Controllers
     {
         private PCSEntities db = new PCSEntities();
 
+        // Get: Specialist
+
+        public ActionResult ManageSpecialistAccount(long? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Error", "Error");
+            }
+            ViewBag.Specialist = id;
+            var specialist = db.Specialists.FirstOrDefault(s => s.SpecialistId == id);
+            if (specialist != null)
+            {
+                ViewBag.Title = specialist.FirstName + " " + specialist.MiddleName + " " + specialist.LastName;
+            }
+            return View();
+        }
+
         // GET: Specialists
         public async Task<ActionResult> Index()
         {

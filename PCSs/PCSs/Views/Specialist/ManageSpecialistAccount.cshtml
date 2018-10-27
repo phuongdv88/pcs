@@ -1,8 +1,6 @@
 ﻿@{
     Layout = null;
 }
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -167,10 +165,10 @@
                 </a>
 
 
-                <a href="#report-management" data-toggle="tab" id="bs-report-management">
-                    <div class="col-md-12 col-sm-12 report-management item">
+                <a href="#task-management" data-toggle="tab" id="bs-task-management">
+                    <div class="col-md-12 col-sm-12 task-management item">
                         <img src="~/Content/Image/iconreport.png" />
-                        Report
+                        My Task
                     </div>
                 </a>
 
@@ -235,7 +233,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="report-management" class="tab-pane fade in">
+                <div id="task-management" class="tab-pane fade in">
                     <!--chart-->
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class=" box box-success barchart">
@@ -283,7 +281,7 @@
                                 <div class="col-md-12 col-sm-12 col-xs-12">
                                     <div class="box">
                                         <div class="box-header">
-                                            <h3 class="box-title">Report</h3>
+                                            <h3 class="box-title">My Task</h3>
                                             <div>
                                                 <button type="button" class="btn btn-primary btn-lg" id="btnRefreshReport" title="Refresh" onclick="return _getAllCandidateReport(@ViewBag.RecruiterId);"><span class="glyphicon glyphicon-refresh"></span></button>
                                             </div>
@@ -327,68 +325,6 @@
                 </div>
             </div>
 
-            <!-- New Candidate Modal -->
-            <div class="modal fade" id="newCandidateModal" tabindex="-1" role="dialog" aria-labelledby="newCandidateModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg" style="position:unset">
-                    <div class="modal-content" style="position:unset">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                            <h4 class="modal-title" id="newCandidateModalLabel">Create New Candidate</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div id="candidateId" hidden></div>
-                            @Html.Label("Candidate's Name")
-                            <br />
-                            <form id="formNewEditCandidate" onsubmit=" _add(); return false;">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <input type="text" id="firstName" placeholder="First Name" required>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <input type="text" id="middleName" placeholder="Middle Name" required>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <input type="text" id="lastName" placeholder="Last Name" required>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label for="Name">Email</label>
-                                        <input type="email" class="form-control" id="email" placeholder="Email" required>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label for="Name">Phone number</label>
-                                        <input type="text" class="form-control" id="phoneNumber" maxlength="11" pattern="^[0-9\-\+]{9,15}$" placeholder="Phone Number" required>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label for="Name">Job Title</label>
-                                        <input type="text" class="form-control" id="jobTitle" placeholder="Job Title" required>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label>Job Level</label>
-                                        <div class="form-group">
-                                            <select class="form-control select2" id="jobLevel" required>
-                                                <option value="Fresher">Fresher</option>
-                                                <option value="Junior">Junior</option>
-                                                <option value="Senior">Senior</option>
-                                                <option value="Manager">Manager</option>
-                                                <option value="Higher">Higher</option>s
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary" id="btnAdd">Add</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <!-- Candidate's information Modal -->
             <div class="modal fade" id="candiateInfoModal" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-lg" style="position:unset">
@@ -439,7 +375,7 @@
     <script src="~/Content/Js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="~/Content/Js/demo.js"></script>
-    <script src="~/Scripts/manage-account.js"></script>
+    <script src="~/Scripts/manage-specialist-account.js"></script>
     <!--chart-->
     <script src="~/Scripts/Chart.js"></script>
 

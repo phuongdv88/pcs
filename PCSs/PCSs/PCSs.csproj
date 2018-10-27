@@ -2317,6 +2317,7 @@
     <Content Include="Views\ReferenceInfo\Index.cshtml" />
     <Content Include="Views\Client\ManageAccount.cshtml" />
     <Content Include="Views\Candidate\EditProfile.cshtml" />
+    <Content Include="Views\Specialist\ManageSpecialistAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
