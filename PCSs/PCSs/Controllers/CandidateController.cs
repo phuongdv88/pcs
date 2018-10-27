@@ -27,7 +27,8 @@ namespace PCSs.Controllers
         {
             if (userLoginId == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Error", "Error");
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var can = db.Candidates.FirstOrDefault(s => s.UserLoginId == userLoginId);
             if (can == null)
@@ -71,6 +72,7 @@ namespace PCSs.Controllers
             can.JobLevel = candidate.JobLevel;
             can.JobTitle = candidate.JobTitle;
             can.IDNumber = candidate.IDNumber;
+            can.Status = "Ready";
             if (ModelState.IsValid)
             {
                 db.Entry(can).State = EntityState.Modified;

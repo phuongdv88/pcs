@@ -17,8 +17,12 @@ namespace PCSs.Controllers
     {
         private PCSEntities db = new PCSEntities();
         // GET: Client Manager
-        public ActionResult ManageAccount(long id)
+        public ActionResult ManageAccount(long? id)
         {
+            if(id == null)
+            {
+                return RedirectToAction("Error", "Error");
+            }
             ViewBag.RecruiterId = id;
             var recruiter = db.Recruiters.FirstOrDefault(s => s.RecruiterId == id);
             if (recruiter != null)
@@ -36,14 +40,14 @@ namespace PCSs.Controllers
         {
             //if (recruiterId == null)
             //    return Json(new { msg = "Can't find user id" }, JsonRequestBehavior.AllowGet);
-            var result = Json(db.Candidates.Where(s => s.RecruiterId == id).OrderBy(s => s.CandidateId), JsonRequestBehavior.AllowGet);
+            var result = Json(db.Candidates.Where(s => s.RecruiterId == id).OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
             return result;
         }
         public JsonResult GetAllCandidateCompleted(long id)
         {
             //if (recruiterId == null)
             //    return Json(new { msg = "Can't find user id" }, JsonRequestBehavior.AllowGet);
-            var result = Json(db.Candidates.Where(s => s.RecruiterId == id && s.Status == "Completed").OrderBy(s => s.CandidateId), JsonRequestBehavior.AllowGet);
+            var result = Json(db.Candidates.Where(s => s.RecruiterId == id && (s.Status == "Completed" || s.Status == "Closed")).OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
             return result;
         }
 
@@ -156,6 +160,27 @@ namespace PCSs.Controllers
             return Json(recruiter, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult GetReportForChart()
+        {
+            long recruitID = -1;
+            if (!long.TryParse(Session["RecruiterId"].ToString(), out recruitID))
+            {
+                return Json(new { msg = "Error: Can't get recruiter's profile" }, JsonRequestBehavior.AllowGet);
+            }
+            string registered = "";
+            string completed = "";
+            // get register by month
+            for(int i = 1; i <= 12; i++)
+            {
+                registered += db.Candidates.Count(s => (s.RecruiterId == recruitID && s.CreatedTime.Month == i)).ToString() + ',';
+                completed += db.Candidates.Count(s => (s.RecruiterId == recruitID && s.CompleteTime != null && s.CompleteTime.Value.Month == i && (s.Status == "Completed" || s.Status == "Closed"))).ToString() + ',';
+            }
+            registered = registered.Substring(0, registered.Length - 1);
+            completed = completed.Substring(0, completed.Length - 1);
+            var rs = new { RegisterArray = registered, CompleteArray = completed };
+            return Json(rs, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult UpdateRecruiterProfile(Recruiter newRecruiter)
         {
             long recruitID = -1;
@@ -203,11 +228,15 @@ namespace PCSs.Controllers
                     if (isMatch)
                     {
                         //updatePassword 
+                        if(passwordTochange.NewPassword.Length == 0)
+                        {
+                            return Json(new { result = -1, msg = "New password is empty." }, JsonRequestBehavior.AllowGet);
+                        }
                         userLogin.SecurityStamp = Util.Helper.getRandomAlphaNumeric(100);
                         userLogin.PasswordHash = Util.Helper.createMD5Hash(passwordTochange.NewPassword, userLogin.UserName, userLogin.SecurityStamp);
                         db.Entry(userLogin).State = EntityState.Modified;
                         var rs = db.SaveChanges();
-                        return Json(new { result = rs, msg = "Update password successfully" }, JsonRequestBehavior.AllowGet);
+                        return Json(new { result = rs, msg = "Update password successfully." }, JsonRequestBehavior.AllowGet);
                     }
                     else
                     {

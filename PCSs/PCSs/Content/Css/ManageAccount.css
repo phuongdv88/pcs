@@ -131,11 +131,11 @@
   
 
 
-form{
+/*form{
 	padding: 4%;
 	/*width: 100%;*/
 	padding-left: 20px;
-}
+}*/
 
 .form-group{
 	overflow: hidden;
@@ -368,16 +368,12 @@ form{
 	width: 100%;
 	text-transform: capitalize;
 }
-.barchart {
-    width: 50%;
-}   
+
 @media (max-width: 1200px){
 	.container{
 		width: 100%;
 	}
-    .barchart {
-        width: 50%;
-    }
+
 }
 
 @media (max-width: 991px){
@@ -393,9 +389,7 @@ form{
 	.form-group .form-control{
 	    width: 55%;
 	}
-    .barchart {
-        width: 50%;
-    }
+
 }
 
 @media (max-width: 767px){

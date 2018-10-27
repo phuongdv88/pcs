@@ -64,7 +64,7 @@
                     <i class="fa fa-gears"></i>
                 </a>
                 <div class="dropdown-content sidenav">
-                    <a href="#" data-toggle="modal" data-target="#changeProfileModal" onclick="return getProfile()">
+                    <a href="#" data-toggle="modal" onclick="return getProfile();">
                         <b>
                             <i class="fa fa-user"></i> Change profile
                         </b>
@@ -84,137 +84,91 @@
                     </a>
                 </div>
             </div>
-        
+            <!-- form edit pass -->
+            <div class="modal fade" id="changePassModal" role="dialog" tabindex="-1">
+                <div class="modal-dialog" style="position:unset">
 
-
-
-            <!--<div id="mySidenav" class="sidenav">
-        
-            <a href="#" data-toggle="modal" data-target="#changeProfileModal" onclick="return getProfile()">
-                <b>
-                    <i class="fa fa-user"></i> Change profile
-                </b>
-            </a>
-
-            <a href="#" data-toggle="modal" data-target="#changePassModal">
-
-                <b>
-                    <i class="fa fa-edit"></i>Change Password
-                </b>
-            </a>
-
-            <a href=@Url.Action("Login", "Home")>
-                <b>
-                    <i class="glyphicon glyphicon-log-out"></i>Log out
-                </b>
-            </a>
-
-
-        </div>-->
-        <!-- form edit pass -->
-        <div class="modal fade" id="changePassModal" role="dialog" tabindex="-1">
-            <div class="modal-dialog" style="position:unset">
-
-                <!-- Modal content-->
-                <div class="modal-content" style="width: 100%;padding: 2em 2em 0 2em">
-                    <div class="modal-header" style="padding-left: 0px;">
-                        <h4>Change PassWord</h4>
-                    </div>
-                    <form onsubmit="return updatePassword();">
-                        <div class="modal-body form-edit">
-                            <label>Old Password</label><br />
-                            <input type="password" id="oldPassword" name="passwordold" placeholder="Password old.." required>
-                            <label>New Password</label><br />
-                            <input type="password" id="newPassword" name="passwordnew" placeholder="Password new.." required>
-                            <label>Confirm Password</label><br />
-                            <input type="password" id="" name="confirmPassword" placeholder="Confirm password.." required>
-                            <div id="changePasswordMessage"></div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary" id="btnEditPass">Save</button>
-                            </div>
+                    <!-- Modal content-->
+                    <div class="modal-content" style="width: 100%;padding: 2em 2em 0 2em">
+                        <div class="modal-header" style="padding-left: 0px;">
+                            <h4>Change PassWord</h4>
                         </div>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-        <!-- end form edit pass -->
-        <!-- form edit information -->
-        <div class="modal fade" id="changeProfileModal" role="dialog" tabindex="-1">
-            <div class="modal-dialog modal-lg" style="position:unset">
-                <!-- Modal content-->
-                <div class="modal-content" style="width: 100%;padding:  2em 2em 0 2em">
-                    <div class="modal-header" style="padding-left: 0px;">
-                        <h4 class="modal-title">Change Profile</h4>
-                    </div>
-                    <form onsubmit="return editProfile();">
-
-                        <div class="modal-body form-edit">
-                            <label>First name</label><br />
-                            <input type="text" id="recruiterFirstName" placeholder="Firstname.." required>
-                            <label>Middle name</label><br />
-                            <input type="text" id="recruiterMiddleName" placeholder="Firstname.." required>
-                            <label>Last name</label><br />
-                            <input type="text" id="recruiterLastName" placeholder="Lastname.." required>
-                            <label> Email</label><br />
-                            <input type="text" id="recruiterEmail" placeholder="Email.." required>
-                            <label>Phone number</label><br />
-                            <input type="number" id="recruiterPhoneNumber" pattern="[0][0-9]{7-9}" placeholder="Phone number.." required>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary" id="btnEditProfile">Save</button>
-                                @*<input />*@
+                        <form onsubmit="updatePassword(); return false;">
+                            <div class="modal-body form-edit">
+                                <input id="UserName" name="UserName" hidden>
+                                <label>Old Password</label><br />
+                                <input type="password" id="oldPassword" placeholder="Password old.." required>
+                                <label>New Password</label><br />
+                                <input type="password" id="newPassword" placeholder="Password.." required>
+                                <label>Confirm Password</label><br />
+                                <input type="password" id="confirmPassword" placeholder="Confirm password.." required>
+                                <div id="changePasswordMessage"></div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary" id="btnEditPass">Save</button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
+                    </div>
 
-                    </form>
                 </div>
             </div>
+            <!-- end form edit pass -->
+            <!-- form edit information -->
+            <div class="modal fade" id="changeProfileModal" role="dialog" tabindex="-1">
+                <div class="modal-dialog modal-lg" style="position:unset">
+                    <!-- Modal content-->
+                    <div class="modal-content" style="width: 100%;padding:  2em 2em 0 2em">
+                        <div class="modal-header" style="padding-left: 0px;">
+                            <h4 class="modal-title">Change Profile</h4>
+                        </div>
+                        <form onsubmit="editProfile(); return false;">
+
+                            <div class="modal-body form-edit">
+                                <label>First name</label><br />
+                                <input type="text" id="recruiterFirstName" placeholder="Firstname.." required>
+                                <label>Middle name</label><br />
+                                <input type="text" id="recruiterMiddleName" placeholder="Firstname.." required>
+                                <label>Last name</label><br />
+                                <input type="text" id="recruiterLastName" placeholder="Lastname.." required>
+                                <label> Email</label><br />
+                                <input type="email" id="recruiterEmail" placeholder="Email.." required>
+                                <label>Phone number</label><br />
+                                <input type="text" id="recruiterPhoneNumber" pattern="^[0-9\-\+]{9,15}$" placeholder="Phone number.." required>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary" id="btnEditProfile">Save</button>
+                                    @*<input />*@
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- end form edit information -->
+
+            <div style="float: right;padding-top: 13px;height: 100%;width:auto">
+                <!-- The user image in the navbar-->
+                <i class="fa fa-user" style="color:silver" id="welcomeUser"> Welcome @ViewBag.Title</i>
+                <span></span>
+            </div>
         </div>
-
-        <!-- end form edit information -->
-        <script>
-
-
-            //function openNav() {
-            //    document.getElementById("mySidenav").style.width = "250px";
-            //}
-
-            //function closeNav() {
-            //    document.getElementById("mySidenav").style.width = "0";
-            //}
-
-            //$(document.body).click(function (e) {
-            //    var a = document.getElementById("mySidenav").clientWidth;
-            //    if (a == 250) {
-
-            //        document.getElementById("mySidenav").style.width = "0";
-            //    }
-
-            //});
-        </script>
-        <!-- end sidebar -->
-        <div style="float: right;padding-top: 13px;height: 100%;width:auto">
-            <!-- The user image in the navbar-->
-            <i class="fa fa-user" style="color:silver"  id="welcomeUser"> Welcome @ViewBag.Title</i>
-            <span></span>
-        </div>
-    </div>
     </div>
     <!-- body-->
     <div class=" col-md-12 col-sm-12 col-xs-12 clearPanddingMargin" style="display:flex;min-height:890px">
         <div class=" col-md-2 col-sm-2 col-xs-12  slide-bar" style="padding:0px">
             <div class="col-md-12  col-sm-12 col-xs-12 list">
 
-                <a href="#candidate-manager" data-toggle="tab">
-                    <div class="col-md-12 col-sm-12 candidate-manager item">
+                <a href="#candidate-management" data-toggle="tab">
+                    <div class="col-md-12 col-sm-12 candidate-management item">
                         <img src="~/Content/Image/iconmanager.png" />
                         Candidate Management
                     </div>
                 </a>
 
 
-                <a href="#report-manager" data-toggle="tab">
-                    <div class="col-md-12 col-sm-12 Report-manager item">
+                <a href="#report-management" data-toggle="tab" id="bs-report-management">
+                    <div class="col-md-12 col-sm-12 report-management item">
                         <img src="~/Content/Image/iconreport.png" />
                         Report
                     </div>
@@ -225,7 +179,7 @@
         <div class=" col-md-10 col-sm-10 col-xs-12  " style="padding-top:1em">
 
             <div class="tab-content">
-                <div id="candidate-manager" class="tab-pane fade in active">
+                <div id="candidate-management" class="tab-pane fade in active">
                     <div class="wrapper">
                         <!-- Content Wrapper. Contains page content -->
                         <div class="content-wrapper">
@@ -236,8 +190,8 @@
                                         <div class="box-header">
                                             <h3 class="box-title">Candidate Information</h3>
                                             <div>
-                                                <button type="button" class="btn btn-primary btn-lg" id="btnRefresh" onclick="return _getAllCandidate(@ViewBag.RecruiterId);"><span class="glyphicon glyphicon-refresh"></span></button>
-                                                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newCandidateModal"><span class="glyphicon glyphicon-plus-sign"></span></button>
+                                                <button type="button" class="btn btn-primary btn-lg" id="btnRefresh" title="Refresh" onclick="return _getAllCandidate(@ViewBag.RecruiterId);"><span class="glyphicon glyphicon-refresh"></span></button>
+                                                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" title="Create new candidate" data-target="#newCandidateModal"><span class="glyphicon glyphicon-plus-sign"></span></button>
                                             </div>
                                         </div>
                                         <!-- /.box-header -->
@@ -253,7 +207,6 @@
                                                         <th>Start Date</th>
                                                         <th>Completed Date</th>
                                                         <th>Edit</th>
-                                                        <th>Detail</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="tbody"></tbody>
@@ -266,7 +219,6 @@
                                                         <th>Status</th>
                                                         <th>Start Date</th>
                                                         <th>Completed Date</th>
-                                                        <th>Detail</th>
                                                         <th>Edit</th>
                                                     </tr>
                                                 </tfoot>
@@ -283,30 +235,12 @@
                         </div>
                     </div>
                 </div>
-                <div id="report-manager" class="tab-pane fade in">
+                <div id="report-management" class="tab-pane fade in">
                     <!--chart-->
-                    <div class=" col-md-12">
-                        <a data-toggle="tab" href="#StatisticsByYear">
-                            <div class="col-md-3 col-sm-3" style="margin-right:1em;padding:0.6em;border:1px solid rgb(235, 189, 201);border-radius:5px">
-                                Statistics by Year
-                            </div>
-                        </a>
-                        <a data-toggle="tab" href="#StatisticsByMonth">
-                            <div class="col-md-3 col-sm-3" style="margin-right:1em;padding:0.6em;border:1px solid rgb(235, 189, 201);border-radius:5px">
-                                Statistics by Month
-                            </div>
-                        </a>
-                        <a data-toggle="tab" href="#StatisticsByWeek">
-                            <div class="col-md-3 col-sm-3" style="margin-right:1em;padding:0.6em;border:1px solid rgb(235, 189, 201);border-radius:5px">
-                                Statistics by Week
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-12 col-sm-12 col-xs-12" style="padding-top: 3em;">
-                        <div class=" box box-success barchart" @*style="width:50%"*@>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class=" box box-success barchart">
                             <div class="box-header with-border">
                                 <h3 id="textchart" class="box-title">Bar Chart</h3>
-
                                 <div class="box-tools pull-right">
                                     <button type="button" class="btn btn-box-tool" data-widget="collapse">
                                         <i class="fa fa-minus"></i>
@@ -351,7 +285,7 @@
                                         <div class="box-header">
                                             <h3 class="box-title">Report</h3>
                                             <div>
-                                                <button type="button" class="btn btn-primary btn-lg" id="btnRefreshReport" onclick="return _getAllCandidateReport(@ViewBag.RecruiterId);"><span class="glyphicon glyphicon-refresh"></span></button>
+                                                <button type="button" class="btn btn-primary btn-lg" id="btnRefreshReport" title="Refresh" onclick="return _getAllCandidateReport(@ViewBag.RecruiterId);"><span class="glyphicon glyphicon-refresh"></span></button>
                                             </div>
                                         </div>
                                         <!-- /.box-header -->
@@ -395,10 +329,6 @@
 
             <!-- New Candidate Modal -->
             <div class="modal fade" id="newCandidateModal" tabindex="-1" role="dialog" aria-labelledby="newCandidateModalLabel" aria-hidden="true">
-
-
-
-
                 <div class="modal-dialog modal-lg" style="position:unset">
                     <div class="modal-content" style="position:unset">
                         <div class="modal-header">
@@ -409,7 +339,7 @@
                             <div id="candidateId" hidden></div>
                             @Html.Label("Candidate's Name")
                             <br />
-                            <form id="formNewEditCandidate" onsubmit=" return _add()">
+                            <form id="formNewEditCandidate" onsubmit=" _add(); return false;">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <input type="text" id="firstName" placeholder="First Name" required>
@@ -424,12 +354,12 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="Name">Email</label>
-                                        <input type="text" class="form-control" id="email" placeholder="Email" required>
+                                        <input type="email" class="form-control" id="email" placeholder="Email" required>
                                     </div>
 
                                     <div class="col-md-6">
                                         <label for="Name">Phone number</label>
-                                        <input type="text" class="form-control" id="phoneNumber" maxlength="11" pattern="[0][0-9]{7-9}" placeholder="Phone Number" required>
+                                        <input type="text" class="form-control" id="phoneNumber" maxlength="11" pattern="^[0-9\-\+]{9,15}$" placeholder="Phone Number" required>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -453,9 +383,6 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-primary" id="btnAdd">Add</button>
-                                    @*<button type="submit" class="btn btn-primary" onsubmit="return _edit();" id="btnUpdate" style="display:none">Update</button>*@
-                                    @*<input type="submit" class="btn btn-primary" onclick="return _add();"  id="btnAdd" value="Add" />*@
-                                    @*<input type="submit" class="btn btn-primary" onclick="return _edit();" id="btnUpdate" style="display:none" value="Update"/>*@
                                 </div>
                             </form>
                         </div>
@@ -471,11 +398,7 @@
                             <h4 class="modal-title" id="infoCandidateModalLabel">Please email this content to Candidate</h4>
                         </div>
                         <div class="modal-body">
-                            @* <h2> This is login information which you can send to candidate via email to require to complete forms</h2>*@
                             <div><p style="margin-top:0pt; margin-bottom:8pt; text-align:justify; line-height:108%; font-size:12pt"><span style="font-family:Arial">Hi&nbsp;<span id="candidateName"></span></span><span style="font-family:Arial">,</span></p><p style="margin-top:0pt; margin-bottom:8pt; text-align:justify; line-height:108%; font-size:12pt"><span style="font-family:Arial">You have received this message because you </span><span style="font-family:Arial">are </span><span style="font-family:Arial">registered on</span><span style="font-family:Arial">&#xa0;</span><span style="font-family:Arial">Professional Checking System. Professional Checking System owned by SWILIFE is specialized in Employment Verification service. Our friendly, knowledgeable customer support team is ready to help ensure your Employment Verification go smoothly.</span></p><p style="margin-top:0pt; margin-bottom:8pt; text-align:justify; line-height:108%; font-size:13pt"><span style="font-family:Arial; font-size:12pt">Please login at: </span><a href="https://professionalcheckingsystem.com" style="text-decoration:none"><span style="font-family:Arial; font-size:12pt; text-decoration:underline; color:#0563c1">https://professionalcheckingsystem.com</span></a><span style="font-family:Arial; font-size:12pt"> and fill up all information </span><span style="font-family:Arial; font-size:12pt">fields</span><span style="font-family:Arial; font-size:12pt"> </span><span style="font-family:Arial; font-size:12pt">before <span id="lockoutDateUtc"></span></span><span style="font-family:Arial; font-size:12pt">&nbsp;to ensure smooth verification process.</span></p><p style="margin-top:0pt; margin-bottom:8pt; text-align:justify; line-height:108%; font-size:12pt"><span style="font-family:Arial">Use the following values when prompted to log in: </span></p><p style="margin-top:0pt; margin-bottom:8pt; text-indent:22.5pt; text-align:justify; line-height:108%; font-size:12pt"><span style="font-family:Arial">User Name:&nbsp;<span id="userNameInfo"></span></span></p><p style="margin-top:0pt; margin-bottom:8pt; text-indent:22.5pt; text-align:justify; line-height:108%; font-size:12pt"><span style="font-family:Arial">Password:&nbsp;<span id="passwordRaw"></span></span></p><p style="margin-top:0pt; margin-bottom:8pt; text-align:justify; line-height:108%; font-size:12pt"><span style="font-family:Arial; font-style:italic; text-decoration:underline">Note:</span><span style="font-family:Arial"> </span><span style="font-family:Arial">We only conduct Verification Process according to your company’s order which is allowed by candidates. If you don’t know about this proce</span><span style="font-family:Arial">ss, please contact your company. W</span><span style="font-family:Arial">e shall not </span><span style="font-family:Arial">hold</span><span style="font-family:Arial"> liable for any </span><span style="font-family:Arial">candidates’ claim</span><span style="font-family:Arial"> of </span><span style="font-family:Arial">collecting personal information without </span><span style="font-family:Arial">owner’s </span><span style="font-family:Arial">permission</span><span style="font-family:Arial">.</span><span style="font-family:Arial"> Finally, we ensur</span><span style="font-family:Arial">e hold all the information you supplied in complete confidence, and without </span><span style="font-family:Arial">your company</span><span style="font-family:Arial">’s consent in writing shall not be revealed any part to any other third parties, at any time, nor used for any purpose other than the performance </span><span style="font-family:Arial">in the</span><span style="font-family:Arial"> Agreement</span><span style="font-family:Arial"> we signed with your company</span><span style="font-family:Arial">.</span></p><p style="margin-top:0pt; margin-bottom:8pt; text-align:justify; line-height:108%; font-size:12pt"><span style="font-family:Arial">&#xa0;</span></p><p style="margin-top:0pt; margin-bottom:8pt; line-height:108%; font-size:12pt"><span style="font-family:Arial">SWILIFE JOINT STOCK COMPANY</span></p><p style="margin-top:0pt; margin-bottom:8pt; line-height:108%; font-size:12pt"><span style="font-family:Arial">No.12, 641 </span><span style="font-family:Arial">Lane, Pham Van Dong Street, Co Nhue 1 Ward, Bac Tu Liem District, Hanoi</span></p></div>
-                            @*<div>User Name:&nbsp;<span id="userNameInfo"></span></div>
-                                <div>Password:&nbsp;<span id="passwordRaw"></span></div>
-                                <div>Please update information before:&nbsp;<span id="lockoutDateUtc"></span></div>*@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
@@ -495,27 +418,10 @@
         <div class="row col-md-6 col-sm-6 col-xs-12 footerright">
             <i>
                 <img src="~/Content/Image/e-mail.png" style="filter:white;height:1em"> contact@swilife.com
-
             </i>
-
-
             <i class="fa fa-phone"> 02439942285</i>
-
             <i><img src="~/Content/Image/logo PCS trang.png" class="logo"></i>
-
-
         </div>
-        @*<div class="col-md-2 col-sm-12 col-xs-12">
-            <img src="~/Content/Image/e-mail.png" style="filter:white;height:1em"> contact@swilife.com
-        </div>
-        <div class="col-md-2 col-sm-12 col-xs-12">
-            <i class="fa fa-phone"></i>
-            02439942285
-        </div>
-        <div class="col-md-2 col-sm-12 col-xs-12">
-            <img src="~/Content/Image/logo PCS trang.png" class="logo">
-        </div>*@
-
     </div>
     <!-- ./wrapper -->
     <!-- jQuery 3 -->
@@ -543,102 +449,9 @@
             _setCurrentRecruitId(@ViewBag.RecruiterId);
             _getAllCandidate(@ViewBag.RecruiterId);
             _getAllCandidateReport(@ViewBag.RecruiterId);
+            setUserLoginName("@Session["UserName"].ToString()");
         })
     </script>
-    <script>
-        function chart() {
-
-            var areaChartData = {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                datasets: [
-                    {
-                        label: 'Electronics',
-                        fillColor: 'rgb(255, 51, 102)',
-                        strokeColor: 'rgb(255, 51, 102)',
-                        pointColor: 'rgb(255, 51, 102)',
-                        pointStrokeColor: '#c1c7d1',
-                        pointHighlightFill: '#fff',
-                        pointHighlightStroke: 'rgba(220,220,220,1)',
-                        data: [65, 59, 80, 81, 56, 55, 80]
-                    },
-                    {
-                        label: 'Digital Goods',
-                        fillColor: 'rgba(60,141,188,0.9)',
-                        strokeColor: 'rgba(60,141,188,0.8)',
-                        pointColor: '#3b8bba',
-                        pointStrokeColor: 'rgba(60,141,188,1)',
-                        pointHighlightFill: '#fff',
-                        pointHighlightStroke: 'rgba(60,141,188,1)',
-                        data: [28, 48, 40, 19, 86, 27, 90]
-                    }
-                ]
-            }
-            var barChartOptions = {
-                //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
-                scaleBeginAtZero: true,
-                //Boolean - Whether grid lines are shown across the chart
-                scaleShowGridLines: true,
-                //String - Colour of the grid lines
-                scaleGridLineColor: 'rgba(0,0,0,.05)',
-                //Number - Width of the grid lines
-                scaleGridLineWidth: 1,
-                //Boolean - Whether to show horizontal lines (except X axis)
-                scaleShowHorizontalLines: true,
-                //Boolean - Whether to show vertical lines (except Y axis)
-                scaleShowVerticalLines: true,
-                //Boolean - If there is a stroke on each bar
-                barShowStroke: true,
-                //Number - Pixel width of the bar stroke
-                barStrokeWidth: 2,
-                //Number - Spacing between each of the X value sets
-                barValueSpacing: 5,
-                //Number - Spacing between data sets within X values
-                barDatasetSpacing: 1,
-                //String - A legend template
-                legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
-                //Boolean - whether to make the chart responsive
-                responsive: true,
-                maintainAspectRatio: true
-            }
-            //-------------
-
-            var barChartCanvas = $('#barChart').get(0).getContext('2d')
-            var barChart = new Chart(barChartCanvas)
-            var barChartData = areaChartData
-            barChartData.datasets[1].fillColor = '#3366ff'
-            barChartData.datasets[1].strokeColor = '#3366ff'
-            barChartData.datasets[1].pointColor = '#3366ff'
-            barChartOptions.datasetFill = false
-            barChart.Bar(barChartData, barChartOptions)
-
-        }
-
-
-        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-            var target = $(e.target).attr("href") // activated tab
-
-            switch (target) {
-
-                case "#report-manager":
-                    document.getElementById("textchart").innerHTML = "Statistics By Year"
-                    chart();
-                    break;
-                case "#StatisticsByYear":
-                    document.getElementById("textchart").innerHTML = "Statistics By Year"
-                    chart();
-                    break;
-                case "#StatisticsByMonth":
-                    document.getElementById("textchart").innerHTML = "Statistics By Month"
-                    chart();
-                    break;
-                case "#StatisticsByWeek":
-                    document.getElementById("textchart").innerHTML = "Statistics By Week"
-                    chart();
-                    break;
-            }
-        })
-    </script>
-
 
 </body>
 </html>
