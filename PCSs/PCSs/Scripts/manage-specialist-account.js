@@ -1,28 +1,26 @@
-﻿$(document).ready(function () {
-    //_getAllCandidate();
+﻿var currentSpecialistId = -1;
+uploadFileHtml = $("#uploadFileModal").html();
+changePasswordModalHtml = $("#changePassModal").html();
+
+$(document).ready(function () {
     $('#bs-task-management').on('shown.bs.tab', function () {
         generateChart();
         //$('#task-management').off();
     })
+    // reset modal when hidden them
+    $("#uploadFileModal").on('hidden.bs.modal', function () {
+        $("#uploadFileModal").html(uploadFileHtml);
+    })
+
+    $("#changePassModal").on('hidden.bs.modal', function () {
+        $("#changePassModal").html(changePasswordModalHtml);
+    })
+
+    Number.prototype.padLeft = function (base, chr) {
+        var len = (String(base || 10).length - String(this).length) + 1;
+        return len > 0 ? new Array(len).join(chr || '0') + this : this;
+    }
 });
-var currentRecruiterId = -1;
-
-modalHtml = $("#newCandidateModal").html();
-changePasswordModalHtml = $("#changePassModal").html();
-// reset modal when hidden them
-$("#newCandidateModal").on('hidden.bs.modal', function(){
-    $("#newCandidateModal").html(modalHtml);
-})
-
-$("#changePassModal").on('hidden.bs.modal', function () {
-    $("#changePassModal").html(changePasswordModalHtml);
-})
-
-Number.prototype.padLeft = function (base, chr) {
-    var len = (String(base || 10).length - String(this).length) + 1;
-    return len > 0 ? new Array(len).join(chr || '0') + this : this;
-}
-
 
 function formatDate(inputStr) {
     var d = new Date(parseInt(inputStr));
@@ -35,15 +33,15 @@ function formatDate(inputStr) {
     return dformat;
 }
 function _setCurrentRecruitId(id) {
-    currentRecruiterId = id;
+    currentSpecialistId = id;
 }
 
 function setUserLoginName(userName) {
     $("#UserName").val(userName);
 }
-function _getAllCandidate(id) {
+function getAvailableCandidate() {
     $.ajax({
-        url: '/Client/GetAllCandidate/' + id,
+        url: '/Specialist/GetAvailableCandidate',
         //data: '{id: ' + id + ' }',
         type: "GET",
         contentType: "application/json; charset=utf-8",
@@ -68,7 +66,7 @@ function _getAllCandidate(id) {
                 else {
                     html += '<td>' + formatDate(item.CompleteTime.substr(6)) + '</td>';
                 }
-                html += '<td><a href="#" onClick="return _getCandidateById(' + item.CandidateId + ')" class="fas fa-pencil-alt" title="View detail"></a></td>';
+                html += '<td><a href="#" onClick="return getUploadFileForm(' + item.CandidateId + ')" class="fas fa-pencil-alt" title="View detail"></a></td>';
                 //html += '<td><a href="#" onClick="return _getCandidateInfoById(' + item.UserLoginId + ' , \'' + candidateName + '\')" class="far fa-calendar-alt"></a></td>';
                 html += '</tr>';
             });
@@ -83,9 +81,38 @@ function _getAllCandidate(id) {
     return false;
 }
 
-function _getAllCandidateReport(id) {
+function getUploadFileForm(candidateId) {
+    $("#candidateId").val(candidateId);
+    $('#uploadFileModal').modal('show');
+    return false;
+}
+
+function uploadFile() {
+    var formdata = new FormData(); //FormData object
+    var fileInput = document.getElementById('fileInput');
+    //Iterating through each files selected in fileInput
+    for (i = 0; i < fileInput.files.length; i++) {
+        //Appending each file to FormData object
+        formdata.append(fileInput.files[i].name, fileInput.files[i]);
+    }
+    //Creating an XMLHttpRequest and sending
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/Specialist/UploadReport/' + $("#candidateId").val());
+    xhr.send(formdata);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            alert(xhr.responseText);
+            $('#uploadFileModal').modal('hide');
+        }
+    }
+
+    //todo: change state of Candidate to Complete of Close
+    return false;
+}
+
+function getAllCandidateCompleted() {
     $.ajax({
-        url: '/Client/GetAllCandidateCompleted/' + id,
+        url: '/Specialist/GetAllCandidateCompleted',
         //data: '{id: ' + id + ' }',
         type: "GET",
         contentType: "application/json; charset=utf-8",
@@ -124,7 +151,7 @@ function _getAllCandidateReport(id) {
 
 function _getCandidateReportById(id) {
     $.ajax({
-        url: '/Client/GetCandidateReport/' + id,
+        url: '/Specialist/GetCandidateReport/' + id,
         type: 'Get',
         contentType: "json",
         success: function (result) {
@@ -141,7 +168,7 @@ function _getCandidateReportById(id) {
 function _getCandidateById(id) {
     modalHtml = $("#newCandidateModal").html();
     $.ajax({
-        url: '/Client/GetCandidate/' + id,
+        url: '/Specialist/GetCandidate/' + id,
         type: 'Get',
         contentType: "json",
         success: function (result) {
@@ -166,7 +193,7 @@ function _getCandidateById(id) {
 /// generate information that is including user name and password of candidate
 //function _getCandidateInfoById(id, candidateName) {
 //    $.ajax({
-//        url: '/Client/GetCandidateInfo/' + id,
+//        url: '/Specialist/GetCandidateInfo/' + id,
 //        type: 'Get',
 //        contentType: "json",
 //        success: function (result) {
@@ -188,77 +215,47 @@ function _getCandidateById(id) {
 //    return false;
 //}
 
-function _add() {
-    var obj = {
-        CandidateId:'0',
-        FirstName: $('#firstName').val(),
-        MiddleName: $('#middleName').val(),
-        LastName: $('#lastName').val(),
-        Email: $('#email').val(),
-        PhoneNumber: $('#phoneNumber').val(),
-        JobTitle: $('#jobTitle').val(),
-        JobLevel: $('#jobLevel').val(),
-        CurrentRecruiterId: currentRecruiterId
-    }
+//function _edit() {
+//    var obj = {
+//        CandidateId: $('#candidateId').val(),
+//        FirstName: $('#firstName').val(),
+//        MiddleName: $('#middleName').val(),
+//        LastName: $('#lastName').val(),
+//        Email: $('#email').val(),
+//        PhoneNumber: $('#phoneNumber').val(),
+//        JobTitle: $('#jobTitle').val(),
+//        JobLevel: $('#jobLevel').val(),
+//        CurrentSpecialistId: currentSpecialistId
+//    }
 
-    $.ajax({
-        url: '/Client/CreateCandidate',
-        data: JSON.stringify(obj),
-        type: 'POST',
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (result) {
-            $('#btnRefresh').click();
-            $("#newCandidateModal").modal('hide');
-        },
-        error: function (errorMessage) {
-            alert(errorMessage.responseText);
-        }
-    });
-    return false;
-}
-
-function _edit() {
-    var obj = {
-        CandidateId: $('#candidateId').val(),
-        FirstName: $('#firstName').val(),
-        MiddleName: $('#middleName').val(),
-        LastName: $('#lastName').val(),
-        Email: $('#email').val(),
-        PhoneNumber: $('#phoneNumber').val(),
-        JobTitle: $('#jobTitle').val(),
-        JobLevel: $('#jobLevel').val(),
-        CurrentRecruiterId: currentRecruiterId
-    }
-
-    $.ajax({
-        url: '/Client/UpdateCandidate',
-        data: JSON.stringify(obj),
-        type: 'POST',
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (result) {
-            $('#btnRefresh').click();
-            $("#newCandidateModal").modal('hide');
-        },
-        error: function (errorMessage) {
-            alert(errorMessage.responseText);
-        }
-    });
-    return false;
-}
+//    $.ajax({
+//        url: '/Specialist/UpdateCandidate',
+//        data: JSON.stringify(obj),
+//        type: 'POST',
+//        contentType: "application/json; charset=utf-8",
+//        dataType: "json",
+//        success: function (result) {
+//            $('#btnRefresh').click();
+//            $("#newCandidateModal").modal('hide');
+//        },
+//        error: function (errorMessage) {
+//            alert(errorMessage.responseText);
+//        }
+//    });
+//    return false;
+//}
 
 function getProfile() {
     $.ajax({
-        url: '/Client/GetRecruiterProfile',
+        url: '/Specialist/GetSpecialistProfile',
         type: 'Get',
         contentType: "json",
         success: function (result) {
-            $('#recruiterFirstName').val(result.FirstName);
-            $('#recruiterMiddleName').val(result.MiddleName);
-            $('#recruiterLastName').val(result.LastName);
-            $('#recruiterEmail').val(result.Email);
-            $('#recruiterPhoneNumber').val(result.PhoneNumber);
+            $('#specialistFirstName').val(result.FirstName);
+            $('#specialistMiddleName').val(result.MiddleName);
+            $('#specialistLastName').val(result.LastName);
+            $('#specialistEmail').val(result.Email);
+            $('#specialistPhoneNumber').val(result.PhoneNumber);
             $('#changeProfileModal').modal('show');
         },
         error: function (errorMessage) {
@@ -269,15 +266,15 @@ function getProfile() {
 
 function editProfile() {
     var obj = {
-        FirstName: $('#recruiterFirstName').val(),
-        MiddleName: $('#recruiterMiddleName').val(),
-        LastName: $('#recruiterLastName').val(),
-        Email: $('#recruiterEmail').val(),
-        PhoneNumber: $('#recruiterPhoneNumber').val(),
+        FirstName: $('#specialistFirstName').val(),
+        MiddleName: $('#specialistMiddleName').val(),
+        LastName: $('#specialistLastName').val(),
+        Email: $('#specialistEmail').val(),
+        PhoneNumber: $('#specialistPhoneNumber').val(),
     }
 
     $.ajax({
-        url: '/Client/UpdateRecruiterProfile',
+        url: '/Specialist/UpdateSpecialistProfile',
         data: JSON.stringify(obj),
         type: 'POST',
         contentType: "application/json; charset=utf-8",
@@ -302,7 +299,7 @@ function updatePassword() {
     }
 
     $.ajax({
-        url: '/Client/UpdatePassword',
+        url: '/Specialist/UpdatePassword',
         data: JSON.stringify(obj),
         type: 'POST',
         contentType: "application/json; charset=utf-8",
@@ -340,7 +337,7 @@ confirm_password.onkeyup = validateConfirmPassword;
 
 function generateChart() {
     $.ajax({
-        url: '/Client/GetReportForChart',
+        url: '/Specialist/GetReportForChart',
         type: 'Get',
         contentType: "json",
         success: function (rs) {

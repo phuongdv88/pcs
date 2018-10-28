@@ -50,8 +50,6 @@
     <!--Header menu-->
     <div class="row col-md-12 col-sm-12 col-xs-12  header" style="margin:0;padding:0">
         <div class="col-md-3 col-sm-3 col-xs-3 " style=" background-color: #464646;padding: 0px;height:100%;">
-            @*<img src="~/Content/Image/logo PCS.png" />*@
-            @*<img src="~/Content/Image/logo PCS trang.png" />*@
             <img src="~/Content/Image/logo PCS trang.png" style="height:100%" />
         </div>
         <div class="col-md-9 col-sm-9 col-xs-9 " style=" background-color: #464646;padding: 0px;height:100%">
@@ -85,7 +83,6 @@
             <!-- form edit pass -->
             <div class="modal fade" id="changePassModal" role="dialog" tabindex="-1">
                 <div class="modal-dialog" style="position:unset">
-
                     <!-- Modal content-->
                     <div class="modal-content" style="width: 100%;padding: 2em 2em 0 2em">
                         <div class="modal-header" style="padding-left: 0px;">
@@ -107,10 +104,29 @@
                             </div>
                         </form>
                     </div>
-
                 </div>
             </div>
             <!-- end form edit pass -->
+            <!-- form uploadFile -->
+            <div class="modal fade" id="uploadFileModal" role="dialog" tabindex="-1">
+                <div class="modal-dialog" style="position:unset">
+                    <!-- Modal content-->
+                    <div class="modal-content" style="width: 100%;padding: 2em 2em 0 2em">
+                        <div class="modal-header" style="padding-left: 0px;">
+                            <h4>Upload Report</h4>
+                        </div>
+                        <div class="modal-body form-edit">
+                            <input id="candidateId" name="candidateId" hidden>
+                            <!--Form upload File-->
+                            <input id="fileInput" type="file" accept="application/pdf">
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" id="btnUpload" onclick="uploadFile(); return false;">Upload file</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end form uploadFile -->
             <!-- form edit information -->
             <div class="modal fade" id="changeProfileModal" role="dialog" tabindex="-1">
                 <div class="modal-dialog modal-lg" style="position:unset">
@@ -123,15 +139,15 @@
 
                             <div class="modal-body form-edit">
                                 <label>First name</label><br />
-                                <input type="text" id="recruiterFirstName" placeholder="Firstname.." required>
+                                <input type="text" id="specialistFirstName" placeholder="Firstname.." required>
                                 <label>Middle name</label><br />
-                                <input type="text" id="recruiterMiddleName" placeholder="Firstname.." required>
+                                <input type="text" id="specialistMiddleName" placeholder="Firstname.." required>
                                 <label>Last name</label><br />
-                                <input type="text" id="recruiterLastName" placeholder="Lastname.." required>
+                                <input type="text" id="specialistLastName" placeholder="Lastname.." required>
                                 <label> Email</label><br />
-                                <input type="email" id="recruiterEmail" placeholder="Email.." required>
+                                <input type="email" id="specialistEmail" placeholder="Email.." required>
                                 <label>Phone number</label><br />
-                                <input type="text" id="recruiterPhoneNumber" pattern="^[0-9\-\+]{9,15}$" placeholder="Phone number.." required>
+                                <input type="text" id="specialistPhoneNumber" pattern="^[0-9\-\+]{9,15}$" placeholder="Phone number.." required>
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-primary" id="btnEditProfile">Save</button>
                                     @*<input />*@
@@ -188,7 +204,7 @@
                                         <div class="box-header">
                                             <h3 class="box-title">Candidate Information</h3>
                                             <div>
-                                                <button type="button" class="btn btn-primary btn-lg" id="btnRefresh" title="Refresh" onclick="return _getAllCandidate(@ViewBag.RecruiterId);"><span class="glyphicon glyphicon-refresh"></span></button>
+                                                <button type="button" class="btn btn-primary btn-lg" id="btnRefresh" title="Refresh" onclick="return _getAllCandidate(@ViewBag.SpecialistId);"><span class="glyphicon glyphicon-refresh"></span></button>
                                                 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" title="Create new candidate" data-target="#newCandidateModal"><span class="glyphicon glyphicon-plus-sign"></span></button>
                                             </div>
                                         </div>
@@ -204,7 +220,7 @@
                                                         <th>Status</th>
                                                         <th>Created Date</th>
                                                         <th>Completed Date</th>
-                                                        <th>Edit</th>
+                                                        <th>Actions</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="tbody"></tbody>
@@ -217,7 +233,7 @@
                                                         <th>Status</th>
                                                         <th>Created Date</th>
                                                         <th>Completed Date</th>
-                                                        <th>Edit</th>
+                                                        <th>Actions</th>
                                                     </tr>
                                                 </tfoot>
                                             </table>
@@ -283,7 +299,7 @@
                                         <div class="box-header">
                                             <h3 class="box-title">My Task</h3>
                                             <div>
-                                                <button type="button" class="btn btn-primary btn-lg" id="btnRefreshReport" title="Refresh" onclick="return _getAllCandidateReport(@ViewBag.RecruiterId);"><span class="glyphicon glyphicon-refresh"></span></button>
+                                                <button type="button" class="btn btn-primary btn-lg" id="btnRefreshReport" title="Refresh" onclick="return _getAllCandidateReport(@ViewBag.SpecialistId);"><span class="glyphicon glyphicon-refresh"></span></button>
                                             </div>
                                         </div>
                                         <!-- /.box-header -->
@@ -382,9 +398,9 @@
     <!-- page script -->
     <script>
         $(function () {
-            _setCurrentRecruitId(@ViewBag.RecruiterId);
-            _getAllCandidate(@ViewBag.RecruiterId);
-            _getAllCandidateReport(@ViewBag.RecruiterId);
+            _setCurrentRecruitId(@ViewBag.SpecialistId);
+            getAvailableCandidate();
+            getAllCandidateCompleted();
             setUserLoginName("@Session["UserName"].ToString()");
         })
     </script>

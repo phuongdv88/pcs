@@ -38,6 +38,7 @@
     <Property Name="IDSupply" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="UserLoginId" Type="Int64" Nullable="false" />
     <Property Name="PassportNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SpecialistId" Type="Int64" />
   </EntityType>
   <EntityType Name="Client">
     <Key>

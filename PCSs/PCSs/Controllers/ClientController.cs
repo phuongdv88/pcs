@@ -9,6 +9,8 @@ using System.Web;
 using System.Web.Mvc;
 using PCSs.Models;
 using System.Data.Entity.Migrations;
+using System.IO;
+using System.Net.Mime;
 
 namespace PCSs.Controllers
 {
@@ -54,7 +56,64 @@ namespace PCSs.Controllers
         public JsonResult GetCandidateReport(long id)
         {
             // return link file of Candidate report
-            return Json(new { link = "link_file_of_report" }, JsonRequestBehavior.AllowGet);
+            long recruitID = -1;
+            if (!long.TryParse(Session["RecruiterId"].ToString(), out recruitID))
+            {
+                return Json(new { rs = -1, msg = "Error: You don't have permittion to change this candidate" }, JsonRequestBehavior.AllowGet);
+            }
+            var candidate = db.Candidates.First(s => s.CandidateId == id && s.RecruiterId == recruitID);
+            if (candidate == null)
+            {
+                return Json(new { rs = -1, msg = "Error: You don't have permittion to view this candidate report" }, JsonRequestBehavior.AllowGet);
+            }
+            var attachment = db.AttachmentFiles.LastOrDefault(s => s.CandidateId == id);
+            if(attachment != null)
+            {
+                return Json(new { rs = 1, link = attachment.Link }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { rs = -1, msg = "Error: Can't find this candidate report" }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetCandidateReportPdf(long id)
+        {
+            // return link file of Candidate report
+            long recruitID = -1;
+            if (!long.TryParse(Session["RecruiterId"].ToString(), out recruitID))
+            {
+                return RedirectToAction("ErrorDontHavePermission", "Error");
+            }
+            var candidate = db.Candidates.FirstOrDefault(s => (s.CandidateId == id && s.RecruiterId == recruitID));
+            if (candidate == null)
+            {
+                return RedirectToAction("ErrorDontHavePermission", "Error");
+            }
+            try
+            {
+                var attachment = db.AttachmentFiles.Where(s => s.CandidateId == id).OrderByDescending(s=>s.AttachmentFileId).Take(1).Single();
+                if (attachment != null)
+                {
+                    byte[] filedata = System.IO.File.ReadAllBytes(attachment.Link);
+                    string contentType = MimeMapping.GetMimeMapping(attachment.Link);
+
+                    var cd = new System.Net.Mime.ContentDisposition
+                    {
+                        FileName = attachment.FileName,
+                        Inline = true,
+                    };
+
+                    Response.AppendHeader("Content-Disposition", cd.ToString());
+
+                    return File(filedata, contentType);
+                }
+
+                return RedirectToAction("Error", "Error");
+
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Error", "Error");
+            }
         }
         public JsonResult GetCandidate(long id)
         {
@@ -246,107 +305,8 @@ namespace PCSs.Controllers
             }
             return Json(new { result = -1, msg = "Can't get recruiter's profile" }, JsonRequestBehavior.AllowGet);
         }
-        // GET: Clients
-        public async Task<ActionResult> Index()
-        {
-            return View(await db.Clients.ToListAsync());
-        }
-
-        // GET: Clients/Details/5
-        public async Task<ActionResult> Details(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Client client = await db.Clients.FindAsync(id);
-            if (client == null)
-            {
-                return HttpNotFound();
-            }
-            return View(client);
-        }
-
-        // GET: Clients/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Clients/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ClientId,Name,TaxCode,Address,Website,Description,StartDate,StopDate,PackageValue")] Client client)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Clients.Add(client);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-
-            return View(client);
-        }
-
-        // GET: Clients/Edit/5
-        public async Task<ActionResult> Edit(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Client client = await db.Clients.FindAsync(id);
-            if (client == null)
-            {
-                return HttpNotFound();
-            }
-            return View(client);
-        }
-
-        // POST: Clients/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ClientId,Name,TaxCode,Address,Website,Description,StartDate,StopDate,PackageValue")] Client client)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(client).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            return View(client);
-        }
-
-        // GET: Clients/Delete/5
-        public async Task<ActionResult> Delete(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Client client = await db.Clients.FindAsync(id);
-            if (client == null)
-            {
-                return HttpNotFound();
-            }
-            return View(client);
-        }
-
-        // POST: Clients/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(long id)
-        {
-            Client client = await db.Clients.FindAsync(id);
-            db.Clients.Remove(client);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
-        }
-
+   
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)

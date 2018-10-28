@@ -1,28 +1,27 @@
-﻿$(document).ready(function () {
+﻿var currentRecruiterId = -1;
+
+modalHtml = $("#newCandidateModal").html();
+changePasswordModalHtml = $("#changePassModal").html();
+
+$(document).ready(function () {
     //_getAllCandidate();
     $('#bs-report-management').on('shown.bs.tab', function () {
         generateChart();
         //$('#report-management').off();
     })
+    // reset modal when hidden them
+    $("#newCandidateModal").on('hidden.bs.modal', function () {
+        $("#newCandidateModal").html(modalHtml);
+    })
+
+    $("#changePassModal").on('hidden.bs.modal', function () {
+        $("#changePassModal").html(changePasswordModalHtml);
+    })
+    Number.prototype.padLeft = function (base, chr) {
+        var len = (String(base || 10).length - String(this).length) + 1;
+        return len > 0 ? new Array(len).join(chr || '0') + this : this;
+    }
 });
-var currentRecruiterId = -1;
-
-modalHtml = $("#newCandidateModal").html();
-changePasswordModalHtml = $("#changePassModal").html();
-// reset modal when hidden them
-$("#newCandidateModal").on('hidden.bs.modal', function(){
-    $("#newCandidateModal").html(modalHtml);
-})
-
-$("#changePassModal").on('hidden.bs.modal', function () {
-    $("#changePassModal").html(changePasswordModalHtml);
-})
-
-Number.prototype.padLeft = function (base, chr) {
-    var len = (String(base || 10).length - String(this).length) + 1;
-    return len > 0 ? new Array(len).join(chr || '0') + this : this;
-}
-
 
 function formatDate(inputStr) {
     var d = new Date(parseInt(inputStr));
@@ -108,7 +107,7 @@ function _getAllCandidateReport(id) {
                 else {
                     html += '<td>' + formatDate(item.CompleteTime.substr(6)) + '</td>';
                 }
-                html += '<td><a href="#" onClick="return _getCandidateReportById(' + item.UserLoginId + ')" class="far fa-calendar-alt"></a></td>';
+                html += '<td><a href="#" onClick="return _getCandidateReportById(' + item.CandidateId + ')" class="far fa-calendar-alt"></a></td>';
                 html += '</tr>';
             });
             $('#report tbody').html(html);
@@ -123,21 +122,9 @@ function _getAllCandidateReport(id) {
 }
 
 function _getCandidateReportById(id) {
-    $.ajax({
-        url: '/Client/GetCandidateReport/' + id,
-        type: 'Get',
-        contentType: "json",
-        success: function (result) {
-            //$('#candiateInfoModal').modal('show');
-            alert('Show info or view pdf file from' + result.link);
-        },
-        error: function (errorMessage) {
-            alert(errorMessage.responseText);
-        }
-    });
-    return false;
-}
 
+    window.open('/Client/GetCandidateReportPdf/' + id);
+}
 function _getCandidateById(id) {
     modalHtml = $("#newCandidateModal").html();
     $.ajax({
