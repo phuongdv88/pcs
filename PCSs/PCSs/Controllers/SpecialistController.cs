@@ -55,7 +55,9 @@ namespace PCSs.Controllers
             {
                 return Json(new { msg = "Error: Can't get specialist's profile" }, JsonRequestBehavior.AllowGet);
             }
-            var result = Json(db.Candidates.Where(s => (s.SpecialistId == specialistId && (s.Status == "Completed" || s.Status == "Closed"))).OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
+            //var result = Json(db.Candidates.Where(s => (s.SpecialistId == specialistId && (s.Status == "Completed" || s.Status == "Closed"))).OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
+            //todo: fortest
+            var result = Json(db.Candidates.Where(s => (s.SpecialistId == specialistId/*(s.Status == "Completed" || s.Status == "Closed")*/)).OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
             return result;
         }
 

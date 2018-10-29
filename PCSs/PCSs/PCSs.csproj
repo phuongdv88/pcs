@@ -205,6 +205,7 @@
     <Compile Include="Util\Helper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Css\admin.css" />
     <Content Include="Content\all.css" />
     <Content Include="Content\bootstrap-datepicker\dist\css\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap-datepicker\dist\css\bootstrap-datepicker.min.css" />
@@ -424,6 +425,7 @@
     <Content Include="Content\Css\Candidate.css" />
     <Content Include="Content\Css\error.css" />
     <Content Include="Content\Css\font-awesome.css" />
+    <Content Include="Content\Css\form.css" />
     <Content Include="Content\Css\Login.css" />
     <Content Include="Content\Css\logo.css" />
     <Content Include="Content\Css\ManageAccount.css" />
@@ -2320,6 +2322,7 @@
     <Content Include="Views\Client\ManageAccount.cshtml" />
     <Content Include="Views\Candidate\EditProfile.cshtml" />
     <Content Include="Views\Specialist\ManageSpecialistAccount.cshtml" />
+    <Content Include="Views\Admin\EditAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

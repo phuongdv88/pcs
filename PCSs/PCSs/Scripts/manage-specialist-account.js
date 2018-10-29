@@ -66,7 +66,7 @@ function getAvailableCandidate() {
                 else {
                     html += '<td>' + formatDate(item.CompleteTime.substr(6)) + '</td>';
                 }
-                html += '<td><a href="#" onClick="return getUploadFileForm(' + item.CandidateId + ')" class="fas fa-pencil-alt" title="View detail"></a></td>';
+                html += '<td><a href="#" onClick="return getUploadFileForm(' + item.CandidateId + ')"  title="Assign Me"><img src="/Content/Image/assignme.png" </a></td>';
                 //html += '<td><a href="#" onClick="return _getCandidateInfoById(' + item.UserLoginId + ' , \'' + candidateName + '\')" class="far fa-calendar-alt"></a></td>';
                 html += '</tr>';
             });
@@ -129,13 +129,19 @@ function getAllCandidateCompleted() {
                 html += '<td>' + candidateName + '</td>';
                 html += '<td>' + item.Email + '</td>';
                 html += '<td>' + item.PhoneNumber + '</td>';
+                html += '<td>' + item.Status + '</td>';
+                html += '<td>' + formatDate(item.CreatedTime.substr(6)) + '</td>';
+
                 if (item.CompleteTime == undefined) {
                     html += '<td>N/A</td>';
                 }
                 else {
                     html += '<td>' + formatDate(item.CompleteTime.substr(6)) + '</td>';
                 }
-                html += '<td><a href="#" onClick="return _getCandidateReportById(' + item.UserLoginId + ')" class="far fa-calendar-alt"></a></td>';
+                html += '<td>' + item.Email + '</td>';
+
+                html += '<td><a href="#" title="Send Email" onClick="return _getCandidateReportById(' + item.UserLoginId + ')"><img  src="/Content/Image/send.png" /></a> <a href="#"  title="Upload" onClick="return _getCandidateReportById(' + item.UserLoginId + ')" ><img id="iconUpload" src="/Content/Image/upload.png" /></a><a href="#" title="Process" onClick="return _getCandidateReportById(' + item.UserLoginId + ')" ><img id="process" src="/Content/Image/processing.png" /></a></td>';
+               
                 html += '</tr>';
             });
             $('#report tbody').html(html);

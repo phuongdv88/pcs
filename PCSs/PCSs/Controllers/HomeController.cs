@@ -64,7 +64,9 @@ namespace PCSs.Controllers
                     {
                         case UserRole.ADMIN:
                             //admin 
-                            return RedirectToAction("Index", "Admin");
+                            // return RedirectToAction("Index", "Admin");
+                            //to do test
+                            return RedirectToAction("EditAccount", "Admin");
                         case UserRole.CLIENT:
                             // Recruiter
                             return RedirectToAction("ManageAccount", "Client");
@@ -173,7 +175,9 @@ namespace PCSs.Controllers
                             {
                                 case UserRole.ADMIN:
                                     //admin 
-                                    return RedirectToAction("Index", "Admin");
+                                    // return RedirectToAction("Index", "Admin");
+                                    // to do test
+                                    return RedirectToAction("EditAccount", "Admin");
                                 case UserRole.CLIENT:
                                     // Recruiter
                                     var recruiterId = db.Recruiters.FirstOrDefault(s => s.UserLoginId == userInfo.UserLoginId).RecruiterId;

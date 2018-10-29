@@ -1,0 +1,67 @@
+.box {
+    position: relative;
+    border-radius: 3px;
+    background: #ffffff;
+    border-top: 3px solid #d2d6de;
+    margin-bottom: 20px;
+    width: 100%;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    height: auto;
+}
+.clearMaginPadding{
+    padding: 0px;
+    margin: 0px;
+}
+.tab-content.box{
+    border-top: 0px;
+    /* box-shadow: 0 0px 0px rgba(0,0,0,0.1); */
+}
+.status{
+    width: 100%;
+}
+.btnFinish{
+    /* margin-top: 7px; */
+    margin-left: 1em;
+    width: auto;
+    background-color: #3c8dbc !important;
+float: right;
+}
+.note{
+    width: 100%;
+    
+}
+.iconcheck{
+    color: red ;
+    display: contents;
+}
+.iconinfor{
+    color: red;
+    display: contents;
+}
+label{
+    min-width: 5em;
+    font-weight: 100;
+}
+input[type=password],[type=text],[type=number], select, textarea {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+
+input[type=submit] {
+    background-color: #3c8dbc;
+    color: white;
+    padding: 11px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}

@@ -1,0 +1,21 @@
+﻿#report img{
+    height:1.5em;
+    width:1.5em;
+    /*padding-right:2em;*/
+}
+#report a{
+    padding:0 0.5em 0 0.5em;
+    border-right:1px solid black;
+   
+}
+#candidates a {
+    margin-left: 1em;
+}
+#report #process {
+    padding-top: 2px;
+    padding-bottom: 3px;
+}
+#report #iconUpload {
+    padding-top: 2px;
+    padding-bottom: 3px;
+}
