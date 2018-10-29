@@ -16,6 +16,13 @@ namespace PCSs.Controllers
     {
         private PCSEntities db = new PCSEntities();
 
+        //editAccount
+        public ActionResult EditAccount()
+        {
+            return View();
+        }
+
+
         // GET: Admin
         public async Task<ActionResult> Index()
         {

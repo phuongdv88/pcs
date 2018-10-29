@@ -187,7 +187,6 @@ D:\tailieu\Swilife\pcs\PCSs\PCSs\obj\Debug\PCSs.csproj.CoreCompileInputs.cache
 D:\tailieu\Swilife\pcs\PCSs\PCSs\obj\Debug\PCSs.csproj.CopyComplete
 D:\tailieu\Swilife\pcs\PCSs\PCSs\obj\Debug\PCSs.dll
 D:\tailieu\Swilife\pcs\PCSs\PCSs\obj\Debug\PCSs.pdb
-D:\tailieu\Swilife\pcs\PCSs\PCSs\obj\Debug\PCSs.csprojAssemblyReference.cache
 F:\pcs\PCSs\PCSs\bin\roslyn\csc.exe
 F:\pcs\PCSs\PCSs\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 F:\pcs\PCSs\PCSs\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
@@ -234,3 +233,4 @@ F:\pcs\PCSs\PCSs\bin\Antlr3.Runtime.pdb
 F:\pcs\PCSs\PCSs\bin\Newtonsoft.Json.xml
 F:\pcs\PCSs\PCSs\obj\Debug\PCSs.dll
 F:\pcs\PCSs\PCSs\obj\Debug\PCSs.pdb
+D:\tailieu\Swilife\pcs\PCSs\PCSs\obj\Debug\PCSs.csprojAssemblyReference.cache
