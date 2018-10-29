@@ -43,9 +43,9 @@ namespace PCSs.Controllers
 
         public JsonResult GetAvailableCandidate()
         {
-            //var result = Json(db.Candidates.Where(s=> (s.Status ==  "Initial" || s.Status == "Ready")).OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
+            var result = Json(db.Candidates.Where(s=> (s.Status ==  "Initial" || s.Status == "Ready")).OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
             //todo:fortest
-            var result = Json(db.Candidates.OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
+            //var result = Json(db.Candidates.OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
             return result;
         }
         public JsonResult GetAllCandidateCompleted()
@@ -183,9 +183,9 @@ namespace PCSs.Controllers
                 return Json(new { result = -1, msg = "Can't get specialist's profile" }, JsonRequestBehavior.AllowGet);
             }
 
-            //var can = db.Candidates.FirstOrDefault(s => s.CandidateId == id && s.SpecialistId == specialistId);
+            var can = db.Candidates.FirstOrDefault(s => s.CandidateId == id && s.SpecialistId == specialistId);
             //todo: for test
-            var can = db.Candidates.FirstOrDefault(s => s.CandidateId == id);
+            //var can = db.Candidates.FirstOrDefault(s => s.CandidateId == id);
             if (can != null)
             {
                 try
@@ -205,7 +205,7 @@ namespace PCSs.Controllers
                     AttachmentFile attachment = new AttachmentFile() { Link = Server.MapPath("~/Reports/") + filePath, CandidateId = id, FileName = file.FileName };
                     db.AttachmentFiles.Add(attachment);
                     db.SaveChanges();
-                    return Json(new { result = -1, msg = "Uploaded " + Request.Files.Count + " files" }, JsonRequestBehavior.AllowGet);
+                    return Json(new { result = 1, msg = "Uploaded " + Request.Files.Count + " files" }, JsonRequestBehavior.AllowGet);
                 }
                 catch (Exception e)
                 {
