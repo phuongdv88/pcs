@@ -18,6 +18,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <UseGlobalApplicationHostFile />
+    <NameOfLastUsedPublishProfile>pcs</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
