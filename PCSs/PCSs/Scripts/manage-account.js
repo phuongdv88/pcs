@@ -47,7 +47,7 @@ function _getAllCandidate(id) {
         type: "GET",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        timeout: '3000',
+        timeout: '5000',
         success: function (result) {
             var html = '';
             var i = 0;
@@ -72,7 +72,7 @@ function _getAllCandidate(id) {
                 html += '</tr>';
             });
             $('#candidates tbody').html(html);
-            $('#candidates').DataTable()
+            $('#candidates').DataTable();
 
         },
         error: function (errorMessage) {
@@ -89,7 +89,7 @@ function _getAllCandidateReport(id) {
         type: "GET",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        timeout: '3000',
+        timeout: '5000',
         success: function (result) {
             var html = '';
             var i = 0;
@@ -111,7 +111,7 @@ function _getAllCandidateReport(id) {
                 html += '</tr>';
             });
             $('#report tbody').html(html);
-            $('#report').DataTable()
+            $('#report').DataTable();
 
         },
         error: function (errorMessage) {
@@ -131,6 +131,7 @@ function _getCandidateById(id) {
         url: '/Client/GetCandidate/' + id,
         type: 'Get',
         contentType: "json",
+        timeout: '5000',
         success: function (result) {
             $('#candidateId').val(result.CandidateId);
             $('#firstName').val(result.FirstName);
@@ -156,6 +157,7 @@ function _getCandidateById(id) {
 //        url: '/Client/GetCandidateInfo/' + id,
 //        type: 'Get',
 //        contentType: "json",
+//timeout: '5000',
 //        success: function (result) {
 //            $('#candidateName').text(candidateName);
 //            $('#userNameInfo').text(result.UserName); // need to update to db the field userName, password of candiate table
@@ -194,6 +196,7 @@ function _add() {
         type: 'POST',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
+        timeout: '5000',
         success: function (result) {
             $('#btnRefresh').click();
             $("#newCandidateModal").modal('hide');
@@ -224,6 +227,7 @@ function _edit() {
         type: 'POST',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
+        timeout: '5000',
         success: function (result) {
             $('#btnRefresh').click();
             $("#newCandidateModal").modal('hide');
@@ -240,6 +244,7 @@ function getProfile() {
         url: '/Client/GetRecruiterProfile',
         type: 'Get',
         contentType: "json",
+        timeout: '5000',
         success: function (result) {
             $('#recruiterFirstName').val(result.FirstName);
             $('#recruiterMiddleName').val(result.MiddleName);
@@ -269,6 +274,7 @@ function editProfile() {
         type: 'POST',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
+        timeout: '5000',
         success: function (result) {
             $("#changeProfileModal").modal('hide');
             // update profile and title
@@ -294,6 +300,7 @@ function updatePassword() {
         type: 'POST',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
+        timeout: '5000',
         success: function (rs) {
             if (rs.result == -1) {
                 // show error
@@ -330,9 +337,9 @@ function generateChart() {
         url: '/Client/GetReportForChart',
         type: 'Get',
         contentType: "json",
-        success: function (rs) {
-            
-            document.getElementById("textchart").innerHTML = "Statistics By Month";
+        timeout: '5000',
+        success: function (rs) {            
+            document.getElementById("textchart").innerHTML = "Number of candidates";
             var dataRegistered = [];
             var res1 = rs.RegisterArray.split(",");
             for (var i = 0; i < res1.length; i++) {

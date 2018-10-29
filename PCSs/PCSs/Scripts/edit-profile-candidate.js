@@ -157,7 +157,7 @@ function getAllCompany(id) {
         type: "GET",
         contenttype: "application/json; charset=utf-8",
         dataType: "json",
-        timeout: '3000',
+        timeout: '5000',
         success: function (result) {
             var html = '';
             var i = 0;
@@ -197,7 +197,7 @@ function getAllReference(id, comFormId) {
         type: "GET",
         contenttype: "application/json; charset=utf-8",
         dataType: "json",
-        timeout: '3000',
+        timeout: '5000',
         success: function (result) {
             var i = 0;
             listComId.length = 0;
@@ -241,6 +241,7 @@ function newCompany(comFormId) {
         type: "POST",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
+        timeout: '5000',
         success: function (rs) {
             submitReferences(comFormId, rs.comId); // submit all references after submit company
             return rs.responseText;
@@ -266,6 +267,7 @@ function editCompany(comFormId, comId) {
         type: "POST",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
+        timeout: '5000',
         success: function (rs) {
             submitReferences(comFormId, comId); // submit all references after submit company
             return rs.responseText;
@@ -283,6 +285,7 @@ function deleteCompany(comId) {
         type: 'POST',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
+        timeout: '5000',
         async: true,
         success: function (result) {
 
@@ -309,6 +312,7 @@ function newReference(refeFormId, comFormId, comId) {
         type: "POST",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
+        timeout: '5000',
         success: function (rs) {
 
         },
@@ -333,6 +337,7 @@ function editReference(refeFormId, comFormId, comId) {
         type: "POST",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
+        timeout: '5000',
         success: function (rs) {
 
         },
@@ -348,6 +353,7 @@ function deleteReference(refeId) {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         async: true,
+        timeout: '5000',
         success: function (result) {
 
         },

@@ -1,0 +1,457 @@
+﻿body {
+}
+.form-edit{
+    padding:0;
+}
+#footer {
+   position:absolute;
+   bottom:0;
+   width:100%;
+   height:60px;   /* Height of the footer */
+   background:#6cf;
+}
+.content-wrapper, .main-footer{
+    margin-left:0px;
+}
+.header .logo{
+	/*padding: 20px 0;*/
+    padding:0px;
+
+}
+.header .logo img{
+	height: 100px;
+	width: auto;
+}
+
+.header{
+	/*background: #2f829e;*/
+    height:3em;
+
+}
+
+.header .name-company{
+	float: right;
+	cursor: pointer;
+	height: 40px;
+	font-size: 18px;
+	font-weight:  bold;
+	color: #fff;
+	line-height: 40px;
+	margin-top: 50px;
+	position: relative;
+}
+
+.header .popup-company-top{
+	width: 300px;
+	display: none;
+    position: absolute;
+    top: 140px;
+    right: 0;
+    z-index: 111;
+    height: auto;
+    background: #222d32;
+    text-align: center;
+}
+
+.header .popup-company-top .form-group{
+	width: 100%;
+	margin: 0; 
+}
+
+.header .popup-company-top .item{
+	width: 100%;
+	color: #fff;
+	height: 40px;
+	line-height: 40px;
+}
+
+.header .popup-company-top .item:hover{
+	background: #1a2226;
+}
+
+.header .logout{
+	height: 140px;
+	font-size: 18px;
+	display:  block;
+	font-weight:  bold;
+	color: #fff;
+	line-height: 140px;
+}
+.head .change-infor input{
+	background: #f87b25;
+	color: #fff;
+	font-weight: bold;
+	height: 40px;
+}
+
+.side-bar{
+	padding: 0;
+}
+
+.form-company{
+	display: none;
+	padding-top: 50px;
+}
+.form-company .form-group:last-child{
+	width: 150px;
+	float: right;
+}
+.form-company .form-group:last-child .form-control{
+	width: 100%;
+}
+.list {
+    padding: 0;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background-color: #ececec !important;
+}
+.list .item{
+	width: 100%;
+	cursor: pointer;
+	/*color: #fff;*/
+	font-size: 14px;
+	/*text-align: center;*/
+	margin: auto;
+	min-height: 40px;
+	line-height: 40px;
+    padding-left:1em;
+    
+}
+    .list .item img {
+        width: 1.5em;
+        margin-right: 1em;
+       
+        
+    }
+    .list .item:hover {
+        background: #1e282c;
+        /*filter: contrast(1000%);*/
+    }
+  
+
+
+/*form{
+	padding: 4%;
+	/*width: 100%;*/
+	padding-left: 20px;
+}*/
+
+.form-group{
+	overflow: hidden;
+}
+
+.form-group label{
+	width: 20%;
+	text-align: right;
+	padding-right: 10px;
+	float: left;
+}
+.form-group input{
+	width: 82%;
+	float: left;
+}
+
+.company-tab .form-group .form-control{
+	width: 80%;
+	float: left;
+}
+
+.form-recruiter{
+	display: none;
+}
+.form-recruiter .table{
+	width: 100%;
+}
+
+.form-recruiter .title-name{
+	width: 30%;
+}
+.form-recruiter .title-email{
+	width: 50%;
+}
+.form-recruiter .title-phone-number{
+	width: 20%;
+}
+.form-recruiter .form-group{
+	width: 50%;
+	float: left;
+}
+
+#myTable .title-edit:after{
+	display: none;
+}
+#myTable .title-report:after{
+	display: none;
+}
+
+.form-recruiter .form-control{
+	width: 150px;
+	font-weight: bold;
+	background: #f87b25;
+	color: #fff;
+	text-align: center;
+}
+
+.form-candidate{
+	padding-top: 50px;
+	overflow: hidden;
+	display: none;
+}
+.form-candidate form{
+	padding: 0;
+}
+.form-candidate .list-button{
+	margin-bottom: 40px;
+	overflow: hidden; 
+}
+
+.form-candidate .list-button .form-group{
+	width: 25%;
+	float: left;
+}
+.form-candidate .form-group .form-control{
+	width: 150px;
+	color: #fff;
+	font-weight: bold;
+	background-color: #f87b25;
+}
+.form-candidate .input-group{
+	width: 70%;
+	margin-bottom: 20px;
+}
+.form-candidate .input-group .glyphicon{
+	font-size: 20px;
+}
+
+.company-tab .table{
+	margin-top: 50px;
+	border: 1px solid #f4f4f4;
+}
+
+.show{
+	display: block;
+}
+
+.active{
+	/*background: #1a2226;*/
+}
+
+.table td{
+	border: 1px solid #f4f4f4;
+}
+.table th{
+	border: 1px solid #f4f4f4;
+	border-top: 0; 
+}
+.table .edit{
+	vertical-align: middle;
+    text-align: center;
+}
+
+.table .name a{
+	color: #30a5ff;
+}
+
+.table .edit a:before{
+	color: #30a5ff;
+}
+
+.table .report{
+	vertical-align: middle;
+    text-align: center;
+}
+
+.table .report a:before{
+	color: #30a5ff;
+	font-size: 20px;
+}
+
+.company-tab .mask{
+	position: fixed;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    background: #000;
+    z-index: 22;
+    opacity: 0.7;
+    display: none;
+}
+
+
+.form-popup-recruiter{
+	position: fixed;
+	width: 70%;
+	left: 0;
+	margin-left: 50%;
+	margin-top: 10%;
+	opacity: 1;
+	top: 0;
+	z-index: 999;
+	display: none;
+	transform: translate(-50%);
+}
+
+.form-popup-recruiter form{
+	background: #999;
+	width: 100%;
+	position:  relative;
+}
+.form-popup-recruiter .fa-times{
+	position: absolute;
+	right: 15px;
+	height: 22px;
+	width: 25px;
+	top: 10px;
+	text-align: center;
+	cursor: pointer;
+}
+.form-popup-recruiter .fa-times:before{
+	font-size: 22px;
+	vertical-align: middle;
+	color: #000;
+}
+
+.form-popup-recruiter .form-group:last-child{
+	width: 150px;
+	margin: auto;
+}
+
+.form-popup-recruiter .form-group:last-child .form-control{
+	width: 100%;
+	text-transform: capitalize;
+}
+
+
+/* css popup candidate*/
+
+.form-popup-candidate{
+	position: fixed;
+	width: 70%;
+	left: 0;
+	margin-left: 50%;
+	margin-top: 10%;
+	opacity: 1;
+	top: 0;
+	display: none;
+	z-index: 999;
+	transform: translate(-50%);
+}
+
+.form-popup-candidate form{
+	background: #999;
+	width: 100%;
+	position:  relative;
+}
+.form-popup-candidate .fa-times{
+	position: absolute;
+	right: 15px;
+	height: 22px;
+	width: 25px;
+	top: 10px;
+	text-align: center;
+	cursor: pointer;
+}
+.form-popup-candidate .fa-times:before{
+	font-size: 22px;
+	vertical-align: middle;
+	color: #000;
+}
+
+.form-popup-candidate .form-group:last-child{
+	width: 150px;
+	margin: auto;
+}
+
+.form-popup-candidate .form-group:last-child .form-control{
+	width: 100%;
+	text-transform: capitalize;
+}
+
+@media (max-width: 1200px){
+	.container{
+		width: 100%;
+	}
+
+}
+
+@media (max-width: 991px){
+	form {
+	    width: 100%;
+	    padding-left: 20px;
+	}
+
+	.list {
+	    /*width: 180px;*/
+	}
+
+	.form-group .form-control{
+	    width: 55%;
+	}
+
+}
+
+@media (max-width: 767px){
+	.list {
+	    width: 100%;
+	    height: auto;
+	    overflow: hidden;
+	}
+
+	.navbar-form {
+		margin: 0;
+		padding: 0;
+	}
+
+	.list .item {
+		/*width: 33.33%;*/
+		float: left;
+	}
+
+	.form-candidate .form-group{
+	    width: 48%;
+	}
+
+	.form-candidate .form-group:first-child{
+		margin-right: 4%;
+	}
+    .barchart {
+        width: 100%;
+    }
+}
+
+@media (max-width: 640px){
+	.form-candidate .form-group .form-control {
+	    width: 100%;
+	}
+	form {
+		padding: 0;
+	}
+	.table td, th{
+		font-size: 10px;
+	}
+	.list .item {
+	    font-size: 10px;
+	}
+    .barchart {
+        width: 100%;
+    }
+}
+
+
+
+/*css edit-recruiter*/
+
+.edit-recruiter .form-group:last-child{
+	width: 150px;
+	float: right;
+}
+
+.edit-recruiter .form-group:last-child .form-control{
+	width: 100%;
+}
+.clearPanddingMargin{
+    padding:0px;
+    margin:0px;
+}
