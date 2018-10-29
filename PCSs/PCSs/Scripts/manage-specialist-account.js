@@ -46,7 +46,7 @@ function getAvailableCandidate() {
         type: "GET",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        timeout: '3000',
+        timeout: '5000',
         success: function (result) {
             var html = '';
             var i = 0;
@@ -117,7 +117,7 @@ function getAllCandidateCompleted() {
         type: "GET",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        timeout: '3000',
+        timeout: '5000',
         success: function (result) {
             var html = '';
             var i = 0;
@@ -160,6 +160,7 @@ function _getCandidateReportById(id) {
         url: '/Specialist/GetCandidateReport/' + id,
         type: 'Get',
         contentType: "json",
+        timeout: '5000',
         success: function (result) {
             //$('#candiateInfoModal').modal('show');
             alert('Show info or view pdf file from' + result.link);
@@ -177,6 +178,7 @@ function _getCandidateById(id) {
         url: '/Specialist/GetCandidate/' + id,
         type: 'Get',
         contentType: "json",
+        timeout: '5000',
         success: function (result) {
             $('#candidateId').val(result.CandidateId);
             $('#firstName').val(result.FirstName);
@@ -202,6 +204,7 @@ function _getCandidateById(id) {
 //        url: '/Specialist/GetCandidateInfo/' + id,
 //        type: 'Get',
 //        contentType: "json",
+//timeout: '5000',
 //        success: function (result) {
 //            $('#candidateName').text(candidateName);
 //            $('#userNameInfo').text(result.UserName); // need to update to db the field userName, password of candiate table
@@ -240,6 +243,7 @@ function _getCandidateById(id) {
 //        type: 'POST',
 //        contentType: "application/json; charset=utf-8",
 //        dataType: "json",
+//timeout: '5000',
 //        success: function (result) {
 //            $('#btnRefresh').click();
 //            $("#newCandidateModal").modal('hide');
@@ -256,6 +260,7 @@ function getProfile() {
         url: '/Specialist/GetSpecialistProfile',
         type: 'Get',
         contentType: "json",
+        timeout: '5000',
         success: function (result) {
             $('#specialistFirstName').val(result.FirstName);
             $('#specialistMiddleName').val(result.MiddleName);
@@ -285,6 +290,7 @@ function editProfile() {
         type: 'POST',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
+        timeout: '5000',
         success: function (result) {
             $("#changeProfileModal").modal('hide');
             // update profile and title
@@ -310,6 +316,7 @@ function updatePassword() {
         type: 'POST',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
+        timeout: '5000',
         success: function (rs) {
             if (rs.result == -1) {
                 // show error
@@ -346,6 +353,7 @@ function generateChart() {
         url: '/Specialist/GetReportForChart',
         type: 'Get',
         contentType: "json",
+        timeout: '5000',
         success: function (rs) {
             
             document.getElementById("textchart").innerHTML = "Statistics By Month";

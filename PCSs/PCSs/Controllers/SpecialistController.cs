@@ -43,7 +43,7 @@ namespace PCSs.Controllers
 
         public JsonResult GetAvailableCandidate()
         {
-            var result = Json(db.Candidates.Where(s=> (s.Status ==  "Initial" || s.Status == "Ready")).OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
+            var result = Json(db.Candidates.Where(s=> ((s.Status ==  "Initial" || s.Status == "Ready") && s.SpecialistId == -1)).OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
             //todo:fortest
             //var result = Json(db.Candidates.OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
             return result;
