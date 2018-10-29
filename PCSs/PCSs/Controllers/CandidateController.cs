@@ -36,7 +36,14 @@ namespace PCSs.Controllers
                 return HttpNotFound();
             }
             Session["CandidateId"] = can.CandidateId;
-            ViewBag.Title = can.FirstName + " " + can.MiddleName + " " + can.LastName + " 's Information";
+            if (can.MiddleName == null)
+            {
+                ViewBag.Title = can.FirstName + " " + can.LastName;
+            } else
+            {
+                ViewBag.Title = can.FirstName + " " + can.MiddleName + " " + can.LastName + " 's Information";
+
+            }
 
             List<SelectListItem> items = new List<SelectListItem>();
             items.Add(new SelectListItem { Text = "Fresher", Value = "Fresher" });

@@ -55,6 +55,9 @@ function _getAllCandidate(id) {
             $.each(result, function (key, item) {
                 i++;
                 var candidateName = item.FirstName + " " + item.MiddleName + " " + item.LastName;
+                if (item.MiddleName === null) {
+                    candidateName = item.FirstName + " " + item.LastName;
+                }
                 html += '<tr>';
                 html += '<td>' + i + '</td>';
 
@@ -108,6 +111,9 @@ function _getAllCandidateReport(id) {
             $.each(result, function (key, item) {
                 i++;
                 var candidateName = item.FirstName + " " + item.MiddleName + " " + item.LastName;
+                if (item.MiddleName === null) {
+                    candidateName = item.FirstName + " " + item.LastName;
+                }
                 html += '<tr>';
                 html += '<td>' + i + '</td>';
                 html += '<td>' + candidateName + '</td>';

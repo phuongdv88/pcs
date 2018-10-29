@@ -24,12 +24,12 @@ $(document).ready(function () {
 
 function formatDate(inputStr) {
     var d = new Date(parseInt(inputStr));
-    dformat = [d.getHours().padLeft(),
-                   d.getMinutes().padLeft(),
-                   d.getSeconds().padLeft()].join(':') + ' ' +
-                   [d.getDate().padLeft(),
-                   (d.getMonth() + 1).padLeft(),
-                   d.getFullYear().padLeft()].join('/');
+    dformat = [d.getFullYear().padLeft(),
+              (d.getMonth() + 1).padLeft(),
+              d.getDate().padLeft()].join('/') + ' ' +
+              [d.getHours().padLeft(),
+              d.getMinutes().padLeft(),
+              d.getSeconds().padLeft()].join(':');
     return dformat;
 }
 function _setCurrentRecruitId(id) {
@@ -46,13 +46,17 @@ function getAvailableCandidate() {
         type: "GET",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        timeout: '3000',
+        timeout: '5000',
         success: function (result) {
             var html = '';
             var i = 0;
             $.each(result, function (key, item) {
                 i++;
                 var candidateName = item.FirstName + " " + item.MiddleName + " " + item.LastName;
+                if (item.MiddleName === null) {
+                    candidateName = item.FirstName + " " + item.LastName;
+                }
+                
                 html += '<tr>';
                 html += '<td>' + i + '</td>';
                 html += '<td>' + candidateName + '</td>';
@@ -60,14 +64,18 @@ function getAvailableCandidate() {
                 html += '<td>' + item.PhoneNumber + '</td>';
                 html += '<td>' + item.Status + '</td>';
                 html += '<td>' + formatDate(item.CreatedTime.substr(6)) + '</td>';
-                if (item.CompleteTime == undefined) {
-                    html += '<td>N/A</td>';
+                if (item.CompleteTime == undefined || (item.Status !== 'Completed' && item.Status !== 'Closed')) {
+                    html += '<td></td>';
                 }
                 else {
                     html += '<td>' + formatDate(item.CompleteTime.substr(6)) + '</td>';
                 }
-                html += '<td><a href="#" onClick="return getUploadFileForm(' + item.CandidateId + ')" class="fas fa-pencil-alt" title="View detail"></a></td>';
-                //html += '<td><a href="#" onClick="return _getCandidateInfoById(' + item.UserLoginId + ' , \'' + candidateName + '\')" class="far fa-calendar-alt"></a></td>';
+                if (item.Status === "Initial") {
+                    html += '<td style="text-align: center; vertical-align: middle;"><a href="#" onClick="return assignMe(' + item.CandidateId + ')" class="fas fa-check" title="Assign Me"></a></td>';
+                } else {
+                    html += '<td></td>';
+                }
+                //html += '<td><a href="#" onClick="return getUploadFileForm(' + item.CandidateId + ')" class="fas fa-pencil-alt" title="View detail"></a></td>';
                 html += '</tr>';
             });
             $('#candidates tbody').html(html);
@@ -81,6 +89,81 @@ function getAvailableCandidate() {
     return false;
 }
 
+function getMyCandidate() {
+    $.ajax({
+        url: '/Specialist/GetMyCandidate',
+        //data: '{id: ' + id + ' }',
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        timeout: '5000',
+        success: function (result) {
+            var html = '';
+            var i = 0;
+            $.each(result, function (key, item) {
+                i++;
+                var candidateName = item.FirstName + " " + item.MiddleName + " " + item.LastName;
+                if (item.MiddleName === null) {
+                    candidateName = item.FirstName + " " + item.LastName;
+                }
+
+                html += '<tr>';
+                html += '<td>' + i + '</td>';
+                html += '<td>' + 'CompanyName' + '</td>';
+                html += '<td>' + candidateName + '</td>';
+                html += '<td>' + item.Email + '</td>';
+                html += '<td>' + item.PhoneNumber + '</td>';
+                html += '<td>' + item.Status + '</td>';
+                html += '<td>' + formatDate(item.CreatedTime.substr(6)) + '</td>';
+                if (item.CompleteTime == undefined || (item.Status !== 'Completed' && item.Status !== 'Closed')) {
+                    html += '<td></td>';
+                }
+                else {
+                    html += '<td>' + formatDate(item.CompleteTime.substr(6)) + '</td>';
+                }
+
+                if (item.Status === "Initial") {
+                    html += '<td style="text-align: center; vertical-align: middle;"><a href="#" onClick="return emailToCandidate(' + item.CandidateId + ')" class="fas fa-envelope" title="Email to Candidate"></a><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span><a href="#" onClick="return processBackgroundChecks(' + item.CandidateId + ')" class="fas fa-user-check" title="Process Background Checks"></a><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span><a href="#" onClick="return getUploadFileForm(' + item.CandidateId + ')" class="fas fa-file-upload" title="Upload Report"></a></td>';
+
+                } else {
+                    html += '<td></td>';
+                }
+                //html += '<td><a href="#" onClick="return getUploadFileForm(' + item.CandidateId + ')" class="fas fa-pencil-alt" title="View detail"></a></td>';
+                html += '</tr>';
+            });
+            $('#myTask tbody').html(html);
+            $('#myTask').DataTable();
+
+        },
+        error: function (errorMessage) {
+            alert(errorMessage.responseText);
+        }
+    });
+    return false;
+    return false;
+}
+
+function assignMe(canId) {
+    $.ajax({
+        url: '/Specialist/AssignMe/' + canId,
+        type: 'POST',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        timeout: '5000',
+        async: true,
+        success: function (rs) {
+            if (rs.result == -1) {
+                alert(rs.msg);
+            } else {
+                $('#btnRefresh').click();
+            }
+        },
+        error: function (errorMessage) {
+            alert(errorMessage.responseText);
+        }
+    });
+    return false;
+}
 function getUploadFileForm(candidateId) {
     $("#candidateId").val(candidateId);
     $('#uploadFileModal').modal('show');
@@ -109,50 +192,13 @@ function uploadFile() {
     return false;
 }
 
-function getAllCandidateCompleted() {
-    $.ajax({
-        url: '/Specialist/GetAllCandidateCompleted',
-        //data: '{id: ' + id + ' }',
-        type: "GET",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        timeout: '3000',
-        success: function (result) {
-            var html = '';
-            var i = 0;
-            $.each(result, function (key, item) {
-                i++;
-                var candidateName = item.FirstName + " " + item.MiddleName + " " + item.LastName;
-                html += '<tr>';
-                html += '<td>' + i + '</td>';
-                html += '<td>' + candidateName + '</td>';
-                html += '<td>' + item.Email + '</td>';
-                html += '<td>' + item.PhoneNumber + '</td>';
-                if (item.CompleteTime == undefined) {
-                    html += '<td>N/A</td>';
-                }
-                else {
-                    html += '<td>' + formatDate(item.CompleteTime.substr(6)) + '</td>';
-                }
-                html += '<td><a href="#" onClick="return _getCandidateReportById(' + item.UserLoginId + ')" class="far fa-calendar-alt"></a></td>';
-                html += '</tr>';
-            });
-            $('#report tbody').html(html);
-            $('#report').DataTable()
-
-        },
-        error: function (errorMessage) {
-            alert(errorMessage.responseText);
-        }
-    });
-    return false;
-}
 
 function _getCandidateReportById(id) {
     $.ajax({
         url: '/Specialist/GetCandidateReport/' + id,
         type: 'Get',
         contentType: "json",
+        timeout: '5000',
         success: function (result) {
             //$('#candiateInfoModal').modal('show');
             alert('Show info or view pdf file from' + result.link);
@@ -170,6 +216,7 @@ function _getCandidateById(id) {
         url: '/Specialist/GetCandidate/' + id,
         type: 'Get',
         contentType: "json",
+        timeout: '5000',
         success: function (result) {
             $('#candidateId').val(result.CandidateId);
             $('#firstName').val(result.FirstName);
@@ -249,6 +296,7 @@ function getProfile() {
         url: '/Specialist/GetSpecialistProfile',
         type: 'Get',
         contentType: "json",
+        timeout: '5000',
         success: function (result) {
             $('#specialistFirstName').val(result.FirstName);
             $('#specialistMiddleName').val(result.MiddleName);
@@ -278,6 +326,7 @@ function editProfile() {
         type: 'POST',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
+        timeout: '5000',
         success: function (result) {
             $("#changeProfileModal").modal('hide');
             // update profile and title
@@ -303,6 +352,7 @@ function updatePassword() {
         type: 'POST',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
+        timeout: '5000',
         success: function (rs) {
             if (rs.result == -1) {
                 // show error

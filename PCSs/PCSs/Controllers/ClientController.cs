@@ -29,7 +29,13 @@ namespace PCSs.Controllers
             var recruiter = db.Recruiters.FirstOrDefault(s => s.RecruiterId == id);
             if (recruiter != null)
             {
-                ViewBag.Title = recruiter.FirstName + " " + recruiter.MiddleName + " " + recruiter.LastName;
+                if(recruiter.MiddleName == null){
+                    ViewBag.Title = recruiter.FirstName + " " + recruiter.LastName;
+                } else
+                {
+                    ViewBag.Title = recruiter.FirstName + " " + recruiter.MiddleName + " " + recruiter.LastName;
+
+                }
             }
             return View();
         }
@@ -292,7 +298,12 @@ namespace PCSs.Controllers
                     recruiter.PhoneNumber = newRecruiter.PhoneNumber;
                     db.Entry(recruiter).State = EntityState.Modified;
                     var r = db.SaveChanges();
-                    return Json(new { rs = r, msg = recruiter.FirstName + " " + recruiter.MiddleName + " " + recruiter.LastName }, JsonRequestBehavior.AllowGet);
+                    var recruiterName = recruiter.FirstName + " " + recruiter.LastName;
+                    if(recruiter.MiddleName != null)
+                    {
+                        recruiterName = recruiter.FirstName + " " + recruiter.MiddleName + " " + recruiter.LastName;
+                    } 
+                    return Json(new { rs = r, msg = recruiterName }, JsonRequestBehavior.AllowGet);
                 }
             }
             return Json(new { rs = -1, msg = "1" }, JsonRequestBehavior.AllowGet);

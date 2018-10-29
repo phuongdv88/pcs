@@ -204,8 +204,7 @@
                                         <div class="box-header">
                                             <h3 class="box-title">Candidate Information</h3>
                                             <div>
-                                                <button type="button" class="btn btn-primary btn-lg" id="btnRefresh" title="Refresh" onclick="return _getAllCandidate(@ViewBag.SpecialistId);"><span class="glyphicon glyphicon-refresh"></span></button>
-                                              @*  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" title="Create new candidate" data-target="#newCandidateModal"><span class="glyphicon glyphicon-plus-sign"></span></button>*@
+                                                <button type="button" class="btn btn-primary btn-lg" id="btnRefresh" title="Refresh" onclick="return getAvailableCandidate();"><span class="glyphicon glyphicon-refresh"></span></button>
                                             </div>
                                         </div>
                                         <!-- /.box-header -->
@@ -220,7 +219,7 @@
                                                         <th>Status</th>
                                                         <th>Created Date</th>
                                                         <th>Name Company</th>
-                                                        <th>Actions</th>
+                                                        <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="tbody"></tbody>
@@ -233,7 +232,7 @@
                                                         <th>Status</th>
                                                         <th>Created Date</th>
                                                         <th>Completed Date</th>
-                                                        <th>Actions</th>
+                                                        <th>Action</th>
                                                     </tr>
                                                 </tfoot>
                                             </table>
@@ -299,39 +298,38 @@
                                         <div class="box-header">
                                             <h3 class="box-title">My Task</h3>
                                             <div>
-                                                <button type="button" class="btn btn-primary btn-lg" id="btnRefreshReport" title="Refresh" onclick="return getAllCandidateCompleted();"><span class="glyphicon glyphicon-refresh"></span></button>
+                                                <button type="button" class="btn btn-primary btn-lg" id="btnRefreshmyTask" title="Refresh" onclick="return getMyCandidate();"><span class="glyphicon glyphicon-refresh"></span></button>
                                             </div>
                                         </div>
                                         
                                         <!-- /.box-header -->
                                         <div class="box-body">
-                                            <table id="report" class="table table-bordered table-striped">
+                                            <table id="myTask" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr>
-
                                                         <th>Index</th>
+                                                        <th>Company</th>
                                                         <th>Full Name</th>
                                                         <th>Email</th>
                                                         <th>Phone Number</th>
                                                         <th>Status</th>
                                                         <th>Created Date</th>
                                                         <th>Completed Date</th>
-                                                        <th>Name Company</th>
-                                                        <th>View Report</th>
+                                                        <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="tbody"></tbody>
                                                 <tfoot>
                                                     <tr>
                                                         <th>Index</th>
+                                                        <th>Company</th>
                                                         <th>Full Name</th>
                                                         <th>Email</th>
                                                         <th>Phone Number</th>
                                                         <th>Status</th>
                                                         <th>Created Date</th>
                                                         <th>Completed Date</th>
-                                                        <th>Name Company</th>
-                                                        <th>View Report</th>
+                                                        <th>Action</th>
                                                     </tr>
                                                 </tfoot>
                                             </table>
@@ -408,7 +406,7 @@
         $(function () {
             _setCurrentRecruitId(@ViewBag.SpecialistId);
             getAvailableCandidate();
-            getAllCandidateCompleted();
+            getMyCandidate();
             setUserLoginName("@Session["UserName"].ToString()");
         })
     </script>

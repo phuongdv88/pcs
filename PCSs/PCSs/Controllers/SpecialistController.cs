@@ -32,7 +32,13 @@ namespace PCSs.Controllers
             var specialist = db.Specialists.FirstOrDefault(s => s.SpecialistId == id);
             if (specialist != null)
             {
-                ViewBag.Title = specialist.FirstName + " " + specialist.MiddleName + " " + specialist.LastName;
+                if(specialist.MiddleName == null)
+                {
+                    ViewBag.Title = specialist.FirstName + " " + specialist.LastName;
+                } else
+                {
+                    ViewBag.Title = specialist.FirstName + " " + specialist.MiddleName + " " + specialist.LastName;
+                }
             }
             return View();
         }
@@ -48,23 +54,52 @@ namespace PCSs.Controllers
             //var result = Json(db.Candidates.OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
             return result;
         }
-        public JsonResult GetAllCandidateCompleted()
+
+        public JsonResult GetMyCandidate()
         {
             long specialistId = -1;
-            if (!long.TryParse(Session["SpecialistId"].ToString(), out specialistId))
+            try
             {
-                return Json(new { msg = "Error: Can't get specialist's profile" }, JsonRequestBehavior.AllowGet);
-            }
-            //var result = Json(db.Candidates.Where(s => (s.SpecialistId == specialistId && (s.Status == "Completed" || s.Status == "Closed"))).OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
-            //todo: fortest
-            var result = Json(db.Candidates.Where(s => (s.SpecialistId == specialistId/*(s.Status == "Completed" || s.Status == "Closed")*/)).OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
-            return result;
-        }
+                if (!long.TryParse(Session["SpecialistId"].ToString(), out specialistId))
+                {
+                    return Json(new { rs = -1, msg = "Error: Can't get specialist's profile" }, JsonRequestBehavior.AllowGet);
+                }
 
-        public JsonResult GetCandidateReport(long id)
+                return Json(db.Candidates.Where(s => (s.SpecialistId == specialistId)).OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception e)
+            {
+                return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+      
+        public JsonResult AssignMe(long id)
         {
-            // return link file of Candidate report
-            return Json(new { link = "link_file_of_report" }, JsonRequestBehavior.AllowGet);
+            long specialistId = -1;
+            try {
+                if (!long.TryParse(Session["SpecialistId"].ToString(), out specialistId))
+                {
+                    return Json(new { rs = -1, msg = "Error: Can't get specialist's profile" }, JsonRequestBehavior.AllowGet);
+                }
+
+                var can = db.Candidates.FirstOrDefault(s => s.CandidateId == id);
+                if (can == null) {
+                    return Json(new { rs = -1, msg = "Can not get candiate's profile" }, JsonRequestBehavior.AllowGet);
+                }
+                if (can.SpecialistId == -1)
+                {
+                    can.SpecialistId = specialistId;
+                    db.Entry(can).State = EntityState.Modified;
+                    var r = db.SaveChanges();
+
+                    return Json(new { rs = 1, msg = "Error: Can't get specialist's profile" }, JsonRequestBehavior.AllowGet);
+                }
+                return Json(new { rs = -1, msg = "Can not assign this candiate" }, JsonRequestBehavior.AllowGet);
+            } catch(Exception e)
+            {
+                return Json(new { rs = -1, msg = e.Message}, JsonRequestBehavior.AllowGet);
+            }
         }
         public JsonResult GetCandidate(long id)
         {
@@ -133,7 +168,12 @@ namespace PCSs.Controllers
                     specialist.PhoneNumber = newSpecialist.PhoneNumber;
                     db.Entry(specialist).State = EntityState.Modified;
                     var r = db.SaveChanges();
-                    return Json(new { rs = r, msg = specialist.FirstName + " " + specialist.MiddleName + " " + specialist.LastName }, JsonRequestBehavior.AllowGet);
+                    var specialistName = specialist.FirstName + " " + specialist.LastName;
+                    if (specialist.MiddleName != null)
+                    {
+                        specialistName = specialist.FirstName + " " + specialist.MiddleName + " " + specialist.LastName;
+                    }
+                    return Json(new { rs = r, msg = specialistName }, JsonRequestBehavior.AllowGet);
                 }
             }
             return Json(new { rs = -1, msg = "1" }, JsonRequestBehavior.AllowGet);
