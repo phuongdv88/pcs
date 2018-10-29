@@ -1,0 +1,130 @@
+﻿@model PCSs.Models.CompanyInfo
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>CompanyInfo</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.StartDate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.StopDate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.StopDate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Jobtitle)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Jobtitle)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Country)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Country)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Address)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Address)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Website)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Website)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Note)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Note)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CheckingStatus)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CheckingStatus)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CandidateId)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CandidateId)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CheckingTime)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CheckingTime)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.isChecked)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.isChecked)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.CompanyInfoId }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

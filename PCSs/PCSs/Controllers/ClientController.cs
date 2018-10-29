@@ -164,6 +164,8 @@ namespace PCSs.Controllers
                     RecruiterId = can.CurrentRecruiterId,
                     CreatedTime = DateTime.Now,
                     Status = "Initial",
+                    CompleteTime = DateTime.Now,
+                    SpecialistId = -1,
 
                 };
                 db.Candidates.Add(candidate);
@@ -222,22 +224,30 @@ namespace PCSs.Controllers
         public JsonResult GetReportForChart()
         {
             long recruitID = -1;
-            if (!long.TryParse(Session["RecruiterId"].ToString(), out recruitID))
+            try {
+                if (!long.TryParse(Session["RecruiterId"].ToString(), out recruitID))
+                {
+                    return Json(new { msg = "Error: Can't get recruiter's profile" }, JsonRequestBehavior.AllowGet);
+                }
+                string registered = "";
+                string completed = "";
+                // get register by month
+                for (int i = 1; i <= 12; i++)
+                {
+                    registered += db.Candidates.Count(s => (s.RecruiterId == recruitID && s.CreatedTime.Month == i)).ToString() + ',';
+                    completed += db.Candidates.Count(s => (s.RecruiterId == recruitID && (s.CompleteTime != null && s.CompleteTime.Value.Month == i) && (s.Status == "Completed" || s.Status == "Closed"))).ToString() + ',';
+                }
+                if (registered.Length > 0)
+                {
+                    registered = registered.Substring(0, registered.Length - 1);
+                    completed = completed.Substring(0, completed.Length - 1);
+                }
+                var rs = new { RegisterArray = registered, CompleteArray = completed };
+                return Json(rs, JsonRequestBehavior.AllowGet);
+            }catch(Exception e)
             {
-                return Json(new { msg = "Error: Can't get recruiter's profile" }, JsonRequestBehavior.AllowGet);
+                return Json(e.Message, JsonRequestBehavior.AllowGet);
             }
-            string registered = "";
-            string completed = "";
-            // get register by month
-            for(int i = 1; i <= 12; i++)
-            {
-                registered += db.Candidates.Count(s => (s.RecruiterId == recruitID && s.CreatedTime.Month == i)).ToString() + ',';
-                completed += db.Candidates.Count(s => (s.RecruiterId == recruitID && s.CompleteTime != null && s.CompleteTime.Value.Month == i && (s.Status == "Completed" || s.Status == "Closed"))).ToString() + ',';
-            }
-            registered = registered.Substring(0, registered.Length - 1);
-            completed = completed.Substring(0, completed.Length - 1);
-            var rs = new { RegisterArray = registered, CompleteArray = completed };
-            return Json(rs, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult UpdateRecruiterProfile(Recruiter newRecruiter)
