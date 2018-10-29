@@ -25,12 +25,13 @@ $(document).ready(function () {
 
 function formatDate(inputStr) {
     var d = new Date(parseInt(inputStr));
-    dformat = [d.getHours().padLeft(),
-                   d.getMinutes().padLeft(),
-                   d.getSeconds().padLeft()].join(':') + ' ' +
-                   [d.getDate().padLeft(),
-                   (d.getMonth() + 1).padLeft(),
-                   d.getFullYear().padLeft()].join('/');
+
+    dformat = [d.getFullYear().padLeft(),
+              (d.getMonth() + 1).padLeft(),
+              d.getDate().padLeft()].join('/') + ' ' +
+              [d.getHours().padLeft(),
+              d.getMinutes().padLeft(),
+              d.getSeconds().padLeft()].join(':');
     return dformat;
 }
 function _setCurrentRecruitId(id) {
@@ -56,19 +57,30 @@ function _getAllCandidate(id) {
                 var candidateName = item.FirstName + " " + item.MiddleName + " " + item.LastName;
                 html += '<tr>';
                 html += '<td>' + i + '</td>';
-                html += '<td>' + candidateName + '</td>';
+
+                if (item.Status === "Initial") {
+                    html += '<td><a href="#" onClick="return _getCandidateById(' + item.CandidateId + ')" title="Edit">' + candidateName + '</a></td>';
+                } else {
+                    html += '<td>' + candidateName + '</td>';
+                }
+
                 html += '<td>' + item.Email + '</td>';
                 html += '<td>' + item.PhoneNumber + '</td>';
                 html += '<td>' + item.Status + '</td>';
                 html += '<td>' + formatDate(item.CreatedTime.substr(6)) + '</td>';
-                if (item.CompleteTime == undefined) {
-                    html += '<td>N/A</td>';
+                if (item.CompleteTime == undefined || (item.Status !== 'Completed' && item.Status !== 'Closed')) {
+                    html += '<td></td>';
                 }
                 else {
                     html += '<td>' + formatDate(item.CompleteTime.substr(6)) + '</td>';
                 }
-                html += '<td><a href="#" onClick="return _getCandidateById(' + item.CandidateId + ')" class="fas fa-pencil-alt" title="View detail"></a></td>';
-                //html += '<td><a href="#" onClick="return _getCandidateInfoById(' + item.UserLoginId + ' , \'' + candidateName + '\')" class="far fa-calendar-alt"></a></td>';
+                if (item.Status === "Initial") {
+                    html += '<td style="text-align: center; vertical-align: middle;"><a href="#" onClick="return _getCandidateById(' + item.CandidateId + ')" class="fas fa-edit" title="Edit"></a><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span><a href="#" onClick="return deleteCandidate(' + item.CandidateId + ')" class="fas fa-trash-alt" title="Remove"></a></td>';
+                } else {
+                    html += '<td></td>';
+                }
+
+
                 html += '</tr>';
             });
             $('#candidates tbody').html(html);
@@ -107,7 +119,7 @@ function _getAllCandidateReport(id) {
                 else {
                     html += '<td>' + formatDate(item.CompleteTime.substr(6)) + '</td>';
                 }
-                html += '<td><a href="#" onClick="return _getCandidateReportById(' + item.CandidateId + ')" class="far fa-calendar-alt"></a></td>';
+                html += '<td style="text-align: center; vertical-align: middle;"><a href="#" onClick="return _getCandidateReportById(' + item.CandidateId + ')" class="fas fa-file-download"></a></td>';
                 html += '</tr>';
             });
             $('#report tbody').html(html);
@@ -167,7 +179,7 @@ function _getCandidateById(id) {
 //            } else {
 //                $('#lockoutDateUtc').text(formatDate(result.LockoutDateUtc.substr(6))); // 5day from created date
 //            }
-            
+
 //            $('#candiateInfoModal').modal('show');
 //        },
 //        error: function (errorMessage) {
@@ -179,7 +191,7 @@ function _getCandidateById(id) {
 
 function _add() {
     var obj = {
-        CandidateId:'0',
+        CandidateId: '0',
         FirstName: $('#firstName').val(),
         MiddleName: $('#middleName').val(),
         LastName: $('#lastName').val(),
@@ -316,6 +328,31 @@ function updatePassword() {
     return false;
 }
 
+function deleteCandidate(id) {
+    rs = confirm('Are your sure to delete this candidate?');
+    if (rs) {
+        $.ajax({
+            url: '/Client/DeleteCandidate/' + id,
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            timeout: '5000',
+            async: true,
+            success: function (rs) {
+                if (rs.result == -1) {
+                    alert(rs.msg);
+                } else {
+                    $('#btnRefresh').click();
+                }
+            },
+            error: function (errorMessage) {
+                alert(errorMessage.responseText);
+            }
+        });
+    }
+    return false;
+}
+
 var password = document.getElementById("newPassword")
   , confirm_password = document.getElementById("confirmPassword");
 
@@ -338,7 +375,7 @@ function generateChart() {
         type: 'Get',
         contentType: "json",
         timeout: '5000',
-        success: function (rs) {            
+        success: function (rs) {
             document.getElementById("textchart").innerHTML = "Number of candidates";
             var dataRegistered = [];
             var res1 = rs.RegisterArray.split(",");

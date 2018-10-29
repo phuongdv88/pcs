@@ -190,6 +190,10 @@ namespace PCSs.Controllers
             {
                 return Json(new { msg = "Error: You don't have permittion to change this candidate" }, JsonRequestBehavior.AllowGet);
             }
+            if(candidate.Status != "Initial")
+            {
+                return Json(new { msg = "Error: Can not edit candidate information when they submited" }, JsonRequestBehavior.AllowGet);
+            }
             candidate.FirstName = can.FirstName;
             candidate.MiddleName = can.MiddleName;
             candidate.LastName = can.LastName;
@@ -197,14 +201,29 @@ namespace PCSs.Controllers
             candidate.PhoneNumber = can.PhoneNumber;
             candidate.JobTitle = can.JobTitle;
             candidate.JobLevel = can.JobLevel;
-            //db.Entry(candidate).State = EntityState.Modified;
+            db.Entry(candidate).State = EntityState.Modified;
             var rs = db.SaveChanges();
             return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult Delete(long id)
+        public JsonResult DeleteCandidate(long id)
         {
-            db.Candidates.Remove(db.Candidates.FirstOrDefault(s => s.CandidateId == id && s.RecruiterId == long.Parse(Session["RecruiterId"].ToString())));
+            long recruitID = -1;
+            if (!long.TryParse(Session["RecruiterId"].ToString(), out recruitID))
+            {
+                return Json(new { msg = "Error: You don't have permittion to change this candidate" }, JsonRequestBehavior.AllowGet);
+            }
+            var candidate = db.Candidates.FirstOrDefault(s => s.CandidateId == id && s.RecruiterId == recruitID);
+            if (candidate == null)
+            {
+                return Json(new { msg = "Error: You don't have permittion to change this candidate" }, JsonRequestBehavior.AllowGet);
+            }
+            if (candidate.Status != "Initial")
+            {
+                return Json(new { msg = "Error: Can not edit candidate information when they submited" }, JsonRequestBehavior.AllowGet);
+            }
+
+            db.Candidates.Remove(candidate);
             var rs = db.SaveChanges();
             return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
         }
