@@ -150,10 +150,9 @@ function removeReference(refeFormId, comFormId) {
     return false;
 }
 
-function getAllCompany(id) {
-    currentCandidateId = id;
+function getCandidateInfo() {
     $.ajax({
-        url: '/Candidate/GetAllCompany/' + id,
+        url: '/Candidate/GetCandidateInfo',
         type: "GET",
         contenttype: "application/json; charset=utf-8",
         dataType: "json",
@@ -162,6 +161,7 @@ function getAllCompany(id) {
             var html = '';
             var i = 0;
             $.each(result, function (key, item) {
+                i++;
                 // fill up company info
                 // generate html of company form
                 var comFormId = addCompany(false);
@@ -178,6 +178,85 @@ function getAllCompany(id) {
                 listComId[item.CompanyInfoId] = comFormId;
 
             });
+            if (i === 0) {
+                addCompany(true);
+            }
+
+        },
+        error: function (errorMessage) {
+            alert(errorMessage.responseText);
+        },
+        complete: function () {
+            $.each(listComId, function (key, item) {
+                getAllReference(key, item);
+            });
+        }
+
+    });
+    return false;
+}
+
+function updateCandidateInfo() {
+    var obj = {
+        CompanyInfoId: $("#" + comFormId).find('#companyId').val(),
+        StartDate: $("#" + comFormId).find('#startDate').val(),
+        StopDate: $("#" + comFormId).find('#stopDate').val(),
+        Jobtitle: $("#" + comFormId).find('#companyJobTitle').val(),
+        Name: $("#" + comFormId).find('#companyName').val(),
+        Address: $("#" + comFormId).find('#companyAddress').val(),
+        Website: $("#" + comFormId).find('#companyWebsite').val(),
+        JobDuties: $("#" + comFormId).find('#jobDuties').val(),
+    };
+    $.ajax({
+        url: '/Candidate/EditCompany/',
+        data: JSON.stringify(obj),
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        timeout: '5000',
+        success: function (rs) {
+            submitReferences(comFormId, comId); // submit all references after submit company
+            return rs.responseText;
+        },
+        error: function (rs) {
+            alert(rs.responseText);
+        }
+    });
+}
+
+function getAllCompany(id) {
+    currentCandidateId = id;
+    $.ajax({
+        url: '/Candidate/GetAllCompany/' + id,
+        type: "GET",
+        contenttype: "application/json; charset=utf-8",
+        dataType: "json",
+        timeout: '5000',
+        success: function (result) {
+            var html = '';
+            var i = 0;
+            $.each(result, function (key, item) {
+                i++;
+                // fill up company info
+                // generate html of company form
+                var comFormId = addCompany(false);
+                // fill data to the form
+                $('#' + comFormId).find("#companyId").val(item.CompanyInfoId);
+                $('#' + comFormId).find("#companyName").val(item.Name);
+                $('#' + comFormId).find("#companyAddress").val(item.Address);
+                $('#' + comFormId).find("#companyWebsite").val(item.Website);
+                $('#' + comFormId).find("#companyJobTitle").val(item.Jobtitle);
+                $('#' + comFormId).find("#startDate").val(formatDate(item.StartDate.substr(6)));
+                $('#' + comFormId).find("#stopDate").val(formatDate(item.StopDate.substr(6)));
+                $('#' + comFormId).find("#jobDuties").val(item.JobDuties);
+                // fill up reference every company
+                listComId[item.CompanyInfoId] = comFormId;
+
+            });
+            if (i === 0) {
+                addCompany(true);
+            }
+
         },
         error: function (errorMessage) {
             alert(errorMessage.responseText);

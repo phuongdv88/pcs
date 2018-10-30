@@ -89,6 +89,31 @@ namespace PCSs.Controllers
             }
             return RedirectToAction("Login", "Home");
         }
+
+        public JsonResult GetCandidateInfo()
+        {
+            long candidateId = -1;
+            try
+            {
+                if (long.TryParse(Session["CandidateId"].ToString(), out candidateId))
+                {
+                    var can = db.Candidates.FirstOrDefault(s => s.CandidateId == candidateId);
+                    return Json(can, JsonRequestBehavior.AllowGet);
+                }
+                return Json(new { msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+
+                return Json(new { msg = e.Message }, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+        //public JsonResult UpdateCandidateInfo(Candidate can)
+        //{
+
+        //}
         // ajax add, edit, delete company, add, edit, delete reference
         public JsonResult GetAllCompany(long id)
         {

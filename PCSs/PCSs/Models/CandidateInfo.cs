@@ -43,6 +43,6 @@ namespace PCSs.Models
     public class CandidateStatusToChange
     {
         public long CandidateId { get; set; }
-        public string Status { get; set; }
+        public string CandidateStatus { get; set; }
     }
 }

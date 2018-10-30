@@ -162,6 +162,7 @@ function getAllCompany(id) {
             var html = '';
             var i = 0;
             $.each(result, function (key, item) {
+                i++;
                 // fill up company info
                 // generate html of company form
                 var comFormId = addCompany(false);
@@ -178,6 +179,10 @@ function getAllCompany(id) {
                 listComId[item.CompanyInfoId] = comFormId;
 
             });
+            if (i === 0) {
+                addCompany(true);
+            }
+
         },
         error: function (errorMessage) {
             alert(errorMessage.responseText);

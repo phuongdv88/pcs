@@ -56,7 +56,7 @@ function getAvailableCandidate() {
                 if (item.MiddleName === null) {
                     candidateName = item.FirstName + " " + item.LastName;
                 }
-                
+
                 html += '<tr>';
                 html += '<td>' + i + '</td>';
                 html += '<td>' + candidateName + '</td>';
@@ -121,13 +121,7 @@ function getMyCandidate() {
                 else {
                     html += '<td>' + formatDate(item.CompleteTime.substr(6)) + '</td>';
                 }
-
-                if (item.Status === "Initial") {
-                    html += '<td style="text-align: center; vertical-align: middle;"><a href="#" onClick="return _getCandidateEmailInfoById(' + item.CandidateId + ', \'' + candidateName + '\')" class="fas fa-envelope" title="Email to Candidate"></a><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span><a href="/Specialist/ProcessBackgroundCheckCandidate/' + item.CandidateId + '" class="fas fa-user-check" title="Process Background Checks"></a><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span><a href="#" onClick="return getUploadFileForm(' + item.CandidateId + ')" class="fas fa-file-upload" title="Upload Report"></a></td>';
-
-                } else {
-                    html += '<td></td>';
-                }
+                html += '<td style="text-align: center; vertical-align: middle;"><a href="#" onClick="return _getCandidateEmailInfoById(' + item.CandidateId + ', \'' + candidateName + '\')" class="fas fa-envelope" title="Email to Candidate"></a><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span><a href="/Specialist/ProcessBackgroundCheckCandidate/' + item.CandidateId + '" class="fas fa-user-check" title="Process Background Checks"></a><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span><a href="#" onClick="return getUploadFileForm(' + item.CandidateId + ')" class="fas fa-file-upload" title="Upload Report"></a></td>';
                 html += '</tr>';
             });
             $('#myTask tbody').html(html);
@@ -153,7 +147,7 @@ function assignMe(canId) {
                 alert(rs.msg);
             } else {
                 $('#btnRefresh').click();
-                $('#btnRefreshmyTask').click();                
+                $('#btnRefreshmyTask').click();
             }
         },
         error: function (errorMessage) {
@@ -193,24 +187,30 @@ function uploadFile() {
 }
 
 function updateStatus(id, status) {
-        var obj = {
-            CandidateId: id,
-            Status: status
-        }
-        $.ajax({
-            url: '/Specialist/UpdateStatus',
-            data: JSON.stringify(obj),
-            type: 'POST',
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (result) {
+
+    var obj = {
+        CandidateId: id,
+        CandidateStatus: status
+    }
+    $.ajax({
+        url: '/Specialist/UpdateStatus',
+        data: JSON.stringify(obj),
+        type: 'POST',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+            if (result.rs !== -1) {
+                $('#btnRefreshmyTask').click();
                 $('#uploadFileModal').modal('hide');
-            },
-            error: function (errorMessage) {
-                alert(errorMessage.responseText);
+            } else {
+                alert(result.msg);
             }
-        });
-        return false;
+        },
+        error: function (errorMessage) {
+            alert(errorMessage.responseText);
+        }
+    });
+    return false;
 }
 
 function _getCandidateReportById(id) {
@@ -271,7 +271,7 @@ function _getCandidateEmailInfoById(id, candidateName) {
             } else {
                 $('#lockoutDateUtc').text(formatDate(result.LockoutDateUtc.substr(6))); // 5day from created date
             }
-            
+
             $('#candiateEmailInfoModal').modal('show');
         },
         error: function (errorMessage) {
@@ -381,7 +381,7 @@ function generateChart() {
         type: 'Get',
         contentType: "json",
         success: function (rs) {
-            
+
             document.getElementById("textchart").innerHTML = "Statistics By Month";
             var dataRegistered = [];
             var res1 = rs.RegisterArray.split(",");
