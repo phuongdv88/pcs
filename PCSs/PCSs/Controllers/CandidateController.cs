@@ -36,23 +36,17 @@ namespace PCSs.Controllers
                 return HttpNotFound();
             }
             Session["CandidateId"] = can.CandidateId;
+            ViewBag.CandidateId = can.CandidateId;
             if (can.MiddleName == null)
             {
                 ViewBag.Title = can.FirstName + " " + can.LastName;
-            } else
+            }
+            else
             {
                 ViewBag.Title = can.FirstName + " " + can.MiddleName + " " + can.LastName + " 's Information";
 
             }
-
-            List<SelectListItem> items = new List<SelectListItem>();
-            items.Add(new SelectListItem { Text = "Fresher", Value = "Fresher" });
-            items.Add(new SelectListItem { Text = "Junior", Value = "Junior" });
-            items.Add(new SelectListItem { Text = "Senior", Value = "Senior" });
-            items.Add(new SelectListItem { Text = "Manager", Value = "Manager" });
-            items.Add(new SelectListItem { Text = "Higher", Value = "Higher" });
-            ViewBag.LevelType = items;
-            return View(can);
+            return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -100,20 +94,63 @@ namespace PCSs.Controllers
                     var can = db.Candidates.FirstOrDefault(s => s.CandidateId == candidateId);
                     return Json(can, JsonRequestBehavior.AllowGet);
                 }
-                return Json(new { msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
 
-                return Json(new { msg = e.Message }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
             }
 
         }
 
-        //public JsonResult UpdateCandidateInfo(Candidate can)
-        //{
+        public JsonResult UpdateCandidateInfo(Candidate candidate)
+        {
+            long candidateId = -1;
+            try
+            {
+                if (long.TryParse(Session["CandidateId"].ToString(), out candidateId))
+                {
+                    var can = db.Candidates.FirstOrDefault(s => s.CandidateId == candidateId);
+                    if (can.FirstName != candidate.FirstName ||
+                    can.LastName != candidate.FirstName ||
+                    can.Gender != candidate.FirstName ||
+                    can.Email != candidate.FirstName ||
+                    can.PhoneNumber != candidate.FirstName ||
+                    can.DOB != candidate.FirstName ||
+                    can.IDNumber != candidate.FirstName ||
+                    can.JobTitle != candidate.FirstName ||
+                    can.JobLevel != candidate.FirstName ||
+                    can.Address != candidate.FirstName)
+                    {
+                        can.FirstName = candidate.FirstName;
+                        can.MiddleName = candidate.FirstName;
+                        can.LastName = candidate.FirstName;
+                        can.Gender = candidate.FirstName;
+                        can.Email = candidate.FirstName;
+                        can.PhoneNumber = candidate.FirstName;
+                        can.DOB = candidate.FirstName;
+                        can.IDNumber = candidate.FirstName;
+                        can.JobTitle = candidate.FirstName;
+                        can.JobLevel = candidate.FirstName;
+                        can.Address = candidate.FirstName;
+                        if(can.Status == "Initial")
+                        {
+                            can.Status = "Ready";
+                        }
+                        db.Entry(can).State = EntityState.Modified;
+                        var result = db.SaveChanges();
+                        return Json(new { rs = result, msg = "Successfully" }, JsonRequestBehavior.AllowGet);
+                    }
+                }
+                return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
 
-        //}
+                return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
         // ajax add, edit, delete company, add, edit, delete reference
         public JsonResult GetAllCompany(long id)
         {
@@ -133,12 +170,12 @@ namespace PCSs.Controllers
                     var rs = db.SaveChanges();
                     return Json(new { comId = com.CompanyInfoId }, JsonRequestBehavior.AllowGet);
                 }
-                return Json(new { msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
 
-                return Json(new { msg = e.Message }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
             }
 
         }
@@ -168,13 +205,13 @@ namespace PCSs.Controllers
                         company.JobDuties = com.JobDuties;
 
                         db.Entry(company).State = EntityState.Modified;
-                        var rs = db.SaveChanges();
-                        return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
+                        var r = db.SaveChanges();
+                        return Json(new { rs = r, msg = "Successfully" }, JsonRequestBehavior.AllowGet);
                     }
-                    else return Json(new { msg = "1" }, JsonRequestBehavior.AllowGet);
+                    else return Json(new { rs = -1, msg = "1" }, JsonRequestBehavior.AllowGet);
                 }
             }
-            return Json(new { msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+            return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult DeleteCompany(long id)
@@ -188,16 +225,16 @@ namespace PCSs.Controllers
                     if (com != null)
                     {
                         db.CompanyInfoes.Remove(com);
-                        var rs = db.SaveChanges();
-                        return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
+                        var r = db.SaveChanges();
+                        return Json(new { rs = r, msg = "Successfully" }, JsonRequestBehavior.AllowGet);
                     }
                 }
-                return Json(new { msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
 
-                return Json(new { msg = e.Message }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
             }
 
         }
@@ -220,16 +257,16 @@ namespace PCSs.Controllers
                     {
                         refe.CheckingStatus = "Initial";
                         db.ReferenceInfoes.Add(refe);
-                        var rs = db.SaveChanges();
-                        return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
+                        var r = db.SaveChanges();
+                        return Json(new { rs = r, msg = "" }, JsonRequestBehavior.AllowGet);
                     }
                 }
-                return Json(new { msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
 
-                return Json(new { msg = e.Message }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -258,19 +295,19 @@ namespace PCSs.Controllers
                                 reference.Email = refe.Email;
                                 reference.PhoneNumber = refe.PhoneNumber;
                                 db.Entry(reference).State = EntityState.Modified;
-                                var rs = db.SaveChanges();
-                                return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
+                                var r = db.SaveChanges();
+                                return Json(new { rs = r, msg = "" }, JsonRequestBehavior.AllowGet);
                             }
-                            else return Json(new { msg = "1" }, JsonRequestBehavior.AllowGet);
+                            else return Json(new { rs = -1, msg = "1" }, JsonRequestBehavior.AllowGet);
                         }
                     }
                 }
-                return Json(new { msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
 
-                return Json(new { msg = e.Message }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -288,17 +325,17 @@ namespace PCSs.Controllers
                         if (com != null)
                         {
                             db.ReferenceInfoes.Remove(refe);
-                            var rs = db.SaveChanges();
-                            return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
+                            var r = db.SaveChanges();
+                            return Json(new { rs = r, msg = "" }, JsonRequestBehavior.AllowGet);
                         }
                     }
                 }
-                return Json(new { msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
 
-                return Json(new { msg = e.Message }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
             }
         }
         // GET: Candidates/Details/5

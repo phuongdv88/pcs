@@ -158,30 +158,20 @@ function getCandidateInfo() {
         dataType: "json",
         timeout: '5000',
         success: function (result) {
-            var html = '';
-            var i = 0;
-            $.each(result, function (key, item) {
-                i++;
-                // fill up company info
-                // generate html of company form
-                var comFormId = addCompany(false);
-                // fill data to the form
-                $('#' + comFormId).find("#companyId").val(item.CompanyInfoId);
-                $('#' + comFormId).find("#companyName").val(item.Name);
-                $('#' + comFormId).find("#companyAddress").val(item.Address);
-                $('#' + comFormId).find("#companyWebsite").val(item.Website);
-                $('#' + comFormId).find("#companyJobTitle").val(item.Jobtitle);
-                $('#' + comFormId).find("#startDate").val(formatDate(item.StartDate.substr(6)));
-                $('#' + comFormId).find("#stopDate").val(formatDate(item.StopDate.substr(6)));
-                $('#' + comFormId).find("#jobDuties").val(item.JobDuties);
-                // fill up reference every company
-                listComId[item.CompanyInfoId] = comFormId;
+            // fill data to the form
+            $('#candidateFirstName').val(result.FirstName);
+            $('#candidateMiddleName').val(result.MiddleName);
+            $('#candidateLastName').val(result.LastName);
+            $('#candidateGender').val(result.Gender);
+            $('#candidateEmail').val(result.Email);
+            $('#candidatePhoneNumber').val(result.PhoneNumber);
+            $('#candidateDOB').val(result.DOB);
+            $('#candidateIDNumber').val(result.IDNumber);
+            $('#candidateJobTitle').val(result.JobTitle);
+            $('#candidateJobLevel').val(result.JobLevel);
+            $('#candidateAddress').val(result.Address);
 
-            });
-            if (i === 0) {
-                addCompany(true);
-            }
-
+            // fill up reference every company
         },
         error: function (errorMessage) {
             alert(errorMessage.responseText);
@@ -198,28 +188,32 @@ function getCandidateInfo() {
 
 function updateCandidateInfo() {
     var obj = {
-        CompanyInfoId: $("#" + comFormId).find('#companyId').val(),
-        StartDate: $("#" + comFormId).find('#startDate').val(),
-        StopDate: $("#" + comFormId).find('#stopDate').val(),
-        Jobtitle: $("#" + comFormId).find('#companyJobTitle').val(),
-        Name: $("#" + comFormId).find('#companyName').val(),
-        Address: $("#" + comFormId).find('#companyAddress').val(),
-        Website: $("#" + comFormId).find('#companyWebsite').val(),
-        JobDuties: $("#" + comFormId).find('#jobDuties').val(),
+        FirstName: $('#candidateFirstName').val(),
+        MiddleName: $('#candidateMiddleName').val(),
+        LastName: $('#candidateLastName').val(),
+        Gender: $('#candidateGender').val(),
+        Email: $('#candidateEmail').val(),
+        PhoneNumber: $('#candidatePhoneNumber').val(),
+        DOB: $('#candidateDOB').val(),
+        IDNumber: $('#candidateIDNumber').val(),
+        JobTitle: $('#candidateJobTitle').val(),
+        JobLevel: $('#candidateJobLevel').val(),
+        Address: $('#candidateAddress').val(),
     };
     $.ajax({
-        url: '/Candidate/EditCompany/',
+        url: '/Candidate/UpdateCandidateInfo',
         data: JSON.stringify(obj),
         type: "POST",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         timeout: '5000',
-        success: function (rs) {
-            submitReferences(comFormId, comId); // submit all references after submit company
-            return rs.responseText;
+        success: function (result) {
+            if (result.rs === -1) {
+                alert(rs.responseText.msg);
+            }
         },
-        error: function (rs) {
-            alert(rs.responseText);
+        error: function (results) {
+            alert(results.responseText);
         }
     });
 }
@@ -464,11 +458,10 @@ function submitReferences(comFormId, comId) {
         }
     })
 }
-
-$("#updateCandidateForm").submit(function (e) {
-
-    e.preventDefault();
+function submitData() {
     lastSubmit = true;
+    // update Candidate
+
     // Get all company id by class
     var comFormIdArray = $(".companyClass").map(function () { return this.id });
     $.each(comFormIdArray, function (index, value) {
@@ -484,13 +477,12 @@ $("#updateCandidateForm").submit(function (e) {
         deleteCompany(value);
     });
     listDeleteCompanyId.length = 0;
-
-    //$(this).unbind('submit').submit(); // submit form, before it, ensure all ajax script is finish
-});
+}
 
 $(document).ajaxStop(function () {
     if (lastSubmit) {
-        $("#updateCandidateForm").unbind('submit').submit(); // submit form, before it, ensure all ajax script is finish
         lastSubmit = false;
+        // goto login link
+        window.location.href = "/Home/Login";
     }
 });

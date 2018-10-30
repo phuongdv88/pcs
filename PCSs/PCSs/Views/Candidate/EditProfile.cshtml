@@ -1,6 +1,4 @@
-﻿@model PCSs.Models.Candidate
-
-@{
+﻿@{
     Layout = null;
 }
 
@@ -39,244 +37,250 @@
         <!-- general form elements -->
         <div class="box">
             <!-- form start -->
-            @using (Html.BeginForm("EditProfile", "Candidate", FormMethod.Post, new { id = "updateCandidateForm" }))
-            {
-                @Html.AntiForgeryToken()
-                @Html.HiddenFor(model => model.CandidateId)
-                <div class="tab-content">
-                    <!-- general information tab -->
-                    <div id="candidate" class="tab-pane fade in active">
-                        <form id="candidateForm" onsubmit="activeTab('company'); return false;">
-                            <div class="col-md-12">
-                                <div class="box-body">
-                                    <div class="with-border text-center">
-                                        <h3 class="box-title">Basic Information</h3>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-12">
-                                            @Html.Label("Name:")
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    @Html.EditorFor(s => s.FirstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "First Name" } })
-                                                </div>
-                                                <div class="col-md-3">
-                                                    @Html.EditorFor(s => s.MiddleName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Middle Name" } })
-                                                </div>
-                                                <div class="col-md-3">
-                                                    @Html.EditorFor(s => s.LastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Last Name" } })
-                                                </div>
-                                                <div class="form-group col-md-3">
-                                                    <label for="">Gender</label>
-                                                    <div class="row gender">
-                                                        <div class="col-md-6">
-                                                            @Html.RadioButtonFor(model => model.Gender, "Male", new { id = "male" })
-                                                            @Html.Label("male", "Male")
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            @Html.RadioButtonFor(model => model.Gender, "Female", new { id = "female" })
-                                                            @Html.Label("female", "Female")
-                                                        </div>
-                                                    </div>
+
+            <div class="tab-content">
+                <!-- general information tab -->
+                <div id="candidate" class="tab-pane fade in active">
+                    <form id="candidateForm"  onsubmit="activeTab('company'); return false;">
+                        @Html.AntiForgeryToken()
+                        <input id="candidateId" hidden value="-1" />
+                        <div class="col-md-12">
+                            <div class="box-body">
+                                <div class="with-border text-center">
+                                    <h3 class="box-title">Basic Information</h3>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label class="control-label">Name:</label>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <input class="form-control" type="text" id="candidateFirstName" placeholder="First Name..." required />
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input type="text" class="form-control"  id="candidateMiddleName" placeholder="Middle Name..." />
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input type="text" class="form-control"  id="candidateLastName" placeholder="Last Name..." required />
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label  class="control-label">Gender</label>
+                                                <!-- radio -->
+                                                <div class="form-group" id="candidateGender">
+                                                    <label>
+                                                        <input type="radio" name ="gender" value="Male" class="minimal" checked>
+                                                        Male
+                                                    </label>
+                                                    <label>
+                                                        <input type="radio" name="gender" value="Female" class="minimal">
+                                                        Female
+                                                    </label>
                                                 </div>
                                             </div>
-
                                         </div>
 
                                     </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-3">
-                                            @Html.LabelFor(model => model.Email)
-                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", type = "email" } })
 
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            @Html.LabelFor(model => model.PhoneNumber)
-                                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control"} })
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            @Html.LabelFor(model => model.DOB)
-                                            @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control" } })
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            @Html.LabelFor(model => model.IDNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-                                            @Html.EditorFor(model => model.IDNumber, new { htmlAttributes = new { @class = "form-control" } })
-                                        </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-3">
+                                        <label class="control-label">Email</label>
+                                        <input type="email" class="form-control" id="candidateEmail" placeholder="Email.." required>
                                     </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-6">
-                                            @Html.LabelFor(model => model.JobTitle)
-                                            @Html.EditorFor(model => model.JobTitle, new { htmlAttributes = new { @class = "form-control" } })
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            @Html.LabelFor(model => model.JobLevel)
-                                            @Html.DropDownListFor(model => model.JobLevel, new SelectList(ViewBag.LevelType, "Value", "Text"), new { id = "Level Type", @class = "form-control" })
-                                        </div>
+                                    <div class="form-group col-md-3">
+                                        <label class="control-label">Phone Number</label><br />
+                                        <input type="text" class="form-control" id="candidatePhoneNumber" pattern="^[0-9\-\+]{9,15}$" placeholder="Phone number.." required>
                                     </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-12">
-                                            @Html.LabelFor(model => model.Address)
-                                            @Html.TextAreaFor(model => model.Address, new { @class = "form-control col-md-12", @rows = 5 })
+                                    <div class="form-group col-md-3">
+                                        <label class="control-label">Date Of Birth</label>
+                                        <input class="form-control" type="text" id="candidateDOB" placeholder="Date of birth..." required />
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label class="control-label">Identity Card Number</label>
+                                        <input class="form-control" type="text" id="candidateIDNumber" placeholder="Identity Card Number..." required />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label">Job Title</label>
+                                        <input class="form-control" type="text" id="candidateJobTitle" placeholder="Job Title..." required />
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label">Job Level</label>
+                                        <div class="form-group">
+                                            <select class="form-control select2" id="candidateJobLevel" required>
+                                                <option value="Fresher">Fresher</option>
+                                                <option value="Junior">Junior</option>
+                                                <option value="Senior">Senior</option>
+                                                <option value="Manager">Manager</option>
+                                                <option value="Higher">Higher</option>s
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- /.box-body -->
-                                <div class="box-footer text-right col-md-12">
-                                    <button type="button" class="btn btn-primary" href="#company" data-toggle="pill">Next</button>
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label class="control-label">Address</label>
+                                        <textarea class="form-control col-md-12" placeholder="Address.." cols="20" id="candidateAddress" name="candidateAddress" rows="5" required></textarea>
+                                    </div>
                                 </div>
                             </div>
-                        </form>
-                    </div>
-
-                    <!-- Company information tab-->
-                    <div id="company" class="tab-pane fade">
-                        <!-- form start -->
-
-                        <div class="box-body" id="company-information">
-                            <!-- add company and reference info here-->
-                            <div id="baseFormCompany">
-                                <form id="company-base-info_comId" onsubmit="activeTab('candidate'); return false;" hidden>
-                                    <div class="with-border text-center">
-                                        <h3 class="box-title">Company Information</h3>
-                                    </div>
-                                    <div class="cold-md-3 cancel text-right" id="button-remove-company" onclick="removeCompany('company-base-info_comId')">
-                                        <button class="btn btn-danger" title="Remove this company"><i class="fa fa-times" aria-hidden="true"></i></button>
-                                    </div>
-                                    <div class="box-body">
-                                        <div class="company-general-information">
-                                            <input id="companyId" hidden value="-1" />
-                                            <div class="row">
-                                                <div class="form-group col-md-6">
-                                                    <label class="control-label  col-md-6">Name</label>
-                                                    <input type="text" class="form-control" placeholder="Company Name..." id="companyName" required />
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label class="control-label  col-md-6">Address</label>
-                                                    <input type="text" class="form-control" placeholder="Address..." id="companyAddress" required />
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="form-group col-md-6">
-                                                    <label class="control-label col-md-6">Website</label>
-                                                    <input type="text" class="form-control" placeholder="Website..." id="companyWebsite" required />
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label class="control-label col-md-6">Job Title</label>
-                                                    <input type="text" class="form-control" placeholder="Job title..." id="companyJobTitle" required />
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="form-group col-md-6">
-                                                    <label class="control-label col-md-6">Start Date</label>
-                                                    <div class="input-group date col-md-12">
-                                                        <div class="input-group-addon">
-                                                            <i class="fa fa-calendar"></i>
-                                                        </div>
-                                                        <input type="text" class="form-control pull-right" id="startDate" required>
-                                                    </div>
-
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label class="control-label col-md-6">Stop Date</label>
-                                                    <div class="input-group date col-md-12">
-                                                        <div class="input-group-addon">
-                                                            <i class="fa fa-calendar"></i>
-                                                        </div>
-                                                        <input type="text" class="form-control pull-right col-md-6" id="stopDate" required>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="form-group col-md-12">
-                                                    <label class="control-label col-md-6">Job Duties</label>
-                                                    <textarea class="form-control col-md-12" placeholder="Job Duties.." cols="20" id="jobDuties" name="jobDuties" rows="3" required></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--Reference information-->
-                                        <div id="referenceInformation">
-                                            <div id="baseReference">
-                                                <div id="reference-information_refeId" hidden>
-                                                    <div class="box-body">
-                                                        <div class="cold-md-3 cancel text-right" onclick="removeReference('reference-information_refeId', 'company-base-info_comId')" id="btnRemoveReference" hidden>
-                                                            <button class="btn btn-danger" title="Remove this reference"><i class="fa fa-times" aria-hidden="true"></i></button>
-                                                        </div>
-                                                        <input id="referenceId" hidden value="-1" required />
-                                                        <div class="row">
-                                                            <div class="col-md-9">
-                                                                <h3>Reference Information</h3>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="form-group col-md-6">
-                                                                <label class="control-label  col-md-6">Full Name</label>
-                                                                <input type="text" class="form-control" placeholder="Full Name..." id="refeFullName" required />
-                                                            </div>
-                                                            <div class="form-group col-md-3">
-                                                                <label class="control-label col-md-12">Job Title</label>
-                                                                <input type="text" class="form-control" placeholder="Job Title..." id="refeJobTitle" required />
-                                                            </div>
-                                                            <div class="form-group col-md-3">
-                                                                <label class="control-label  col-md-12">Relationship</label>
-                                                                <div class="form-group">
-                                                                    <select class="form-control select2" id="refeRelationship" required>
-                                                                        <option value="Superior">Superior</option>
-                                                                        <option value="Peer">Peer</option>
-                                                                        <option value="Subordinate">Subordinate</option>
-                                                                        <option value="Other">Other</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="form-group col-md-6">
-                                                                <label class="control-label  col-md-6">Email</label>
-                                                                <input type="email" class="form-control" placeholder="Email..." id="refeEmail" required />
-                                                            </div>
-                                                            <div class="form-group col-md-6">
-                                                                <label class="control-label  col-md-6">Phone Number</label>
-                                                                <input type="text" class="form-control" placeholder="Phone Number..." id="refePhoneNumber" required pattern="^[0-9\-\+]{9,15}$" />
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--Add reference button-->
-                                        <div class="box-title clickadd" id="addReferenceButton">
-                                            <button type="button" class="btn btn-primary" id="button-add-reference" title="Add reference" onclick="addReference('company-base-info_comId')">+ Add reference</button>
-                                        </div>
-                                    </div>
-                                </form>
+                            <!-- /.box-body -->
+                            <div class="box-footer text-right col-md-12">
+                                <button type="submit" class="btn btn-primary" >Next</button>
                             </div>
                         </div>
-                        <!--/.Company info-->
-                        <div class="box-footer text-right" id="add-company-button">
-                            <button type="button" class="btn btn-primary" id="btnAddCompany" title="Add company" onclick="addCompany(true)"><i class="fa fa-plus" aria-hidden="true"></i></button>
-                        </div>
-                        <div class="checkbox icheck">
-                            <label id="ConfirmSubmit">
-                                <input type="checkbox" class="minimal" id="cbConfirmSubmit">
-                                I guarantee the above information is true and take full responsibility before the law. The company reserves the right to verify the above information.
-                            </label>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="box-footer">
-                                    <button type="button" class="btn btn-primary" href="#candidate" data-toggle="pill">Back</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="box-footer text-center">
-                            <button type="submit" class="btn btn-primary" id="buttonSubmit" disabled="disabled">Submit</button>
-                        </div>
-
-                    </div>
+                    </form>
                 </div>
-            }
+            </div>
+            <!-- Company information tab-->
+            <div id="company" class="tab-pane fade">
+                <!-- form start -->
+                <form id="companyForm" onsubmit="submitData(); return false;" hidden>
+                    <div class="box-body" id="company-information">
+                        <!-- add company and reference info here-->
+                        <div id="baseFormCompany">
+                            <div id="company-base-info_comId" onsubmit="activeTab('candidate'); return false;" hidden>
+                                <div class="with-border text-center">
+                                    <h3 class="box-title">Company Information</h3>
+                                </div>
+                                <div class="cold-md-3 cancel text-right" id="button-remove-company" onclick="removeCompany('company-base-info_comId')">
+                                    <button class="btn btn-danger" title="Remove this company"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                </div>
+                                <div class="box-body">
+                                    <div class="company-general-information">
+                                        <input id="companyId" hidden value="-1" />
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label  col-md-6">Name</label>
+                                                <input type="text" class="form-control" placeholder="Company Name..." id="companyName" required />
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label  col-md-6">Address</label>
+                                                <input type="text" class="form-control" placeholder="Address..." id="companyAddress" required />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label col-md-6">Website</label>
+                                                <input type="text" class="form-control" placeholder="Website..." id="companyWebsite" required />
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label col-md-6">Job Title</label>
+                                                <input type="text" class="form-control" placeholder="Job title..." id="companyJobTitle" required />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label col-md-6">Start Date</label>
+                                                <div class="input-group date col-md-12">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </div>
+                                                    <input type="text" class="form-control pull-right" id="startDate" required>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label col-md-6">Stop Date</label>
+                                                <div class="input-group date col-md-12">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </div>
+                                                    <input type="text" class="form-control pull-right col-md-6" id="stopDate" required>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-12">
+                                                <label class="control-label col-md-6">Job Duties</label>
+                                                <textarea class="form-control col-md-12" placeholder="Job Duties.." cols="20" id="jobDuties" name="jobDuties" rows="3" required></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Reference information-->
+                                    <div id="referenceInformation">
+                                        <div id="baseReference">
+                                            <div id="reference-information_refeId" hidden>
+                                                <div class="box-body">
+                                                    <div class="cold-md-3 cancel text-right" onclick="removeReference('reference-information_refeId', 'company-base-info_comId')" id="btnRemoveReference" hidden>
+                                                        <button class="btn btn-danger" title="Remove this reference"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                                    </div>
+                                                    <input id="referenceId" hidden value="-1" required />
+                                                    <div class="row">
+                                                        <div class="col-md-9">
+                                                            <h3>Reference Information</h3>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6">
+                                                            <label class="control-label  col-md-6">Full Name</label>
+                                                            <input type="text" class="form-control" placeholder="Full Name..." id="refeFullName" required />
+                                                        </div>
+                                                        <div class="form-group col-md-3">
+                                                            <label class="control-label col-md-12">Job Title</label>
+                                                            <input type="text" class="form-control" placeholder="Job Title..." id="refeJobTitle" required />
+                                                        </div>
+                                                        <div class="form-group col-md-3">
+                                                            <label class="control-label  col-md-12">Relationship</label>
+                                                            <div class="form-group">
+                                                                <select class="form-control select2" id="refeRelationship" required>
+                                                                    <option value="Superior">Superior</option>
+                                                                    <option value="Peer">Peer</option>
+                                                                    <option value="Subordinate">Subordinate</option>
+                                                                    <option value="Other">Other</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6">
+                                                            <label class="control-label  col-md-6">Email</label>
+                                                            <input type="email" class="form-control" placeholder="Email..." id="refeEmail" required />
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label class="control-label  col-md-6">Phone Number</label>
+                                                            <input type="text" class="form-control" placeholder="Phone Number..." id="refePhoneNumber" required pattern="^[0-9\-\+]{9,15}$" />
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Add reference button-->
+                                    <div class="box-title clickadd" id="addReferenceButton">
+                                        <button type="button" class="btn btn-primary" id="button-add-reference" title="Add reference" onclick="addReference('company-base-info_comId')">+ Add reference</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/.Company info-->
+                    <div class="box-footer text-right" id="add-company-button">
+                        <button type="button" class="btn btn-primary" id="btnAddCompany" title="Add company" onclick="addCompany(true)"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                    </div>
+                    <div class="checkbox icheck">
+                        <label id="ConfirmSubmit">
+                            <input type="checkbox" class="minimal" id="cbConfirmSubmit">
+                            I guarantee the above information is true and take full responsibility before the law. The company reserves the right to verify the above information.
+                        </label>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="box-footer">
+                                <button type="button" class="btn btn-primary" href="#candidate" data-toggle="pill">Back</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="box-footer text-center">
+                        <button type="submit" class="btn btn-primary" id="buttonSubmit" disabled="disabled">Submit</button>
+                    </div>
+                </form>
+
+            </div>
         </div>
     </div>
     <!-- jQuery 3 -->
@@ -298,7 +302,8 @@
     <script type="text/javascript" src="~/Scripts/edit-profile-candidate-1.0.0.js"></script>
     <script>
         $(function () {
-            getAllCompany(@Model.CandidateId);
+            getCandidateInfo();
+            getAllCompany(@ViewBag.CandidateId);
         })
     </script>
 </body>

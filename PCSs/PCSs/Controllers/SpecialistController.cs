@@ -156,7 +156,7 @@ namespace PCSs.Controllers
             long specialistId = -1;
             if (!long.TryParse(Session["SpecialistId"].ToString(), out specialistId))
             {
-                return Json(new { msg = "Error: Can't get specialist's profile" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Error: Can't get specialist's profile" }, JsonRequestBehavior.AllowGet);
             }
             var specialist = db.Specialists.FirstOrDefault(x => x.SpecialistId == specialistId);
             return Json(specialist, JsonRequestBehavior.AllowGet);
@@ -167,7 +167,7 @@ namespace PCSs.Controllers
             long specialistId = -1;
             if (!long.TryParse(Session["SpecialistId"].ToString(), out specialistId))
             {
-                return Json(new { msg = "Error: Can't get specialist's profile" }, JsonRequestBehavior.AllowGet);
+                return Json(new {rs = -1, msg = "Error: Can't get specialist's profile" }, JsonRequestBehavior.AllowGet);
             }
             string registered = "";
             string completed = "";
@@ -321,7 +321,7 @@ namespace PCSs.Controllers
                 }
                 catch (Exception e)
                 {
-                    return Json(new { msg = e.Message }, JsonRequestBehavior.AllowGet);
+                    return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
                 }
             }
 
