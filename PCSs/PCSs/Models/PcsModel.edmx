@@ -76,7 +76,9 @@
           <Property Name="CheckingStatus" Type="varchar" MaxLength="50" />
           <Property Name="CandidateId" Type="bigint" Nullable="false" />
           <Property Name="CheckingTime" Type="datetime" />
-          <Property Name="isChecked" Type="bit" Nullable="false" />
+          <Property Name="IsChecked" Type="bit" Nullable="false" />
+          <Property Name="JobDuties" Type="nvarchar(max)" />
+          <Property Name="CheckResult" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="EducationInfo">
           <Key>
@@ -248,7 +250,9 @@
           <Property Name="CheckingStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CandidateId" Type="Int64" Nullable="false" />
           <Property Name="CheckingTime" Type="DateTime" Precision="3" />
-          <Property Name="isChecked" Type="Boolean" Nullable="false" />
+          <Property Name="IsChecked" Type="Boolean" Nullable="false" />
+          <Property Name="JobDuties" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CheckResult" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="EducationInfo">
           <Key>
@@ -411,6 +415,9 @@
           <EntitySetMapping Name="CompanyInfoes">
             <EntityTypeMapping TypeName="PCSModel.CompanyInfo">
               <MappingFragment StoreEntitySet="CompanyInfo">
+                <ScalarProperty Name="CheckResult" ColumnName="CheckResult" />
+                <ScalarProperty Name="JobDuties" ColumnName="JobDuties" />
+                <ScalarProperty Name="IsChecked" ColumnName="IsChecked" />
                 <ScalarProperty Name="CompanyInfoId" ColumnName="CompanyInfoId" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="StopDate" ColumnName="StopDate" />
@@ -424,7 +431,6 @@
                 <ScalarProperty Name="CheckingStatus" ColumnName="CheckingStatus" />
                 <ScalarProperty Name="CandidateId" ColumnName="CandidateId" />
                 <ScalarProperty Name="CheckingTime" ColumnName="CheckingTime" />
-                <ScalarProperty Name="isChecked" ColumnName="isChecked" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

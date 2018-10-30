@@ -29,7 +29,13 @@ namespace PCSs.Controllers
             var recruiter = db.Recruiters.FirstOrDefault(s => s.RecruiterId == id);
             if (recruiter != null)
             {
-                ViewBag.Title = recruiter.FirstName + " " + recruiter.MiddleName + " " + recruiter.LastName;
+                if(recruiter.MiddleName == null){
+                    ViewBag.Title = recruiter.FirstName + " " + recruiter.LastName;
+                } else
+                {
+                    ViewBag.Title = recruiter.FirstName + " " + recruiter.MiddleName + " " + recruiter.LastName;
+
+                }
             }
             return View();
         }
@@ -59,12 +65,12 @@ namespace PCSs.Controllers
             long recruitID = -1;
             if (!long.TryParse(Session["RecruiterId"].ToString(), out recruitID))
             {
-                return Json(new { rs = -1, msg = "Error: You don't have permittion to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
             }
             var candidate = db.Candidates.First(s => s.CandidateId == id && s.RecruiterId == recruitID);
             if (candidate == null)
             {
-                return Json(new { rs = -1, msg = "Error: You don't have permittion to view this candidate report" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Error: You don't have permission to view this candidate report" }, JsonRequestBehavior.AllowGet);
             }
             var attachment = db.AttachmentFiles.LastOrDefault(s => s.CandidateId == id);
             if(attachment != null)
@@ -183,12 +189,16 @@ namespace PCSs.Controllers
             long recruitID = -1;
             if (!long.TryParse(Session["RecruiterId"].ToString(), out recruitID))
             {
-                return Json(new { msg = "Error: You don't have permittion to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
             }
             var candidate = db.Candidates.First(s => s.CandidateId == can.CandidateId && s.RecruiterId == recruitID);
             if (candidate == null)
             {
-                return Json(new { msg = "Error: You don't have permittion to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+            }
+            if(candidate.Status != "Initial")
+            {
+                return Json(new { msg = "Error: Can not edit candidate information when they submited" }, JsonRequestBehavior.AllowGet);
             }
             candidate.FirstName = can.FirstName;
             candidate.MiddleName = can.MiddleName;
@@ -197,14 +207,29 @@ namespace PCSs.Controllers
             candidate.PhoneNumber = can.PhoneNumber;
             candidate.JobTitle = can.JobTitle;
             candidate.JobLevel = can.JobLevel;
-            //db.Entry(candidate).State = EntityState.Modified;
+            db.Entry(candidate).State = EntityState.Modified;
             var rs = db.SaveChanges();
             return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult Delete(long id)
+        public JsonResult DeleteCandidate(long id)
         {
-            db.Candidates.Remove(db.Candidates.FirstOrDefault(s => s.CandidateId == id && s.RecruiterId == long.Parse(Session["RecruiterId"].ToString())));
+            long recruitID = -1;
+            if (!long.TryParse(Session["RecruiterId"].ToString(), out recruitID))
+            {
+                return Json(new { msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+            }
+            var candidate = db.Candidates.FirstOrDefault(s => s.CandidateId == id && s.RecruiterId == recruitID);
+            if (candidate == null)
+            {
+                return Json(new { msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+            }
+            if (candidate.Status != "Initial")
+            {
+                return Json(new { msg = "Error: Can not edit candidate information when they submited" }, JsonRequestBehavior.AllowGet);
+            }
+
+            db.Candidates.Remove(candidate);
             var rs = db.SaveChanges();
             return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
         }
@@ -273,7 +298,12 @@ namespace PCSs.Controllers
                     recruiter.PhoneNumber = newRecruiter.PhoneNumber;
                     db.Entry(recruiter).State = EntityState.Modified;
                     var r = db.SaveChanges();
-                    return Json(new { rs = r, msg = recruiter.FirstName + " " + recruiter.MiddleName + " " + recruiter.LastName }, JsonRequestBehavior.AllowGet);
+                    var recruiterName = recruiter.FirstName + " " + recruiter.LastName;
+                    if(recruiter.MiddleName != null)
+                    {
+                        recruiterName = recruiter.FirstName + " " + recruiter.MiddleName + " " + recruiter.LastName;
+                    } 
+                    return Json(new { rs = r, msg = recruiterName }, JsonRequestBehavior.AllowGet);
                 }
             }
             return Json(new { rs = -1, msg = "1" }, JsonRequestBehavior.AllowGet);

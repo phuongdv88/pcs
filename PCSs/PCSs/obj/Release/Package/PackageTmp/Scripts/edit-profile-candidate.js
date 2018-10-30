@@ -173,6 +173,7 @@ function getAllCompany(id) {
                 $('#' + comFormId).find("#companyJobTitle").val(item.Jobtitle);
                 $('#' + comFormId).find("#startDate").val(formatDate(item.StartDate.substr(6)));
                 $('#' + comFormId).find("#stopDate").val(formatDate(item.StopDate.substr(6)));
+                $('#' + comFormId).find("#jobDuties").val(item.JobDuties);
                 // fill up reference every company
                 listComId[item.CompanyInfoId] = comFormId;
 
@@ -234,6 +235,7 @@ function newCompany(comFormId) {
         Name: $("#" + comFormId).find('#companyName').val(),
         Address: $("#" + comFormId).find('#companyAddress').val(),
         Website: $("#" + comFormId).find('#companyWebsite').val(),
+        JobDuties: $("#" + comFormId).find('#jobDuties').val(),
     };
     $.ajax({
         url: '/Candidate/CreateCompany/',
@@ -260,6 +262,7 @@ function editCompany(comFormId, comId) {
         Name: $("#" + comFormId).find('#companyName').val(),
         Address: $("#" + comFormId).find('#companyAddress').val(),
         Website: $("#" + comFormId).find('#companyWebsite').val(),
+        JobDuties: $("#" + comFormId).find('#jobDuties').val(),
     };
     $.ajax({
         url: '/Candidate/EditCompany/',

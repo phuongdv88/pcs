@@ -61,6 +61,9 @@
     <EntitySetMapping Name="CompanyInfoes">
       <EntityTypeMapping TypeName="PCSModel.CompanyInfo">
         <MappingFragment StoreEntitySet="CompanyInfo">
+          <ScalarProperty Name="CheckResult" ColumnName="CheckResult" />
+          <ScalarProperty Name="JobDuties" ColumnName="JobDuties" />
+          <ScalarProperty Name="IsChecked" ColumnName="IsChecked" />
           <ScalarProperty Name="CompanyInfoId" ColumnName="CompanyInfoId" />
           <ScalarProperty Name="StartDate" ColumnName="StartDate" />
           <ScalarProperty Name="StopDate" ColumnName="StopDate" />
@@ -74,7 +77,6 @@
           <ScalarProperty Name="CheckingStatus" ColumnName="CheckingStatus" />
           <ScalarProperty Name="CandidateId" ColumnName="CandidateId" />
           <ScalarProperty Name="CheckingTime" ColumnName="CheckingTime" />
-          <ScalarProperty Name="isChecked" ColumnName="isChecked" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

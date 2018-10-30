@@ -233,3 +233,7 @@ F:\pcs\PCSs\PCSs\bin\Newtonsoft.Json.xml
 F:\pcs\PCSs\PCSs\obj\Debug\PCSs.dll
 F:\pcs\PCSs\PCSs\obj\Debug\PCSs.pdb
 D:\SwilifeSourceCode\PCSGIT\pcs\PCSs\PCSs\obj\Debug\PCSs.csprojResolveAssemblyReference.cache
+D:\tailieu\Swilife\pcs\PCSs\PCSs\obj\Debug\PCSs.csprojAssemblyReference.cache
+D:\SwilifeSourceCode\PCSGIT\pcs\PCSs\PCSs\obj\Debug\PCSs.csprojResolveAssemblyReference.cache
+F:\pcs\PCSs\PCSs\obj\Debug\PCSs.csprojResolveAssemblyReference.cache
+

@@ -27,6 +27,8 @@ namespace PCSs.Models
         public string CheckingStatus { get; set; }
         public long CandidateId { get; set; }
         public Nullable<System.DateTime> CheckingTime { get; set; }
-        public bool isChecked { get; set; }
+        public bool IsChecked { get; set; }
+        public string JobDuties { get; set; }
+        public string CheckResult { get; set; }
     }
 }
