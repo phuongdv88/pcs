@@ -453,6 +453,7 @@
     <Content Include="Content\Css\skins\skin-yellow.min.css" />
     <Content Include="Content\Css\skins\_all-skins.css" />
     <Content Include="Content\Css\skins\_all-skins.min.css" />
+    <Content Include="Content\Css\Specialist.css" />
     <Content Include="Content\datatables.net-bs\css\dataTables.bootstrap.css" />
     <Content Include="Content\datatables.net-bs\css\dataTables.bootstrap.min.css" />
     <Content Include="Content\datatables.net-bs\js\dataTables.bootstrap.js" />
@@ -579,9 +580,11 @@
     <Content Include="Content\iCheck\square\yellow.css" />
     <Content Include="Content\iCheck\square\yellow.png" />
     <Content Include="Content\iCheck\square\_all.css" />
+    <Content Include="Content\Image\assignme.png" />
     <Content Include="Content\Image\b2.jpg" />
     <Content Include="Content\Image\e-mail.png" />
     <Content Include="Content\Image\facebook-icon.png" />
+    <Content Include="Content\Image\iconcompany.png" />
     <Content Include="Content\Image\iconmanager.png" />
     <Content Include="Content\Image\iconreport.png" />
     <Content Include="Content\Image\icons8-view-50.png" />
@@ -593,7 +596,12 @@
     <Content Include="Content\Image\LogoSample_ByTailorBrands.jpg" />
     <Content Include="Content\Image\logotrang.png" />
     <Content Include="Content\Image\password.png" />
+    <Content Include="Content\Image\processing.png" />
+    <Content Include="Content\Image\recruiter.png" />
+    <Content Include="Content\Image\send.png" />
+    <Content Include="Content\Image\specialist-user.png" />
     <Content Include="Content\Image\tick.png" />
+    <Content Include="Content\Image\upload.png" />
     <Content Include="Content\Image\user.png" />
     <Content Include="Content\Image\user2-160x160.jpg" />
     <Content Include="Content\Ionicons\css\ionicons.css" />
@@ -2134,7 +2142,6 @@
     <Content Include="Content\bootstrap-datepicker\less\.csslintrc" />
     <Content Include="Content\bootstrap-datepicker\less\datepicker.less" />
     <Content Include="Content\bootstrap-datepicker\less\datepicker3.less" />
-    <None Include="Properties\PublishProfiles\pcs.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

@@ -186,8 +186,10 @@ F:\pcs\PCSs\PCSs\bin\Antlr3.Runtime.pdb
 F:\pcs\PCSs\PCSs\bin\Newtonsoft.Json.xml
 F:\pcs\PCSs\PCSs\obj\Debug\PCSs.dll
 F:\pcs\PCSs\PCSs\obj\Debug\PCSs.pdb
+D:\SwilifeSourceCode\PCSGIT\pcs\PCSs\PCSs\obj\Debug\PCSs.csprojResolveAssemblyReference.cache
 D:\tailieu\Swilife\pcs\PCSs\PCSs\obj\Debug\PCSs.csprojAssemblyReference.cache
 F:\pcs\PCSs\PCSs\obj\Debug\PCSs.csprojResolveAssemblyReference.cache
+<<<<<<< HEAD
 D:\SwilifeSourceCode\PCSGIT\pcs\PCSs\PCSs\bin\roslyn\csc.exe
 D:\SwilifeSourceCode\PCSGIT\pcs\PCSs\PCSs\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 D:\SwilifeSourceCode\PCSGIT\pcs\PCSs\PCSs\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
@@ -235,3 +237,6 @@ D:\SwilifeSourceCode\PCSGIT\pcs\PCSs\PCSs\bin\Newtonsoft.Json.xml
 D:\SwilifeSourceCode\PCSGIT\pcs\PCSs\PCSs\obj\Debug\PCSs.dll
 D:\SwilifeSourceCode\PCSGIT\pcs\PCSs\PCSs\obj\Debug\PCSs.pdb
 D:\SwilifeSourceCode\PCSGIT\pcs\PCSs\PCSs\obj\Debug\PCSs.csprojResolveAssemblyReference.cache
+=======
+
+>>>>>>> 2e3e7f72fbe1740d287b962bedb4d6acfb289c03
