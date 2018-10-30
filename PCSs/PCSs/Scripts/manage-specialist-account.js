@@ -71,7 +71,7 @@ function getAvailableCandidate() {
                     html += '<td>' + formatDate(item.CompleteTime.substr(6)) + '</td>';
                 }
                 if (item.Status === "Initial") {
-                    html += '<td style="text-align: center; vertical-align: middle;"><a href="#" onClick="return assignMe(' + item.CandidateId + ')" class="fas fa-check" title="Assign Me"></a></td>';
+                    html += '<td style="text-align: center; vertical-align: middle;"><a href="#" onClick="return assignMe(' + item.CandidateId + ')" class="fas fa-hand-point-up" title="Assign to me"></a></td>';
                 } else {
                     html += '<td></td>';
                 }
@@ -123,23 +123,20 @@ function getMyCandidate() {
                 }
 
                 if (item.Status === "Initial") {
-                    html += '<td style="text-align: center; vertical-align: middle;"><a href="#" onClick="return emailToCandidate(' + item.CandidateId + ')" class="fas fa-envelope" title="Email to Candidate"></a><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span><a href="#" onClick="return processBackgroundChecks(' + item.CandidateId + ')" class="fas fa-user-check" title="Process Background Checks"></a><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span><a href="#" onClick="return getUploadFileForm(' + item.CandidateId + ')" class="fas fa-file-upload" title="Upload Report"></a></td>';
+                    html += '<td style="text-align: center; vertical-align: middle;"><a href="#" onClick="return _getCandidateEmailInfoById(' + item.CandidateId + ', \'' + candidateName + '\')" class="fas fa-envelope" title="Email to Candidate"></a><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span><a href="/Specialist/ProcessBackgroundCheckCandidate/' + item.CandidateId + '" class="fas fa-user-check" title="Process Background Checks"></a><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span><a href="#" onClick="return getUploadFileForm(' + item.CandidateId + ')" class="fas fa-file-upload" title="Upload Report"></a></td>';
 
                 } else {
                     html += '<td></td>';
                 }
-                //html += '<td><a href="#" onClick="return getUploadFileForm(' + item.CandidateId + ')" class="fas fa-pencil-alt" title="View detail"></a></td>';
                 html += '</tr>';
             });
             $('#myTask tbody').html(html);
             $('#myTask').DataTable();
-
         },
         error: function (errorMessage) {
             alert(errorMessage.responseText);
         }
     });
-    return false;
     return false;
 }
 
@@ -156,6 +153,7 @@ function assignMe(canId) {
                 alert(rs.msg);
             } else {
                 $('#btnRefresh').click();
+                $('#btnRefreshmyTask').click();                
             }
         },
         error: function (errorMessage) {
@@ -184,14 +182,36 @@ function uploadFile() {
     xhr.send(formdata);
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
-            //alert(xhr.responseText);
-            $('#uploadFileModal').modal('hide');
+            //$('#uploadFileModal').modal('hide');
+            // check success or not?
+            //change status
+            updateStatus($("#candidateId").val(), $("#candidateStatus").val())
         }
     }
     //todo: change state of Candidate to Complete of Close
     return false;
 }
 
+function updateStatus(id, status) {
+        var obj = {
+            CandidateId: id,
+            Status: status
+        }
+        $.ajax({
+            url: '/Specialist/UpdateStatus',
+            data: JSON.stringify(obj),
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                $('#uploadFileModal').modal('hide');
+            },
+            error: function (errorMessage) {
+                alert(errorMessage.responseText);
+            }
+        });
+        return false;
+}
 
 function _getCandidateReportById(id) {
     $.ajax({
@@ -236,60 +256,31 @@ function _getCandidateById(id) {
     });
     return false;
 }
-/// generate information that is including user name and password of candidate
-//function _getCandidateInfoById(id, candidateName) {
-//    $.ajax({
-//        url: '/Specialist/GetCandidateInfo/' + id,
-//        type: 'Get',
-//        contentType: "json",
-//        success: function (result) {
-//            $('#candidateName').text(candidateName);
-//            $('#userNameInfo').text(result.UserName); // need to update to db the field userName, password of candiate table
-//            $('#passwordRaw').text(result.PasswordRaw);
-//            if (result.LockoutDateUtc == undefined) {
-//                $('#lockoutDateUtc').text('N/A'); // 5day from created date
-//            } else {
-//                $('#lockoutDateUtc').text(formatDate(result.LockoutDateUtc.substr(6))); // 5day from created date
-//            }
+
+function _getCandidateEmailInfoById(id, candidateName) {
+    $.ajax({
+        url: '/Specialist/GetCandidateInfo/' + id,
+        type: 'Get',
+        contentType: "json",
+        success: function (result) {
+            $('#candidateName').text(candidateName);
+            $('#userNameInfo').text(result.UserName); // need to update to db the field userName, password of candiate table
+            $('#passwordRaw').text(result.PasswordRaw);
+            if (result.LockoutDateUtc == undefined) {
+                $('#lockoutDateUtc').text('N/A'); // 5day from created date
+            } else {
+                $('#lockoutDateUtc').text(formatDate(result.LockoutDateUtc.substr(6))); // 5day from created date
+            }
             
-//            $('#candiateInfoModal').modal('show');
-//        },
-//        error: function (errorMessage) {
-//            alert(errorMessage.responseText);
-//        }
-//    });
-//    return false;
-//}
+            $('#candiateEmailInfoModal').modal('show');
+        },
+        error: function (errorMessage) {
+            alert(errorMessage.responseText);
+        }
+    });
+    return false;
+}
 
-//function _edit() {
-//    var obj = {
-//        CandidateId: $('#candidateId').val(),
-//        FirstName: $('#firstName').val(),
-//        MiddleName: $('#middleName').val(),
-//        LastName: $('#lastName').val(),
-//        Email: $('#email').val(),
-//        PhoneNumber: $('#phoneNumber').val(),
-//        JobTitle: $('#jobTitle').val(),
-//        JobLevel: $('#jobLevel').val(),
-//        CurrentSpecialistId: currentSpecialistId
-//    }
-
-//    $.ajax({
-//        url: '/Specialist/UpdateCandidate',
-//        data: JSON.stringify(obj),
-//        type: 'POST',
-//        contentType: "application/json; charset=utf-8",
-//        dataType: "json",
-//        success: function (result) {
-//            $('#btnRefresh').click();
-//            $("#newCandidateModal").modal('hide');
-//        },
-//        error: function (errorMessage) {
-//            alert(errorMessage.responseText);
-//        }
-//    });
-//    return false;
-//}
 
 function getProfile() {
     $.ajax({

@@ -103,12 +103,12 @@ namespace PCSs.Controllers
                 if (long.TryParse(Session["CandidateId"].ToString(), out candidateId))
                 {
                     com.CandidateId = candidateId;
-                    com.isChecked = false;
+                    com.IsChecked = false;
                     db.CompanyInfoes.Add(com);
                     var rs = db.SaveChanges();
                     return Json(new { comId = com.CompanyInfoId }, JsonRequestBehavior.AllowGet);
                 }
-                return Json(new { msg = "Error: You don't have permittion to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
@@ -131,7 +131,8 @@ namespace PCSs.Controllers
                     company.Jobtitle != com.Jobtitle ||
                     company.Name != com.Name ||
                     company.Address != com.Address ||
-                    company.Website != com.Website)
+                    company.Website != com.Website ||
+                    company.JobDuties != com.JobDuties)
                     {
                         company.StartDate = com.StartDate;
                         company.StopDate = com.StopDate;
@@ -139,6 +140,7 @@ namespace PCSs.Controllers
                         company.Name = com.Name;
                         company.Address = com.Address;
                         company.Website = com.Website;
+                        company.JobDuties = com.JobDuties;
 
                         db.Entry(company).State = EntityState.Modified;
                         var rs = db.SaveChanges();
@@ -147,7 +149,7 @@ namespace PCSs.Controllers
                     else return Json(new { msg = "1" }, JsonRequestBehavior.AllowGet);
                 }
             }
-            return Json(new { msg = "Error: You don't have permittion to change this candidate" }, JsonRequestBehavior.AllowGet);
+            return Json(new { msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult DeleteCompany(long id)
@@ -165,7 +167,7 @@ namespace PCSs.Controllers
                         return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
                     }
                 }
-                return Json(new { msg = "Error: You don't have permittion to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
@@ -197,7 +199,7 @@ namespace PCSs.Controllers
                         return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
                     }
                 }
-                return Json(new { msg = "Error: You don't have permittion to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
@@ -238,7 +240,7 @@ namespace PCSs.Controllers
                         }
                     }
                 }
-                return Json(new { msg = "Error: You don't have permittion to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
@@ -266,7 +268,7 @@ namespace PCSs.Controllers
                         }
                     }
                 }
-                return Json(new { msg = "Error: You don't have permittion to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {

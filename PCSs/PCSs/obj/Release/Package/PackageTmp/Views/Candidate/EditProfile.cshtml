@@ -40,103 +40,97 @@
         <div class="box">
             <!-- form start -->
             @using (Html.BeginForm("EditProfile", "Candidate", FormMethod.Post, new { id = "updateCandidateForm" }))
-                {
-            @Html.AntiForgeryToken()
-            @Html.HiddenFor(model => model.CandidateId)
-            <div class="tab-content">
-                <!-- general information tab -->
-                <div id="candidate" class="tab-pane fade in active">
-                    <form id="candidateForm" onsubmit="activeTab('company'); return false;">
-                        <div class="col-md-12">
-                            <div class="box-body">
-                                <div class="with-border text-center">
-                                    <h3 class="box-title">Basic Information</h3>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-md-12">
-                                        @Html.Label("Name:")
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                @Html.EditorFor(s => s.FirstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "First Name" } })
-                                            </div>
-                                            <div class="col-md-3">
-                                                @Html.EditorFor(s => s.MiddleName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Middle Name" } })
-                                            </div>
-                                            <div class="col-md-3">
-                                                @Html.EditorFor(s => s.LastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Last Name" } })
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label for="">Gender</label>
-                                                <div class="row gender">
-                                                    <div class="col-md-6">
-                                                        @Html.RadioButtonFor(model => model.Gender, "Male", new { id = "male" })
-                                                        @Html.Label("male", "Male")
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        @Html.RadioButtonFor(model => model.Gender, "Female", new { id = "female" })
-                                                        @Html.Label("female", "Female")
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.CandidateId)
+                <div class="tab-content">
+                    <!-- general information tab -->
+                    <div id="candidate" class="tab-pane fade in active">
+                        <form id="candidateForm" onsubmit="activeTab('company'); return false;">
+                            <div class="col-md-12">
+                                <div class="box-body">
+                                    <div class="with-border text-center">
+                                        <h3 class="box-title">Basic Information</h3>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            @Html.Label("Name:")
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    @Html.EditorFor(s => s.FirstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "First Name" } })
+                                                </div>
+                                                <div class="col-md-3">
+                                                    @Html.EditorFor(s => s.MiddleName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Middle Name" } })
+                                                </div>
+                                                <div class="col-md-3">
+                                                    @Html.EditorFor(s => s.LastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Last Name" } })
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <label for="">Gender</label>
+                                                    <div class="row gender">
+                                                        <div class="col-md-6">
+                                                            @Html.RadioButtonFor(model => model.Gender, "Male", new { id = "male" })
+                                                            @Html.Label("male", "Male")
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            @Html.RadioButtonFor(model => model.Gender, "Female", new { id = "female" })
+                                                            @Html.Label("female", "Female")
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+
                                         </div>
 
                                     </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-3">
+                                            @Html.LabelFor(model => model.Email)
+                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", type = "email" } })
 
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-md-3">
-                                        @Html.LabelFor(model => model.Email)
-                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", type = "email" } })
-                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            @Html.LabelFor(model => model.PhoneNumber)
+                                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control"} })
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            @Html.LabelFor(model => model.DOB)
+                                            @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            @Html.LabelFor(model => model.IDNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                                            @Html.EditorFor(model => model.IDNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
                                     </div>
-                                    <div class="form-group col-md-3">
-                                        @Html.LabelFor(model => model.PhoneNumber)
-                                        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", pattern = @"^[0-9\-\+]{9,15}$" } })
-                                        @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            @Html.LabelFor(model => model.JobTitle)
+                                            @Html.EditorFor(model => model.JobTitle, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            @Html.LabelFor(model => model.JobLevel)
+                                            @Html.DropDownListFor(model => model.JobLevel, new SelectList(ViewBag.LevelType, "Value", "Text"), new { id = "Level Type", @class = "form-control" })
+                                        </div>
                                     </div>
-                                    <div class="form-group col-md-3">
-                                        @Html.LabelFor(model => model.DOB)
-                                        @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        @Html.LabelFor(model => model.IDNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-                                        @Html.EditorFor(model => model.IDNumber, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.IDNumber, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-md-6">
-                                        @Html.LabelFor(model => model.JobTitle)
-                                        @Html.EditorFor(model => model.JobTitle, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.JobTitle, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        @Html.LabelFor(model => model.JobLevel)
-                                        @Html.DropDownListFor(model => model.JobLevel, new SelectList(ViewBag.LevelType, "Value", "Text"), new { id = "Level Type", @class = "form-control" })
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            @Html.LabelFor(model => model.Address)
+                                            @Html.TextAreaFor(model => model.Address, new { @class = "form-control col-md-12", @rows = 5 })
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="form-group col-md-12">
-                                        @Html.LabelFor(model => model.Address)
-                                        @Html.TextAreaFor(model => model.Address, new { @class = "form-control col-md-12", @rows = 5 })
-                                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
-                                    </div>
+                                <!-- /.box-body -->
+                                <div class="box-footer text-right col-md-12">
+                                    <button type="button" class="btn btn-primary" href="#company" data-toggle="pill">Next</button>
                                 </div>
                             </div>
-                            <!-- /.box-body -->
-                            <div class="box-footer text-right col-md-12">
-                                <button type="button" class="btn btn-primary" href="#company" data-toggle="pill">Next</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                        </form>
+                    </div>
 
-                <!-- Company information tab-->
-                <div id="company" class="tab-pane fade">
-                    <!-- form start -->
-                    
+                    <!-- Company information tab-->
+                    <div id="company" class="tab-pane fade">
+                        <!-- form start -->
+
                         <div class="box-body" id="company-information">
                             <!-- add company and reference info here-->
                             <div id="baseFormCompany">
@@ -145,7 +139,7 @@
                                         <h3 class="box-title">Company Information</h3>
                                     </div>
                                     <div class="cold-md-3 cancel text-right" id="button-remove-company" onclick="removeCompany('company-base-info_comId')">
-                                        <button class="btn btn-danger" title="Remove this company" ><i class="fa fa-times" aria-hidden="true"></i></button>
+                                        <button class="btn btn-danger" title="Remove this company"><i class="fa fa-times" aria-hidden="true"></i></button>
                                     </div>
                                     <div class="box-body">
                                         <div class="company-general-information">
@@ -191,7 +185,12 @@
                                                     </div>
 
                                                 </div>
-
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-12">
+                                                    <label class="control-label col-md-6">Job Duties</label>
+                                                    <textarea class="form-control col-md-12" placeholder="Job Duties.." cols="20" id="jobDuties" name="jobDuties" rows="3" required></textarea>
+                                                </div>
                                             </div>
                                         </div>
                                         <!--Reference information-->
@@ -253,7 +252,7 @@
                                 </form>
                             </div>
                         </div>
-                    <!--/.Company info-->
+                        <!--/.Company info-->
                         <div class="box-footer text-right" id="add-company-button">
                             <button type="button" class="btn btn-primary" id="btnAddCompany" title="Add company" onclick="addCompany(true)"><i class="fa fa-plus" aria-hidden="true"></i></button>
                         </div>
@@ -274,9 +273,9 @@
                         <div class="box-footer text-center">
                             <button type="submit" class="btn btn-primary" id="buttonSubmit" disabled="disabled">Submit</button>
                         </div>
-                    
+
+                    </div>
                 </div>
-            </div>
             }
         </div>
     </div>

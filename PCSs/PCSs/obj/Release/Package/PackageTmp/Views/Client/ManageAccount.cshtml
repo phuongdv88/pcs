@@ -12,12 +12,10 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!--for header-->
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/Css/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/Css/logo.css" rel="stylesheet" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+   @* <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>*@
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>*@
 
     <!-- Bootstrap 3.3.7 -->
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
@@ -52,8 +50,6 @@
     <!--Header menu-->
     <div class="row col-md-12 col-sm-12 col-xs-12  header" style="margin:0;padding:0">
         <div class="col-md-3 col-sm-3 col-xs-3 " style=" background-color: #464646;padding: 0px;height:100%;">
-            @*<img src="~/Content/Image/logo PCS.png" />*@
-            @*<img src="~/Content/Image/logo PCS trang.png" />*@
             <img src="~/Content/Image/logo PCS trang.png" style="height:100%" />
         </div>
         <div class="col-md-9 col-sm-9 col-xs-9 " style=" background-color: #464646;padding: 0px;height:100%">
@@ -127,7 +123,7 @@
                                 <label>First name</label><br />
                                 <input type="text" id="recruiterFirstName" placeholder="Firstname.." required>
                                 <label>Middle name</label><br />
-                                <input type="text" id="recruiterMiddleName" placeholder="Firstname.." required>
+                                <input type="text" id="recruiterMiddleName" placeholder="Firstname..">
                                 <label>Last name</label><br />
                                 <input type="text" id="recruiterLastName" placeholder="Lastname.." required>
                                 <label> Email</label><br />
@@ -206,7 +202,7 @@
                                                         <th>Status</th>
                                                         <th>Created Date</th>
                                                         <th>Completed Date</th>
-                                                        <th>Edit</th>
+                                                        <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="tbody"></tbody>
@@ -219,7 +215,7 @@
                                                         <th>Status</th>
                                                         <th>Created Date</th>
                                                         <th>Completed Date</th>
-                                                        <th>Edit</th>
+                                                        <th>Action</th>
                                                     </tr>
                                                 </tfoot>
                                             </table>
@@ -237,7 +233,7 @@
                 </div>
                 <div id="report-management" class="tab-pane fade in">
                     <!--chart-->
-                    <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div >
                         <div class=" box box-success barchart">
                             <div class="box-header with-border">
                                 <h3 id="textchart" class="box-title">Bar Chart</h3>
@@ -345,7 +341,7 @@
                                         <input type="text" id="firstName" placeholder="First Name" required>
                                     </div>
                                     <div class="col-md-4">
-                                        <input type="text" id="middleName" placeholder="Middle Name" required>
+                                        <input type="text" id="middleName" placeholder="Middle Name">
                                     </div>
                                     <div class="col-md-4">
                                         <input type="text" id="lastName" placeholder="Last Name" required>

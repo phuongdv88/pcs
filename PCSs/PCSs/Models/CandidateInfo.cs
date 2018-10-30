@@ -24,7 +24,7 @@ namespace PCSs.Models
         MissingInformation,
         Pending,
         Completed,
-        Finish
+        Closed,
     }
     public class CandidateSimpleInfo
     {
@@ -38,5 +38,11 @@ namespace PCSs.Models
         public string JobLevel { get; set; }
         public string RecruiterId { get; set; }
         public long CurrentRecruiterId { get; set; }
+    }
+
+    public class CandidateStatusToChange
+    {
+        public long CandidateId { get; set; }
+        public string Status { get; set; }
     }
 }

@@ -118,11 +118,22 @@
                         <div class="modal-body form-edit">
                             <input id="candidateId" name="candidateId" hidden>
                             <!--Form upload File-->
-                            <input id="fileInput" type="file" accept="application/pdf">
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" id="btnUpload" onclick="uploadFile(); return false;">Upload file</button>
+                            <div class="row">
+                                <input class="col-md-12" id="fileInput" type="file" accept="application/pdf">
                             </div>
-                        </div>
+                            <div class="row">
+                                <label>Change Status</label>
+                                <div class="form-group col-md-12">
+                                    <select class="form-control select2" id="candidateStatus" required>
+                                        <option value="Completed">Completed</option>
+                                        <option value="Closed">Closed</option>
+                                    </select>
+                                </div>
+                            </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" id="btnUpload" onclick="uploadFile(); return false;">Upload file</button>
+                                </div>
+                            </div>
                     </div>
                 </div>
             </div>
@@ -348,7 +359,7 @@
             </div>
           
             <!-- Candidate's information Modal -->
-            <div class="modal fade" id="candiateInfoModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal fade" id="candiateEmailInfoModal" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-lg" style="position:unset">
                     <div class="modal-content">
                         <div class="modal-header">

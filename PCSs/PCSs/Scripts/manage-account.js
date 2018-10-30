@@ -60,13 +60,7 @@ function _getAllCandidate(id) {
                 }
                 html += '<tr>';
                 html += '<td>' + i + '</td>';
-
-                if (item.Status === "Initial") {
-                    html += '<td><a href="#" onClick="return _getCandidateById(' + item.CandidateId + ')" title="Edit">' + candidateName + '</a></td>';
-                } else {
-                    html += '<td>' + candidateName + '</td>';
-                }
-
+                html += '<td>' + candidateName + '</td>';
                 html += '<td>' + item.Email + '</td>';
                 html += '<td>' + item.PhoneNumber + '</td>';
                 html += '<td>' + item.Status + '</td>';

@@ -71,7 +71,9 @@
     <Property Name="CheckingStatus" Type="varchar" MaxLength="50" />
     <Property Name="CandidateId" Type="bigint" Nullable="false" />
     <Property Name="CheckingTime" Type="datetime" />
-    <Property Name="isChecked" Type="bit" Nullable="false" />
+    <Property Name="IsChecked" Type="bit" Nullable="false" />
+    <Property Name="JobDuties" Type="nvarchar(max)" />
+    <Property Name="CheckResult" Type="nvarchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="EducationInfo">
     <Key>

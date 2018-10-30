@@ -2320,6 +2320,7 @@
     <Content Include="Views\Client\ManageAccount.cshtml" />
     <Content Include="Views\Candidate\EditProfile.cshtml" />
     <Content Include="Views\Specialist\ManageSpecialistAccount.cshtml" />
+    <Content Include="Views\Specialist\ProcessBackgroundCheckCandidate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

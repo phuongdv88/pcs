@@ -31,7 +31,7 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link href="~/Content/Css/skins/_all-skins.min.css" rel="stylesheet" />
-
+    <link href="~/Content/Css/Specialist.css" rel="stylesheet" />
     <link href="~/Content/Css/ManageAccount.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
@@ -118,11 +118,22 @@
                         <div class="modal-body form-edit">
                             <input id="candidateId" name="candidateId" hidden>
                             <!--Form upload File-->
-                            <input id="fileInput" type="file" accept="application/pdf">
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" id="btnUpload" onclick="uploadFile(); return false;">Upload file</button>
+                            <div class="row">
+                                <input class="col-md-12" id="fileInput" type="file" accept="application/pdf">
                             </div>
-                        </div>
+                            <div class="row">
+                                <label>Change Status</label>
+                                <div class="form-group col-md-12">
+                                    <select class="form-control select2" id="candidateStatus" required>
+                                        <option value="Completed">Completed</option>
+                                        <option value="Closed">Closed</option>
+                                    </select>
+                                </div>
+                            </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" id="btnUpload" onclick="uploadFile(); return false;">Upload file</button>
+                                </div>
+                            </div>
                     </div>
                 </div>
             </div>
@@ -141,7 +152,7 @@
                                 <label>First name</label><br />
                                 <input type="text" id="specialistFirstName" placeholder="Firstname.." required>
                                 <label>Middle name</label><br />
-                                <input type="text" id="specialistMiddleName" placeholder="Firstname.." required>
+                                <input type="text" id="specialistMiddleName" placeholder="Firstname..">
                                 <label>Last name</label><br />
                                 <input type="text" id="specialistLastName" placeholder="Lastname.." required>
                                 <label> Email</label><br />
@@ -204,8 +215,7 @@
                                         <div class="box-header">
                                             <h3 class="box-title">Candidate Information</h3>
                                             <div>
-                                                <button type="button" class="btn btn-primary btn-lg" id="btnRefresh" title="Refresh" onclick="return _getAllCandidate(@ViewBag.SpecialistId);"><span class="glyphicon glyphicon-refresh"></span></button>
-                                                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" title="Create new candidate" data-target="#newCandidateModal"><span class="glyphicon glyphicon-plus-sign"></span></button>
+                                                <button type="button" class="btn btn-primary btn-lg" id="btnRefresh" title="Refresh" onclick="return getAvailableCandidate();"><span class="glyphicon glyphicon-refresh"></span></button>
                                             </div>
                                         </div>
                                         <!-- /.box-header -->
@@ -219,8 +229,8 @@
                                                         <th>Phone Number</th>
                                                         <th>Status</th>
                                                         <th>Created Date</th>
-                                                        <th>Completed Date</th>
-                                                        <th>Actions</th>
+                                                        <th>Name Company</th>
+                                                        <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="tbody"></tbody>
@@ -233,7 +243,7 @@
                                                         <th>Status</th>
                                                         <th>Created Date</th>
                                                         <th>Completed Date</th>
-                                                        <th>Actions</th>
+                                                        <th>Action</th>
                                                     </tr>
                                                 </tfoot>
                                             </table>
@@ -299,31 +309,38 @@
                                         <div class="box-header">
                                             <h3 class="box-title">My Task</h3>
                                             <div>
-                                                <button type="button" class="btn btn-primary btn-lg" id="btnRefreshReport" title="Refresh" onclick="return _getAllCandidateReport(@ViewBag.SpecialistId);"><span class="glyphicon glyphicon-refresh"></span></button>
+                                                <button type="button" class="btn btn-primary btn-lg" id="btnRefreshmyTask" title="Refresh" onclick="return getMyCandidate();"><span class="glyphicon glyphicon-refresh"></span></button>
                                             </div>
                                         </div>
+                                        
                                         <!-- /.box-header -->
                                         <div class="box-body">
-                                            <table id="report" class="table table-bordered table-striped">
+                                            <table id="myTask" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr>
                                                         <th>Index</th>
+                                                        <th>Company</th>
                                                         <th>Full Name</th>
                                                         <th>Email</th>
                                                         <th>Phone Number</th>
+                                                        <th>Status</th>
+                                                        <th>Created Date</th>
                                                         <th>Completed Date</th>
-                                                        <th>View Report</th>
+                                                        <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="tbody"></tbody>
                                                 <tfoot>
                                                     <tr>
                                                         <th>Index</th>
+                                                        <th>Company</th>
                                                         <th>Full Name</th>
                                                         <th>Email</th>
                                                         <th>Phone Number</th>
+                                                        <th>Status</th>
+                                                        <th>Created Date</th>
                                                         <th>Completed Date</th>
-                                                        <th>View Report</th>
+                                                        <th>Action</th>
                                                     </tr>
                                                 </tfoot>
                                             </table>
@@ -340,9 +357,9 @@
                     </div>
                 </div>
             </div>
-
+          
             <!-- Candidate's information Modal -->
-            <div class="modal fade" id="candiateInfoModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal fade" id="candiateEmailInfoModal" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-lg" style="position:unset">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -400,7 +417,7 @@
         $(function () {
             _setCurrentRecruitId(@ViewBag.SpecialistId);
             getAvailableCandidate();
-            getAllCandidateCompleted();
+            getMyCandidate();
             setUserLoginName("@Session["UserName"].ToString()");
         })
     </script>

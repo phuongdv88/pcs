@@ -18,7 +18,10 @@ namespace PCSs.Controllers
         private PCSEntities db = new PCSEntities();
 
         // Get: Specialist
-
+        public ActionResult ProcessBackgroundCheckCandidate(long? id)
+        {
+            return View();
+        }
         public ActionResult ManageSpecialistAccount(long? id)
         {
             if (id == null)
@@ -32,10 +35,11 @@ namespace PCSs.Controllers
             var specialist = db.Specialists.FirstOrDefault(s => s.SpecialistId == id);
             if (specialist != null)
             {
-                if(specialist.MiddleName == null)
+                if (specialist.MiddleName == null)
                 {
                     ViewBag.Title = specialist.FirstName + " " + specialist.LastName;
-                } else
+                }
+                else
                 {
                     ViewBag.Title = specialist.FirstName + " " + specialist.MiddleName + " " + specialist.LastName;
                 }
@@ -49,7 +53,7 @@ namespace PCSs.Controllers
 
         public JsonResult GetAvailableCandidate()
         {
-            var result = Json(db.Candidates.Where(s=> ((s.Status ==  "Initial" || s.Status == "Ready") && s.SpecialistId == -1)).OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
+            var result = Json(db.Candidates.Where(s => ((s.Status == "Initial" || s.Status == "Ready") && s.SpecialistId == -1)).OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
             //todo:fortest
             //var result = Json(db.Candidates.OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
             return result;
@@ -73,18 +77,20 @@ namespace PCSs.Controllers
                 return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
             }
         }
-      
+
         public JsonResult AssignMe(long id)
         {
             long specialistId = -1;
-            try {
+            try
+            {
                 if (!long.TryParse(Session["SpecialistId"].ToString(), out specialistId))
                 {
                     return Json(new { rs = -1, msg = "Error: Can't get specialist's profile" }, JsonRequestBehavior.AllowGet);
                 }
 
                 var can = db.Candidates.FirstOrDefault(s => s.CandidateId == id);
-                if (can == null) {
+                if (can == null)
+                {
                     return Json(new { rs = -1, msg = "Can not get candiate's profile" }, JsonRequestBehavior.AllowGet);
                 }
                 if (can.SpecialistId == -1)
@@ -96,21 +102,53 @@ namespace PCSs.Controllers
                     return Json(new { rs = 1, msg = "Error: Can't get specialist's profile" }, JsonRequestBehavior.AllowGet);
                 }
                 return Json(new { rs = -1, msg = "Can not assign this candiate" }, JsonRequestBehavior.AllowGet);
-            } catch(Exception e)
+            }
+            catch (Exception e)
             {
-                return Json(new { rs = -1, msg = e.Message}, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
             }
         }
         public JsonResult GetCandidate(long id)
         {
-            var can = db.Candidates.FirstOrDefault(x => x.CandidateId == id);
-            return Json(can, JsonRequestBehavior.AllowGet);
+            long specialistId = -1;
+            try
+            {
+                if (!long.TryParse(Session["SpecialistId"].ToString(), out specialistId))
+                {
+                    return Json(new { rs = -1, msg = "Error: Can't get specialist's profile" }, JsonRequestBehavior.AllowGet);
+                }
+                var can = db.Candidates.FirstOrDefault(x => x.CandidateId == id);
+                return Json(can, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
+            }
         }
 
         public JsonResult GetCandidateInfo(long id)
         {
-            var user = db.UserLogins.FirstOrDefault(x => x.UserLoginId == id);
-            return Json(user, JsonRequestBehavior.AllowGet);
+            long specialistId = -1;
+            try
+            {
+                if (!long.TryParse(Session["SpecialistId"].ToString(), out specialistId))
+                {
+                    return Json(new { rs = -1, msg = "Error: Can't get specialist's profile" }, JsonRequestBehavior.AllowGet);
+                }
+
+                var can = db.Candidates.FirstOrDefault(s => s.CandidateId == id);
+                if (can == null)
+                {
+                    return Json(new { rs = -1, msg = "Can not get candiate's profile" }, JsonRequestBehavior.AllowGet);
+                }
+                var user = db.UserLogins.FirstOrDefault(x => x.UserLoginId == can.UserLoginId);
+                return Json(user, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
+            }
+
         }
 
         public JsonResult GetSpecialistProfile()
@@ -179,6 +217,35 @@ namespace PCSs.Controllers
             return Json(new { rs = -1, msg = "1" }, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult UpdateStatus(CandidateStatusToChange status)
+        {
+            long specialistId = -1;
+            try
+            {
+                if (!long.TryParse(Session["SpecialistId"].ToString(), out specialistId))
+                {
+                    return Json(new { rs = -1, msg = "Error: Can't get specialist's profile" }, JsonRequestBehavior.AllowGet);
+                }
+
+                var can = db.Candidates.FirstOrDefault(s => s.CandidateId == status.CandidateId);
+                if (can == null)
+                {
+                    return Json(new { rs = -1, msg = "Can not get candiate's profile" }, JsonRequestBehavior.AllowGet);
+                }
+                if(can.Status != status.Status)
+                {
+                    can.Status = status.Status;
+                    db.Entry(can).State = EntityState.Modified;
+                    var rs = db.SaveChanges();
+                    return Json(rs, JsonRequestBehavior.AllowGet);
+                }
+                return Json(-1, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
         public JsonResult UpdatePassword(PasswordToChange passwordTochange)
         {
             long specialistId = -1;
@@ -235,10 +302,10 @@ namespace PCSs.Controllers
                     //upload file and save link to candidate by id
                     HttpPostedFileBase file = Request.Files[0]; //Uploaded file
                     // Create directory to save this file
-                    string filePath =Util.Helper.getRandomAlphaNumeric(10);
+                    string filePath = Util.Helper.getRandomAlphaNumeric(10);
                     while (Directory.Exists(Server.MapPath("~/Reports/") + filePath))
                     {
-                        filePath =Util.Helper.getRandomAlphaNumeric(10);
+                        filePath = Util.Helper.getRandomAlphaNumeric(10);
                     }
                     Directory.CreateDirectory(Server.MapPath("~/Reports/") + filePath);
                     filePath += "/" + file.FileName; ;
