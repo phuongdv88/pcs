@@ -113,27 +113,27 @@ namespace PCSs.Controllers
                 {
                     var can = db.Candidates.FirstOrDefault(s => s.CandidateId == candidateId);
                     if (can.FirstName != candidate.FirstName ||
-                    can.LastName != candidate.FirstName ||
-                    can.Gender != candidate.FirstName ||
-                    can.Email != candidate.FirstName ||
-                    can.PhoneNumber != candidate.FirstName ||
-                    can.DOB != candidate.FirstName ||
-                    can.IDNumber != candidate.FirstName ||
-                    can.JobTitle != candidate.FirstName ||
-                    can.JobLevel != candidate.FirstName ||
-                    can.Address != candidate.FirstName)
+                    can.LastName != candidate.LastName ||
+                    can.Gender != candidate.Gender ||
+                    can.Email != candidate.Email ||
+                    can.PhoneNumber != candidate.PhoneNumber ||
+                    can.DOB != candidate.DOB ||
+                    can.IDNumber != candidate.IDNumber ||
+                    can.JobTitle != candidate.JobTitle ||
+                    can.JobLevel != candidate.JobLevel ||
+                    can.Address != candidate.Address)
                     {
                         can.FirstName = candidate.FirstName;
-                        can.MiddleName = candidate.FirstName;
-                        can.LastName = candidate.FirstName;
-                        can.Gender = candidate.FirstName;
-                        can.Email = candidate.FirstName;
-                        can.PhoneNumber = candidate.FirstName;
-                        can.DOB = candidate.FirstName;
-                        can.IDNumber = candidate.FirstName;
-                        can.JobTitle = candidate.FirstName;
-                        can.JobLevel = candidate.FirstName;
-                        can.Address = candidate.FirstName;
+                        can.MiddleName = candidate.MiddleName;
+                        can.LastName = candidate.LastName;
+                        can.Gender = candidate.Gender;
+                        can.Email = candidate.Email;
+                        can.PhoneNumber = candidate.PhoneNumber;
+                        can.DOB = candidate.DOB;
+                        can.IDNumber = candidate.IDNumber;
+                        can.JobTitle = candidate.JobTitle;
+                        can.JobLevel = candidate.JobLevel;
+                        can.Address = candidate.Address;
                         if(can.Status == "Initial")
                         {
                             can.Status = "Ready";

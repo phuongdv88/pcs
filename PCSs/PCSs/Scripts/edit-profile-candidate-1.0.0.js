@@ -11,8 +11,9 @@
 });
 
 function activeTab(tab) {
-    $("#" + tab).addClass("in active");
-    $(".tab-pane").not($("#" + tab)).removeClass("in active");
+    //$("#" + tab).addClass("in active");
+    //$(".tab-pane").not($("#" + tab)).removeClass("in active");
+    $('.nav-tabs a[href="#' + tab + '"]').tab('show');
     return false;
 }
 
@@ -40,27 +41,29 @@ var listComId = {};
 var listDeleteCompanyId = [];
 var listDeleteReferenceId = [];
 var lastSubmit = false;
-
+var baseFormCompanyHtml = "";
+var baseReferenceHtml = "";
 $(document).ready(function () {
     // load company
-});
+    $('#cbConfirmSubmit').on('ifChecked', function (event) {
+        $('#buttonSubmit').prop("disabled", false);
+    });
+    $('cbConfirmSubmit').on('ifUnchecked', function (event) {
+        $('#buttonSubmit').prop("disabled", true);
+    });
 
-$('input').on('ifChecked', function (event) {
-    $('#buttonSubmit').prop("disabled", false);
-});
-$('input').on('ifUnchecked', function (event) {
-    $('#buttonSubmit').prop("disabled", true);
+    baseFormCompanyHtml = $("#baseFormCompany").html();
+    baseReferenceHtml = $("#baseReference").html();
+    $("#baseFormCompany").remove();
 });
 
 function generateCompanyHtml(comIndex) {
-    var comHtml = $("#baseFormCompany").html();
-    comHtml = comHtml.replace(/_comId/g, comIndex);
+    var comHtml = baseFormCompanyHtml.replace(/_comId/g, comIndex);
     return comHtml;
 }
 
 function generateReferenceHtml(refeIndex, comFormId) {
-    var refeHtml = $("#baseReference").html();
-    refeHtml = refeHtml.replace(/_refeId/g, refeIndex);
+    var refeHtml = baseReferenceHtml.replace(/_refeId/g, refeIndex);
     refeHtml = refeHtml.replace(/company-base-info_comId/g, comFormId);
     return refeHtml;
 }
@@ -76,7 +79,6 @@ function addCompany(isNew) {
     lastIndexReferenceArray[comFormId] = 0;
     var comHtml = generateCompanyHtml(lastIndexCompany);
     $("#company-information").append(comHtml);
-    $("#company-information").find('#' + comFormId).prop("hidden", false); // show
     $("#company-information").find('#' + comFormId).addClass("companyClass"); // add class for company base form
     //Date picker
     $("#company-information").find('#' + comFormId).find('#startDate').datepicker({
@@ -127,12 +129,13 @@ function addReference(comFormId, isTheFirstOne) {
     var refeFormId = "reference-information" + lastIndexReferenceArray[comFormId];
     var refeHtml = generateReferenceHtml(lastIndexReferenceArray[comFormId], comFormId);
     $('#' + comFormId).find('#referenceInformation').append(refeHtml);
+    // remove base reference Information
+    $('#' + comFormId).find('#baseReference').remove();
     if (isTheFirstOne) {
         $('#' + comFormId).find("#" + refeFormId).find('#btnRemoveReference').remove(); // show remove reference button
     } else {
         $('#' + comFormId).find("#" + refeFormId).find('#btnRemoveReference').prop("hidden", false); // show remove reference button
     }
-    $('#' + comFormId).find("#" + refeFormId).prop("hidden", false);
     $('#' + comFormId).find("#" + refeFormId).addClass("referenceClass"); // add class for reference form
 
     return refeFormId;
@@ -162,7 +165,11 @@ function getCandidateInfo() {
             $('#candidateFirstName').val(result.FirstName);
             $('#candidateMiddleName').val(result.MiddleName);
             $('#candidateLastName').val(result.LastName);
-            $('#candidateGender').val(result.Gender);
+            if (result.Gender === "Female") {
+                $('#female').iCheck('check');
+            } else {
+                $('#female').iCheck('uncheck');
+            }
             $('#candidateEmail').val(result.Email);
             $('#candidatePhoneNumber').val(result.PhoneNumber);
             $('#candidateDOB').val(result.DOB);
@@ -187,11 +194,16 @@ function getCandidateInfo() {
 }
 
 function updateCandidateInfo() {
+    var gender = "Male";
+    if ($("#female").prop('checked') == true) {
+        gender = "Female";
+    }
+
     var obj = {
         FirstName: $('#candidateFirstName').val(),
         MiddleName: $('#candidateMiddleName').val(),
         LastName: $('#candidateLastName').val(),
-        Gender: $('#candidateGender').val(),
+        Gender: gender,
         Email: $('#candidateEmail').val(),
         PhoneNumber: $('#candidatePhoneNumber').val(),
         DOB: $('#candidateDOB').val(),
@@ -461,7 +473,7 @@ function submitReferences(comFormId, comId) {
 function submitData() {
     lastSubmit = true;
     // update Candidate
-
+    updateCandidateInfo();
     // Get all company id by class
     var comFormIdArray = $(".companyClass").map(function () { return this.id });
     $.each(comFormIdArray, function (index, value) {
