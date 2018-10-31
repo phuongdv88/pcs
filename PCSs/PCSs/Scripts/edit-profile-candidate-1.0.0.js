@@ -237,10 +237,10 @@ function updateCandidateInfo() {
     });
 }
 
-function getAllCompany(id) {
+function getAllCompany() {
     currentCandidateId = id;
     $.ajax({
-        url: '/Candidate/GetAllCompany/' + id,
+        url: '/Candidate/GetAllCompany',
         type: "GET",
         contenttype: "application/json; charset=utf-8",
         dataType: "json",

@@ -197,7 +197,7 @@
                                             <div class="row">
                                                 <div class="form-group col-md-12">
                                                     <label class="control-label col-md-6">Job Duties</label>
-                                                    <textarea type="text" class="form-control col-md-12" placeholder="Job Duties.." cols="20" id="jobDuties" name="jobDuties" rows="3" required>...</textarea>
+                                                    <textarea type="text" class="form-control col-md-12" placeholder="Job Duties.." cols="20" id="jobDuties" name="jobDuties" rows="3" required></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -307,7 +307,7 @@
     <script>
         $(function () {
             getCandidateInfo();
-            getAllCompany(@ViewBag.CandidateId);
+            getAllCompany();
         })
     </script>
 </body>

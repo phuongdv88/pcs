@@ -14,9 +14,6 @@
     <!--for header-->
     <link href="~/Content/Css/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/Css/logo.css" rel="stylesheet" />
-   @* <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>*@
-    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>*@
-
     <!-- Bootstrap 3.3.7 -->
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <!-- Font Awesome -->
@@ -31,6 +28,7 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link href="~/Content/Css/skins/_all-skins.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet" />
 
     <link href="~/Content/Css/ManageAccount.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
@@ -187,7 +185,7 @@
                                             <h3 class="box-title">Candidate Information</h3>
                                             <div>
                                                 <button type="button" class="btn btn-primary btn-lg" id="btnRefresh" title="Refresh" onclick="return _getAllCandidate();"><span class="glyphicon glyphicon-refresh"></span></button>
-                                                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" title="Create new candidate" data-target="#newCandidateModal"><span class="glyphicon glyphicon-plus-sign"></span></button>
+                                                <button type="button" class="btn btn-primary btn-lg" title="Create new candidate" onclick="newCandidate();"><span class="glyphicon glyphicon-plus-sign"></span></button>
                                             </div>
                                         </div>
                                         <!-- /.box-header -->
@@ -233,7 +231,7 @@
                 </div>
                 <div id="report-management" class="tab-pane fade in">
                     <!--chart-->
-                    <div >
+                    <div>
                         <div class=" box box-success barchart">
                             <div class="box-header with-border">
                                 <h3 id="textchart" class="box-title">Bar Chart</h3>
@@ -325,55 +323,115 @@
 
             <!-- New Candidate Modal -->
             <div class="modal fade" id="newCandidateModal" tabindex="-1" role="dialog" aria-labelledby="newCandidateModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg" style="position:unset">
+                <div class="modal-dialog modal-lg" style="position:unset; width:800px;">
                     <div class="modal-content" style="position:unset">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                           @* <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>*@
                             <h4 class="modal-title" id="newCandidateModalLabel">Create New Candidate</h4>
                         </div>
                         <div class="modal-body">
                             <div id="candidateId" hidden></div>
                             @Html.Label("Candidate's Name")
                             <br />
-                            <form id="formNewEditCandidate" onsubmit=" _add(); return false;">
+                            <form id="formNewEditCandidate" onsubmit=" submitData(true); return false;">
                                 <div class="row">
-                                    <div class="col-md-4">
-                                        <input type="text" id="firstName" placeholder="First Name" required>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <input type="text" id="middleName" placeholder="Middle Name">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <input type="text" id="lastName" placeholder="Last Name" required>
+                                    <div class="col-md-12">
+                                        <input type="text" id="firstName" placeholder="First Name..." required>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
+                                        <input type="text" id="middleName" placeholder="Middle Name...">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input type="text" id="lastName" placeholder="Last Name..." required>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
                                         <label for="Name">Email</label>
-                                        <input type="email" class="form-control" id="email" placeholder="Email" required>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label for="Name">Phone number</label>
-                                        <input type="text" class="form-control" id="phoneNumber" maxlength="11" pattern="^[0-9\-\+]{9,15}$" placeholder="Phone Number" required>
+                                        <input type="email" class="form-control" id="email" placeholder="Email..." required>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <label for="Name">Job Title</label>
-                                        <input type="text" class="form-control" id="jobTitle" placeholder="Job Title" required>
+                                    <div class="col-md-12">
+                                        <label for="Name">Phone number</label>
+                                        <input type="text" class="form-control" id="phoneNumber" maxlength="15" pattern="^[0-9\-\+]{9,15}$" placeholder="Phone Number..." required>
                                     </div>
-
-                                    <div class="col-md-6">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="Name">Job Title</label>
+                                        <input type="text" class="form-control" id="jobTitle" placeholder="Job Title..." required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
                                         <label>Job Level</label>
-                                        <div class="form-group">
-                                            <select class="form-control select2" id="jobLevel" required>
+                                        <div class="form-group ">
+                                            <select class="form-control select2 col-md-12" id="jobLevel" required>
                                                 <option value="Staff">Staff</option>
                                                 <option value="Manager">Manager</option>
                                                 <option value="Other">Other</option>s
                                             </select>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="box-body" id="company-information">
+                                    <!-- add company and reference info here-->
+                                    <div id="baseFormCompany">
+                                        <div id="company-base-info_comId">
+                                            <div class="with-border text-center">
+                                                <label>Company Information</label>
+                                            </div>
+                                            <div class="cold-md-3 cancel text-right">
+                                                <button type ="button" class="btn btn-danger" title="Remove this company"  id="button-remove-company" onclick="removeCompany('company-base-info_comId')"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                            </div>
+                                            <div class="box-body">
+                                                <div class="company-general-information">
+                                                    <input id="companyId" type="hidden" value="-1" />
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <label class="control-label  col-md-12">Name</label>
+                                                            <input type="text" class="form-control" placeholder="Company Name..." id="companyName" required />
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="control-label col-md-12">Job Title</label>
+                                                            <input type="text" class="form-control" placeholder="Job title..." id="companyJobTitle" required />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <label class="control-label col-md-12 col-lg-12 col-sm-12">Start Date</label>
+                                                            <div class="input-group date col-md-12">
+                                                                <div class="input-group-addon btn" for="startDate">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                </div>
+                                                                <input type="text" class="form-control pull-right" id="startDate" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="control-label col-md-12">Stop Date</label>
+                                                            <div class="input-group date col-md-12">
+                                                                <div class="input-group-addon">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                </div>
+                                                                <input type="text" class="form-control pull-right col-md-6" id="stopDate" required>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/.Company info-->
+                                <div class="box-footer text-right" id="add-company-button">
+                                    <button type="button" class="btn btn-primary" id="btnAddCompany" title="Add company" onclick="addCompany(false)"><i class="fa fa-plus" aria-hidden="true"></i></button>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-primary" id="btnAdd">Add</button>
@@ -434,6 +492,7 @@
     <!-- AdminLTE for demo purposes -->
     <script src="~/Content/Js/demo.js"></script>
     <script src="~/Scripts/manage-account-1.0.0.js"></script>
+    <script src="~/Content/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     <!--chart-->
     <script src="~/Scripts/Chart.js"></script>
 

@@ -22,10 +22,12 @@ namespace PCSs.Controllers
         public ActionResult ManageAccount()
         {
             long recruiterId = -1;
-            if (!long.TryParse(Session["RecruiterId"].ToString(), out recruiterId))
+            if (Session["RecruiterId"] == null)
             {
                 return RedirectToAction("Error", "Error");
             }
+            recruiterId = Convert.ToInt64(Session["RecruiterId"]);
+
             var recruiter = db.Recruiters.FirstOrDefault(s => s.RecruiterId == recruiterId);
             if (recruiter == null)
             {
@@ -218,8 +220,8 @@ namespace PCSs.Controllers
 
                 };
                 db.Candidates.Add(candidate);
-                var r = db.SaveChanges();
-                return Json(new { rs = r, msg = "" }, JsonRequestBehavior.AllowGet);
+                db.SaveChanges();
+                return Json(new { rs = candidate.CandidateId, msg = "" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
@@ -252,7 +254,7 @@ namespace PCSs.Controllers
             candidate.JobLevel = can.JobLevel;
             db.Entry(candidate).State = EntityState.Modified;
             var r = db.SaveChanges();
-            return Json(new { rs = r, msg = r }, JsonRequestBehavior.AllowGet);
+            return Json(new { rs = candidate.CandidateId, msg = r }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult DeleteCandidate(long id)
@@ -271,12 +273,130 @@ namespace PCSs.Controllers
             {
                 return Json(new { rs = -1, msg = "Error: Can not delete candidate information when they submitted" }, JsonRequestBehavior.AllowGet);
             }
-
+            // remove all company and reference of this candidate
+            var companies = db.CompanyInfoes.Where(s => s.CandidateId == candidate.CandidateId);
+            foreach(var com in companies)
+            {
+                var refes = db.ReferenceInfoes.Where(s => s.CompanyInfoId == com.CompanyInfoId);
+                foreach(var refe in refes)
+                {
+                    db.ReferenceInfoes.Remove(refe);
+                }
+                db.CompanyInfoes.Remove(com);
+            }
             db.Candidates.Remove(candidate);
             var r = db.SaveChanges();
             return Json(new { rs = r, msg = "" }, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult GetAllCompany(long id)
+        {
+            long clientId = -1;
+            if (!long.TryParse(Session["ClientId"].ToString(), out clientId))
+            {
+                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
+            }
+            var candidate = db.Candidates.FirstOrDefault(s => s.CandidateId == id && s.ClientId == clientId);
+            if (candidate == null)
+            {
+                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
+            }
+
+            var result = Json(db.CompanyInfoes.Where(s => s.CandidateId == id).OrderBy(s => s.CompanyInfoId), JsonRequestBehavior.AllowGet);
+            return result;
+        }
+        public JsonResult CreateCompany(CompanyInfo com)
+        {
+            try
+            {
+                long clientId = -1;
+                if (!long.TryParse(Session["ClientId"].ToString(), out clientId))
+                {
+                    return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
+                }
+                var candidate = db.Candidates.FirstOrDefault(s => s.CandidateId == com.CandidateId && s.ClientId == clientId);
+                if (candidate != null)
+                {
+                    com.IsChecked = false;
+                    db.CompanyInfoes.Add(com);
+                    var r = db.SaveChanges();
+                    return Json(new { rs = r, msg = "Successfully" }, JsonRequestBehavior.AllowGet);
+                }
+                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+
+                return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+        public JsonResult EditCompany(CompanyInfo com)
+        {
+            long clientId = -1;
+            if (!long.TryParse(Session["ClientId"].ToString(), out clientId))
+            {
+                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
+            }
+            var candidate = db.Candidates.FirstOrDefault(s => s.CandidateId == com.CandidateId && s.ClientId == clientId);
+            if (candidate == null)
+            {
+                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
+            }
+            var company = db.CompanyInfoes.FirstOrDefault(s => (s.CompanyInfoId == com.CompanyInfoId && s.CandidateId == com.CandidateId));
+            if (company != null)
+            {
+                if (com.StartDate != company.StartDate ||
+                    company.StopDate != com.StopDate ||
+                company.Jobtitle != com.Jobtitle ||
+                company.Name != com.Name)
+                {
+                    company.StartDate = com.StartDate;
+                    company.StopDate = com.StopDate;
+                    company.Jobtitle = com.Jobtitle;
+                    company.Name = com.Name;
+                    db.Entry(company).State = EntityState.Modified;
+                    var r = db.SaveChanges();
+                    return Json(new { rs = r, msg = "Successfully" }, JsonRequestBehavior.AllowGet);
+                }
+                else return Json(new { rs = 1, msg = "1" }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult DeleteCompany(long id) // comid
+        {
+            try
+            {
+
+                long clientId = -1;
+                if (!long.TryParse(Session["ClientId"].ToString(), out clientId))
+                {
+                    return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
+                }
+
+                var company = db.CompanyInfoes.FirstOrDefault(s => (s.CompanyInfoId == id));
+                if (company == null)
+                {
+                    return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
+                }
+                var candidate = db.Candidates.FirstOrDefault(s => s.CandidateId == company.CandidateId && s.ClientId == clientId);
+                if (candidate == null)
+                {
+                    return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
+                }
+
+                db.CompanyInfoes.Remove(company);
+                var r = db.SaveChanges();
+                return Json(new { rs = r, msg = "Successfully" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+
+                return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
+            }
+
+        }
 
         public JsonResult GetRecruiterProfile()
         {
@@ -351,7 +471,7 @@ namespace PCSs.Controllers
                     return Json(new { rs = r, msg = recruiterName }, JsonRequestBehavior.AllowGet);
                 }
             }
-            return Json(new { rs = -1, msg = "1" }, JsonRequestBehavior.AllowGet);
+            return Json(new { rs = 1, msg = "1" }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult UpdatePassword(PasswordToChange passwordTochange)

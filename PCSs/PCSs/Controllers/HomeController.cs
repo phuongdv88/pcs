@@ -169,8 +169,8 @@ namespace PCSs.Controllers
                         Session["UserId"] = userInfo.UserLoginId;
                         Session["UserName"] = userInfo.UserName;
                         Session["Role"] = userInfo.Role;
-                        if (string.IsNullOrEmpty(entity.ReturnURL))
-                        {
+                        //if (string.IsNullOrEmpty(entity.ReturnURL))
+                        //{
                             switch ((UserRole) userInfo.Role)
                             {
                                 case UserRole.ADMIN:
@@ -203,8 +203,8 @@ namespace PCSs.Controllers
                                 default:
                                     return RedirectToAction("Login", "Home");
                             }
-                        }
-                        return RedirectToLocal(entity.ReturnURL, userInfo.Role);
+                        //}
+                        //return RedirectToLocal(entity.ReturnURL, userInfo.Role);
                     }
                     else
                     {

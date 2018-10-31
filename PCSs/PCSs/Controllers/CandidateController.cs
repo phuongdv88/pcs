@@ -152,10 +152,14 @@ namespace PCSs.Controllers
             }
         }
         // ajax add, edit, delete company, add, edit, delete reference
-        public JsonResult GetAllCompany(long id)
+        public JsonResult GetAllCompany()
         {
-            var result = Json(db.CompanyInfoes.Where(s => s.CandidateId == id).OrderBy(s => s.CompanyInfoId), JsonRequestBehavior.AllowGet);
-            return result;
+            long candidateId = -1;
+            if (long.TryParse(Session["CandidateId"].ToString(), out candidateId))
+            {
+                return Json(db.CompanyInfoes.Where(s => s.CandidateId == candidateId).OrderBy(s => s.CompanyInfoId), JsonRequestBehavior.AllowGet);
+            }
+            return Json(new {rs = -1, msg="Permission Denied" }, JsonRequestBehavior.AllowGet);
         }
         public JsonResult CreateCompany(CompanyInfo com)
         {
