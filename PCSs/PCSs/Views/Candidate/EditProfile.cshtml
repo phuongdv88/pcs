@@ -51,22 +51,12 @@
                                     <h3 class="box-title">Basic Information</h3>
                                 </div>
                                 <div class="row">
-                                    <div class="form-group col-md-9">
-                                        <label class="control-label">Name:</label>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <input class="form-control" type="text" id="candidateFirstName" placeholder="First Name..." required />
-                                            </div>
-                                            <div class="col-md-4">
-                                                <input type="text" class="form-control" id="candidateMiddleName" placeholder="Middle Name..." />
-                                            </div>
-                                            <div class="col-md-4">
-                                                <input type="text" class="form-control" id="candidateLastName" placeholder="Last Name..." required />
-                                            </div>
-                                        </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label">Full Name:</label>
+                                        <input type="email" class="form-control" id="candidatesFullName" disabled>
                                     </div>
-                                    <div class="form-group col-md-3">
-                                        <label class="control-label">Gender</label>
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label">Gender:</label>
                                         <!-- radio -->
                                         <div class="form-group">
                                             <label class="col-md-6">
@@ -82,17 +72,18 @@
 
                                 </div>
                                 <div class="row">
-                                    <div class="form-group col-md-3">
-                                        <label class="control-label">Email</label>
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label">Email:</label>
                                         <input type="email" class="form-control" id="candidateEmail" placeholder="Email.." required>
                                     </div>
-                                    <div class="form-group col-md-3">
-                                        <label class="control-label">Phone Number</label><br />
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label">Phone Number:</label><br />
                                         <input type="text" class="form-control" id="candidatePhoneNumber" pattern="^[0-9\-\+]{9,15}$" placeholder="Phone number.." required>
                                     </div>
-                                    <div class="form-group col-md-3">
-                                        @*<input class="form-control" type="text" id="candidateDOB" placeholder="Date of birth..." required />*@
-                                        <label class="control-label col-md-12">Date Of Birth</label>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label col-md-12">Date Of Birth:</label>
                                         <div class="input-group date col-md-12">
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
@@ -100,27 +91,12 @@
                                             <input type="text" class="form-control pull-right col-md-6" id="candidateDOB" placeholder="yyyy/mm/dd" required>
                                         </div>
                                     </div>
-                                    <div class="form-group col-md-3">
-                                        <label class="control-label">Identity Card Number</label>
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label">Identity Card Number:</label>
                                         <input class="form-control" type="text" id="candidateIDNumber" placeholder="Identity Card Number..." required />
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="form-group col-md-6">
-                                        <label class="control-label">Job Title</label>
-                                        <input class="form-control" type="text" id="candidateJobTitle" placeholder="Job Title..." required />
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="control-label">Job Level</label>
-                                        <div class="form-group">
-                                            <select class="form-control select2" id="candidateJobLevel">
-                                                <option value="Staff">Staff</option>
-                                                <option value="Manager">Manager</option>
-                                                <option value="Other">Other</option>s
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
+
                                 <div class="row">
                                     <div class="form-group col-md-12">
                                         <label class="control-label">Address</label>
@@ -146,31 +122,19 @@
                                     <div class="with-border text-center">
                                         <h3 class="box-title">Company Information</h3>
                                     </div>
-                                    <div class="cold-md-3 cancel text-right" id="button-remove-company" onclick="removeCompany('company-base-info_comId')">
-                                        <button class="btn btn-danger" title="Remove this company"><i class="fa fa-times" aria-hidden="true"></i></button>
-                                    </div>
                                     <div class="box-body">
                                         <div class="company-general-information">
                                             <input id="companyId" type="hidden" value="-1" />
                                             <div class="row">
                                                 <div class="form-group col-md-6">
-                                                    <label class="control-label  col-md-6">Name</label>
-                                                    <input type="text" class="form-control" placeholder="Company Name..." id="companyName" required />
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label class="control-label  col-md-6">Address</label>
-                                                    <input type="text" class="form-control" placeholder="Address..." id="companyAddress" required />
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="form-group col-md-6">
-                                                    <label class="control-label col-md-6">Website</label>
-                                                    <input type="text" class="form-control" placeholder="Website..." id="companyWebsite" required />
+                                                    <label class="control-label  col-md-6">Name:</label>
+                                                    <input type="text" class="form-control" id="companyName" disabled />
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label class="control-label col-md-6">Job Title</label>
-                                                    <input type="text" class="form-control" placeholder="Job title..." id="companyJobTitle" required />
+                                                    <input type="text" class="form-control" id="companyJobTitle" disabled />
                                                 </div>
+
                                             </div>
                                             <div class="row">
                                                 <div class="form-group col-md-6">
@@ -179,7 +143,7 @@
                                                         <div class="input-group-addon">
                                                             <i class="fa fa-calendar"></i>
                                                         </div>
-                                                        <input type="text" class="form-control pull-right" id="startDate" required>
+                                                        <input type="text" class="form-control pull-right" id="startDate" disabled>
                                                     </div>
 
                                                 </div>
@@ -189,9 +153,19 @@
                                                         <div class="input-group-addon">
                                                             <i class="fa fa-calendar"></i>
                                                         </div>
-                                                        <input type="text" class="form-control pull-right col-md-6" id="stopDate" required>
+                                                        <input type="text" class="form-control pull-right col-md-6" id="stopDate" disabled>
                                                     </div>
 
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label class="control-label  col-md-6">Address</label>
+                                                    <input type="text" class="form-control" placeholder="Address..." id="companyAddress" required />
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label class="control-label col-md-6">Website</label>
+                                                    <input type="text" class="form-control" placeholder="Website..." id="companyWebsite" required />
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -206,8 +180,8 @@
                                             <div id="baseReference">
                                                 <div id="reference-information_refeId">
                                                     <div class="box-body">
-                                                        <div class="cold-md-3 cancel text-right" onclick="removeReference('reference-information_refeId', 'company-base-info_comId')" id="btnRemoveReference" hidden>
-                                                            <button class="btn btn-danger" title="Remove this reference"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                                        <div class="cold-md-3 cancel text-right" >
+                                                            <button type="button" class="btn btn-danger" title="Remove this reference"onclick="removeReference('reference-information_refeId', 'company-base-info_comId')" id="btnRemoveReference" hidden><i class="fa fa-times" aria-hidden="true"></i></button>
                                                         </div>
                                                         <input id="referenceId" type="hidden" value="-1" />
                                                         <div class="row">
@@ -253,22 +227,12 @@
                                             </div>
                                         </div>
                                         <!--Add reference button-->
-                                        <div class="box-title clickadd" id="addReferenceButton">
+                                        <div class="box-title clickadd text-right" id="addReferenceButton">
                                             <button type="button" class="btn btn-primary" id="button-add-reference" title="Add reference" onclick="addReference('company-base-info_comId')">+ Add reference</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!--/.Company info-->
-                        <div class="box-footer text-right" id="add-company-button">
-                            <button type="button" class="btn btn-primary" id="btnAddCompany" title="Add company" onclick="addCompany(true)"><i class="fa fa-plus" aria-hidden="true"></i></button>
-                        </div>
-                        <div class="checkbox icheck">
-                            <label id="ConfirmSubmit">
-                                <input type="checkbox" class="minimal" id="cbConfirmSubmit">
-                                I guarantee the above information is true and take full responsibility before the law. The company reserves the right to verify the above information.
-                            </label>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
@@ -277,7 +241,13 @@
                                 </div>
                             </div>
                         </div>
-
+                        <!--/.Company info-->
+                        <div class="checkbox icheck">
+                            <label id="ConfirmSubmit">
+                                <input type="checkbox" class="minimal" id="cbConfirmSubmit">
+                                I guarantee the above information is true and take full responsibility before the law. The company reserves the right to verify the above information.
+                            </label>
+                        </div>
                         <div class="box-footer text-center">
                             <button type="submit" class="btn btn-primary" id="buttonSubmit" disabled="disabled">Submit</button>
                         </div>
@@ -307,7 +277,7 @@
     <script>
         $(function () {
             getCandidateInfo();
-            getAllCompany();
+            getAllCompanyCan();
         })
     </script>
 </body>

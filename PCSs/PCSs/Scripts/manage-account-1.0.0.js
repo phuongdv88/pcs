@@ -186,13 +186,13 @@ function _getCandidateById(id) {
 function addCandidate() {
     var obj = {
         CandidateId: '0',
-        FirstName: $('#firstName').val(),
-        MiddleName: $('#middleName').val(),
-        LastName: $('#lastName').val(),
-        Email: $('#email').val(),
-        PhoneNumber: $('#phoneNumber').val(),
-        JobTitle: $('#jobTitle').val(),
-        JobLevel: $('#jobLevel').val(),
+        FirstName: $.trim($('#firstName').val()),
+        MiddleName: $.trim($('#middleName').val()),
+        LastName: $.trim($('#lastName').val()),
+        Email: $.trim($('#email').val()),
+        PhoneNumber: $.trim($('#phoneNumber').val()),
+        JobTitle: $.trim($('#jobTitle').val()),
+        JobLevel: $.trim($('#jobLevel').val()),
         CurrentRecruiterId: currentRecruiterId
     }
 
@@ -229,14 +229,14 @@ function addCandidate() {
 
 function editCandidate() {
     var obj = {
-        CandidateId: $('#candidateId').val(),
-        FirstName: $('#firstName').val(),
-        MiddleName: $('#middleName').val(),
-        LastName: $('#lastName').val(),
-        Email: $('#email').val(),
-        PhoneNumber: $('#phoneNumber').val(),
-        JobTitle: $('#jobTitle').val(),
-        JobLevel: $('#jobLevel').val(),
+        CandidateId: $.trim($('#candidateId').val()),
+        FirstName: $.trim($('#firstName').val()),
+        MiddleName: $.trim($('#middleName').val()),
+        LastName: $.trim($('#lastName').val()),
+        Email: $.trim($('#email').val()),
+        PhoneNumber: $.trim($('#phoneNumber').val()),
+        JobTitle: $.trim($('#jobTitle').val()),
+        JobLevel: $.trim($('#jobLevel').val()),
     }
 
     $.ajax({
@@ -290,11 +290,11 @@ function getProfile() {
 
 function editProfile() {
     var obj = {
-        FirstName: $('#recruiterFirstName').val(),
-        MiddleName: $('#recruiterMiddleName').val(),
-        LastName: $('#recruiterLastName').val(),
-        Email: $('#recruiterEmail').val(),
-        PhoneNumber: $('#recruiterPhoneNumber').val(),
+        FirstName: $.trim($('#recruiterFirstName').val()),
+        MiddleName: $.trim($('#recruiterMiddleName').val()),
+        LastName: $.trim($('#recruiterLastName').val()),
+        Email: $.trim($('#recruiterEmail').val()),
+        PhoneNumber: $.trim($('#recruiterPhoneNumber').val()),
     }
 
     $.ajax({
@@ -575,13 +575,13 @@ function getAllCompany(id) {
 };
 function newCompany(comFormId, candidateId) {
     var obj = {
-        StartDate: $("#" + comFormId).find('#startDate').val(),
-        StopDate: $("#" + comFormId).find('#stopDate').val(),
-        Jobtitle: $("#" + comFormId).find('#companyJobTitle').val(),
-        Name: $("#" + comFormId).find('#companyName').val(),
-        Address: $("#" + comFormId).find('#companyAddress').val(),
-        Website: $("#" + comFormId).find('#companyWebsite').val(),
-        JobDuties: $("#" + comFormId).find('#jobDuties').val(),
+        StartDate: $.trim($("#" + comFormId).find('#startDate').val()),
+        StopDate: $.trim($("#" + comFormId).find('#stopDate').val()),
+        Jobtitle: $.trim($("#" + comFormId).find('#companyJobTitle').val()),
+        Name: $.trim($("#" + comFormId).find('#companyName').val()),
+        Address: $.trim($("#" + comFormId).find('#companyAddress').val()),
+        Website: $.trim($("#" + comFormId).find('#companyWebsite').val()),
+        JobDuties: $.trim($("#" + comFormId).find('#jobDuties').val()),
         CandidateId: candidateId
     };
     $.ajax({
@@ -604,14 +604,14 @@ function newCompany(comFormId, candidateId) {
 }
 function editCompany(comFormId, comId, candidateId) {
     var obj = {
-        CompanyInfoId: $("#" + comFormId).find('#companyId').val(),
-        StartDate: $("#" + comFormId).find('#startDate').val(),
-        StopDate: $("#" + comFormId).find('#stopDate').val(),
-        Jobtitle: $("#" + comFormId).find('#companyJobTitle').val(),
-        Name: $("#" + comFormId).find('#companyName').val(),
-        Address: $("#" + comFormId).find('#companyAddress').val(),
-        Website: $("#" + comFormId).find('#companyWebsite').val(),
-        JobDuties: $("#" + comFormId).find('#jobDuties').val(),
+        CompanyInfoId: $.trim($("#" + comFormId).find('#companyId').val()),
+        StartDate: $.trim($("#" + comFormId).find('#startDate').val()),
+        StopDate: $.trim($("#" + comFormId).find('#stopDate').val()),
+        Jobtitle: $.trim($("#" + comFormId).find('#companyJobTitle').val()),
+        Name: $.trim($("#" + comFormId).find('#companyName').val()),
+        Address: $.trim($("#" + comFormId).find('#companyAddress').val()),
+        Website: $.trim($("#" + comFormId).find('#companyWebsite').val()),
+        JobDuties: $.trim($("#" + comFormId).find('#jobDuties').val()),
         CandidateId: candidateId,
     };
     $.ajax({
@@ -670,7 +670,7 @@ function submitData(isNew) {
         candidateId = editCandidate();
 
     }
-   
+
 }
 
 $(document).ajaxStop(function () {

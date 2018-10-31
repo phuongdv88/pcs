@@ -112,27 +112,18 @@ namespace PCSs.Controllers
                 if (long.TryParse(Session["CandidateId"].ToString(), out candidateId))
                 {
                     var can = db.Candidates.FirstOrDefault(s => s.CandidateId == candidateId);
-                    if (can.FirstName != candidate.FirstName ||
-                    can.LastName != candidate.LastName ||
-                    can.Gender != candidate.Gender ||
+                    if (can.Gender != candidate.Gender ||
                     can.Email != candidate.Email ||
                     can.PhoneNumber != candidate.PhoneNumber ||
                     can.DOB != candidate.DOB ||
                     can.IDNumber != candidate.IDNumber ||
-                    can.JobTitle != candidate.JobTitle ||
-                    can.JobLevel != candidate.JobLevel ||
                     can.Address != candidate.Address)
                     {
-                        can.FirstName = candidate.FirstName;
-                        can.MiddleName = candidate.MiddleName;
-                        can.LastName = candidate.LastName;
                         can.Gender = candidate.Gender;
                         can.Email = candidate.Email;
                         can.PhoneNumber = candidate.PhoneNumber;
                         can.DOB = candidate.DOB;
                         can.IDNumber = candidate.IDNumber;
-                        can.JobTitle = candidate.JobTitle;
-                        can.JobLevel = candidate.JobLevel;
                         can.Address = candidate.Address;
                         if(can.Status == "Initial")
                         {
@@ -143,7 +134,7 @@ namespace PCSs.Controllers
                         return Json(new { rs = result, msg = "Successfully" }, JsonRequestBehavior.AllowGet);
                     }
                 }
-                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = 1, msg = "1" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
@@ -212,7 +203,7 @@ namespace PCSs.Controllers
                         var r = db.SaveChanges();
                         return Json(new { rs = r, msg = "Successfully" }, JsonRequestBehavior.AllowGet);
                     }
-                    else return Json(new { rs = -1, msg = "1" }, JsonRequestBehavior.AllowGet);
+                    else return Json(new { rs = 1, msg = "1" }, JsonRequestBehavior.AllowGet);
                 }
             }
             return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
@@ -302,7 +293,7 @@ namespace PCSs.Controllers
                                 var r = db.SaveChanges();
                                 return Json(new { rs = r, msg = "" }, JsonRequestBehavior.AllowGet);
                             }
-                            else return Json(new { rs = -1, msg = "1" }, JsonRequestBehavior.AllowGet);
+                            else return Json(new { rs = 1, msg = "1" }, JsonRequestBehavior.AllowGet);
                         }
                     }
                 }
