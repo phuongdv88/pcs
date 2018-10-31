@@ -51,34 +51,33 @@
                                     <h3 class="box-title">Basic Information</h3>
                                 </div>
                                 <div class="row">
-                                    <div class="form-group col-md-12">
+                                    <div class="form-group col-md-9">
                                         <label class="control-label">Name:</label>
                                         <div class="row">
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <input class="form-control" type="text" id="candidateFirstName" placeholder="First Name..." required />
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <input type="text" class="form-control" id="candidateMiddleName" placeholder="Middle Name..." />
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <input type="text" class="form-control" id="candidateLastName" placeholder="Last Name..." required />
                                             </div>
-                                            <div class="form-group col-md-3">
-                                                <label class="control-label">Gender</label>
-                                                <!-- radio -->
-                                                <div class="form-group">
-                                                    <label>
-                                                        <input type="radio" name="gender" id="male" value="Male" class="minimal" checked>
-                                                        Male
-                                                    </label>
-                                                    <label>
-                                                        <input type="radio" name="gender" id="female" value="Female" class="minimal">
-                                                        Female
-                                                    </label>
-                                                </div>
-                                            </div>
                                         </div>
-
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label class="control-label">Gender</label>
+                                        <!-- radio -->
+                                        <div class="form-group">
+                                            <label class="col-md-6">
+                                                <input type="radio" name="gender" id="male" value="Male" class="minimal" checked>
+                                                Male
+                                            </label>
+                                            <label class="col-md-6">
+                                                <input type="radio" name="gender" id="female" value="Female" class="minimal">
+                                                Female
+                                            </label>
+                                        </div>
                                     </div>
 
                                 </div>
@@ -92,8 +91,14 @@
                                         <input type="text" class="form-control" id="candidatePhoneNumber" pattern="^[0-9\-\+]{9,15}$" placeholder="Phone number.." required>
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label class="control-label">Date Of Birth</label>
-                                        <input class="form-control" type="text" id="candidateDOB" placeholder="Date of birth..." required />
+                                        @*<input class="form-control" type="text" id="candidateDOB" placeholder="Date of birth..." required />*@
+                                        <label class="control-label col-md-12">Date Of Birth</label>
+                                        <div class="input-group date col-md-12">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input type="text" class="form-control pull-right col-md-6" id="candidateDOB" placeholder="yyyy/mm/dd" required>
+                                        </div>
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label class="control-label">Identity Card Number</label>
@@ -108,7 +113,7 @@
                                     <div class="form-group col-md-6">
                                         <label class="control-label">Job Level</label>
                                         <div class="form-group">
-                                            <select class="form-control select2" id="candidateJobLevel" >
+                                            <select class="form-control select2" id="candidateJobLevel">
                                                 <option value="Fresher">Fresher</option>
                                                 <option value="Junior">Junior</option>
                                                 <option value="Senior">Senior</option>

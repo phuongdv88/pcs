@@ -55,6 +55,13 @@ $(document).ready(function () {
     baseFormCompanyHtml = $("#baseFormCompany").html();
     baseReferenceHtml = $("#baseReference").html();
     $("#baseFormCompany").remove();
+
+    $("#candidateDOB").datepicker({
+        autoclose: true,
+        format: "dd/mm/yyyy",
+        startView: "years",
+        minViewMode: "days"
+    });
 });
 
 function generateCompanyHtml(comIndex) {
