@@ -21,7 +21,7 @@ namespace PCSs.Controllers
         // GET: Client Manager
         public ActionResult ManageAccount(long? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return RedirectToAction("Error", "Error");
             }
@@ -29,9 +29,11 @@ namespace PCSs.Controllers
             var recruiter = db.Recruiters.FirstOrDefault(s => s.RecruiterId == id);
             if (recruiter != null)
             {
-                if(recruiter.MiddleName == null){
+                if (recruiter.MiddleName == null)
+                {
                     ViewBag.Title = recruiter.FirstName + " " + recruiter.LastName;
-                } else
+                }
+                else
                 {
                     ViewBag.Title = recruiter.FirstName + " " + recruiter.MiddleName + " " + recruiter.LastName;
 
@@ -44,36 +46,56 @@ namespace PCSs.Controllers
         /// </summary>
         /// <returns></returns>
 
-        public JsonResult GetAllCandidate(long id)
+        public JsonResult GetAllCandidate()
         {
-            //if (recruiterId == null)
-            //    return Json(new { rs = -1, msg = "Can't find user id" }, JsonRequestBehavior.AllowGet);
-            var result = Json(db.Candidates.Where(s => s.RecruiterId == id).OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
-            return result;
+            long clientId = -1;
+            try
+            {
+                if (!long.TryParse(Session["ClientId"].ToString(), out clientId))
+                {
+                    return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
+                }
+                var result = Json(db.Candidates.Where(s => s.ClientId == clientId).OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
+                return result;
+            }
+            catch (Exception e)
+            {
+                return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
+            }
         }
-        public JsonResult GetAllCandidateCompleted(long id)
+        public JsonResult GetAllCandidateCompleted()
         {
-            //if (recruiterId == null)
-            //    return Json(new { rs = -1, msg = "Can't find user id" }, JsonRequestBehavior.AllowGet);
-            var result = Json(db.Candidates.Where(s => s.RecruiterId == id && (s.Status == "Completed" || s.Status == "Closed")).OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
-            return result;
+            long clientId = -1;
+            try
+            {
+                if (!long.TryParse(Session["ClientId"].ToString(), out clientId))
+                {
+                    return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
+                }
+                var result = Json(db.Candidates.Where(s => s.ClientId == clientId && (s.Status == "Completed" || s.Status == "Closed")).OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
+                return result;
+            }
+            catch (Exception e)
+            {
+                return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
+            }
         }
 
         public JsonResult GetCandidateReport(long id)
         {
             // return link file of Candidate report
-            long recruitID = -1;
-            if (!long.TryParse(Session["RecruiterId"].ToString(), out recruitID))
+            long clientId = -1;
+            if (!long.TryParse(Session["ClientId"].ToString(), out clientId))
             {
-                return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
             }
-            var candidate = db.Candidates.First(s => s.CandidateId == id && s.RecruiterId == recruitID);
+            var candidate = db.Candidates.First(s => s.CandidateId == id && s.ClientId == clientId);
             if (candidate == null)
             {
-                return Json(new { rs = -1, msg = "Error: You don't have permission to view this candidate report" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
             }
             var attachment = db.AttachmentFiles.LastOrDefault(s => s.CandidateId == id);
-            if(attachment != null)
+            if (attachment != null)
             {
                 return Json(new { rs = 1, link = attachment.Link }, JsonRequestBehavior.AllowGet);
             }
@@ -84,19 +106,19 @@ namespace PCSs.Controllers
         public ActionResult GetCandidateReportPdf(long id)
         {
             // return link file of Candidate report
-            long recruitID = -1;
-            if (!long.TryParse(Session["RecruiterId"].ToString(), out recruitID))
+            long clientId = -1;
+            if (!long.TryParse(Session["ClientId"].ToString(), out clientId))
             {
                 return RedirectToAction("ErrorDontHavePermission", "Error");
             }
-            var candidate = db.Candidates.FirstOrDefault(s => (s.CandidateId == id && s.RecruiterId == recruitID));
+            var candidate = db.Candidates.FirstOrDefault(s => (s.CandidateId == id && s.ClientId == clientId));
             if (candidate == null)
             {
                 return RedirectToAction("ErrorDontHavePermission", "Error");
             }
             try
             {
-                var attachment = db.AttachmentFiles.Where(s => s.CandidateId == id).OrderByDescending(s=>s.AttachmentFileId).Take(1).Single();
+                var attachment = db.AttachmentFiles.Where(s => s.CandidateId == id).OrderByDescending(s => s.AttachmentFileId).Take(1).Single();
                 if (attachment != null)
                 {
                     byte[] filedata = System.IO.File.ReadAllBytes(attachment.Link);
@@ -123,20 +145,38 @@ namespace PCSs.Controllers
         }
         public JsonResult GetCandidate(long id)
         {
-            var can = db.Candidates.FirstOrDefault(x => x.CandidateId == id);
-            return Json(can, JsonRequestBehavior.AllowGet);
+            long clientId = -1;
+            try
+            {
+                if (!long.TryParse(Session["ClientId"].ToString(), out clientId))
+                {
+                    return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
+                }
+                var can = db.Candidates.FirstOrDefault(x => (x.CandidateId == id && x.ClientId == clientId));
+                return Json(can, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
+            }
         }
 
-        public JsonResult GetCandidateInfo(long id)
-        {
-            var user = db.UserLogins.FirstOrDefault(x => x.UserLoginId == id);
-            return Json(user, JsonRequestBehavior.AllowGet);
-        }
-
-        public JsonResult CreateCandidate(CandidateSimpleInfo can)
+         public JsonResult CreateCandidate(CandidateSimpleInfo can)
         {
             try
             {
+                // return link file of Candidate report
+                long recruiterId = -1;
+                if (!long.TryParse(Session["RecruiterId"].ToString(), out recruiterId))
+                {
+                    return Json(new { rs = -1, msg = "Permission Denied." }, JsonRequestBehavior.AllowGet);
+                }
+                var recruiter = db.Recruiters.FirstOrDefault(s => s.RecruiterId == recruiterId);
+                if (recruiter == null)
+                {
+                    return Json(new { rs = -1, msg = "Permission Denied." }, JsonRequestBehavior.AllowGet);
+                }
+
                 var userLogin = new UserLogin()
                 {
                     UserName = Util.Helper.getRandomAlphaNumeric(6).ToUpper(),
@@ -167,7 +207,8 @@ namespace PCSs.Controllers
                     PhoneNumber = can.PhoneNumber,
                     JobTitle = can.JobTitle,
                     JobLevel = can.JobLevel,
-                    RecruiterId = can.CurrentRecruiterId,
+                    RecruiterId = recruiter.RecruiterId,
+                    ClientId = recruiter.ClientId,
                     CreatedTime = DateTime.Now,
                     Status = "Initial",
                     CompleteTime = DateTime.Now,
@@ -176,7 +217,7 @@ namespace PCSs.Controllers
                 };
                 db.Candidates.Add(candidate);
                 var r = db.SaveChanges();
-                return Json(new { rs =r ,msg = "" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = r, msg = "" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
@@ -186,19 +227,19 @@ namespace PCSs.Controllers
 
         public JsonResult UpdateCandidate(CandidateSimpleInfo can)
         {
-            long recruitID = -1;
-            if (!long.TryParse(Session["RecruiterId"].ToString(), out recruitID))
+            long clientId = -1;
+            if (!long.TryParse(Session["ClientId"].ToString(), out clientId))
             {
-                return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
             }
-            var candidate = db.Candidates.First(s => s.CandidateId == can.CandidateId && s.RecruiterId == recruitID);
+            var candidate = db.Candidates.First(s => s.CandidateId == can.CandidateId && s.ClientId == clientId);
             if (candidate == null)
             {
-                return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
             }
-            if(candidate.Status != "Initial")
+            if (candidate.Status != "Initial")
             {
-                return Json(new { rs = -1, msg = "Error: Can not edit candidate information when they submited" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Error: Can not edit candidate information when they submitted" }, JsonRequestBehavior.AllowGet);
             }
             candidate.FirstName = can.FirstName;
             candidate.MiddleName = can.MiddleName;
@@ -214,19 +255,19 @@ namespace PCSs.Controllers
 
         public JsonResult DeleteCandidate(long id)
         {
-            long recruitID = -1;
-            if (!long.TryParse(Session["RecruiterId"].ToString(), out recruitID))
+            long clientId = -1;
+            if (!long.TryParse(Session["ClientId"].ToString(), out clientId))
             {
-                return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
             }
-            var candidate = db.Candidates.FirstOrDefault(s => s.CandidateId == id && s.RecruiterId == recruitID);
+            var candidate = db.Candidates.FirstOrDefault(s => s.CandidateId == id && s.ClientId == clientId);
             if (candidate == null)
             {
-                return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
             }
             if (candidate.Status != "Initial")
             {
-                return Json(new { rs = -1, msg = "Error: Can not edit candidate information when they submited" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Error: Can not delete candidate information when they submitted" }, JsonRequestBehavior.AllowGet);
             }
 
             db.Candidates.Remove(candidate);
@@ -237,30 +278,31 @@ namespace PCSs.Controllers
 
         public JsonResult GetRecruiterProfile()
         {
-            long recruitID = -1;
-            if (!long.TryParse(Session["RecruiterId"].ToString(), out recruitID))
+            long recruiterId = -1;
+            if (!long.TryParse(Session["RecruiterId"].ToString(), out recruiterId))
             {
                 return Json(new { rs = -1, msg = "Error: Can't get recruiter's profile" }, JsonRequestBehavior.AllowGet);
             }
-            var recruiter = db.Recruiters.FirstOrDefault(x => x.RecruiterId == recruitID);
+            var recruiter = db.Recruiters.FirstOrDefault(x => x.RecruiterId == recruiterId);
             return Json(recruiter, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetReportForChart()
         {
-            long recruitID = -1;
-            try {
-                if (!long.TryParse(Session["RecruiterId"].ToString(), out recruitID))
+            long clientId = -1;
+            try
+            {
+                if (!long.TryParse(Session["ClientId"].ToString(), out clientId))
                 {
-                    return Json(new { rs = -1, msg = "Error: Can't get recruiter's profile" }, JsonRequestBehavior.AllowGet);
+                    return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
                 }
                 string registered = "";
                 string completed = "";
                 // get register by month
                 for (int i = 1; i <= 12; i++)
                 {
-                    registered += db.Candidates.Count(s => (s.RecruiterId == recruitID && s.CreatedTime.Month == i)).ToString() + ',';
-                    completed += db.Candidates.Count(s => (s.RecruiterId == recruitID && (s.CompleteTime != null && s.CompleteTime.Value.Month == i) && (s.Status == "Completed" || s.Status == "Closed"))).ToString() + ',';
+                    registered += db.Candidates.Count(s => (s.ClientId == clientId && s.CreatedTime.Month == i)).ToString() + ',';
+                    completed += db.Candidates.Count(s => (s.ClientId == clientId && (s.CompleteTime != null && s.CompleteTime.Value.Month == i) && (s.Status == "Completed" || s.Status == "Closed"))).ToString() + ',';
                 }
                 if (registered.Length > 0)
                 {
@@ -269,7 +311,8 @@ namespace PCSs.Controllers
                 }
                 var rs = new { RegisterArray = registered, CompleteArray = completed };
                 return Json(rs, JsonRequestBehavior.AllowGet);
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return Json(e.Message, JsonRequestBehavior.AllowGet);
             }
@@ -277,12 +320,12 @@ namespace PCSs.Controllers
 
         public JsonResult UpdateRecruiterProfile(Recruiter newRecruiter)
         {
-            long recruitID = -1;
-            if (!long.TryParse(Session["RecruiterId"].ToString(), out recruitID))
+            long recruiterId = -1;
+            if (!long.TryParse(Session["RecruiterId"].ToString(), out recruiterId))
             {
                 return Json(new { rs = -1, msg = "Error: Can't get recruiter's profile" }, JsonRequestBehavior.AllowGet);
             }
-            var recruiter = db.Recruiters.FirstOrDefault(x => x.RecruiterId == recruitID);
+            var recruiter = db.Recruiters.FirstOrDefault(x => x.RecruiterId == recruiterId);
             if (recruiter != null)
             {
                 if (recruiter.FirstName != newRecruiter.FirstName ||
@@ -299,10 +342,10 @@ namespace PCSs.Controllers
                     db.Entry(recruiter).State = EntityState.Modified;
                     var r = db.SaveChanges();
                     var recruiterName = recruiter.FirstName + " " + recruiter.LastName;
-                    if(recruiter.MiddleName != null)
+                    if (recruiter.MiddleName != null)
                     {
                         recruiterName = recruiter.FirstName + " " + recruiter.MiddleName + " " + recruiter.LastName;
-                    } 
+                    }
                     return Json(new { rs = r, msg = recruiterName }, JsonRequestBehavior.AllowGet);
                 }
             }
@@ -311,23 +354,23 @@ namespace PCSs.Controllers
 
         public JsonResult UpdatePassword(PasswordToChange passwordTochange)
         {
-            long recruitID = -1;
-            if (!long.TryParse(Session["RecruiterId"].ToString(), out recruitID))
+            long recruiterId = -1;
+            if (!long.TryParse(Session["RecruiterId"].ToString(), out recruiterId))
             {
-                return Json(new { result = -1, msg = "Can't get recruiter's profile" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Error: Can't get recruiter's profile" }, JsonRequestBehavior.AllowGet);
             }
-            var recruiter = db.Recruiters.FirstOrDefault(x => x.RecruiterId == recruitID);
+            var recruiter = db.Recruiters.FirstOrDefault(x => x.RecruiterId == recruiterId);
             if (recruiter != null)
             {
                 var userLogin = db.UserLogins.FirstOrDefault(x => x.UserLoginId == recruiter.UserLoginId);
-                if(userLogin != null)
+                if (userLogin != null)
                 {
                     // check old password
                     bool isMatch = PCSs.Util.Helper.CompareMD5HashValue(passwordTochange.OldPassword, userLogin.UserName, userLogin.SecurityStamp, userLogin.PasswordHash);
                     if (isMatch)
                     {
                         //updatePassword 
-                        if(passwordTochange.NewPassword.Length == 0)
+                        if (passwordTochange.NewPassword.Length == 0)
                         {
                             return Json(new { result = -1, msg = "New password is empty." }, JsonRequestBehavior.AllowGet);
                         }
@@ -345,8 +388,8 @@ namespace PCSs.Controllers
             }
             return Json(new { result = -1, msg = "Can't get recruiter's profile" }, JsonRequestBehavior.AllowGet);
         }
-   
-        
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

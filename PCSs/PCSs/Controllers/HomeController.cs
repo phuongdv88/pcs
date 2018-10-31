@@ -179,9 +179,15 @@ namespace PCSs.Controllers
                                     // to do test
                                     return RedirectToAction("EditAccount", "Admin");
                                 case UserRole.CLIENT:
+                                    var recruiter = db.Recruiters.FirstOrDefault(s => s.UserLoginId == userInfo.UserLoginId);
+                                    if(recruiter == null)
+                                    {
+                                        return RedirectToAction("Error", "Error");
+                                    }
                                     // Recruiter
                                     var recruiterId = db.Recruiters.FirstOrDefault(s => s.UserLoginId == userInfo.UserLoginId).RecruiterId;
-                                    Session["RecruiterId"] = recruiterId;
+                                    Session["RecruiterId"] = recruiter.RecruiterId;
+                                    Session["ClientId"] = recruiter.ClientId;
                                     return RedirectToAction("ManageAccount", "Client",new {id =  recruiterId});
 
                                 case UserRole.SPECIALIST:

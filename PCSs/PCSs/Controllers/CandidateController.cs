@@ -94,7 +94,7 @@ namespace PCSs.Controllers
                     var can = db.Candidates.FirstOrDefault(s => s.CandidateId == candidateId);
                     return Json(can, JsonRequestBehavior.AllowGet);
                 }
-                return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
@@ -143,7 +143,7 @@ namespace PCSs.Controllers
                         return Json(new { rs = result, msg = "Successfully" }, JsonRequestBehavior.AllowGet);
                     }
                 }
-                return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
@@ -170,7 +170,7 @@ namespace PCSs.Controllers
                     var rs = db.SaveChanges();
                     return Json(new { comId = com.CompanyInfoId }, JsonRequestBehavior.AllowGet);
                 }
-                return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
@@ -211,7 +211,7 @@ namespace PCSs.Controllers
                     else return Json(new { rs = -1, msg = "1" }, JsonRequestBehavior.AllowGet);
                 }
             }
-            return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+            return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult DeleteCompany(long id)
@@ -229,7 +229,7 @@ namespace PCSs.Controllers
                         return Json(new { rs = r, msg = "Successfully" }, JsonRequestBehavior.AllowGet);
                     }
                 }
-                return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
@@ -261,7 +261,7 @@ namespace PCSs.Controllers
                         return Json(new { rs = r, msg = "" }, JsonRequestBehavior.AllowGet);
                     }
                 }
-                return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
@@ -302,7 +302,7 @@ namespace PCSs.Controllers
                         }
                     }
                 }
-                return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
@@ -330,7 +330,7 @@ namespace PCSs.Controllers
                         }
                     }
                 }
-                return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {

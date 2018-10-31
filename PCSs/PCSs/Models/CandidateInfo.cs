@@ -9,11 +9,9 @@ namespace PCSs.Models
 {
     enum JobLevel
     {
-        Fresher,
-        Junior,
-        Senior,
+        Staff,
         Manager,
-        Higher
+        Other
     }
 
     enum CandidateStatus

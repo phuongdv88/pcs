@@ -41,9 +41,9 @@ function _setCurrentRecruitId(id) {
 function setUserLoginName(userName) {
     $("#UserName").val(userName);
 }
-function _getAllCandidate(id) {
+function _getAllCandidate() {
     $.ajax({
-        url: '/Client/GetAllCandidate/' + id,
+        url: '/Client/GetAllCandidate',
         //data: '{id: ' + id + ' }',
         type: "GET",
         contentType: "application/json; charset=utf-8",
@@ -91,9 +91,9 @@ function _getAllCandidate(id) {
     return false;
 }
 
-function _getAllCandidateReport(id) {
+function getAllCandidateCompleted() {
     $.ajax({
-        url: '/Client/GetAllCandidateCompleted/' + id,
+        url: '/Client/GetAllCandidateCompleted',
         //data: '{id: ' + id + ' }',
         type: "GET",
         contentType: "application/json; charset=utf-8",
@@ -163,32 +163,6 @@ function _getCandidateById(id) {
     });
     return false;
 }
-/// generate information that is including user name and password of candidate
-//function _getCandidateInfoById(id, candidateName) {
-//    $.ajax({
-//        url: '/Client/GetCandidateInfo/' + id,
-//        type: 'Get',
-//        contentType: "json",
-//timeout: '5000',
-//        success: function (result) {
-//            $('#candidateName').text(candidateName);
-//            $('#userNameInfo').text(result.UserName); // need to update to db the field userName, password of candiate table
-//            $('#passwordRaw').text(result.PasswordRaw);
-//            if (result.LockoutDateUtc == undefined) {
-//                $('#lockoutDateUtc').text('N/A'); // 5day from created date
-//            } else {
-//                $('#lockoutDateUtc').text(formatDate(result.LockoutDateUtc.substr(6))); // 5day from created date
-//            }
-
-//            $('#candiateInfoModal').modal('show');
-//        },
-//        error: function (errorMessage) {
-//            alert(errorMessage.responseText);
-//        }
-//    });
-//    return false;
-//}
-
 function _add() {
     var obj = {
         CandidateId: '0',
