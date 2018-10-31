@@ -149,6 +149,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ActivityLog.cs">
+      <DependentUpon>PcsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AdminAuthorization.cs" />
     <Compile Include="Models\AttachmentFile.cs">
       <DependentUpon>PcsModel.tt</DependentUpon>
@@ -162,6 +165,9 @@
       <DependentUpon>PcsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ClientAuthorization.cs" />
+    <Compile Include="Models\ClientLog.cs">
+      <DependentUpon>PcsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CompanyInfo.cs">
       <DependentUpon>PcsModel.tt</DependentUpon>
     </Compile>

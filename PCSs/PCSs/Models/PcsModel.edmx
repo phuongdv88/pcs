@@ -5,6 +5,19 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="PCSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ActivityLog">
+          <Key>
+            <PropertyRef Name="ActivityLogId" />
+          </Key>
+          <Property Name="ActivityLogId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActionType" Type="nvarchar" MaxLength="50" />
+          <Property Name="ActionTime" Type="datetime" />
+          <Property Name="ActionContent" Type="nvarchar(max)" />
+          <Property Name="UserLoginId" Type="bigint" />
+          <Property Name="UserRole" Type="int" />
+          <Property Name="SpecialistId" Type="bigint" />
+          <Property Name="CandidateId" Type="bigint" />
+        </EntityType>
         <EntityType Name="AttachmentFile">
           <Key>
             <PropertyRef Name="AttachmentFileId" />
@@ -13,6 +26,7 @@
           <Property Name="Link" Type="text" Nullable="false" />
           <Property Name="FileName" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="CandidateId" Type="bigint" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Candidate">
           <Key>
@@ -58,6 +72,17 @@
           <Property Name="StartDate" Type="date" Nullable="false" />
           <Property Name="StopDate" Type="date" Nullable="false" />
           <Property Name="PackageValue" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClientLog">
+          <Key>
+            <PropertyRef Name="ClientLogId" />
+          </Key>
+          <Property Name="ClientLogId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LogType" Type="nvarchar" MaxLength="50" />
+          <Property Name="LogTime" Type="datetime" />
+          <Property Name="LogContent" Type="nvarchar(max)" />
+          <Property Name="RecruiterId" Type="bigint" />
+          <Property Name="ClientId" Type="bigint" />
         </EntityType>
         <EntityType Name="CompanyInfo">
           <Key>
@@ -164,9 +189,11 @@
           <Property Name="SpecialistId" Type="bigint" />
         </EntityType>
         <EntityContainer Name="PCSModelStoreContainer">
+          <EntitySet Name="ActivityLog" EntityType="Self.ActivityLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AttachmentFile" EntityType="Self.AttachmentFile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Candidate" EntityType="Self.Candidate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientLog" EntityType="Self.ClientLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompanyInfo" EntityType="Self.CompanyInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EducationInfo" EntityType="Self.EducationInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Recruiter" EntityType="Self.Recruiter" Schema="dbo" store:Type="Tables" />
@@ -187,6 +214,7 @@
           <Property Name="Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="FileName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CandidateId" Type="Int64" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Candidate">
           <Key>
@@ -348,7 +376,33 @@
           <EntitySet Name="Specialists" EntityType="Self.Specialist" />
           <EntitySet Name="UserLogins" EntityType="Self.UserLogin" />
           <EntitySet Name="VerificationLogs" EntityType="Self.VerificationLog" />
+          <EntitySet Name="ActivityLogs" EntityType="PCSModel.ActivityLog" />
+          <EntitySet Name="ClientLogs" EntityType="PCSModel.ClientLog" />
         </EntityContainer>
+        <EntityType Name="ActivityLog">
+          <Key>
+            <PropertyRef Name="ActivityLogId" />
+          </Key>
+          <Property Name="ActivityLogId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActionType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ActionTime" Type="DateTime" Precision="3" />
+          <Property Name="ActionContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserLoginId" Type="Int64" />
+          <Property Name="UserRole" Type="Int32" />
+          <Property Name="SpecialistId" Type="Int64" />
+          <Property Name="CandidateId" Type="Int64" />
+        </EntityType>
+        <EntityType Name="ClientLog">
+          <Key>
+            <PropertyRef Name="ClientLogId" />
+          </Key>
+          <Property Name="ClientLogId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LogType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LogTime" Type="DateTime" Precision="3" />
+          <Property Name="LogContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RecruiterId" Type="Int64" />
+          <Property Name="ClientId" Type="Int64" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -358,6 +412,7 @@
           <EntitySetMapping Name="AttachmentFiles">
             <EntityTypeMapping TypeName="PCSModel.AttachmentFile">
               <MappingFragment StoreEntitySet="AttachmentFile">
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="AttachmentFileId" ColumnName="AttachmentFileId" />
                 <ScalarProperty Name="Link" ColumnName="Link" />
                 <ScalarProperty Name="FileName" ColumnName="FileName" />
@@ -520,6 +575,32 @@
                 <ScalarProperty Name="ReferenceInfoId" ColumnName="ReferenceInfoId" />
                 <ScalarProperty Name="EducationInfoId" ColumnName="EducationInfoId" />
                 <ScalarProperty Name="SpecialistId" ColumnName="SpecialistId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActivityLogs">
+            <EntityTypeMapping TypeName="PCSModel.ActivityLog">
+              <MappingFragment StoreEntitySet="ActivityLog">
+                <ScalarProperty Name="CandidateId" ColumnName="CandidateId" />
+                <ScalarProperty Name="SpecialistId" ColumnName="SpecialistId" />
+                <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+                <ScalarProperty Name="UserLoginId" ColumnName="UserLoginId" />
+                <ScalarProperty Name="ActionContent" ColumnName="ActionContent" />
+                <ScalarProperty Name="ActionTime" ColumnName="ActionTime" />
+                <ScalarProperty Name="ActionType" ColumnName="ActionType" />
+                <ScalarProperty Name="ActivityLogId" ColumnName="ActivityLogId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientLogs">
+            <EntityTypeMapping TypeName="PCSModel.ClientLog">
+              <MappingFragment StoreEntitySet="ClientLog">
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="RecruiterId" ColumnName="RecruiterId" />
+                <ScalarProperty Name="LogContent" ColumnName="LogContent" />
+                <ScalarProperty Name="LogTime" ColumnName="LogTime" />
+                <ScalarProperty Name="LogType" ColumnName="LogType" />
+                <ScalarProperty Name="ClientLogId" ColumnName="ClientLogId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

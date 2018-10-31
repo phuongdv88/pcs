@@ -14,7 +14,9 @@
         <EntityTypeShape EntityType="PCSModel.ReferenceInfo" Width="1.5" PointX="1" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="PCSModel.Specialist" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PCSModel.UserLogin" Width="1.5" PointX="8.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PCSModel.VerificationLog" Width="1.5" PointX="6.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCSModel.VerificationLog" Width="1.5" PointX="6.625" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PCSModel.ActivityLog" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="PCSModel.ClientLog" Width="1.5" PointX="2.625" PointY="9" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

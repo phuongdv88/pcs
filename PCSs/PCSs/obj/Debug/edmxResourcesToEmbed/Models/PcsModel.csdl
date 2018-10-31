@@ -8,6 +8,7 @@
     <Property Name="Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="FileName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="CandidateId" Type="Int64" Nullable="false" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Candidate">
     <Key>
@@ -169,5 +170,31 @@
     <EntitySet Name="Specialists" EntityType="Self.Specialist" />
     <EntitySet Name="UserLogins" EntityType="Self.UserLogin" />
     <EntitySet Name="VerificationLogs" EntityType="Self.VerificationLog" />
+    <EntitySet Name="ActivityLogs" EntityType="PCSModel.ActivityLog" />
+    <EntitySet Name="ClientLogs" EntityType="PCSModel.ClientLog" />
   </EntityContainer>
+  <EntityType Name="ActivityLog">
+    <Key>
+      <PropertyRef Name="ActivityLogId" />
+    </Key>
+    <Property Name="ActivityLogId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ActionType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ActionTime" Type="DateTime" Precision="3" />
+    <Property Name="ActionContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserLoginId" Type="Int64" />
+    <Property Name="UserRole" Type="Int32" />
+    <Property Name="SpecialistId" Type="Int64" />
+    <Property Name="CandidateId" Type="Int64" />
+  </EntityType>
+  <EntityType Name="ClientLog">
+    <Key>
+      <PropertyRef Name="ClientLogId" />
+    </Key>
+    <Property Name="ClientLogId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LogType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LogTime" Type="DateTime" Precision="3" />
+    <Property Name="LogContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RecruiterId" Type="Int64" />
+    <Property Name="ClientId" Type="Int64" />
+  </EntityType>
 </Schema>

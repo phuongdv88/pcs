@@ -19,25 +19,27 @@ namespace PCSs.Controllers
     {
         private PCSEntities db = new PCSEntities();
         // GET: Client Manager
-        public ActionResult ManageAccount(long? id)
+        public ActionResult ManageAccount()
         {
-            if (id == null)
+            long recruiterId = -1;
+            if (!long.TryParse(Session["RecruiterId"].ToString(), out recruiterId))
             {
                 return RedirectToAction("Error", "Error");
             }
-            ViewBag.RecruiterId = id;
-            var recruiter = db.Recruiters.FirstOrDefault(s => s.RecruiterId == id);
-            if (recruiter != null)
+            var recruiter = db.Recruiters.FirstOrDefault(s => s.RecruiterId == recruiterId);
+            if (recruiter == null)
             {
-                if (recruiter.MiddleName == null)
-                {
-                    ViewBag.Title = recruiter.FirstName + " " + recruiter.LastName;
-                }
-                else
-                {
-                    ViewBag.Title = recruiter.FirstName + " " + recruiter.MiddleName + " " + recruiter.LastName;
+                return RedirectToAction("Error", "Error");
+            }
 
-                }
+            if (recruiter.MiddleName == null)
+            {
+                ViewBag.Title = recruiter.FirstName + " " + recruiter.LastName;
+            }
+            else
+            {
+                ViewBag.Title = recruiter.FirstName + " " + recruiter.MiddleName + " " + recruiter.LastName;
+
             }
             return View();
         }
@@ -161,7 +163,7 @@ namespace PCSs.Controllers
             }
         }
 
-         public JsonResult CreateCandidate(CandidateSimpleInfo can)
+        public JsonResult CreateCandidate(CandidateSimpleInfo can)
         {
             try
             {

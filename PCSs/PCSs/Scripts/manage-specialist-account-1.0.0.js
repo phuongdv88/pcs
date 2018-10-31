@@ -1,5 +1,4 @@
-﻿var currentSpecialistId = -1;
-uploadFileHtml = $("#uploadFileModal").html();
+﻿uploadFileHtml = $("#uploadFileModal").html();
 changePasswordModalHtml = $("#changePassModal").html();
 
 $(document).ready(function () {
@@ -32,10 +31,6 @@ function formatDate(inputStr) {
               d.getSeconds().padLeft()].join(':');
     return dformat;
 }
-function _setCurrentRecruitId(id) {
-    currentSpecialistId = id;
-}
-
 function setUserLoginName(userName) {
     $("#UserName").val(userName);
 }

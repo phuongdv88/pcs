@@ -188,7 +188,7 @@ namespace PCSs.Controllers
                                     var recruiterId = db.Recruiters.FirstOrDefault(s => s.UserLoginId == userInfo.UserLoginId).RecruiterId;
                                     Session["RecruiterId"] = recruiter.RecruiterId;
                                     Session["ClientId"] = recruiter.ClientId;
-                                    return RedirectToAction("ManageAccount", "Client",new {id =  recruiterId});
+                                    return RedirectToAction("ManageAccount", "Client");
 
                                 case UserRole.SPECIALIST:
                                     // specialist
