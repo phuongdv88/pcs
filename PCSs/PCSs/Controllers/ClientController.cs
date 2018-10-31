@@ -221,6 +221,16 @@ namespace PCSs.Controllers
                 };
                 db.Candidates.Add(candidate);
                 db.SaveChanges();
+                var log = new ClientLog()
+                {
+                    RecruiterId = recruiter.RecruiterId,
+                    LogType = "Create Candidate",
+                    LogTime = DateTime.Now,
+                    ClientId = recruiter.ClientId,
+                    LogContent = "Create candidate " + can.FirstName + " " + can.MiddleName + " " + can.LastName
+                };
+                db.ClientLogs.Add(log);
+                db.SaveChanges();
                 return Json(new { rs = candidate.CandidateId, msg = "" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
@@ -233,6 +243,11 @@ namespace PCSs.Controllers
         {
             long clientId = -1;
             if (!long.TryParse(Session["ClientId"].ToString(), out clientId))
+            {
+                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
+            }
+            long recruiterId = -1;
+            if (!long.TryParse(Session["RecruiterId"].ToString(), out recruiterId))
             {
                 return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
             }
@@ -254,6 +269,16 @@ namespace PCSs.Controllers
             candidate.JobLevel = can.JobLevel;
             db.Entry(candidate).State = EntityState.Modified;
             var r = db.SaveChanges();
+            var log = new ClientLog()
+            {
+                RecruiterId = candidate.RecruiterId,
+                LogType = "Update Candidate",
+                LogTime = DateTime.Now,
+                ClientId = candidate.ClientId,
+                LogContent = "Update candidate " + can.FirstName + " " + can.MiddleName + " " + can.LastName
+            };
+            db.ClientLogs.Add(log);
+            db.SaveChanges();
             return Json(new { rs = candidate.CandidateId, msg = r }, JsonRequestBehavior.AllowGet);
         }
 
@@ -286,6 +311,18 @@ namespace PCSs.Controllers
             }
             db.Candidates.Remove(candidate);
             var r = db.SaveChanges();
+
+            var log = new ClientLog()
+            {
+                RecruiterId = candidate.RecruiterId,
+                LogType = "Delete Candidate",
+                LogTime = DateTime.Now,
+                ClientId = candidate.ClientId,
+                LogContent = "Delete candidate " + candidate.FirstName + " " + candidate.MiddleName + " " + candidate.LastName
+            };
+            db.ClientLogs.Add(log);
+            db.SaveChanges();
+
             return Json(new { rs = r, msg = "" }, JsonRequestBehavior.AllowGet);
         }
 
