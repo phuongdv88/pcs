@@ -56,8 +56,9 @@
                                         <div class="form-group col-md-12">
                                             @Html.Label("Name:")
                                             <div class="row">
-                                                <div class="col-md-3">
+                                                <div class="col-md-3" >
                                                     @Html.EditorFor(s => s.FirstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "First Name" } })
+                                                    
                                                 </div>
                                                 <div class="col-md-3">
                                                     @Html.EditorFor(s => s.MiddleName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Middle Name" } })
@@ -121,7 +122,7 @@
                                 </div>
                                 <!-- /.box-body -->
                                 <div class="box-footer text-right col-md-12">
-                                    <button type="button" class="btn btn-primary" href="#company" data-toggle="pill">Next</button>
+                                    <button type="button" class="btn btn-primary" href="#company"  data-toggle="pill">Next</button>
                                 </div>
                             </div>
                         </form>
@@ -301,6 +302,7 @@
             getAllCompany(@Model.CandidateId);
         })
     </script>
+  
 </body>
 
 </html>
