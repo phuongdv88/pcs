@@ -151,9 +151,12 @@
 	padding-right: 10px;
 	float: left;
 }
-.form-group input{
-	width: 82%;
-	float: left;
+.form-group .select2{
+    margin-top:6px;
+}
+.form-group input {
+    width: 82%;
+    float: left;
 }
 
 .company-tab .form-group .form-control{
