@@ -38,6 +38,7 @@ button[type="button"] {
     background-color: #fff;
     border-top-color: #fff;
 }
-.btnRemoveReference{
-    clear:unset
+#btnRemoveReference{
+    width:unset;
+    border-radius:unset;
 }
