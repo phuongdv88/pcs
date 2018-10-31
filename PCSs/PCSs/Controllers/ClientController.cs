@@ -47,14 +47,14 @@ namespace PCSs.Controllers
         public JsonResult GetAllCandidate(long id)
         {
             //if (recruiterId == null)
-            //    return Json(new { msg = "Can't find user id" }, JsonRequestBehavior.AllowGet);
+            //    return Json(new { rs = -1, msg = "Can't find user id" }, JsonRequestBehavior.AllowGet);
             var result = Json(db.Candidates.Where(s => s.RecruiterId == id).OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
             return result;
         }
         public JsonResult GetAllCandidateCompleted(long id)
         {
             //if (recruiterId == null)
-            //    return Json(new { msg = "Can't find user id" }, JsonRequestBehavior.AllowGet);
+            //    return Json(new { rs = -1, msg = "Can't find user id" }, JsonRequestBehavior.AllowGet);
             var result = Json(db.Candidates.Where(s => s.RecruiterId == id && (s.Status == "Completed" || s.Status == "Closed")).OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
             return result;
         }
@@ -175,12 +175,12 @@ namespace PCSs.Controllers
 
                 };
                 db.Candidates.Add(candidate);
-                var rs = db.SaveChanges();
-                return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
+                var r = db.SaveChanges();
+                return Json(new { rs =r ,msg = "" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
-                return Json(new { msg = e.Message }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -189,16 +189,16 @@ namespace PCSs.Controllers
             long recruitID = -1;
             if (!long.TryParse(Session["RecruiterId"].ToString(), out recruitID))
             {
-                return Json(new { msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
             }
             var candidate = db.Candidates.First(s => s.CandidateId == can.CandidateId && s.RecruiterId == recruitID);
             if (candidate == null)
             {
-                return Json(new { msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
             }
             if(candidate.Status != "Initial")
             {
-                return Json(new { msg = "Error: Can not edit candidate information when they submited" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Error: Can not edit candidate information when they submited" }, JsonRequestBehavior.AllowGet);
             }
             candidate.FirstName = can.FirstName;
             candidate.MiddleName = can.MiddleName;
@@ -208,8 +208,8 @@ namespace PCSs.Controllers
             candidate.JobTitle = can.JobTitle;
             candidate.JobLevel = can.JobLevel;
             db.Entry(candidate).State = EntityState.Modified;
-            var rs = db.SaveChanges();
-            return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
+            var r = db.SaveChanges();
+            return Json(new { rs = r, msg = r }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult DeleteCandidate(long id)
@@ -217,21 +217,21 @@ namespace PCSs.Controllers
             long recruitID = -1;
             if (!long.TryParse(Session["RecruiterId"].ToString(), out recruitID))
             {
-                return Json(new { msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
             }
             var candidate = db.Candidates.FirstOrDefault(s => s.CandidateId == id && s.RecruiterId == recruitID);
             if (candidate == null)
             {
-                return Json(new { msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
             }
             if (candidate.Status != "Initial")
             {
-                return Json(new { msg = "Error: Can not edit candidate information when they submited" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Error: Can not edit candidate information when they submited" }, JsonRequestBehavior.AllowGet);
             }
 
             db.Candidates.Remove(candidate);
-            var rs = db.SaveChanges();
-            return Json(new { msg = rs }, JsonRequestBehavior.AllowGet);
+            var r = db.SaveChanges();
+            return Json(new { rs = r, msg = "" }, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -240,7 +240,7 @@ namespace PCSs.Controllers
             long recruitID = -1;
             if (!long.TryParse(Session["RecruiterId"].ToString(), out recruitID))
             {
-                return Json(new { msg = "Error: Can't get recruiter's profile" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Error: Can't get recruiter's profile" }, JsonRequestBehavior.AllowGet);
             }
             var recruiter = db.Recruiters.FirstOrDefault(x => x.RecruiterId == recruitID);
             return Json(recruiter, JsonRequestBehavior.AllowGet);
@@ -252,7 +252,7 @@ namespace PCSs.Controllers
             try {
                 if (!long.TryParse(Session["RecruiterId"].ToString(), out recruitID))
                 {
-                    return Json(new { msg = "Error: Can't get recruiter's profile" }, JsonRequestBehavior.AllowGet);
+                    return Json(new { rs = -1, msg = "Error: Can't get recruiter's profile" }, JsonRequestBehavior.AllowGet);
                 }
                 string registered = "";
                 string completed = "";

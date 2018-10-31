@@ -6,7 +6,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>E:\PcsPublic</_PublishTargetUrl>
+    <_PublishTargetUrl>D:\pcsdeploy</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/Antlr3.Runtime.dll">
@@ -28,7 +28,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/07/2018 17:37:01</publishTime>
     </File>
     <File Include="bin/PCSs.dll">
-      <publishTime>10/30/2018 12:17:21</publishTime>
+      <publishTime>10/30/2018 13:25:52</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>09/07/2018 17:37:01</publishTime>
@@ -5847,6 +5847,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/Chart.js">
       <publishTime>10/17/2018 12:18:25</publishTime>
     </File>
+    <File Include="Scripts/edit-profile-candidate-1.0.0.js">
+      <publishTime>10/30/2018 13:07:40</publishTime>
+    </File>
     <File Include="Scripts/edit-profile-candidate.js">
       <publishTime>10/30/2018 10:58:45</publishTime>
     </File>
@@ -6219,8 +6222,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/jquery/src/wrap.js">
       <publishTime>09/08/2018 00:44:35</publishTime>
     </File>
+    <File Include="Scripts/manage-account-1.0.0.js">
+      <publishTime>10/30/2018 10:14:44</publishTime>
+    </File>
     <File Include="Scripts/manage-account.js">
       <publishTime>10/30/2018 10:14:44</publishTime>
+    </File>
+    <File Include="Scripts/manage-specialist-account-1.0.0.js">
+      <publishTime>10/30/2018 12:14:29</publishTime>
     </File>
     <File Include="Scripts/manage-specialist-account.js">
       <publishTime>10/30/2018 12:14:29</publishTime>
@@ -6235,7 +6244,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/07/2018 17:37:00</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>10/29/2018 09:28:09</publishTime>
+      <publishTime>10/30/2018 13:22:38</publishTime>
     </File>
     <File Include="Views/Admin/Create.cshtml">
       <publishTime>09/12/2018 16:26:15</publishTime>
@@ -6265,7 +6274,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/18/2018 11:12:01</publishTime>
     </File>
     <File Include="Views/Candidate/EditProfile.cshtml">
-      <publishTime>10/30/2018 11:01:38</publishTime>
+      <publishTime>10/30/2018 13:23:34</publishTime>
     </File>
     <File Include="Views/Candidate/Index.cshtml">
       <publishTime>09/10/2018 15:43:00</publishTime>
@@ -6286,7 +6295,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/20/2018 16:58:24</publishTime>
     </File>
     <File Include="Views/Client/ManageAccount.cshtml">
-      <publishTime>10/30/2018 10:02:45</publishTime>
+      <publishTime>10/30/2018 13:23:57</publishTime>
     </File>
     <File Include="Views/CompanyInfo/Create.cshtml">
       <publishTime>09/18/2018 16:46:32</publishTime>
@@ -6355,7 +6364,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/10/2018 15:43:15</publishTime>
     </File>
     <File Include="Views/Specialist/ManageSpecialistAccount.cshtml">
-      <publishTime>10/30/2018 11:36:30</publishTime>
+      <publishTime>10/30/2018 13:23:54</publishTime>
     </File>
     <File Include="Views/Specialist/ProcessBackgroundCheckCandidate.cshtml">
       <publishTime>10/30/2018 12:13:32</publishTime>
@@ -6367,7 +6376,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/11/2018 17:44:38</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/30/2018 12:17:26</publishTime>
+      <publishTime>10/30/2018 13:25:53</publishTime>
     </File>
   </ItemGroup>
 </Project>

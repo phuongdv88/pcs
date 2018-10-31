@@ -156,7 +156,7 @@ namespace PCSs.Controllers
             long specialistId = -1;
             if (!long.TryParse(Session["SpecialistId"].ToString(), out specialistId))
             {
-                return Json(new { msg = "Error: Can't get specialist's profile" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Error: Can't get specialist's profile" }, JsonRequestBehavior.AllowGet);
             }
             var specialist = db.Specialists.FirstOrDefault(x => x.SpecialistId == specialistId);
             return Json(specialist, JsonRequestBehavior.AllowGet);
@@ -167,7 +167,7 @@ namespace PCSs.Controllers
             long specialistId = -1;
             if (!long.TryParse(Session["SpecialistId"].ToString(), out specialistId))
             {
-                return Json(new { msg = "Error: Can't get specialist's profile" }, JsonRequestBehavior.AllowGet);
+                return Json(new {rs = -1, msg = "Error: Can't get specialist's profile" }, JsonRequestBehavior.AllowGet);
             }
             string registered = "";
             string completed = "";
@@ -232,14 +232,17 @@ namespace PCSs.Controllers
                 {
                     return Json(new { rs = -1, msg = "Can not get candiate's profile" }, JsonRequestBehavior.AllowGet);
                 }
-                if(can.Status != status.Status)
+                if(can.Status != status.CandidateStatus)
                 {
-                    can.Status = status.Status;
+                    can.Status = status.CandidateStatus;
+                    can.CompleteTime = DateTime.Now;
+                    can.LastUpdateReportTime = DateTime.Now;
+                    
                     db.Entry(can).State = EntityState.Modified;
-                    var rs = db.SaveChanges();
-                    return Json(rs, JsonRequestBehavior.AllowGet);
+                    var r = db.SaveChanges();
+                    return Json(new { rs = r, msg = "Done" }, JsonRequestBehavior.AllowGet);
                 }
-                return Json(-1, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Can not get candiate's profile" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
@@ -318,7 +321,7 @@ namespace PCSs.Controllers
                 }
                 catch (Exception e)
                 {
-                    return Json(new { msg = e.Message }, JsonRequestBehavior.AllowGet);
+                    return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
                 }
             }
 
