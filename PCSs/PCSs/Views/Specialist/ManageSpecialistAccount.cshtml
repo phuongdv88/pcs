@@ -10,8 +10,8 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!--for header-->
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    @*@Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")*@
     <link href="~/Content/Css/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/Css/logo.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -460,7 +460,6 @@
     <!-- page script -->
     <script>
         $(function () {
-            _setCurrentRecruitId(@ViewBag.SpecialistId);
             getAvailableCandidate();
             getMyCandidate();
             setUserLoginName("@Session["UserName"].ToString()");

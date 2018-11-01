@@ -328,36 +328,6 @@ namespace PCSs.Controllers
             return Json(new { result = -1, msg = "Can't get candidate's information" }, JsonRequestBehavior.AllowGet);
 
         }
-        // GET: Specialists/Edit/5
-        public async Task<ActionResult> Edit(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Specialist specialist = await db.Specialists.FindAsync(id);
-            if (specialist == null)
-            {
-                return HttpNotFound();
-            }
-            return View(specialist);
-        }
-
-        // POST: Specialists/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "SpecialistId,FirstName,MiddleName,LastName,Email,PhoneNumber,Role,UserLoginId")] Specialist specialist)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(specialist).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            return View(specialist);
-        }
 
         protected override void Dispose(bool disposing)
         {
