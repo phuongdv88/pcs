@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title id="title">@ViewBag.Title</title>
+    <title id="title">@ViewBag.SpecialistName</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!--for header-->
@@ -174,7 +174,7 @@
 
             <div style="float: right;padding-top: 13px;height: 100%;width:auto">
                 <!-- The user image in the navbar-->
-                <i class="fa fa-user" style="color:silver" id="welcomeUser"> Welcome @ViewBag.Title</i>
+                <i class="fa fa-user" style="color:silver" id="welcomeUser"> Welcome @ViewBag.SpecialistName</i>
                 <span></span>
             </div>
         </div>
@@ -204,7 +204,7 @@
         <div class=" col-md-10 col-sm-10 col-xs-12  " style="padding-top:1em">
 
             <div class="tab-content">
-                <div id="candidate-management" class="tab-pane fade in active">
+                <div id="candidate-management" class="tab-pane fade">
                     <div class="wrapper">
                         <!-- Content Wrapper. Contains page content -->
                         <div class="content-wrapper">
@@ -259,7 +259,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="task-management" class="tab-pane fade in">
+                <div id="task-management" class="tab-pane fade in  active">
                     <!--chart-->
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class=" box box-success barchart">

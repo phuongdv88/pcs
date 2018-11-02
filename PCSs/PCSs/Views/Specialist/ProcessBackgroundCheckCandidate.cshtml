@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title id="title">@ViewBag.Title</title>
+    <title id="title">@ViewBag.SpecialistName</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link href="~/Content/Css/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -161,7 +161,7 @@
 
             <div style="float: right;padding-top: 13px;height: 100%;width:auto">
                 <!-- The user image in the navbar-->
-                <i class="fa fa-user" style="color:silver" id="welcomeUser"> Welcome @ViewBag.Title</i>
+                <i class="fa fa-user" style="color:silver" id="welcomeUser"> Welcome @ViewBag.SpecialistName</i>
                 <span></span>
             </div>
         </div>
@@ -180,47 +180,47 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <label>Name:</label>
-                            <label style="font-weight:bold;" id="candidateFullName">Trần Thị Hải Yến</label>
+                            <label style="font-weight:bold;" id="candidateFullName"></label>
                         </div>
                         <div class="col-lg-6">
                             <label>Gender:</label>
-                            <label style="font-weight:bold;" id="candidateGender">Nữ</label>
+                            <label style="font-weight:bold;" id="candidateGender"></label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
                             <label>Phone:</label>
-                            <label style="font-weight:bold;" id="candidatePhone">0988888888</label>
+                            <label style="font-weight:bold;" id="candidatePhone"></label>
                         </div>
                         <div class="col-lg-6">
                             <label>Email:</label>
-                            <label style="font-weight:bold;" id="candidateEmail">tranthihaiyen@gmai.com</label>
+                            <label style="font-weight:bold;" id="candidateEmail"></label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
                             <label> DOB:</label>
-                            <label style="font-weight:bold;" id="candidateDOB">12-2-1999</label>
+                            <label style="font-weight:bold;" id="candidateDOB"></label>
                         </div>
                         <div class="col-lg-6">
                             <label>ID Number:</label>
-                            <label style="font-weight:bold;" id="candidateIDNumber">131467795</label>
+                            <label style="font-weight:bold;" id="candidateIDNumber"></label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
                             <label>Job title:</label>
-                            <label style="font-weight:bold;" id="candidateJobTitle">Fresher</label>
+                            <label style="font-weight:bold;" id="candidateJobTitle"></label>
                         </div>
                         <div class="col-lg-6">
                             <label>Job level:</label>
-                            <label style="font-weight:bold;" id="candidateJobLevel">Level 9</label>
+                            <label style="font-weight:bold;" id="candidateJobLevel"></label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
                             <label>Address:</label>
-                            <label style="font-weight:bold;" id="candidateAddress">Số 2,Đường Kim Giang, Thanh Xuân, Hà Noi</label>
+                            <label style="font-weight:bold;" id="candidateAddress"></label>
                         </div>
                     </div>
                 </div>
@@ -264,18 +264,11 @@
         <!-- Company -->
 
         <div class="col-md-12 clearMaginPadding" style="background-color: #666666;margin-top: 1em;">
-            <ul class="nav nav-tabs">
-                <li class="active">
-                    <a data-toggle="tab" href="#company">Company</a>
-                </li>
-                @*<li>
-                        <a data-toggle="tab" href="#company1">Company 1</a>
-                    </li>*@
-            </ul>
+            <ul class="nav nav-tabs" id="navCompanies"></ul>
         </div>
-        <div class="tab-content">
-            <div id="company" class="tab-pane fade in active">
-                <div class="col-md-12 clearMaginPadding" style="padding-bottom: 1em">
+        <div class="tab-content" id="companyInformation">
+            <div id="company_comId" class="tab-pane fade companyInfo">
+                <form class="col-md-12 clearMaginPadding" style="padding-bottom: 1em" onsubmit="submitCompanyData('company_comId')">
                     <div class="col-md-8 clearMaginPadding">
                         <!-- information company -->
                         <div class="row col-md-12">
@@ -302,15 +295,15 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="col-md-4">
-                                                    <input type="radio" name="checkResultName" id="true" value="True" class="minimal" >
+                                                    <input type="radio" name="checkResultName" id="nameTrue" value="True" class="minimal">
                                                     True
                                                 </label>
                                                 <label class="col-md-4">
-                                                    <input type="radio" name="checkResultName" id="false" value="False" class="minimal">
+                                                    <input type="radio" name="checkResultName" id="nameFalse" value="False" class="minimal">
                                                     False
                                                 </label>
                                                 <label class="col-md-4">
-                                                    <input type="radio" name="checkResultName" id="notAvailable" value="N/A" class="minimal" checked>
+                                                    <input type="radio" name="checkResultName" id="nameNA" value="N/A" class="minimal" checked>
                                                     N/A
                                                 </label>
                                             </div>
@@ -324,15 +317,15 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="col-md-4">
-                                                    <input type="radio" name="checkResultJobTitle" id="true" value="True" class="minimal" >
+                                                    <input type="radio" name="checkResultJobTitle" id="jobTitleTrue" value="True" class="minimal">
                                                     True
                                                 </label>
                                                 <label class="col-md-4">
-                                                    <input type="radio" name="checkResultJobTitle" id="false" value="False" class="minimal">
+                                                    <input type="radio" name="checkResultJobTitle" id="jobTitleFalse" value="False" class="minimal">
                                                     False
                                                 </label>
                                                 <label class="col-md-4">
-                                                    <input type="radio" name="checkResultJobTitle" id="notAvailable" value="N/A" class="minimal" checked>
+                                                    <input type="radio" name="checkResultJobTitle" id="jobTitleTrueNA" value="N/A" class="minimal" checked>
                                                     N/A
                                                 </label>
                                             </div>
@@ -348,15 +341,15 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="col-md-4">
-                                                    <input type="radio" name="checkResultPeriod" id="true" value="True" class="minimal" >
+                                                    <input type="radio" name="checkResultPeriod" id="periodTrue" value="True" class="minimal">
                                                     True
                                                 </label>
                                                 <label class="col-md-4">
-                                                    <input type="radio" name="checkResultPeriod" id="false" value="False" class="minimal">
+                                                    <input type="radio" name="checkResultPeriod" id="periodFalse" value="False" class="minimal">
                                                     False
                                                 </label>
                                                 <label class="col-md-4">
-                                                    <input type="radio" name="checkResultPeriod" id="notAvailable" value="N/A" class="minimal" checked>
+                                                    <input type="radio" name="checkResultPeriod" id="periodTrueNA" value="N/A" class="minimal" checked>
                                                     N/A
                                                 </label>
                                             </div>
@@ -370,15 +363,15 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="col-md-4">
-                                                    <input type="radio" name="checkResultJobDuties" id="true" value="True" class="minimal" >
+                                                    <input type="radio" name="checkResultJobDuties" id="dutiesTrue" value="True" class="minimal">
                                                     True
                                                 </label>
                                                 <label class="col-md-4">
-                                                    <input type="radio" name="checkResultJobDuties" id="false" value="False" class="minimal">
+                                                    <input type="radio" name="checkResultJobDuties" id="dutiesFalse" value="False" class="minimal">
                                                     False
                                                 </label>
                                                 <label class="col-md-4">
-                                                    <input type="radio" name="checkResultJobDuties" id="notAvailable" value="N/A" class="minimal" checked>
+                                                    <input type="radio" name="checkResultJobDuties" id="dutiesNA" value="N/A" class="minimal" checked>
                                                     N/A
                                                 </label>
                                             </div>
@@ -393,59 +386,51 @@
                             <div class="col-md-12 ">
                                 <!-- reference1 -->
                                 <div class="row col-md-12 clearMaginPadding" id="referenceInformation">
-                                    <div class="row col-md-12" id="referenceForm_referFormId">
+                                    <div class="row col-md-12" id="referenceForm_0">
                                         <div class="row col-md-12">
                                             <h4>Reference</h4>
                                         </div>
                                         <div class="row col-md-12 clearMaginPadding">
                                             <div class="col-md-6 clearMaginPadding">
-                                                <form>
-                                                    <label>Name:</label>
-                                                    <label style="font-weight:bold;" id="referenceName">Nguyen Hoang Nam</label>
-                                                    <br>
-                                                    <label>Phone:</label>
-                                                    <label style="font-weight:bold;" id="referencePhone">0989989959</label>
-                                                    <br>
-                                                    <label>Email:</label>
-                                                    <label style="font-weight:bold;" id="referenceEmail">namnh@gmail.com</label>
-                                                </form>
+                                                <label>Name:</label>
+                                                <label style="font-weight:bold;" id="referenceName">Nguyen Hoang Nam</label>
+                                                <br>
+                                                <label>Phone:</label>
+                                                <label style="font-weight:bold;" id="referencePhone">0989989959</label>
+                                                <br>
+                                                <label>Email:</label>
+                                                <label style="font-weight:bold;" id="referenceEmail">namnh@gmail.com</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <form>
-                                                    <label>Job title:</label>
-                                                    <label style="font-weight:bold;" id="referenceJobTitle">Director</label>
-                                                    <br>
-                                                    <label>Relationship:</label>
-                                                    <label style="font-weight:bold;" id="referenceRelationship">supervisor</label>
-                                                </form>
+                                                <label>Job title:</label>
+                                                <label style="font-weight:bold;" id="referenceJobTitle">Director</label>
+                                                <br>
+                                                <label>Relationship:</label>
+                                                <label style="font-weight:bold;" id="referenceRelationship">supervisor</label>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row col-md-12" id="referenceForm_02">
+                                    <div class="row col-md-12" id="referenceForm_1">
                                         <div class="row col-md-12">
                                             <h4>Reference</h4>
                                         </div>
                                         <div class="row col-md-12 clearMaginPadding">
                                             <div class="col-md-6 clearMaginPadding">
-                                                <form>
-                                                    <label>Name:</label>
-                                                    <label style="font-weight:bold;" id="referenceName">Nguyen Hoang Nam</label>
-                                                    <br>
-                                                    <label>Phone:</label>
-                                                    <label style="font-weight:bold;" id="referencePhone">0989989959</label>
-                                                    <br>
-                                                    <label>Email:</label>
-                                                    <label style="font-weight:bold;" id="referenceEmail">namnh@gmail.com</label>
-                                                </form>
+                                                <label>Name:</label>
+                                                <label style="font-weight:bold;" id="referenceName">Nguyen Hoang Nam</label>
+                                                <br>
+                                                <label>Phone:</label>
+                                                <label style="font-weight:bold;" id="referencePhone">0989989959</label>
+                                                <br>
+                                                <label>Email:</label>
+                                                <label style="font-weight:bold;" id="referenceEmail">namnh@gmail.com</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <form>
-                                                    <label>Job title:</label>
-                                                    <label style="font-weight:bold;" id="referenceJobTitle">Director</label>
-                                                    <br>
-                                                    <label>Relationship:</label>
-                                                    <label style="font-weight:bold;" id="referenceRelationship">supervisor</label>
-                                                </form>
+                                                <label>Job title:</label>
+                                                <label style="font-weight:bold;" id="referenceJobTitle">Director</label>
+                                                <br>
+                                                <label>Relationship:</label>
+                                                <label style="font-weight:bold;" id="referenceRelationship">supervisor</label>
                                             </div>
                                         </div>
                                     </div>
@@ -453,7 +438,7 @@
                             </div>
                         </div>
                     </div>
-                    <form class="col-md-4 clearMaginPadding" style="margin-top: 1em">
+                    <div class="col-md-4 clearMaginPadding" style="margin-top: 1em">
                         <!-- note -->
                         <div class="row col-md-12 clearMaginPadding">
                             <div class="col-md-2 clearMaginPadding">
@@ -479,13 +464,13 @@
                                 </select>
                             </div>
                             <div class="col-md-12 col-sm-12 col-xs-12" style="padding-right: 3em">
-                                <input type="submit" value="Submit" class="btnFinish">
+                                <input type="submit" value="Submit" id="btnSubmitCompanyResult">
                             </div>
 
 
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
             <!-- end -->
         </div>
@@ -518,7 +503,13 @@
     <!-- AdminLTE for demo purposes -->
     <script src="~/Content/Js/demo.js"></script>
     <script src="~/Content/iCheck/icheck.min.js"></script>
+    <script src="~/Scripts/utils.js"></script>
     <script src="~/Scripts/process-backgroundchecks-candidate.js"></script>
+
+    <script>
+        getAllCompanyInfo(@ViewBag.CandidateId);
+        getCandidateId(@ViewBag.CandidateId);
+    </script>
 
 </body>
 </html>

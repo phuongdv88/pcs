@@ -52,8 +52,9 @@ $(document).ready(function () {
         $('#buttonSubmit').prop("disabled", true);
     });
 
-    baseFormCompanyHtml = $("#baseFormCompany").html();
     baseReferenceHtml = $("#baseReference").html();
+    $("#baseReference").remove();
+    baseFormCompanyHtml = $("#baseFormCompany").html();
     $("#baseFormCompany").remove();
 
     $("#candidateDOB").datepicker({
@@ -75,7 +76,7 @@ function generateReferenceHtml(refeIndex, comFormId) {
     return refeHtml;
 }
 
-function addCompany(isNew) {
+function addCompany() {
     lastIndexCompany++;
     countCompany++;
     if (countCompany >= limitCompany) {
@@ -100,9 +101,6 @@ function addCompany(isNew) {
         startView: "years",
         minViewMode: "months"
     })
-    if (isNew) {
-        addReference(comFormId, true)
-    }
     return comFormId;
 }
 function removeCompany(comFormId) {
@@ -152,7 +150,7 @@ function removeReference(refeFormId, comFormId) {
     if (referenceId !== '-1') {
         listDeleteReferenceId.push(referenceId);
     }
-    $('#' + refeFormId).remove();
+    $('#' + comFormId).find('#' + refeFormId).remove();
     countReferenceArray[comFormId]--;
     if (countReferenceArray[comFormId] < limitReference) {
         $('#' + comFormId).find("#addReferenceButton").prop("hidden", false);
@@ -246,7 +244,7 @@ function getAllCompanyCan() {
                 i++;
                 // fill up company info
                 // generate html of company form
-                var comFormId = addCompany(false);
+                var comFormId = addCompany();
                 // fill data to the form
                 $('#' + comFormId).find("#companyId").val(item.CompanyInfoId);
                 $('#' + comFormId).find("#companyName").val(item.Name);
@@ -258,11 +256,8 @@ function getAllCompanyCan() {
                 $('#' + comFormId).find("#jobDuties").val(item.JobDuties);
                 // fill up reference every company
                 listComId[item.CompanyInfoId] = comFormId;
-
             });
-            if (i === 0) {
-                addCompany(true);
-            }
+            
 
         },
         error: function (errorMessage) {

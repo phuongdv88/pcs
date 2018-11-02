@@ -20,8 +20,38 @@ namespace PCSs.Controllers
         // Get: Specialist
         public ActionResult ProcessBackgroundCheckCandidate(long? id)
         {
-            return View();
+            long specialistId = -1;
+            try
+            {
+                if (!long.TryParse(Session["SpecialistId"].ToString(), out specialistId))
+                {
+                    return Json(new { rs = -1, msg = "Error: Can't get specialist's profile" }, JsonRequestBehavior.AllowGet);
+                }
+
+                ViewBag.CandidateId = id;
+                var specialist = db.Specialists.FirstOrDefault(s => s.SpecialistId == specialistId);
+                if (specialist != null)
+                {
+                    if (specialist.MiddleName == null)
+                    {
+                        ViewBag.SpecialistName = specialist.FirstName + " " + specialist.LastName;
+                    }
+                    else
+                    {
+                        ViewBag.SpecialistName = specialist.FirstName + " " + specialist.MiddleName + " " + specialist.LastName;
+                    }
+                }
+                return View();
+
+            }
+            catch (Exception e)
+            {
+                return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
+            }
+           
         }
+
+
         public ActionResult ManageSpecialistAccount(long? id)
         {
             if (id == null)
@@ -37,19 +67,15 @@ namespace PCSs.Controllers
             {
                 if (specialist.MiddleName == null)
                 {
-                    ViewBag.Title = specialist.FirstName + " " + specialist.LastName;
+                    ViewBag.SpecialistName = specialist.FirstName + " " + specialist.LastName;
                 }
                 else
                 {
-                    ViewBag.Title = specialist.FirstName + " " + specialist.MiddleName + " " + specialist.LastName;
+                    ViewBag.SpecialistName = specialist.FirstName + " " + specialist.MiddleName + " " + specialist.LastName;
                 }
             }
             return View();
         }
-        /// <summary>
-        /// Get all Candidate
-        /// </summary>
-        /// <returns></returns>
 
         public JsonResult GetAvailableCandidate()
         {
@@ -167,7 +193,7 @@ namespace PCSs.Controllers
             long specialistId = -1;
             if (!long.TryParse(Session["SpecialistId"].ToString(), out specialistId))
             {
-                return Json(new {rs = -1, msg = "Error: Can't get specialist's profile" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Error: Can't get specialist's profile" }, JsonRequestBehavior.AllowGet);
             }
             string registered = "";
             string completed = "";
@@ -232,12 +258,12 @@ namespace PCSs.Controllers
                 {
                     return Json(new { rs = -1, msg = "Can not get candiate's profile" }, JsonRequestBehavior.AllowGet);
                 }
-                if(can.Status != status.CandidateStatus)
+                if (can.Status != status.CandidateStatus)
                 {
                     can.Status = status.CandidateStatus;
                     can.CompleteTime = DateTime.Now;
                     can.LastUpdateReportTime = DateTime.Now;
-                    
+
                     db.Entry(can).State = EntityState.Modified;
                     var r = db.SaveChanges();
                     return Json(new { rs = r, msg = "Done" }, JsonRequestBehavior.AllowGet);
@@ -329,6 +355,59 @@ namespace PCSs.Controllers
 
         }
 
+        public JsonResult GetAllCompanyInfo(long? id)
+        {
+            if(id == null)
+            {
+                return Json(new { rs = -1, msg = "Error" }, JsonRequestBehavior.AllowGet);
+            }
+            long specialistId = -1;
+            try
+            {
+                if (!long.TryParse(Session["SpecialistId"].ToString(), out specialistId))
+                {
+                    return Json(new { rs = -1, msg = "Error: Can't get specialist's profile" }, JsonRequestBehavior.AllowGet);
+                }
+                var can = db.Candidates.FirstOrDefault(s => s.CandidateId == id && s.SpecialistId == specialistId);
+                if (can == null)
+                {
+                    return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
+                }
+
+                return Json(db.CompanyInfoes.Where(s => (s.CandidateId == id)).OrderBy(s => s.CompanyInfoId), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult GetCandidateById(long? id)
+        {
+            if (id == null)
+            {
+                return Json(new { rs = -1, msg = "Error" }, JsonRequestBehavior.AllowGet);
+            }
+            long specialistId = -1;
+            try
+            {
+                if (!long.TryParse(Session["SpecialistId"].ToString(), out specialistId))
+                {
+                    return Json(new { rs = -1, msg = "Error: Can't get specialist's profile" }, JsonRequestBehavior.AllowGet);
+                }
+                var can = db.Candidates.FirstOrDefault(s => s.CandidateId == id && s.SpecialistId == specialistId);
+                if (can == null)
+                {
+                    return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
+                }
+
+                return Json(can, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
