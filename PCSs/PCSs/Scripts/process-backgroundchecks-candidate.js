@@ -86,7 +86,7 @@ function getAllCompanyInfo(candidateId) {
                     $('#' + comFormId).find("#companyJobTitle").text(item.Jobtitle);
                     $('#' + comFormId).find("#companyStartDate").text(formatMonthOnly(item.StartDate.substr(6)));
                     $('#' + comFormId).find("#companyStopDate").text(formatMonthOnly(item.StopDate.substr(6)));
-                    $('#' + comFormId).find("#companyJobDuties").text(item.JobDuties);
+                    $('#' + comFormId).find("#companyJobDuties").val(item.JobDuties);
                     $('#' + comFormId).find("#companyNotes").text(item.Note);
 
                     // fill up reference information
