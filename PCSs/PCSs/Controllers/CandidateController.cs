@@ -236,9 +236,24 @@ namespace PCSs.Controllers
 
         public JsonResult GetAllReference(long id)
         {
-            var test = db.ReferenceInfoes.Where(s => s.CompanyInfoId == id).OrderBy(s => s.ReferenceInfoId);
-            var result = Json(db.ReferenceInfoes.Where(s => s.CompanyInfoId == id), JsonRequestBehavior.AllowGet);
-            return result;
+            long candidateId = -1;
+            try
+            {
+                if (long.TryParse(Session["CandidateId"].ToString(), out candidateId))
+                {
+                    var com = db.CompanyInfoes.FirstOrDefault(s => (s.CompanyInfoId == id && s.CandidateId == candidateId));
+                    if (com != null)
+                    {
+                        return Json(db.ReferenceInfoes.Where(s => s.CompanyInfoId == id).OrderBy(s => s.ReferenceInfoId), JsonRequestBehavior.AllowGet);
+                    }
+                }
+                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+
+                return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
+            }
         }
         public JsonResult CreateReference(ReferenceInfo refe)
         {

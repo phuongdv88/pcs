@@ -48,7 +48,7 @@ namespace PCSs.Controllers
             {
                 return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
             }
-           
+
         }
 
 
@@ -77,12 +77,46 @@ namespace PCSs.Controllers
             return View();
         }
 
+        public JsonResult GetAllReference(long id)
+        {
+            long specialistId = -1;
+            try
+            {
+                if (!long.TryParse(Session["SpecialistId"].ToString(), out specialistId))
+                {
+                    return Json(new { rs = -1, msg = "Error: Can't get specialist's profile" }, JsonRequestBehavior.AllowGet);
+                }
+
+                return Json(db.ReferenceInfoes.Where(s => s.CompanyInfoId == id).OrderBy(s => s.ReferenceInfoId), JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception e)
+            {
+                return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
+            }           
+        }
+
         public JsonResult GetAvailableCandidate()
         {
-            var result = Json(db.Candidates.Where(s => ((s.Status == "Initial" || s.Status == "Ready") && s.SpecialistId == -1)).OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
-            //todo:fortest
-            //var result = Json(db.Candidates.OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
-            return result;
+            long specialistId = -1;
+            try
+            {
+                if (!long.TryParse(Session["SpecialistId"].ToString(), out specialistId))
+                {
+                    return Json(new { rs = -1, msg = "Error: Can't get specialist's profile" }, JsonRequestBehavior.AllowGet);
+                }
+
+                var result = Json(db.Candidates.Where(s => ((s.Status == "Initial" || s.Status == "Ready") && s.SpecialistId == -1)).OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
+                //todo:fortest
+                //var result = Json(db.Candidates.OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
+                return result;
+
+            }
+            catch (Exception e)
+            {
+                return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
+            }
+
         }
 
         public JsonResult GetMyCandidate()
@@ -357,7 +391,7 @@ namespace PCSs.Controllers
 
         public JsonResult GetAllCompanyInfo(long? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return Json(new { rs = -1, msg = "Error" }, JsonRequestBehavior.AllowGet);
             }

@@ -46,7 +46,7 @@ input[type=password], [type=text], [type=number], [type=email], select, textarea
     margin-top: unset;
     margin-bottom: 16px;
 }
-input[type=submit] {
+input[type=submit], [type=button] {
     background-color: #3c8dbc;
     color: white;
     padding: 8px 20px;
