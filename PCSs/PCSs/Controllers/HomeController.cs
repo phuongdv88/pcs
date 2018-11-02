@@ -18,7 +18,7 @@ namespace PCSs.Controllers
         public ActionResult Login(string returnURL)
         {
             var userInfo = new UserLoginInfo();
-            
+
             try
             {
                 EnsureLoggedOut();
@@ -83,10 +83,10 @@ namespace PCSs.Controllers
                     }
                 }
                 return RedirectToAction("Login", "Home");
-              
+
 
             }
-            catch {throw;}
+            catch { throw; }
         }
 
         private void EnsureLoggedOut()
@@ -161,7 +161,9 @@ namespace PCSs.Controllers
                                 throw new Exception("Access Denied! This account is expired");
                             }
                         }
-                        // check role to redirection to right link
+                        var returnToUrllink = false;
+                        if (!string.IsNullOrWhiteSpace(entity.ReturnURL) && Url.IsLocalUrl(entity.ReturnURL))
+                            returnToUrllink = true;
 
                         // For set authentication in Cookie (remember me option)
                         SignInRemember(entity.UserName, entity.IsRemember);
@@ -169,42 +171,56 @@ namespace PCSs.Controllers
                         Session["UserId"] = userInfo.UserLoginId;
                         Session["UserName"] = userInfo.UserName;
                         Session["Role"] = userInfo.Role;
-                        //if (string.IsNullOrEmpty(entity.ReturnURL))
-                        //{
-                            switch ((UserRole) userInfo.Role)
-                            {
-                                case UserRole.ADMIN:
-                                    //admin 
-                                    // return RedirectToAction("Index", "Admin");
-                                    // to do test
+                        switch ((UserRole)userInfo.Role)
+                        {
+                            case UserRole.ADMIN:
+                                //admin 
+                                // return RedirectToAction("Index", "Admin");
+                                // to do test
+                                if (!returnToUrllink)
+                                {
                                     return RedirectToAction("EditAccount", "Admin");
-                                case UserRole.CLIENT:
-                                    var recruiter = db.Recruiters.FirstOrDefault(s => s.UserLoginId == userInfo.UserLoginId);
-                                    if(recruiter == null)
-                                    {
-                                        return RedirectToAction("Error", "Error");
-                                    }
-                                    // Recruiter
-                                    var recruiterId = db.Recruiters.FirstOrDefault(s => s.UserLoginId == userInfo.UserLoginId).RecruiterId;
-                                    Session["RecruiterId"] = recruiter.RecruiterId;
-                                    Session["ClientId"] = recruiter.ClientId;
+                                }
+                                break;
+                            case UserRole.CLIENT:
+                                var recruiter = db.Recruiters.FirstOrDefault(s => s.UserLoginId == userInfo.UserLoginId);
+                                if (recruiter == null)
+                                {
+                                    return RedirectToAction("Error", "Error");
+                                }
+                                // Recruiter
+                                var recruiterId = db.Recruiters.FirstOrDefault(s => s.UserLoginId == userInfo.UserLoginId).RecruiterId;
+                                Session["RecruiterId"] = recruiter.RecruiterId;
+                                Session["ClientId"] = recruiter.ClientId;
+                                if (!returnToUrllink)
+                                {
                                     return RedirectToAction("ManageAccount", "Client");
 
-                                case UserRole.SPECIALIST:
-                                    // specialist
-                                    var specialistId = db.Specialists.FirstOrDefault(s => s.UserLoginId == userInfo.UserLoginId).SpecialistId;
-                                    Session["SpecialistId"] = specialistId;
-                                    return RedirectToAction("ManageSpecialistAccount", "Specialist", new { id = specialistId });
+                                }
+                                break;
 
-                                case UserRole.CANDIDATE:
-                                    // Candidate
-                                    // get candidate id
+                            case UserRole.SPECIALIST:
+                                // specialist
+                                var specialistId = db.Specialists.FirstOrDefault(s => s.UserLoginId == userInfo.UserLoginId).SpecialistId;
+                                Session["SpecialistId"] = specialistId;
+                                if (!returnToUrllink)
+                                {
+                                    return RedirectToAction("ManageSpecialistAccount", "Specialist", new { id = specialistId });
+                                }
+                                break;
+
+                            case UserRole.CANDIDATE:
+                                // Candidate
+                                // get candidate id
+                                if (!returnToUrllink)
+                                {
                                     return RedirectToAction("EditProfile", "Candidate", new { userLoginId = userInfo.UserLoginId });
-                                default:
-                                    return RedirectToAction("Login", "Home");
-                            }
-                        //}
-                        //return RedirectToLocal(entity.ReturnURL, userInfo.Role);
+                                }
+                                break;
+                            default:
+                                return RedirectToAction("Login", "Home");
+                        }
+                        return Redirect(entity.ReturnURL);
                     }
                     else
                     {
@@ -218,12 +234,12 @@ namespace PCSs.Controllers
             {
                 TempData["ErrorMSG"] = e.Message;
                 return View(entity);
-            
+
 
             }
         }
 
-    
+
 
 
     }
