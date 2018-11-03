@@ -27,7 +27,7 @@
     <link href="~/Content/Css/skins/_all-skins.min.css" rel="stylesheet" />
     <link href="~/Content/iCheck/all.css" rel="stylesheet" />
     <link href="~/Content/Css/logo.css" rel="stylesheet" />
-   
+
     <link href="~/Content/Css/processBackgroundChecksCandidate.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
@@ -279,7 +279,7 @@
         </div>
         <!-- end general information -->
         <!-- Company -->
-        <div class="col-md-12  col-sm-12 col-xs-12  clearMaginPadding  company" >
+        <div class="col-md-12  col-sm-12 col-xs-12  clearMaginPadding  company">
             <ul class="nav nav-tabs" id="navCompanies"></ul>
         </div>
         <div class="tab-content" id="companyInformation">
@@ -292,24 +292,18 @@
                                 <div class="col-md-12 col-sm-12 col-xs-12 clearMaginPadding" style="padding-top: 1em">
                                     <div style="padding-left: 1em">
                                         <div class="row">
-                                            <div class="col-md-12 col-sm-12 col-xs-12 clearMaginPadding">
+                                            <div class="col-md-4 col-sm-12 col-xs-12 clearMaginPadding">
                                                 <label>Website:</label>
                                                 <label style="font-weight:bold;" id="companyWebsite"></label>
                                             </div>
-
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12 col-sm-12 col-xs-12 clearMaginPadding">
+                                            <div class="col-md-8 col-sm-12 col-xs-12 clearMaginPadding">
                                                 <label>Address:</label>
                                                 <label style="font-weight:bold;" id="companyAddress"></label>
                                             </div>
                                         </div>
+                                        <hr />
                                         <div class="row">
-                                            <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
-                                                <label>Name:</label>
-                                                <label style="font-weight:bold;" id="companyName"></label>
-                                            </div>
-                                            <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
+                                            <div class="col-md-4 col-sm-12 col-xs-12 clearMaginPadding">
                                                 <div class="form-group">
                                                     <label class="col-md-4 col-sm-4 col-xs-4 ">
                                                         <input type="radio" name="checkResultName_comId" id="nameTrue" value="True" class="minimal">
@@ -325,13 +319,13 @@
                                                     </label>
                                                 </div>
                                             </div>
+                                            <div class="col-md-8 col-sm-12 col-xs-12 clearMaginPadding">
+                                                <label>Name:</label>
+                                                <label style="font-weight:bold;" id="companyName"></label>
+                                            </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
-                                                <label>Job title:</label>
-                                                <label style="font-weight:bold;" id="companyJobtitle"></label>
-                                            </div>
-                                            <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
+                                            <div class="col-md-4 col-sm-12 col-xs-12 clearMaginPadding">
                                                 <div class="form-group">
                                                     <label class="col-md-4 col-sm-4 col-xs-4 ">
                                                         <input type="radio" name="checkResultJobTitle_comId" id="jobTitleTrue" value="True" class="minimal">
@@ -347,15 +341,14 @@
                                                     </label>
                                                 </div>
                                             </div>
+                                            <div class="col-md-8 col-sm-12 col-xs-12 clearMaginPadding">
+                                                <label>Job title:</label>
+                                                <label style="font-weight:bold;" id="companyJobtitle"></label>
+                                            </div>
+
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
-                                                <label>Startdate:</label>
-                                                <label style="font-weight:bold;" id="companyStartDate"></label>
-                                                <label>Stopdate:</label>
-                                                <label style="font-weight:bold;" id="companyStopDate"></label>
-                                            </div>
-                                            <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
+                                            <div class="col-md-4 col-sm-12 col-xs-12 clearMaginPadding">
                                                 <div class="form-group">
                                                     <label class="col-md-4 col-sm-4 col-xs-4 ">
                                                         <input type="radio" name="checkResultPeriod_comId" id="periodTrue" value="True" class="minimal">
@@ -371,20 +364,15 @@
                                                     </label>
                                                 </div>
                                             </div>
+                                            <div class="col-md-8 col-sm-12 col-xs-12 clearMaginPadding">
+                                                <label>Startdate:</label>
+                                                <label style="font-weight:bold;" id="companyStartDate"></label>
+                                                <label>Stopdate:</label>
+                                                <label style="font-weight:bold;" id="companyStopDate"></label>
+                                            </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
-                                                <div class="row">
-                                                    <div class="col-md-2 col-sm-12 col-xs-12 ">
-                                                        <label>Job Duties:</label>
-                                                    </div>
-                                                    <div class="col-md-10 col-sm-12 col-xs-12 ">
-                                                        <textarea style="font-weight:bold;" id="companyJobDuties" disabled></textarea>
-                                                    </div>
-                                                </div>
-                                                
-                                            </div>
-                                            <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
+                                            <div class="col-md-4 col-sm-12 col-xs-12 clearMaginPadding">
                                                 <div class="form-group">
                                                     <label class="col-md-4 col-sm-4 col-xs-4 ">
                                                         <input type="radio" name="checkResultJobDuties_comId" id="dutiesTrue" value="True" class="minimal">
@@ -398,6 +386,16 @@
                                                         <input type="radio" name="checkResultJobDuties_comId" id="dutiesNA" value="N/A" class="minimal" checked>
                                                         N/A
                                                     </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8 col-sm-12 col-xs-12 clearMaginPadding">
+                                                <div class="row">
+                                                    <div class="col-md-2 col-sm-12 col-xs-12 ">
+                                                        <label>Job Duties:</label>
+                                                    </div>
+                                                    <div class="col-md-10 col-sm-12 col-xs-12 ">
+                                                        <textarea style="font-weight:bold;" id="companyJobDuties" rows="5" disabled></textarea>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -417,20 +415,20 @@
                                             <div class="row col-md-12 col-sm-12 col-xs-12 clearMaginPadding  ">
                                                 <div class="col-md-6  col-sm-12 col-xs-12 clearMaginPadding">
                                                     <label>Name:</label>
-                                                    <label style="font-weight:bold;" id="referenceName">Nguyen Hoang Nam</label>
+                                                    <label style="font-weight:bold;" id="referenceName"></label>
                                                     <br>
                                                     <label>Phone:</label>
-                                                    <label style="font-weight:bold;" id="referencePhone">0989989959</label>
+                                                    <label style="font-weight:bold;" id="referencePhone"></label>
                                                     <br>
                                                     <label>Email:</label>
-                                                    <label style="font-weight:bold;" id="referenceEmail">namnh@gmail.com</label>
+                                                    <label style="font-weight:bold;" id="referenceEmail"></label>
                                                 </div>
                                                 <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding ">
                                                     <label>Job title:</label>
-                                                    <label style="font-weight:bold;" id="referenceJobTitle">Director</label>
+                                                    <label style="font-weight:bold;" id="referenceJobTitle"></label>
                                                     <br>
                                                     <label>Relationship:</label>
-                                                    <label style="font-weight:bold;" id="referenceRelationship">supervisor</label>
+                                                    <label style="font-weight:bold;" id="referenceRelationship"></label>
                                                 </div>
                                             </div>
                                         </div>
@@ -441,20 +439,20 @@
                                             <div class="row col-md-12 col-sm-12 col-xs-12  clearMaginPadding">
                                                 <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding ">
                                                     <label>Name:</label>
-                                                    <label style="font-weight:bold;" id="referenceName">Nguyen Hoang Nam</label>
+                                                    <label style="font-weight:bold;" id="referenceName"></label>
                                                     <br>
                                                     <label>Phone:</label>
-                                                    <label style="font-weight:bold;" id="referencePhone">0989989959</label>
+                                                    <label style="font-weight:bold;" id="referencePhone"></label>
                                                     <br>
                                                     <label>Email:</label>
-                                                    <label style="font-weight:bold;" id="referenceEmail">namnh@gmail.com</label>
+                                                    <label style="font-weight:bold;" id="referenceEmail"></label>
                                                 </div>
                                                 <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding ">
                                                     <label>Job title:</label>
-                                                    <label style="font-weight:bold;" id="referenceJobTitle">Director</label>
+                                                    <label style="font-weight:bold;" id="referenceJobTitle"></label>
                                                     <br>
                                                     <label>Relationship:</label>
-                                                    <label style="font-weight:bold;" id="referenceRelationship">supervisor</label>
+                                                    <label style="font-weight:bold;" id="referenceRelationship"></label>
                                                 </div>
                                             </div>
                                         </div>
@@ -472,7 +470,7 @@
                                     <textarea class="note" rows="10" id="companyNotes"></textarea>
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-12 col-sm-12 col-xs-12 clearMaginPadding">
                                 <input class="btnFinish" type="button" id="btnSubmitCompanyResult" value="submit" onclick="submitCompanyData('company_comId')">
                             </div>

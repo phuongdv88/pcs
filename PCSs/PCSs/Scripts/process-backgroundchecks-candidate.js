@@ -83,7 +83,7 @@ function getAllCompanyInfo(candidateId) {
                     $('#' + comFormId).find("#companyWebsite").text(item.Website);
                     $('#' + comFormId).find("#companyAddress").text(item.Address);
                     $('#' + comFormId).find("#companyName").text(item.Name);
-                    $('#' + comFormId).find("#companyJobTitle").text(item.Jobtitle);
+                    $('#' + comFormId).find("#companyJobtitle").text(item.Jobtitle);
                     $('#' + comFormId).find("#companyStartDate").text(formatMonthOnly(item.StartDate.substr(6)));
                     $('#' + comFormId).find("#companyStopDate").text(formatMonthOnly(item.StopDate.substr(6)));
                     $('#' + comFormId).find("#companyJobDuties").val(item.JobDuties);
@@ -127,7 +127,7 @@ function getAllReference(comFormId, comId) {
 
             });
             if(i==1){
-                $('#' + comFormId).find("#" + refeFormId).remove();
+                $('#' + comFormId).find("#referenceForm_1").remove();
             }
             
         },

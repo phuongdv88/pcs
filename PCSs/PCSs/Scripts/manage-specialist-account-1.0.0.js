@@ -2,10 +2,10 @@
 changePasswordModalHtml = $("#changePassModal").html();
 
 $(document).ready(function () {
-    $('#bs-task-management').on('shown.bs.tab', function () {
+    //$('#bs-task-management').on('shown.bs.tab', function () {
         generateChart();
         //$('#task-management').off();
-    })
+    //})
     // reset modal when hidden them
     $("#uploadFileModal").on('hidden.bs.modal', function () {
         $("#uploadFileModal").html(uploadFileHtml);
