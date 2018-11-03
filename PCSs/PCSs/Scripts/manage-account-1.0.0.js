@@ -81,8 +81,7 @@ function _getAllCandidate(id) {
                 html += '</tr>';
             });
             $('#candidates tbody').html(html);
-            $('#candidates').DataTable();
-
+           $('#candidates').DataTable();
         },
         error: function (errorMessage) {
             alert(errorMessage.responseText);
@@ -211,6 +210,8 @@ function _add() {
         timeout: '5000',
         success: function (result) {
             $('#btnRefresh').click();
+            //window.location.reload();
+
             $("#newCandidateModal").modal('hide');
         },
         error: function (errorMessage) {
@@ -339,11 +340,19 @@ function deleteCandidate(id) {
             timeout: '5000',
             async: true,
             success: function (rs) {
+                
                 if (rs.result == -1) {
                     alert(rs.msg);
-                } else {
-                    $('#btnRefresh').click();
                 }
+                else {
+                   
+                    $('#btnRefresh').click();
+                   
+                  //  window.location.reload();
+                   
+                    
+                }
+                
             },
             error: function (errorMessage) {
                 alert(errorMessage.responseText);
