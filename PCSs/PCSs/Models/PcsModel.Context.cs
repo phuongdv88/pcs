@@ -35,5 +35,7 @@ namespace PCSs.Models
         public virtual DbSet<Specialist> Specialists { get; set; }
         public virtual DbSet<UserLogin> UserLogins { get; set; }
         public virtual DbSet<VerificationLog> VerificationLogs { get; set; }
+        public virtual DbSet<ActivityLog> ActivityLogs { get; set; }
+        public virtual DbSet<ClientLog> ClientLogs { get; set; }
     }
 }

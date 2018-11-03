@@ -12,12 +12,15 @@ namespace PCSs.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AttachmentFile
+    public partial class ActivityLog
     {
-        public long AttachmentFileId { get; set; }
-        public string Link { get; set; }
-        public string FileName { get; set; }
-        public long CandidateId { get; set; }
-        public string Type { get; set; }
+        public long ActivityLogId { get; set; }
+        public string ActionType { get; set; }
+        public Nullable<System.DateTime> ActionTime { get; set; }
+        public string ActionContent { get; set; }
+        public Nullable<long> UserLoginId { get; set; }
+        public Nullable<int> UserRole { get; set; }
+        public Nullable<long> SpecialistId { get; set; }
+        public Nullable<long> CandidateId { get; set; }
     }
 }

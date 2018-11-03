@@ -1,5 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="PCSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ActivityLog">
+    <Key>
+      <PropertyRef Name="ActivityLogId" />
+    </Key>
+    <Property Name="ActivityLogId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ActionType" Type="nvarchar" MaxLength="50" />
+    <Property Name="ActionTime" Type="datetime" />
+    <Property Name="ActionContent" Type="nvarchar(max)" />
+    <Property Name="UserLoginId" Type="bigint" />
+    <Property Name="UserRole" Type="int" />
+    <Property Name="SpecialistId" Type="bigint" />
+    <Property Name="CandidateId" Type="bigint" />
+  </EntityType>
   <EntityType Name="AttachmentFile">
     <Key>
       <PropertyRef Name="AttachmentFileId" />
@@ -8,6 +21,7 @@
     <Property Name="Link" Type="text" Nullable="false" />
     <Property Name="FileName" Type="varchar" MaxLength="500" Nullable="false" />
     <Property Name="CandidateId" Type="bigint" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Candidate">
     <Key>
@@ -53,6 +67,17 @@
     <Property Name="StartDate" Type="date" Nullable="false" />
     <Property Name="StopDate" Type="date" Nullable="false" />
     <Property Name="PackageValue" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ClientLog">
+    <Key>
+      <PropertyRef Name="ClientLogId" />
+    </Key>
+    <Property Name="ClientLogId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LogType" Type="nvarchar" MaxLength="50" />
+    <Property Name="LogTime" Type="datetime" />
+    <Property Name="LogContent" Type="nvarchar(max)" />
+    <Property Name="RecruiterId" Type="bigint" />
+    <Property Name="ClientId" Type="bigint" />
   </EntityType>
   <EntityType Name="CompanyInfo">
     <Key>
@@ -159,9 +184,11 @@
     <Property Name="SpecialistId" Type="bigint" />
   </EntityType>
   <EntityContainer Name="PCSModelStoreContainer">
+    <EntitySet Name="ActivityLog" EntityType="Self.ActivityLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AttachmentFile" EntityType="Self.AttachmentFile" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Candidate" EntityType="Self.Candidate" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ClientLog" EntityType="Self.ClientLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CompanyInfo" EntityType="Self.CompanyInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EducationInfo" EntityType="Self.EducationInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Recruiter" EntityType="Self.Recruiter" Schema="dbo" store:Type="Tables" />

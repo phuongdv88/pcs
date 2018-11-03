@@ -94,7 +94,7 @@ namespace PCSs.Controllers
                     var can = db.Candidates.FirstOrDefault(s => s.CandidateId == candidateId);
                     return Json(can, JsonRequestBehavior.AllowGet);
                 }
-                return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
@@ -112,28 +112,19 @@ namespace PCSs.Controllers
                 if (long.TryParse(Session["CandidateId"].ToString(), out candidateId))
                 {
                     var can = db.Candidates.FirstOrDefault(s => s.CandidateId == candidateId);
-                    if (can.FirstName != candidate.FirstName ||
-                    can.LastName != candidate.FirstName ||
-                    can.Gender != candidate.FirstName ||
-                    can.Email != candidate.FirstName ||
-                    can.PhoneNumber != candidate.FirstName ||
-                    can.DOB != candidate.FirstName ||
-                    can.IDNumber != candidate.FirstName ||
-                    can.JobTitle != candidate.FirstName ||
-                    can.JobLevel != candidate.FirstName ||
-                    can.Address != candidate.FirstName)
+                    if (can.Gender != candidate.Gender ||
+                    can.Email != candidate.Email ||
+                    can.PhoneNumber != candidate.PhoneNumber ||
+                    can.DOB != candidate.DOB ||
+                    can.IDNumber != candidate.IDNumber ||
+                    can.Address != candidate.Address)
                     {
-                        can.FirstName = candidate.FirstName;
-                        can.MiddleName = candidate.FirstName;
-                        can.LastName = candidate.FirstName;
-                        can.Gender = candidate.FirstName;
-                        can.Email = candidate.FirstName;
-                        can.PhoneNumber = candidate.FirstName;
-                        can.DOB = candidate.FirstName;
-                        can.IDNumber = candidate.FirstName;
-                        can.JobTitle = candidate.FirstName;
-                        can.JobLevel = candidate.FirstName;
-                        can.Address = candidate.FirstName;
+                        can.Gender = candidate.Gender;
+                        can.Email = candidate.Email;
+                        can.PhoneNumber = candidate.PhoneNumber;
+                        can.DOB = candidate.DOB;
+                        can.IDNumber = candidate.IDNumber;
+                        can.Address = candidate.Address;
                         if(can.Status == "Initial")
                         {
                             can.Status = "Ready";
@@ -143,7 +134,7 @@ namespace PCSs.Controllers
                         return Json(new { rs = result, msg = "Successfully" }, JsonRequestBehavior.AllowGet);
                     }
                 }
-                return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = 1, msg = "1" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
@@ -152,10 +143,14 @@ namespace PCSs.Controllers
             }
         }
         // ajax add, edit, delete company, add, edit, delete reference
-        public JsonResult GetAllCompany(long id)
+        public JsonResult GetAllCompany()
         {
-            var result = Json(db.CompanyInfoes.Where(s => s.CandidateId == id).OrderBy(s => s.CompanyInfoId), JsonRequestBehavior.AllowGet);
-            return result;
+            long candidateId = -1;
+            if (long.TryParse(Session["CandidateId"].ToString(), out candidateId))
+            {
+                return Json(db.CompanyInfoes.Where(s => s.CandidateId == candidateId).OrderBy(s => s.CompanyInfoId), JsonRequestBehavior.AllowGet);
+            }
+            return Json(new {rs = -1, msg="Permission Denied" }, JsonRequestBehavior.AllowGet);
         }
         public JsonResult CreateCompany(CompanyInfo com)
         {
@@ -170,7 +165,7 @@ namespace PCSs.Controllers
                     var rs = db.SaveChanges();
                     return Json(new { comId = com.CompanyInfoId }, JsonRequestBehavior.AllowGet);
                 }
-                return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
@@ -208,10 +203,10 @@ namespace PCSs.Controllers
                         var r = db.SaveChanges();
                         return Json(new { rs = r, msg = "Successfully" }, JsonRequestBehavior.AllowGet);
                     }
-                    else return Json(new { rs = -1, msg = "1" }, JsonRequestBehavior.AllowGet);
+                    else return Json(new { rs = 1, msg = "1" }, JsonRequestBehavior.AllowGet);
                 }
             }
-            return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+            return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult DeleteCompany(long id)
@@ -229,7 +224,7 @@ namespace PCSs.Controllers
                         return Json(new { rs = r, msg = "Successfully" }, JsonRequestBehavior.AllowGet);
                     }
                 }
-                return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
@@ -241,9 +236,24 @@ namespace PCSs.Controllers
 
         public JsonResult GetAllReference(long id)
         {
-            var test = db.ReferenceInfoes.Where(s => s.CompanyInfoId == id).OrderBy(s => s.ReferenceInfoId);
-            var result = Json(db.ReferenceInfoes.Where(s => s.CompanyInfoId == id), JsonRequestBehavior.AllowGet);
-            return result;
+            long candidateId = -1;
+            try
+            {
+                if (long.TryParse(Session["CandidateId"].ToString(), out candidateId))
+                {
+                    var com = db.CompanyInfoes.FirstOrDefault(s => (s.CompanyInfoId == id && s.CandidateId == candidateId));
+                    if (com != null)
+                    {
+                        return Json(db.ReferenceInfoes.Where(s => s.CompanyInfoId == id).OrderBy(s => s.ReferenceInfoId), JsonRequestBehavior.AllowGet);
+                    }
+                }
+                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+
+                return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
+            }
         }
         public JsonResult CreateReference(ReferenceInfo refe)
         {
@@ -261,7 +271,7 @@ namespace PCSs.Controllers
                         return Json(new { rs = r, msg = "" }, JsonRequestBehavior.AllowGet);
                     }
                 }
-                return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
@@ -298,11 +308,11 @@ namespace PCSs.Controllers
                                 var r = db.SaveChanges();
                                 return Json(new { rs = r, msg = "" }, JsonRequestBehavior.AllowGet);
                             }
-                            else return Json(new { rs = -1, msg = "1" }, JsonRequestBehavior.AllowGet);
+                            else return Json(new { rs = 1, msg = "1" }, JsonRequestBehavior.AllowGet);
                         }
                     }
                 }
-                return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
@@ -330,7 +340,7 @@ namespace PCSs.Controllers
                         }
                     }
                 }
-                return Json(new { rs = -1, msg = "Error: You don't have permission to change this candidate" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {

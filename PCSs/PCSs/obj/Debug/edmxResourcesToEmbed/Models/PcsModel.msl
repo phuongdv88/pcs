@@ -4,6 +4,7 @@
     <EntitySetMapping Name="AttachmentFiles">
       <EntityTypeMapping TypeName="PCSModel.AttachmentFile">
         <MappingFragment StoreEntitySet="AttachmentFile">
+          <ScalarProperty Name="Type" ColumnName="Type" />
           <ScalarProperty Name="AttachmentFileId" ColumnName="AttachmentFileId" />
           <ScalarProperty Name="Link" ColumnName="Link" />
           <ScalarProperty Name="FileName" ColumnName="FileName" />
@@ -166,6 +167,32 @@
           <ScalarProperty Name="ReferenceInfoId" ColumnName="ReferenceInfoId" />
           <ScalarProperty Name="EducationInfoId" ColumnName="EducationInfoId" />
           <ScalarProperty Name="SpecialistId" ColumnName="SpecialistId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActivityLogs">
+      <EntityTypeMapping TypeName="PCSModel.ActivityLog">
+        <MappingFragment StoreEntitySet="ActivityLog">
+          <ScalarProperty Name="CandidateId" ColumnName="CandidateId" />
+          <ScalarProperty Name="SpecialistId" ColumnName="SpecialistId" />
+          <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+          <ScalarProperty Name="UserLoginId" ColumnName="UserLoginId" />
+          <ScalarProperty Name="ActionContent" ColumnName="ActionContent" />
+          <ScalarProperty Name="ActionTime" ColumnName="ActionTime" />
+          <ScalarProperty Name="ActionType" ColumnName="ActionType" />
+          <ScalarProperty Name="ActivityLogId" ColumnName="ActivityLogId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClientLogs">
+      <EntityTypeMapping TypeName="PCSModel.ClientLog">
+        <MappingFragment StoreEntitySet="ClientLog">
+          <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+          <ScalarProperty Name="RecruiterId" ColumnName="RecruiterId" />
+          <ScalarProperty Name="LogContent" ColumnName="LogContent" />
+          <ScalarProperty Name="LogTime" ColumnName="LogTime" />
+          <ScalarProperty Name="LogType" ColumnName="LogType" />
+          <ScalarProperty Name="ClientLogId" ColumnName="ClientLogId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

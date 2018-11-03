@@ -140,14 +140,15 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CandidateController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
-    <Compile Include="Controllers\CompanyInfoController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\GeneralController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ReferenceInfoController.cs" />
     <Compile Include="Controllers\SpecialistController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ActivityLog.cs">
+      <DependentUpon>PcsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AdminAuthorization.cs" />
     <Compile Include="Models\AttachmentFile.cs">
@@ -162,6 +163,9 @@
       <DependentUpon>PcsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ClientAuthorization.cs" />
+    <Compile Include="Models\ClientLog.cs">
+      <DependentUpon>PcsModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CompanyInfo.cs">
       <DependentUpon>PcsModel.tt</DependentUpon>
     </Compile>
@@ -427,6 +431,7 @@
     <Content Include="Content\Css\Login.css" />
     <Content Include="Content\Css\logo.css" />
     <Content Include="Content\Css\ManageAccount.css" />
+    <Content Include="Content\Css\processBackgroundChecksCandidate.css" />
     <Content Include="Content\Css\skins\skin-black-light.css" />
     <Content Include="Content\Css\skins\skin-black-light.min.css" />
     <Content Include="Content\Css\skins\skin-black.css" />
@@ -2262,11 +2267,13 @@
     <Content Include="Scripts\jquery\src\var\toString.js" />
     <Content Include="Scripts\jquery\src\wrap.js" />
     <Content Include="Scripts\manage-specialist-account-1.0.0.js" />
-    <Content Include="Scripts\manage-account-1.0.0.js" />
+    <Content Include="Scripts\manage-account-1.0.1.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\process-backgroundchecks-candidate.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\edit-profile-candidate-1.0.0.js" />
+    <Content Include="Scripts\edit-profile-candidate-1.0.1.js" />
+    <Content Include="Scripts\utils.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -2282,28 +2289,12 @@
     </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Layout\_LoginLayout.cshtml" />
     <Content Include="Scripts\jquery\.bower.json" />
     <Content Include="Scripts\jquery\bower.json" />
     <Content Include="Scripts\jquery\dist\jquery.min.map" />
     <Content Include="Scripts\jquery\dist\jquery.slim.min.map" />
     <Content Include="Scripts\jquery\external\sizzle\dist\sizzle.min.map" />
     <Content Include="Scripts\jquery\src\.eslintrc.json" />
-    <Content Include="Views\Client\Create.cshtml" />
-    <Content Include="Views\Client\Delete.cshtml" />
-    <Content Include="Views\Client\Details.cshtml" />
-    <Content Include="Views\Client\Edit.cshtml" />
-    <Content Include="Views\Client\Index.cshtml" />
-    <Content Include="Views\Candidate\Create.cshtml" />
-    <Content Include="Views\Candidate\Delete.cshtml" />
-    <Content Include="Views\Candidate\Details.cshtml" />
-    <Content Include="Views\Candidate\Edit.cshtml" />
-    <Content Include="Views\Candidate\Index.cshtml" />
-    <Content Include="Views\Specialist\Create.cshtml" />
-    <Content Include="Views\Specialist\Delete.cshtml" />
-    <Content Include="Views\Specialist\Details.cshtml" />
-    <Content Include="Views\Specialist\Edit.cshtml" />
-    <Content Include="Views\Specialist\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Error\Error.cshtml" />
     <Content Include="Views\Error\ErrorDontHavePermission.cshtml" />
@@ -2314,16 +2305,6 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\General\ForgetPassword.cshtml" />
     <Content Include="Views\Error\ErrorCantVerifyAccount.cshtml" />
-    <Content Include="Views\CompanyInfo\Create.cshtml" />
-    <Content Include="Views\CompanyInfo\Delete.cshtml" />
-    <Content Include="Views\CompanyInfo\Details.cshtml" />
-    <Content Include="Views\CompanyInfo\Edit.cshtml" />
-    <Content Include="Views\CompanyInfo\Index.cshtml" />
-    <Content Include="Views\ReferenceInfo\Create.cshtml" />
-    <Content Include="Views\ReferenceInfo\Delete.cshtml" />
-    <Content Include="Views\ReferenceInfo\Details.cshtml" />
-    <Content Include="Views\ReferenceInfo\Edit.cshtml" />
-    <Content Include="Views\ReferenceInfo\Index.cshtml" />
     <Content Include="Views\Client\ManageAccount.cshtml" />
     <Content Include="Views\Candidate\EditProfile.cshtml" />
     <Content Include="Views\Specialist\ManageSpecialistAccount.cshtml" />

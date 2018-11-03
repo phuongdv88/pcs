@@ -1,7 +1,11 @@
 ﻿var currentRecruiterId = -1;
 
-modalHtml = $("#newCandidateModal").html();
-changePasswordModalHtml = $("#changePassModal").html();
+
+var limitCompany = 3; // max company
+var countCompany = 0; //counter of company
+var lastIndexCompany = 0; // index of company to manage add, remove company
+var listDeleteCompanyId = [];
+var lastSubmit = false;
 
 $(document).ready(function () {
     //_getAllCandidate();
@@ -12,6 +16,10 @@ $(document).ready(function () {
     // reset modal when hidden them
     $("#newCandidateModal").on('hidden.bs.modal', function () {
         $("#newCandidateModal").html(modalHtml);
+        countCompany = 0; //counter of company
+        lastIndexCompany = 0; // index of company to manage add, remove company
+        listDeleteCompanyId.length = 0;
+        lastSubmit = false;
     })
 
     $("#changePassModal").on('hidden.bs.modal', function () {
@@ -21,6 +29,12 @@ $(document).ready(function () {
         var len = (String(base || 10).length - String(this).length) + 1;
         return len > 0 ? new Array(len).join(chr || '0') + this : this;
     }
+
+    changePasswordModalHtml = $("#changePassModal").html();
+    baseFormCompanyHtml = $("#baseFormCompany").html();
+    $("#baseFormCompany").remove();
+    modalHtml = $("#newCandidateModal").html();
+
 });
 
 function formatDate(inputStr) {
@@ -34,6 +48,11 @@ function formatDate(inputStr) {
               d.getSeconds().padLeft()].join(':');
     return dformat;
 }
+function formatMonthOnly(inputStr) {
+    var d = new Date(parseInt(inputStr));
+    dformat = [(d.getMonth() + 1).padLeft(), d.getFullYear().padLeft()].join('/');
+    return dformat;
+}
 function _setCurrentRecruitId(id) {
     currentRecruiterId = id;
 }
@@ -41,9 +60,9 @@ function _setCurrentRecruitId(id) {
 function setUserLoginName(userName) {
     $("#UserName").val(userName);
 }
-function _getAllCandidate(id) {
+function _getAllCandidate() {
     $.ajax({
-        url: '/Client/GetAllCandidate/' + id,
+        url: '/Client/GetAllCandidate',
         //data: '{id: ' + id + ' }',
         type: "GET",
         contentType: "application/json; charset=utf-8",
@@ -90,9 +109,9 @@ function _getAllCandidate(id) {
     return false;
 }
 
-function _getAllCandidateReport(id) {
+function getAllCandidateCompleted() {
     $.ajax({
-        url: '/Client/GetAllCandidateCompleted/' + id,
+        url: '/Client/GetAllCandidateCompleted',
         //data: '{id: ' + id + ' }',
         type: "GET",
         contentType: "application/json; charset=utf-8",
@@ -137,7 +156,6 @@ function _getCandidateReportById(id) {
     window.open('/Client/GetCandidateReportPdf/' + id);
 }
 function _getCandidateById(id) {
-    modalHtml = $("#newCandidateModal").html();
     $.ajax({
         url: '/Client/GetCandidate/' + id,
         type: 'Get',
@@ -154,7 +172,9 @@ function _getCandidateById(id) {
             $('#jobLevel').val(result.JobLevel);
             $('#newCandidateModal').modal('show');
             $('#btnAdd').text("Update");
-            $("#formNewEditCandidate").attr("onsubmit", "_edit(); return false;");
+            $("#formNewEditCandidate").attr("onsubmit", "submitData(false); return false;");
+
+            getAllCompany(result.CandidateId);
         },
         error: function (errorMessage) {
             alert(errorMessage.responseText);
@@ -162,42 +182,16 @@ function _getCandidateById(id) {
     });
     return false;
 }
-/// generate information that is including user name and password of candidate
-//function _getCandidateInfoById(id, candidateName) {
-//    $.ajax({
-//        url: '/Client/GetCandidateInfo/' + id,
-//        type: 'Get',
-//        contentType: "json",
-//timeout: '5000',
-//        success: function (result) {
-//            $('#candidateName').text(candidateName);
-//            $('#userNameInfo').text(result.UserName); // need to update to db the field userName, password of candiate table
-//            $('#passwordRaw').text(result.PasswordRaw);
-//            if (result.LockoutDateUtc == undefined) {
-//                $('#lockoutDateUtc').text('N/A'); // 5day from created date
-//            } else {
-//                $('#lockoutDateUtc').text(formatDate(result.LockoutDateUtc.substr(6))); // 5day from created date
-//            }
-
-//            $('#candiateInfoModal').modal('show');
-//        },
-//        error: function (errorMessage) {
-//            alert(errorMessage.responseText);
-//        }
-//    });
-//    return false;
-//}
-
-function _add() {
+function addCandidate() {
     var obj = {
         CandidateId: '0',
-        FirstName: $('#firstName').val(),
-        MiddleName: $('#middleName').val(),
-        LastName: $('#lastName').val(),
-        Email: $('#email').val(),
-        PhoneNumber: $('#phoneNumber').val(),
-        JobTitle: $('#jobTitle').val(),
-        JobLevel: $('#jobLevel').val(),
+        FirstName: $.trim($('#firstName').val()),
+        MiddleName: $.trim($('#middleName').val()),
+        LastName: $.trim($('#lastName').val()),
+        Email: $.trim($('#email').val()),
+        PhoneNumber: $.trim($('#phoneNumber').val()),
+        JobTitle: $.trim($('#jobTitle').val()),
+        JobLevel: $.trim($('#jobLevel').val()),
         CurrentRecruiterId: currentRecruiterId
     }
 
@@ -209,10 +203,28 @@ function _add() {
         dataType: "json",
         timeout: '5000',
         success: function (result) {
+
             $('#btnRefresh').click();
             //window.location.reload();
 
             $("#newCandidateModal").modal('hide');
+
+            if (result.rs != -1) {
+                $('#btnRefresh').click();
+                $("#newCandidateModal").modal('hide');
+
+                // Get all company id by class
+                var comFormIdArray = $(".companyClass").map(function () { return this.id });
+                $.each(comFormIdArray, function (index, value) {
+                    submitCompany(value, result.rs);
+                });
+                $.each(listDeleteCompanyId, function (index, value) {
+                    deleteCompany(value);
+                });
+                listDeleteCompanyId.length = 0;
+            } else alert(result.msg);
+
+
         },
         error: function (errorMessage) {
             alert(errorMessage.responseText);
@@ -221,17 +233,16 @@ function _add() {
     return false;
 }
 
-function _edit() {
+function editCandidate() {
     var obj = {
-        CandidateId: $('#candidateId').val(),
-        FirstName: $('#firstName').val(),
-        MiddleName: $('#middleName').val(),
-        LastName: $('#lastName').val(),
-        Email: $('#email').val(),
-        PhoneNumber: $('#phoneNumber').val(),
-        JobTitle: $('#jobTitle').val(),
-        JobLevel: $('#jobLevel').val(),
-        CurrentRecruiterId: currentRecruiterId
+        CandidateId: $.trim($('#candidateId').val()),
+        FirstName: $.trim($('#firstName').val()),
+        MiddleName: $.trim($('#middleName').val()),
+        LastName: $.trim($('#lastName').val()),
+        Email: $.trim($('#email').val()),
+        PhoneNumber: $.trim($('#phoneNumber').val()),
+        JobTitle: $.trim($('#jobTitle').val()),
+        JobLevel: $.trim($('#jobLevel').val()),
     }
 
     $.ajax({
@@ -242,14 +253,25 @@ function _edit() {
         dataType: "json",
         timeout: '5000',
         success: function (result) {
-            $('#btnRefresh').click();
-            $("#newCandidateModal").modal('hide');
+            if (result.rs != -1) {
+                // Get all company id by class
+                var comFormIdArray = $(".companyClass").map(function () { return this.id });
+                $.each(comFormIdArray, function (index, value) {
+                    submitCompany(value, result.rs);
+                });
+                $.each(listDeleteCompanyId, function (index, value) {
+                    deleteCompany(value);
+                });
+                listDeleteCompanyId.length = 0;
+                $('#btnRefresh').click();
+                $("#newCandidateModal").modal('hide');
+            } else alert(result.msg);
         },
         error: function (errorMessage) {
             alert(errorMessage.responseText);
         }
     });
-    return false;
+    return -1;
 }
 
 function getProfile() {
@@ -274,11 +296,11 @@ function getProfile() {
 
 function editProfile() {
     var obj = {
-        FirstName: $('#recruiterFirstName').val(),
-        MiddleName: $('#recruiterMiddleName').val(),
-        LastName: $('#recruiterLastName').val(),
-        Email: $('#recruiterEmail').val(),
-        PhoneNumber: $('#recruiterPhoneNumber').val(),
+        FirstName: $.trim($('#recruiterFirstName').val()),
+        MiddleName: $.trim($('#recruiterMiddleName').val()),
+        LastName: $.trim($('#recruiterLastName').val()),
+        Email: $.trim($('#recruiterEmail').val()),
+        PhoneNumber: $.trim($('#recruiterPhoneNumber').val()),
     }
 
     $.ajax({
@@ -470,3 +492,205 @@ function generateChart() {
 }
 
 
+function generateCompanyHtml(comIndex) {
+    var comHtml = baseFormCompanyHtml.replace(/_comId/g, comIndex);
+    return comHtml;
+}
+
+function newCandidate() {
+    addCompany(true);
+    $('#newCandidateModal').modal('show');
+    return false;
+}
+
+function addCompany(isTheFirstOne) {
+    lastIndexCompany++;
+    countCompany++;
+    if (countCompany >= limitCompany) {
+        $("#add-company-button").prop("hidden", true);
+    }
+    var comFormId = "company-base-info" + lastIndexCompany;
+    var comHtml = generateCompanyHtml(lastIndexCompany);
+    $("#company-information").append(comHtml);
+    $("#company-information").find('#' + comFormId).addClass("companyClass"); // add class for company base form
+    //Date picker
+    $("#company-information").find('#' + comFormId).find('#startDate').datepicker({
+        autoclose: true,
+        format: "mm-yyyy",
+        startView: "years",
+        minViewMode: "months"
+    });
+    $("#company-information").find('#' + comFormId).find('#stopDate').datepicker({
+        autoclose: true,
+        format: "mm-yyyy",
+        startView: "years",
+        minViewMode: "months"
+    })
+    if (isTheFirstOne) {
+        $("#company-information").find('#' + comFormId).find("#button-remove-company").remove();
+    }
+    return comFormId;
+}
+function removeCompany(comFormId) {
+    // add to list of deleted company
+    id = $("#" + comFormId).find("#companyId").val();
+    if (id !== '-1') {
+        listDeleteCompanyId.push(id);
+    }
+    $("#" + comFormId).remove(); // todo: need to confirm first
+    countCompany--;
+    if (countCompany < limitCompany) {
+        $("#add-company-button").prop("hidden", false);
+    }
+    return false;
+}
+
+function getAllCompany(id) {
+    $.ajax({
+        url: '/Client/GetAllCompany/' + id,
+        type: "GET",
+        contenttype: "application/json; charset=utf-8",
+        dataType: "json",
+        timeout: '5000',
+        success: function (result) {
+            var html = '';
+            var i = 0;
+            $.each(result, function (key, item) {
+
+                // fill up company info
+                // generate html of company form
+                var comFormId = "";
+                if (i == 0) {
+                    comFormId = addCompany(true);
+                } else {
+                    comFormId = addCompany(false);
+                }
+                // fill data to the form
+                $('#' + comFormId).find("#companyId").val(item.CompanyInfoId);
+                $('#' + comFormId).find("#companyName").val(item.Name);
+                $('#' + comFormId).find("#companyAddress").val(item.Address);
+                $('#' + comFormId).find("#companyWebsite").val(item.Website);
+                $('#' + comFormId).find("#companyJobTitle").val(item.Jobtitle);
+                $('#' + comFormId).find("#startDate").val(formatMonthOnly(item.StartDate.substr(6)));
+                $('#' + comFormId).find("#stopDate").val(formatMonthOnly(item.StopDate.substr(6)));
+                $('#' + comFormId).find("#jobDuties").val(item.JobDuties);
+                i++;
+            });
+            if (i === 0) {
+                addCompany(true);
+            }
+
+        },
+        error: function (errorMessage) {
+            alert(errorMessage.responseText);
+        },
+    });
+    return false;
+};
+function newCompany(comFormId, candidateId) {
+    var obj = {
+        StartDate: $.trim($("#" + comFormId).find('#startDate').val()),
+        StopDate: $.trim($("#" + comFormId).find('#stopDate').val()),
+        Jobtitle: $.trim($("#" + comFormId).find('#companyJobTitle').val()),
+        Name: $.trim($("#" + comFormId).find('#companyName').val()),
+        Address: $.trim($("#" + comFormId).find('#companyAddress').val()),
+        Website: $.trim($("#" + comFormId).find('#companyWebsite').val()),
+        JobDuties: $.trim($("#" + comFormId).find('#jobDuties').val()),
+        CandidateId: candidateId
+    };
+    $.ajax({
+        url: '/Client/CreateCompany',
+        data: JSON.stringify(obj),
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        timeout: '5000',
+        success: function (rs) {
+            if (rs.rs === -1) {
+                alert(rs.msg);
+            }
+        },
+        error: function (rs) {
+            alert(rs.responseText);
+        },
+    });
+    return false;
+}
+function editCompany(comFormId, comId, candidateId) {
+    var obj = {
+        CompanyInfoId: $.trim($("#" + comFormId).find('#companyId').val()),
+        StartDate: $.trim($("#" + comFormId).find('#startDate').val()),
+        StopDate: $.trim($("#" + comFormId).find('#stopDate').val()),
+        Jobtitle: $.trim($("#" + comFormId).find('#companyJobTitle').val()),
+        Name: $.trim($("#" + comFormId).find('#companyName').val()),
+        Address: $.trim($("#" + comFormId).find('#companyAddress').val()),
+        Website: $.trim($("#" + comFormId).find('#companyWebsite').val()),
+        JobDuties: $.trim($("#" + comFormId).find('#jobDuties').val()),
+        CandidateId: candidateId,
+    };
+    $.ajax({
+        url: '/Client/EditCompany',
+        data: JSON.stringify(obj),
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        timeout: '5000',
+        success: function (rs) {
+            if (rs.rs === -1) {
+                alert(rs.msg);
+            }
+        },
+        error: function (rs) {
+            alert(rs.responseText);
+        }
+    });
+    return false;
+}
+function deleteCompany(comId) {
+    //var cf = confirm('Are you sure want to delete this company?')
+    //if (cf) {
+    $.ajax({
+        url: '/Client/DeleteCompany/' + comId,
+        type: 'POST',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        timeout: '5000',
+        async: true,
+        success: function (result) {
+        },
+        error: function (errorMessage) {
+            alert(errorMessage.responseText);
+        }
+    });
+    //}
+}
+
+function submitCompany(comFormId, candidateId) {
+    var comId = $("#" + comFormId).find("#companyId").val();
+    if (comId === '-1') {
+        comId = newCompany(comFormId, candidateId);
+    } else {
+        editCompany(comFormId, comId, candidateId);
+    }
+}
+
+function submitData(isNew) {
+    lastSubmit = true;
+    $("#btnAdd").attr("disabled", "disabled");
+    var candidateId = -1;
+    if (isNew) {
+        candidateId = addCandidate(); // add candidate or update candidate
+    } else {
+        candidateId = editCandidate();
+
+    }
+
+}
+
+$(document).ajaxStop(function () {
+    if (lastSubmit) {
+        lastSubmit = false;
+        // goto login link
+        //window.location.href = "/Home/Login";
+    }
+});
