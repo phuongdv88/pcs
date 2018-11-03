@@ -26,11 +26,10 @@
          folder instead of downloading all of them to reduce the load. -->
     <link href="~/Content/Css/skins/_all-skins.min.css" rel="stylesheet" />
     <link href="~/Content/iCheck/all.css" rel="stylesheet" />
-
     <link href="~/Content/Css/logo.css" rel="stylesheet" />
+   
     <link href="~/Content/Css/processBackgroundChecksCandidate.css" rel="stylesheet" />
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini" style="padding-top:0px">
@@ -167,72 +166,68 @@
         </div>
     </div>
     <!-- body-->
-    <div class="col-md-12 " style="min-height: 90%;width: 100%;background: #ecf0f5;padding-top: 1em;padding-bottom: 2em;">
+    <div class="col-md-12 col-sm-12 col-xs-12  " style="min-height: 90%;width: 100%;background: #ecf0f5;padding-top: 1em;padding-bottom: 2em;">
         <!-- general information -->
-        <div class=" col-md-12">
+        <div class=" col-md-12  col-sm-12 col-xs-12  clearMaginPadding">
             <h3>General Information</h3>
         </div>
-        <div class=" col-md-12 clearMaginPadding box" style="padding-top: 1em">
-
-            <div class="row col-md-12 ">
-
-                <div class="col-md-8 ">
+        <div class=" col-md-12 col-sm-12 col-xs-12  clearMaginPadding box" style="padding-top: 1em">
+            <div class="row col-md-12  col-sm-12 col-xs-12  clearMaginPadding">
+                <div class="col-md-8 col-sm-12 col-xs-12  ">
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-md-6">
                             <label>Name:</label>
                             <label style="font-weight:bold;" id="candidateFullName"></label>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-md-6">
                             <label>Gender:</label>
                             <label style="font-weight:bold;" id="candidateGender"></label>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-md-6">
                             <label>Phone:</label>
                             <label style="font-weight:bold;" id="candidatePhone"></label>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-md-6">
                             <label>Email:</label>
                             <label style="font-weight:bold;" id="candidateEmail"></label>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-md-6">
                             <label> DOB:</label>
                             <label style="font-weight:bold;" id="candidateDOB"></label>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-md-6">
                             <label>ID Number:</label>
                             <label style="font-weight:bold;" id="candidateIDNumber"></label>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-md-6">
                             <label>Job title:</label>
                             <label style="font-weight:bold;" id="candidateJobTitle"></label>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-md-6">
                             <label>Job level:</label>
                             <label style="font-weight:bold;" id="candidateJobLevel"></label>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-md-6">
                             <label>Address:</label>
                             <label style="font-weight:bold;" id="candidateAddress"></label>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 clearMaginPadding">
+                <div class="col-md-4 ">
                     <div class="row col-md-12 clearMaginPadding">
                         <div class="row col-md-12 clearMaginPadding">
-                            <div class="col-md-2">
-                                <h5>
-                                    Status:
-                                </h5>
+                            <div class="col-md-2 clearMaginPadding">
+                                <h5>Status:</h5>
                             </div>
-                            <div class="col-md-6 col-sm-10 col-xs-10">
+                            <div class="col-md-7 col-sm-12 col-xs-12 clearMaginPadding ">
                                 <select class="form-control status select2" id="status">
                                     <option value="Processing">Processing</option>
                                     <option value="Completed">Completed</option>
@@ -241,9 +236,9 @@
                                 </select>
 
                             </div>
-                            <div class="col-md-4 col-sm-10 col-xs-10 " style="padding-left: 0;padding-right: 3em">
-                                <div class="col-md-2  col-xs-3 col-sm-3 ">
-                                    <input type="button" value="Update" class="btnUpdateCandidateStatus" onclick="updateCandidateStatus()">
+                            <div class="col-md-3 col-sm-12 col-xs-12 clearMaginPadding">
+                                <div class="col-md-12  col-xs-12 col-sm-12 clearMaginPadding">
+                                    <input type="button" value="Update" class="btnUpdateCandidateStatus btnFinish " onclick="updateCandidateStatus()">
                                 </div>
                             </div>
                         </div>
@@ -251,19 +246,19 @@
                     <!-- note -->
                     <div class="row col-md-12 clearMaginPadding">
                         <div class="row col-md-12 clearMaginPadding">
-                            <div class="col-md-2">
+                            <div class="col-md-2 clearMaginPadding">
                                 <h5>Log Content</h5>
                             </div>
-                            <div class="col-md-10 ">
+                            <div class="col-md-10 clearMaginPadding">
                                 <textarea class="note" rows="3" id="logNote"></textarea>
                             </div>
 
                         </div>
                         <div class="row col-md-12 clearMaginPadding">
-                            <div class="col-md-2 col-sm-3 col-xs-3">
+                            <div class="col-md-2 col-sm-3 col-xs-3 clearMaginPadding">
                                 <h5>Action Type</h5>
                             </div>
-                            <div class="col-md-7 col-xs-6 col-sm-6 ">
+                            <div class="col-md-7 col-xs-12 col-sm-12 clearMaginPadding">
                                 <select class="form-control status" id="status">
                                     <option>Check Isurance Number</option>
                                     <option>Call Reference</option>
@@ -273,7 +268,7 @@
                                     <option>Other</option>
                                 </select>
                             </div>
-                            <div class="col-md-3 col-sm-3 col-xs-3" style="padding-right: 3em">
+                            <div class="col-md-3 col-sm-12 col-xs-12 clearMaginPadding">
                                 <input type="submit" value="Log" class="btnFinish">
                             </div>
                         </div>
@@ -282,51 +277,49 @@
                 </div>
             </div>
         </div>
-
         <!-- end general information -->
         <!-- Company -->
-
-        <div class="col-md-12 clearMaginPadding" style="background-color: #666666;margin-top: 1em;">
+        <div class="col-md-12  col-sm-12 col-xs-12  clearMaginPadding  company" >
             <ul class="nav nav-tabs" id="navCompanies"></ul>
         </div>
         <div class="tab-content" id="companyInformation">
             <div id="companybase">
                 <div id="company_comId" class="tab-pane fade companyInfo">
-                    <div class="col-md-12 clearMaginPadding" style="padding-bottom: 1em">
-                        <div class="col-md-8 clearMaginPadding">
+                    <div class="col-md-12 col-sm-12 col-xs-12   clearMaginPadding box" style="padding-bottom: 1em">
+                        <div class="col-md-8 col-sm-12 col-xs-12  ">
                             <!-- information company -->
-                            <div class="row col-md-12">
-                                <div class="col-md-12 clearMaginPadding" style="padding-top: 1em">
+                            <div class="row col-md-12 col-sm-12 col-xs-12 clearMaginPadding">
+                                <div class="col-md-12 col-sm-12 col-xs-12 clearMaginPadding" style="padding-top: 1em">
                                     <div style="padding-left: 1em">
                                         <div class="row">
-                                            <div class="col-lg-12">
+                                            <div class="col-md-12 col-sm-12 col-xs-12 clearMaginPadding">
                                                 <label>Website:</label>
                                                 <label style="font-weight:bold;" id="companyWebsite"></label>
                                             </div>
 
                                         </div>
                                         <div class="row">
-                                            <div class="col-lg-12">
+                                            <div class="col-md-12 col-sm-12 col-xs-12 clearMaginPadding">
                                                 <label>Address:</label>
                                                 <label style="font-weight:bold;" id="companyAddress"></label>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-lg-6">
+                                            <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
                                                 <label>Name:</label>
                                                 <label style="font-weight:bold;" id="companyName"></label>
                                             </div>
-                                            <div class="col-lg-6">
+                                            <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
                                                 <div class="form-group">
-                                                    <label class="col-md-4">
+                                                    <label class="col-md-4 col-sm-4 col-xs-4 ">
                                                         <input type="radio" name="checkResultName_comId" id="nameTrue" value="True" class="minimal">
                                                         True
                                                     </label>
-                                                    <label class="col-md-4">
+                                                    <label class="col-md-4 col-sm-4 col-xs-4 ">
                                                         <input type="radio" name="checkResultName_comId" id="nameFalse" value="False" class="minimal">
                                                         False
                                                     </label>
-                                                    <label class="col-md-4">
+                                                    <label class="col-md-4 col-sm-4 col-xs-4 ">
                                                         <input type="radio" name="checkResultName_comId" id="nameNA" value="N/A" class="minimal" checked>
                                                         N/A
                                                     </label>
@@ -334,21 +327,21 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-lg-6">
+                                            <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
                                                 <label>Job title:</label>
                                                 <label style="font-weight:bold;" id="companyJobtitle"></label>
                                             </div>
-                                            <div class="col-lg-6">
+                                            <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
                                                 <div class="form-group">
-                                                    <label class="col-md-4">
+                                                    <label class="col-md-4 col-sm-4 col-xs-4 ">
                                                         <input type="radio" name="checkResultJobTitle_comId" id="jobTitleTrue" value="True" class="minimal">
                                                         True
                                                     </label>
-                                                    <label class="col-md-4">
+                                                    <label class="col-md-4 col-sm-4 col-xs-4 ">
                                                         <input type="radio" name="checkResultJobTitle_comId" id="jobTitleFalse" value="False" class="minimal">
                                                         False
                                                     </label>
-                                                    <label class="col-md-4">
+                                                    <label class="col-md-4 col-sm-4 col-xs-4 ">
                                                         <input type="radio" name="checkResultJobTitle_comId" id="jobTitleTrueNA" value="N/A" class="minimal" checked>
                                                         N/A
                                                     </label>
@@ -356,23 +349,23 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-lg-6">
+                                            <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
                                                 <label>Startdate:</label>
                                                 <label style="font-weight:bold;" id="companyStartDate"></label>
                                                 <label>Stopdate:</label>
                                                 <label style="font-weight:bold;" id="companyStopDate"></label>
                                             </div>
-                                            <div class="col-lg-6">
+                                            <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
                                                 <div class="form-group">
-                                                    <label class="col-md-4">
+                                                    <label class="col-md-4 col-sm-4 col-xs-4 ">
                                                         <input type="radio" name="checkResultPeriod_comId" id="periodTrue" value="True" class="minimal">
                                                         True
                                                     </label>
-                                                    <label class="col-md-4">
+                                                    <label class="col-md-4 col-sm-4 col-xs-4 ">
                                                         <input type="radio" name="checkResultPeriod_comId" id="periodFalse" value="False" class="minimal">
                                                         False
                                                     </label>
-                                                    <label class="col-md-4">
+                                                    <label class="col-md-4 col-sm-4 col-xs-4 ">
                                                         <input type="radio" name="checkResultPeriod_comId" id="periodTrueNA" value="N/A" class="minimal" checked>
                                                         N/A
                                                     </label>
@@ -380,28 +373,28 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-lg-6">
+                                            <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
                                                 <div class="row">
-                                                    <div class="col-lg-2">
+                                                    <div class="col-md-2 col-sm-12 col-xs-12 ">
                                                         <label>Job Duties:</label>
                                                     </div>
-                                                    <div class="col-lg-10">
+                                                    <div class="col-md-10 col-sm-12 col-xs-12 ">
                                                         <textarea style="font-weight:bold;" id="companyJobDuties" disabled></textarea>
                                                     </div>
                                                 </div>
                                                 
                                             </div>
-                                            <div class="col-lg-6">
+                                            <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
                                                 <div class="form-group">
-                                                    <label class="col-md-4">
+                                                    <label class="col-md-4 col-sm-4 col-xs-4 ">
                                                         <input type="radio" name="checkResultJobDuties_comId" id="dutiesTrue" value="True" class="minimal">
                                                         True
                                                     </label>
-                                                    <label class="col-md-4">
+                                                    <label class="col-md-4 col-sm-4 col-xs-4 ">
                                                         <input type="radio" name="checkResultJobDuties_comId" id="dutiesFalse" value="False" class="minimal">
                                                         False
                                                     </label>
-                                                    <label class="col-md-4">
+                                                    <label class="col-md-4 col-sm-4 col-xs-4 ">
                                                         <input type="radio" name="checkResultJobDuties_comId" id="dutiesNA" value="N/A" class="minimal" checked>
                                                         N/A
                                                     </label>
@@ -413,16 +406,16 @@
                             </div>
                             <!-- end information company -->
                             <!-- reference -->
-                            <div style="overflow: scroll;height: 25em;width: 100%;">
-                                <div class="col-md-12 ">
+                            <div class="col-md-12 col-sm-12 col-xs-12 clearMaginPadding " style="overflow: scroll;height: 25em;width: 100%;">
+                                <div class="col-md-12 col-sm-12 col-xs-12 clearMaginPadding ">
                                     <!-- reference1 -->
-                                    <div class="row col-md-12 clearMaginPadding" id="referenceInformation">
-                                        <div class="row col-md-12" id="referenceForm_0">
-                                            <div class="row col-md-12">
+                                    <div class="row col-md-12 col-sm-12 col-xs-12 clearMaginPadding " id="referenceInformation">
+                                        <div class="row col-md-12 col-sm-12 col-xs-12 clearMaginPadding " id="referenceForm_0">
+                                            <div class="row col-md-12 col-sm-12 col-xs-12 ">
                                                 <h4>Reference</h4>
                                             </div>
-                                            <div class="row col-md-12 clearMaginPadding">
-                                                <div class="col-md-6 clearMaginPadding">
+                                            <div class="row col-md-12 col-sm-12 col-xs-12 clearMaginPadding  ">
+                                                <div class="col-md-6  col-sm-12 col-xs-12 clearMaginPadding">
                                                     <label>Name:</label>
                                                     <label style="font-weight:bold;" id="referenceName">Nguyen Hoang Nam</label>
                                                     <br>
@@ -432,7 +425,7 @@
                                                     <label>Email:</label>
                                                     <label style="font-weight:bold;" id="referenceEmail">namnh@gmail.com</label>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding ">
                                                     <label>Job title:</label>
                                                     <label style="font-weight:bold;" id="referenceJobTitle">Director</label>
                                                     <br>
@@ -441,12 +434,12 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row col-md-12" id="referenceForm_1">
-                                            <div class="row col-md-12">
+                                        <div class="row col-md-12 col-sm-12 col-xs-12 clearMaginPadding" id="referenceForm_1">
+                                            <div class="row col-md-12 col-sm-12 col-xs-12 ">
                                                 <h4>Reference</h4>
                                             </div>
-                                            <div class="row col-md-12 clearMaginPadding">
-                                                <div class="col-md-6 clearMaginPadding">
+                                            <div class="row col-md-12 col-sm-12 col-xs-12  clearMaginPadding">
+                                                <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding ">
                                                     <label>Name:</label>
                                                     <label style="font-weight:bold;" id="referenceName">Nguyen Hoang Nam</label>
                                                     <br>
@@ -456,7 +449,7 @@
                                                     <label>Email:</label>
                                                     <label style="font-weight:bold;" id="referenceEmail">namnh@gmail.com</label>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding ">
                                                     <label>Job title:</label>
                                                     <label style="font-weight:bold;" id="referenceJobTitle">Director</label>
                                                     <br>
@@ -469,22 +462,19 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 clearMaginPadding" style="margin-top: 1em">
+                        <div class="col-md-4 " style="margin-top: 1em">
                             <!-- note -->
-                            <div class="row col-md-12 clearMaginPadding">
+                            <div class="row col-md-12 col-sm-12 col-xs-12  clearMaginPadding">
                                 <div class="col-md-2 clearMaginPadding">
                                     <h5>Note</h5>
                                 </div>
                                 <div class="col-md-10 clearMaginPadding">
-                                    <textarea class="note" rows="10" style="width: 91.5%;" id="companyNotes"></textarea>
+                                    <textarea class="note" rows="10" id="companyNotes"></textarea>
                                 </div>
                             </div>
-                            <!-- status -->
-                            <div class="row col-md-12 clearMaginPadding">
-
-                            </div>
-                            <div class="col-md-12 col-sm-12 col-xs-12" style="padding-right: 3em">
-                                <input type="button" id="btnSubmitCompanyResult" value="submit" onclick="submitCompanyData('company_comId')">
+                            
+                            <div class="col-md-12 col-sm-12 col-xs-12 clearMaginPadding">
+                                <input class="btnFinish" type="button" id="btnSubmitCompanyResult" value="submit" onclick="submitCompanyData('company_comId')">
                             </div>
 
 

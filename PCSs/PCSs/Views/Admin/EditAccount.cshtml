@@ -15,16 +15,120 @@
     <link href="~/Content/Css/form.css" rel="stylesheet" />
     <link href="~/Content/Css/admin.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <link href="~/Content/Css/logo.css" rel="stylesheet" />
 </head>
 <body>
+    <!--Header menu-->
+    <div class="row col-md-12 col-sm-12 col-xs-12  header" style="margin:0;padding:0">
+        <div class="col-md-3 col-sm-3 col-xs-3 " style=" background-color: #464646;padding: 0px;height:100%;">
+            <img src="~/Content/Image/logo PCS trang.png" style="height:100%" />
+        </div>
+        <div class="col-md-9 col-sm-9 col-xs-9 " style=" background-color: #464646;padding: 0px;height:100%">
+
+            <!-- Control Sidebar Toggle Button -->
+            <div style="float: right;padding-top: 15px;padding-left: 15px;padding-right:1em" class="dropdown">
+                <a href="#" data-toggle="control-sidebar">
+                    <i class="fa fa-gears"></i>
+                </a>
+                <div class="dropdown-content sidenav">
+                    <a href="#" data-toggle="modal" data-target="#changeProfileModal"  @*onclick="return getProfile();"*@>
+                        <b>
+                            <i class="fa fa-user"></i> Change profile
+                        </b>
+                    </a>
+
+                    <a href="#" data-toggle="modal" data-target="#changePassModal">
+
+                        <b>
+                            <i class="fa fa-edit"></i>Change Password
+                        </b>
+                    </a>
+
+                    <a href=@Url.Action("Login", "Home")>
+                        <b>
+                            <i class="glyphicon glyphicon-log-out"></i>Log out
+                        </b>
+                    </a>
+                </div>
+            </div>
+            <!-- form edit pass -->
+            <div class="modal fade" id="changePassModal" role="dialog" tabindex="-1">
+                <div class="modal-dialog" style="position:unset">
+
+                    <!-- Modal content-->
+                    <div class="modal-content" style="width: 100%;padding: 2em 2em 0 2em">
+                        <div class="modal-header" style="padding-left: 0px;">
+                            <h4>Change PassWord</h4>
+                        </div>
+                        <form onsubmit="updatePassword(); return false;">
+                            <div class="modal-body form-edit">
+                                <input id="UserName" name="UserName" hidden>
+                                <label>Old Password</label><br />
+                                <input type="password" id="oldPassword" placeholder="Password old.." required>
+                                <label>New Password</label><br />
+                                <input type="password" id="newPassword" placeholder="Password.." required>
+                                <label>Confirm Password</label><br />
+                                <input type="password" id="confirmPassword" placeholder="Confirm password.." required>
+                                <div id="changePasswordMessage"></div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary" id="btnEditPass">Save</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+            <!-- end form edit pass -->
+            <!-- form edit information -->
+            <div class="modal fade" id="changeProfileModal" role="dialog" tabindex="-1">
+                <div class="modal-dialog modal-lg" style="position:unset">
+                    <!-- Modal content-->
+                    <div class="modal-content" style="width: 100%;padding:  2em 2em 0 2em">
+                        <div class="modal-header" style="padding-left: 0px;">
+                            <h4 class="modal-title">Change Profile</h4>
+                        </div>
+                        <form onsubmit="editProfile(); return false;">
+
+                            <div class="modal-body form-edit">
+                                <label>First name</label><br />
+                                <input type="text" id="recruiterFirstName" placeholder="Firstname.." required>
+                                <label>Middle name</label><br />
+                                <input type="text" id="recruiterMiddleName" placeholder="Firstname..">
+                                <label>Last name</label><br />
+                                <input type="text" id="recruiterLastName" placeholder="Lastname.." required>
+                                <label> Email</label><br />
+                                <input type="email" id="recruiterEmail" placeholder="Email.." required>
+                                <label>Phone number</label><br />
+                                <input type="text" id="recruiterPhoneNumber" pattern="^[0-9\-\+]{9,15}$" placeholder="Phone number.." required>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary" id="btnEditProfile">Save</button>
+                                    @*<input />*@
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- end form edit information -->
+
+            <div style="float: right;padding-top: 13px;height: 100%;width:auto">
+                <!-- The user image in the navbar-->
+                <i class="fa fa-user" style="color:silver" id="welcomeUser"> Welcome @ViewBag.Title</i>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <!--end header menu-->
     <div class="col-md-12 col-sm-12 col-xs-12 clearPaddingMargin" style="display: flex;min-height: 100%">
-        <div class="col-md-2 col-sm-2 col-xs-12  menuleft clearPaddingMargin">
-            <div class="col-md-12 col-sm-12 col-xs-12 clearPaddingMargin" style="margin-top: 3em">
+        <div class="col-md-2 col-sm-2 col-xs-12 clearPaddingMargin menuleft">
+            <div class="col-md-12 col-sm-12 col-xs-12 clearPaddingMargin">
                 <a href="#dashboard" data-toggle="tab">
                     <div class="col-md-12 col-sm-12 col-xs-12  category"><i class="fa fa-dashboard" style="color: black"></i>Dashboard</div>
                 </a>
-              
+
                 <a href="#company" data-toggle="tab">
                     <div class="col-md-12 col-sm-12 col-xs-12 category"><img src="~/Content/Image/iconcompany.png" style="color: black">Company</div>
                 </a>
@@ -40,7 +144,7 @@
             </div>
 
         </div>
-        <div class="col-md-10 col-sm-10 col-xs-12" style="padding-bottom: 2em">
+        <div class="col-md-10 col-sm-10 col-xs-12 contentRight">
             <div class="tab-content">
                 <div id="dashboard" class="tab-pane fade in active">
                     <div class="col-md-12">
@@ -279,7 +383,7 @@
                                     <th>Stop date</th>
                                     <th>Package</th>
                                     <th>Description</th>
-                                    <th></th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -418,36 +522,36 @@
                                     <div class="col-md-12 clearPaddingMargin">
                                         <div class="col-md-6 clearPaddingMargin" style="padding-right: 1em">
                                             <label>Name</label>
-                                            <input type="text" id="nameNewCompany" name="name" placeholder="Name..">
+                                            <input type="text" id="nameNewCompany" name="name" placeholder="Name.." required>
 
                                         </div>
                                         <div class="col-md-6 clearPaddingMargin" style="padding-right: 1em">
                                             <label>Tax code</label>
-                                            <input type="text" id="taxcodeNewCompany" name="taxcode" placeholder="Tax code..">
+                                            <input type="text" id="taxcodeNewCompany" name="taxcode" placeholder="Tax code.." required>
 
                                         </div>
                                     </div>
                                     <div class="col-md-12 clearPaddingMargin">
                                         <div class="col-md-6 clearPaddingMargin" style="padding-right: 1em">
                                             <label>Address</label>
-                                            <input type="text" id="addressNewCompany" name="address" placeholder="Address..">
+                                            <input type="text" id="addressNewCompany" name="address" placeholder="Address.." required>
 
                                         </div>
                                         <div class="col-md-6 clearPaddingMargin" style="padding-right: 1em">
                                             <label>Website</label>
-                                            <input type="text" id="websiteNewCompany" name="website" placeholder="Website..">
+                                            <input type="text" id="websiteNewCompany" name="website" placeholder="Website.." required>
 
                                         </div>
                                     </div>
                                     <div class="col-md-12 clearPaddingMargin">
                                         <div class="col-md-6 clearPaddingMargin" style="padding-right: 1em">
                                             <label>Start date</label>
-                                            <input type="text" id="startdateNewCompany" name="startdate" placeholder="Start date..">
+                                            <input type="text" id="startdateNewCompany" name="startdate" placeholder="Start date.." required>
 
                                         </div>
                                         <div class="col-md-6 clearPaddingMargin" style="padding-right: 1em">
                                             <label>Stop date</label>
-                                            <input type="text" id="stodateNewCompany" name="stopdate" placeholder="Stop date..">
+                                            <input type="text" id="stodateNewCompany" name="stopdate" placeholder="Stop date.." required>
 
                                         </div>
                                     </div>
@@ -462,7 +566,7 @@
                                         </div>
                                         <div class="col-md-6 clearPaddingMargin" style="padding-right: 1em">
                                             <label>Description</label>
-                                            <input type="text" id="description" name="description" placeholder="Description..">
+                                            <input type="text" id="description" name="description" placeholder="Description.." required>
 
                                         </div>
                                     </div>
@@ -492,41 +596,41 @@
                                     <div class="col-md-12 clearPaddingMargin">
                                         <div class="col-md-4 clearPaddingMargin" style="padding-right: 1em">
                                             <label>First Name</label>
-                                            <input type="text" id="fristnameRecruiter" name="fristname" placeholder="First Name..">
+                                            <input type="text" id="fristnameRecruiter" name="fristname" placeholder="First Name.." required>
 
                                         </div>
                                         <div class="col-md-4 clearPaddingMargin" style="padding-right: 1em">
                                             <label>Middle Name</label>
-                                            <input type="text" id="middlenameRecruiter" name="middlename" placeholder="Middle Name..">
+                                            <input type="text" id="middlenameRecruiter" name="middlename" placeholder="Middle Name.." required>
 
                                         </div>
                                         <div class="col-md-4 clearPaddingMargin" style="padding-right: 1em">
                                             <label>Last Name</label>
-                                            <input type="text" id="lastnameRecruiter" name="lastname" placeholder="Last Name..">
+                                            <input type="text" id="lastnameRecruiter" name="lastname" placeholder="Last Name.." required>
 
                                         </div>
                                     </div>
                                     <div class="col-md-12 clearPaddingMargin">
                                         <div class="col-md-6 clearPaddingMargin" style="padding-right: 1em">
                                             <label>Email</label>
-                                            <input type="text" id="emailRecruiter" name="email" placeholder="Email..">
+                                            <input type="text" id="emailRecruiter" name="email" placeholder="Email.." required>
 
                                         </div>
                                         <div class="col-md-6 clearPaddingMargin" style="padding-right: 1em">
                                             <label>Phone</label>
-                                            <input type="text" id="phoneRecruiter" name="phone" placeholder="Phone..">
+                                            <input type="text" id="phoneRecruiter" name="phone" placeholder="Phone.." required>
 
                                         </div>
                                     </div>
                                     <div class="col-md-12 clearPaddingMargin">
                                         <div class="col-md-6 clearPaddingMargin" style="padding-right: 1em">
                                             <label>User Name</label>
-                                            <input type="text" id="usernameRecruiter" name="username" placeholder="username..">
+                                            <input type="text" id="usernameRecruiter" name="username" placeholder="username.." required>
 
                                         </div>
                                         <div class="col-md-6 clearPaddingMargin" style="padding-right: 1em">
                                             <label>Pass Word</label>
-                                            <input type="password" id="passwordRecruiter" name="password" placeholder="PassWord..">
+                                            <input type="password" id="passwordRecruiter" name="password" placeholder="PassWord.." required>
 
                                         </div>
                                     </div>
@@ -559,11 +663,9 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
-
                                     <th>Email</th>
                                     <th>Phone</th>
-
-                                    <th></th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -633,7 +735,7 @@
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Role</th>
-                                    <th></th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -693,41 +795,41 @@
                                     <div class="col-md-12 clearPaddingMargin">
                                         <div class="col-md-4 clearPaddingMargin" style="padding-right: 1em">
                                             <label>First Name</label>
-                                            <input type="text" id="fristnameSpecialist" name="fristname" placeholder="First Name..">
+                                            <input type="text" id="fristnameSpecialist" name="fristname" placeholder="First Name.." required>
 
                                         </div>
                                         <div class="col-md-4 clearPaddingMargin" style="padding-right: 1em">
                                             <label>Middle Name</label>
-                                            <input type="text" id="middlenameSpecialist" name="middlename" placeholder="Middle Name..">
+                                            <input type="text" id="middlenameSpecialist" name="middlename" placeholder="Middle Name.." required>
 
                                         </div>
                                         <div class="col-md-4 clearPaddingMargin" style="padding-right: 1em">
                                             <label>Last Name</label>
-                                            <input type="text" id="lastnameSpecialist" name="lastname" placeholder="Last Name..">
+                                            <input type="text" id="lastnameSpecialist" name="lastname" placeholder="Last Name.." required>
 
                                         </div>
                                     </div>
                                     <div class="col-md-12 clearPaddingMargin">
                                         <div class="col-md-6 clearPaddingMargin" style="padding-right: 1em">
                                             <label>Email</label>
-                                            <input type="text" id="emailSpecialist" name="email" placeholder="Email..">
+                                            <input type="email" id="emailSpecialist" name="email" placeholder="Email.." required>
 
                                         </div>
                                         <div class="col-md-6 clearPaddingMargin" style="padding-right: 1em">
                                             <label>Phone</label>
-                                            <input type="text" id="phoneSpecialist" name="phone" placeholder="Phone..">
+                                            <input type="text" id="phoneSpecialist" name="phone" placeholder="Phone.." required>
 
                                         </div>
                                     </div>
                                     <div class="col-md-12 clearPaddingMargin">
                                         <div class="col-md-6 clearPaddingMargin" style="padding-right: 1em">
                                             <label>User Name</label>
-                                            <input type="text" id="usernameSpecialist" name="username" placeholder="username..">
+                                            <input type="text" id="usernameSpecialist" name="username" placeholder="username.." required>
 
                                         </div>
                                         <div class="col-md-6 clearPaddingMargin" style="padding-right: 1em">
                                             <label>Pass Word</label>
-                                            <input type="password" id="passwordSpecialist" name="password" placeholder="PassWord..">
+                                            <input type="password" id="passwordSpecialist" name="password" placeholder="PassWord.." required>
 
                                         </div>
                                     </div>
@@ -750,10 +852,11 @@
     <script src="~/Scripts/jquery/dist/jquery.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/Chart.js"></script>
-
+    <script src="~/Scripts/manage-account-1.0.1.js"></script>
     <script src="~/Content/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="~/Content/Js/adminlte.min.js"></script>
     <script src="~/Content/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
     <script>
         $(function () {
 
