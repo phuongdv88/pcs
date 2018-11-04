@@ -180,6 +180,7 @@ function updateCandidateStatus(id) {
         success: function (result) {
             if (result.rs !== -1) {
                 $("#candidateCurrentStatus").text(obj.CandidateStatus);
+                getLogActivities(currentCandidateId);
             } else {
                 alert(result.msg);
             }
@@ -206,10 +207,13 @@ function uploadFile(candidateId) {
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
             // check success or not?
-            $("#logActivityModal").modal('hide');
-        } else {
-            alert("Error");
-        }
+            if (xhr.rs != -1) {
+                getLogActivities(currentCandidateId);
+                $("#logActivityModal").modal('hide');
+            } else {
+                alert(rs.msg);
+            }
+        } 
     }
     return false;
 }
@@ -260,6 +264,8 @@ function submitCompanyData(comFormId) {
         dataType: "json",
         success: function (result) {
             if (result.rs !== -1) {
+                alert("Submit successfully");
+                getLogActivities(currentCandidateId);
             } else {
                 alert(result.msg);
             }
@@ -272,8 +278,44 @@ function submitCompanyData(comFormId) {
 
 }
 
-function getLogActivities(pageNumber) {
+function getLogActivities(canId) {
     //reset pages index
-    // fill content to table
+    $.ajax({
+        url: '/Specialist/GetLogActivities/' + canId,
+        type: "GET",
+        contenttype: "application/json; charset=utf-8",
+        dataType: "json",
+        timeout: '5000',
+        success: function (result) {
+            var html = '';
+            var i = 0;
+            $.each(result, function (key, item) {
+                i++;
+
+                html += '<tr>';
+                html += '<td>' + i + '</td>';
+                html += '<td>' + formatDate(item.ActionTime.substr(6)) + '</td>';
+                html += '<td>' + item.ActionType + '</td>';
+                html += '<td>' + item.ActionContent + '</td>';
+                html += '</tr>';
+            });
+            $('#logActivites tbody').html(html);
+            $('#logActivites').DataTable({
+                'pageLength':5,
+                'paging': true,
+                'lengthChange': false,
+                'searching': false,
+                'ordering': true,
+                'info': true,
+                'autoWidth': false,
+                 "bDestroy": true
+            })
+            //$('#logActivites').DataTable().ajax.reload();
+        },
+        error: function (errorMessage) {
+            alert(errorMessage.responseText);
+        },
+    });
+    return false;
 }
 

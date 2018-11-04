@@ -314,7 +314,20 @@ namespace PCSs.Controllers
                     can.Status = status.CandidateStatus;
                     can.LastUpdateReportTime = DateTime.Now;
                     db.Entry(can).State = EntityState.Modified;
+                    db.SaveChanges();
+                    var logAction = new ActivityLog()
+                    {
+                        ActionTime = DateTime.Now,
+                        ActionType = "Update Candidate's Status",
+                        ActionContent = "Change to " + status.CandidateStatus,
+                        CandidateId = status.CandidateId,
+                        SpecialistId = specialistId,
+                    };
+                    db.ActivityLogs.Add(logAction);
+
                     var r = db.SaveChanges();
+
+
                     return Json(new { rs = r, msg = "Done" }, JsonRequestBehavior.AllowGet);
                 }
                 return Json(new { rs = 1, msg = "unchange" }, JsonRequestBehavior.AllowGet);
@@ -354,6 +367,29 @@ namespace PCSs.Controllers
             }
         }
 
+        public JsonResult GetLogActivities(long id)
+        {
+            long specialistId = -1;
+            try
+            {
+                if (!long.TryParse(Session["SpecialistId"].ToString(), out specialistId))
+                {
+                    return Json(new { rs = -1, msg = "Error: Can't get specialist's profile" }, JsonRequestBehavior.AllowGet);
+                }
+
+                var can = db.Candidates.FirstOrDefault(s => s.CandidateId == id && s.SpecialistId == specialistId);
+                if (can == null)
+                {
+                    return Json(new { rs = -1, msg = "Can not get candiate's profile" }, JsonRequestBehavior.AllowGet);
+                }
+                return Json(db.ActivityLogs.Where(s => (s.SpecialistId == specialistId) && s.CandidateId == id).OrderByDescending(s => s.ActivityLogId), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         public JsonResult UpdateCompanyChecksResult(CompanyInfo com)
         {
             long specialistId = -1;
@@ -373,6 +409,17 @@ namespace PCSs.Controllers
                         comInfo.Note = com.Note;
                         comInfo.IsChecked = true;
                         var r = db.SaveChanges();
+
+                        var logAction = new ActivityLog()
+                        {
+                            ActionTime = DateTime.Now,
+                            ActionType = "Update Company Checks Result",
+                            ActionContent = "Company Name: " + comInfo.Name + "; Result = " + com.CheckResult + "; Note:" + com.Note,
+                            CandidateId = com.CandidateId,
+                            SpecialistId = specialistId,
+                        };
+                        db.ActivityLogs.Add(logAction);
+                        db.SaveChanges();
                         return Json(new { rs = r, msg = "Done" }, JsonRequestBehavior.AllowGet);
                     }
                 }
@@ -449,6 +496,17 @@ namespace PCSs.Controllers
                     AttachmentFile attachment = new AttachmentFile() { Link = Server.MapPath("~/Reports/") + filePath, CandidateId = id, FileName = file.FileName };
                     db.AttachmentFiles.Add(attachment);
                     db.SaveChanges();
+                    var logAction = new ActivityLog()
+                    {
+                        ActionTime = DateTime.Now,
+                        ActionType = "Upload Candidate's report",
+                        ActionContent = "Upload " + can.FirstName + " " + can.MiddleName + " " + can.LastName + "'s report",
+                        CandidateId = can.CandidateId,
+                        SpecialistId = specialistId,
+                    };
+                    db.ActivityLogs.Add(logAction);
+                    db.SaveChanges();
+
                     return Json(new { result = 1, msg = "Uploaded " + Request.Files.Count + " files" }, JsonRequestBehavior.AllowGet);
                 }
                 catch (Exception e)
