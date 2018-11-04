@@ -65,3 +65,9 @@ input[type=submit], [type=button] {
     
     border-top:0px;
 }
+#btnUpdateCandidateStatus{
+    float: right;
+}
+#btnAddLogActivity{
+    float:right;
+}

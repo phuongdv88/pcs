@@ -15,6 +15,7 @@
     <EntitySetMapping Name="Candidates">
       <EntityTypeMapping TypeName="PCSModel.Candidate">
         <MappingFragment StoreEntitySet="Candidate">
+          <ScalarProperty Name="CheckResult" ColumnName="CheckResult" />
           <ScalarProperty Name="SpecialistId" ColumnName="SpecialistId" />
           <ScalarProperty Name="CandidateId" ColumnName="CandidateId" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />

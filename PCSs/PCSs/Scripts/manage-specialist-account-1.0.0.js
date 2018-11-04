@@ -188,7 +188,7 @@ function updateStatus(id, status) {
         CandidateStatus: status
     }
     $.ajax({
-        url: '/Specialist/UpdateStatus',
+        url: '/Specialist/UpdateCandidateStatus',
         data: JSON.stringify(obj),
         type: 'POST',
         contentType: "application/json; charset=utf-8",

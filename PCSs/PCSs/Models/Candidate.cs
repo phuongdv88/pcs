@@ -40,5 +40,6 @@ namespace PCSs.Models
         public long UserLoginId { get; set; }
         public string PassportNumber { get; set; }
         public Nullable<long> SpecialistId { get; set; }
+        public string CheckResult { get; set; }
     }
 }

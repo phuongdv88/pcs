@@ -1,14 +1,21 @@
 ﻿$(function () {
-    $('input').iCheck({
-        checkboxClass: 'icheckbox_square-blue',
-        radioClass: 'iradio_square-blue',
-        increaseArea: '20%' // optional
-    });
-});
 
+});
+var uploadFileHtml = $("#uploadFileModal").html();
+var logActivityHtml = $("#logActivityModal").html();
 var comBaseHtml = $("#companybase").html();
+var currentCandidateId = -1;
 $(document).ready(function () {
+
+
     $("#companybase").remove();
+    $("#uploadFileModal").on('hidden.bs.modal', function () {
+        $("#uploadFileModal").html(uploadFileHtml);
+    })
+    $("#logActivityModal").on('hidden.bs.modal', function () {
+        $("#logActivityModal").html(logActivityHtml);
+    })
+
 });
 function getCandidateId(candidateId) {
     $.ajax({
@@ -18,14 +25,13 @@ function getCandidateId(candidateId) {
         dataType: "json",
         timeout: '5000',
         success: function (result) {
-            if (result.rs !== -1)
-            {
+            if (result.rs !== -1) {
                 var candidateName = result.FirstName + ' ' + result.MiddleName + ' ' + result.LastName;
                 if (result.MiddleName === undefined) {
                     candidateName = result.FirstName + ' ' + result.LastName;
                 }
                 // fill data to the form
-                $('#candidateFullName').text(candidateName);            
+                $('#candidateFullName').text(candidateName);
                 $('#candidateGender').text(result.Gender);
                 $('#candidatePhone').text(result.PhoneNumber);
                 $('#candidateEmail').text(result.Email);
@@ -35,6 +41,8 @@ function getCandidateId(candidateId) {
                 $('#candidateJobLevel').text(result.JobLevel);
                 $('#candidateAddress').text(result.Address);
                 $('#candidateAddress').text(result.Address);
+                $("#candidateCurrentStatus").text(result.Status);
+                currentCandidateId = result.CandidateId;
             }
         },
         error: function (errorMessage) {
@@ -53,7 +61,7 @@ function addCompany(index) {
         navCom = '<li class="active">';
     }
     index++;
-    navCom += '<a data-toggle="tab" href="#' + comFormId + '">Company ' + index + '</a></li>';    
+    navCom += '<a data-toggle="tab" href="#' + comFormId + '">Company ' + index + ' <i class="" id="iconChecked' + index + '"> </i> </a></li>';
     $("#navCompanies").append(navCom)
     return comFormId;
 }
@@ -74,12 +82,12 @@ function getAllCompanyInfo(candidateId) {
             var html = '';
             var i = 0;
             $.each(result, function (key, item) {
-                if (result.rs !== -1)
-                {
+                if (result.rs !== -1) {
                     // fill up company info
                     // generate html of company form
                     var comFormId = addCompany(i);
                     // fill data to the form
+                    $('#' + comFormId).find("#companyId_" + comFormId).val(item.CompanyInfoId);
                     $('#' + comFormId).find("#companyWebsite").text(item.Website);
                     $('#' + comFormId).find("#companyAddress").text(item.Address);
                     $('#' + comFormId).find("#companyName").text(item.Name);
@@ -88,12 +96,32 @@ function getAllCompanyInfo(candidateId) {
                     $('#' + comFormId).find("#companyStopDate").text(formatMonthOnly(item.StopDate.substr(6)));
                     $('#' + comFormId).find("#companyJobDuties").val(item.JobDuties);
                     $('#' + comFormId).find("#companyNotes").text(item.Note);
+                    // fill up checks result
+                    if (item.IsChecked) {
+                        var index = i + 1;
+                        // add icon check to menu
+                        $("#iconChecked" + index).addClass("far fa-check-circle");
+                    }
+                    if (item.CheckResult !== undefined && item.CheckResult !== null) {
+                        var checkresults = item.CheckResult.split(",");
+                        if (checkresults.length === 4) {
+                            var idresultName = 'name' + String(checkresults[0]).replace('/', '') + '_' + comFormId;
+                            var idresultJobTitle = 'jobTitle' + String(checkresults[1]).replace('/', '') + '_' + comFormId;
+                            var idresultPeriod = 'period' + String(checkresults[2]).replace('/', '') + '_' + comFormId;
+                            var idresultDuties = 'duties' + String(checkresults[3]).replace('/', '') + '_' + comFormId;
 
+                            $("#" + idresultName).iCheck('check');
+                            $("#" + idresultJobTitle).iCheck('check');
+                            $("#" + idresultPeriod).iCheck('check');
+                            $("#" + idresultDuties).iCheck('check');
+                            //$('input[name=checkResultName_' + comFormId + ']').find('[val="' + checkresults[0] + '"]').iCheck('check');
+                        }
+                    }
                     // fill up reference information
                     getAllReference(comFormId, item.CompanyInfoId);
                     i++;
                 }
-                });
+            });
         },
         error: function (errorMessage) {
             alert(errorMessage.responseText);
@@ -126,10 +154,10 @@ function getAllReference(comFormId, comId) {
                 }
 
             });
-            if(i==1){
+            if (i == 1) {
                 $('#' + comFormId).find("#referenceForm_1").remove();
             }
-            
+
         },
         error: function (errorMessage) {
             alert(errorMessage.responseText);
@@ -137,6 +165,115 @@ function getAllReference(comFormId, comId) {
     });
     return false;
 }
-function submitCompanyData(comFormId){
+
+function updateCandidateStatus(id) {
+    var obj = {
+        CandidateId: id,
+        CandidateStatus: $("#candidateStatusVal").val(),
+    };
+    $.ajax({
+        url: '/Specialist/UpdateCandidateStatus',
+        data: JSON.stringify(obj),
+        type: 'POST',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+            if (result.rs !== -1) {
+                $("#candidateCurrentStatus").text(obj.CandidateStatus);
+            } else {
+                alert(result.msg);
+            }
+        },
+        error: function (errorMessage) {
+            alert(errorMessage.responseText);
+        }
+    });
+    return false;
+}
+
+function uploadFile(candidateId) {
+    var formdata = new FormData(); //FormData object
+    var fileInput = document.getElementById('fileInput');
+    //Iterating through each files selected in fileInput
+    for (i = 0; i < fileInput.files.length; i++) {
+        //Appending each file to FormData object
+        formdata.append(fileInput.files[i].name, fileInput.files[i]);
+    }
+    //Creating an XMLHttpRequest and sending
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/Specialist/UploadReport/' + candidateId);
+    xhr.send(formdata);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            // check success or not?
+            $("#logActivityModal").modal('hide');
+        } else {
+            alert("Error");
+        }
+    }
+    return false;
+}
+function logActivity(candidateId) {
+    var obj = {
+        CandidateId: candidateId,
+        ActionType: $("#actionType").val(),
+        ActionContent: $("#logNote").val(),
+    };
+    $.ajax({
+        url: '/Specialist/LogActivity',
+        data: JSON.stringify(obj),
+        type: 'POST',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+            if (result.rs !== -1) {
+                //todo: reload logactivities table
+                $("#logActivityModal").modal('hide');
+            } else {
+                alert(result.msg);
+            }
+        },
+        error: function (errorMessage) {
+            alert(errorMessage.responseText);
+        }
+    });
+    return false;
+}
+function submitCompanyData(comFormId) {
+    // get check result to string
+    var checkresult = [$('input[name=checkResultName_' + comFormId + ']:checked').val(),
+        $('input[name=checkResultJobTitle_' + comFormId + ']:checked').val(),
+        $('input[name=checkResultPeriod_' + comFormId + ']:checked').val(),
+        $('input[name=checkResultJobDuties_' + comFormId + ']:checked').val()].join(',');
+
+    var obj = {
+        CompanyInfoId: $("#" + comFormId).find("#companyId_" + comFormId).val(),
+        Note: $("#companyNotes").val(),
+        CheckResult: checkresult,
+        CandidateId: currentCandidateId,
+    };
+    $.ajax({
+        url: '/Specialist/UpdateCompanyChecksResult',
+        data: JSON.stringify(obj),
+        type: 'POST',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+            if (result.rs !== -1) {
+            } else {
+                alert(result.msg);
+            }
+        },
+        error: function (errorMessage) {
+            alert(errorMessage.responseText);
+        }
+    });
+    return false;
 
 }
+
+function getLogActivities(pageNumber) {
+    //reset pages index
+    // fill content to table
+}
+

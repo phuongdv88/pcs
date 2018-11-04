@@ -122,15 +122,22 @@ function getAllCandidateCompleted() {
             var i = 0;
             $.each(result, function (key, item) {
                 i++;
+                var iconHtml = ""
+                if (item.CheckResult == "False") {
+                    iconHtml = '<i class="far fa-times-circle"> </i>';
+                } else if (item.CheckResult == "True") {
+                    iconHtml = '<i class="far fa-check-circle"></i>';
+                }
                 var candidateName = item.FirstName + " " + item.MiddleName + " " + item.LastName;
                 if (item.MiddleName === null) {
                     candidateName = item.FirstName + " " + item.LastName;
                 }
                 html += '<tr>';
                 html += '<td>' + i + '</td>';
-                html += '<td>' + candidateName + '</td>';
+                html += '<td>' + iconHtml + ' ' + candidateName + '</td>';
                 html += '<td>' + item.Email + '</td>';
                 html += '<td>' + item.PhoneNumber + '</td>';
+                
                 if (item.CompleteTime == undefined) {
                     html += '<td>N/A</td>';
                 }

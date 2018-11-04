@@ -40,6 +40,7 @@
     <Property Name="UserLoginId" Type="Int64" Nullable="false" />
     <Property Name="PassportNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="SpecialistId" Type="Int64" />
+    <Property Name="CheckResult" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Client">
     <Key>

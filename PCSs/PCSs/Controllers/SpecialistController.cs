@@ -93,7 +93,7 @@ namespace PCSs.Controllers
             catch (Exception e)
             {
                 return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
-            }           
+            }
         }
 
         public JsonResult GetAvailableCandidate()
@@ -277,7 +277,7 @@ namespace PCSs.Controllers
             return Json(new { rs = -1, msg = "1" }, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult UpdateStatus(CandidateStatusToChange status)
+        public JsonResult UpdateCandidateStatus(CandidateStatusToChange status)
         {
             long specialistId = -1;
             try
@@ -294,15 +294,89 @@ namespace PCSs.Controllers
                 }
                 if (can.Status != status.CandidateStatus)
                 {
+                    if(status.CandidateStatus == "Completed" || status.CandidateStatus == "Close")
+                    {
+                        can.CheckResult = "True";
+                        can.CompleteTime = DateTime.Now;
+                        var coms = db.CompanyInfoes.Where(s => s.CandidateId == can.CandidateId);
+                        foreach(var com in coms)
+                        {
+                            if(com.IsChecked == false)
+                            {
+                                return Json(new { rs = -1, msg = "Candidate has not been checked all companies." }, JsonRequestBehavior.AllowGet);
+                            }
+                            if (com.CheckResult.Contains("False"))
+                            {
+                                can.CheckResult = "False";
+                            }
+                        }
+                    }
                     can.Status = status.CandidateStatus;
-                    can.CompleteTime = DateTime.Now;
                     can.LastUpdateReportTime = DateTime.Now;
-
                     db.Entry(can).State = EntityState.Modified;
                     var r = db.SaveChanges();
                     return Json(new { rs = r, msg = "Done" }, JsonRequestBehavior.AllowGet);
                 }
-                return Json(new { rs = -1, msg = "Can not get candiate's profile" }, JsonRequestBehavior.AllowGet);
+                return Json(new { rs = 1, msg = "unchange" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult LogActivity(ActivityLog logAcivity)
+        {
+            long specialistId = -1;
+            try
+            {
+                if (!long.TryParse(Session["SpecialistId"].ToString(), out specialistId))
+                {
+                    return Json(new { rs = -1, msg = "Error: Can't get specialist's profile" }, JsonRequestBehavior.AllowGet);
+                }
+
+                var can = db.Candidates.FirstOrDefault(s => s.CandidateId == logAcivity.CandidateId && s.SpecialistId == specialistId);
+                if (can == null)
+                {
+                    return Json(new { rs = -1, msg = "Can not get candiate's profile" }, JsonRequestBehavior.AllowGet);
+                }
+                // log activity
+                logAcivity.ActionTime = DateTime.Now;
+                logAcivity.SpecialistId = specialistId;
+                logAcivity.UserRole = 2;
+                db.ActivityLogs.Add(logAcivity);
+                var r = db.SaveChanges();
+                return Json(new { rs = r, msg = "Done" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult UpdateCompanyChecksResult(CompanyInfo com)
+        {
+            long specialistId = -1;
+            try
+            {
+                if (!long.TryParse(Session["SpecialistId"].ToString(), out specialistId))
+                {
+                    return Json(new { rs = -1, msg = "Error: Can't get specialist's profile" }, JsonRequestBehavior.AllowGet);
+                }
+                var comInfo = db.CompanyInfoes.FirstOrDefault(s => s.CompanyInfoId == com.CompanyInfoId);
+                if(comInfo != null)
+                {
+                    if(db.Candidates.Count(s=>s.CandidateId == com.CandidateId && s.SpecialistId == specialistId) > 0)
+                    {
+                        comInfo.CheckResult = com.CheckResult;
+                        comInfo.CheckingTime = DateTime.Now;
+                        comInfo.Note = com.Note;
+                        comInfo.IsChecked = true;
+                        var r = db.SaveChanges();
+                        return Json(new { rs = r, msg = "Done" }, JsonRequestBehavior.AllowGet);
+                    }
+                }
+                return Json(new { rs = -1, msg = "Save Fail" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
@@ -356,8 +430,6 @@ namespace PCSs.Controllers
             }
 
             var can = db.Candidates.FirstOrDefault(s => s.CandidateId == id && s.SpecialistId == specialistId);
-            //todo: for test
-            //var can = db.Candidates.FirstOrDefault(s => s.CandidateId == id);
             if (can != null)
             {
                 try

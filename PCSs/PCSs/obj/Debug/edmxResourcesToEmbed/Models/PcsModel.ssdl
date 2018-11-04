@@ -53,6 +53,7 @@
     <Property Name="UserLoginId" Type="bigint" Nullable="false" />
     <Property Name="PassportNumber" Type="varchar" MaxLength="50" />
     <Property Name="SpecialistId" Type="bigint" />
+    <Property Name="CheckResult" Type="nvarchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="Client">
     <Key>
