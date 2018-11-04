@@ -267,6 +267,7 @@ function getAllCompanyCan() {
             $.each(listComId, function (key, item) {
                 getAllReference(key, item);
             });
+            listComId.length = 0; // reset list com id
         }
 
     });
@@ -282,7 +283,6 @@ function getAllReference(id, comFormId) {
         timeout: '5000',
         success: function (result) {
             var i = 0;
-            listComId.length = 0;
             $.each(result, function (key, item) {
                 // generate html of reference form
                 var refeFormId = "";
@@ -300,6 +300,9 @@ function getAllReference(id, comFormId) {
                 $('#' + comFormId).find("#" + refeFormId).find("#refeEmail").val(item.Email);
                 $('#' + comFormId).find("#" + refeFormId).find("#refePhoneNumber").val(item.PhoneNumber);
             });
+            if (i == 0) {
+                refeFormId = addReference(comFormId, true);
+            }
         },
         error: function (errorMessage) {
             alert(errorMessage.responseText);

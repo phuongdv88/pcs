@@ -35,6 +35,8 @@ function setUserLoginName(userName) {
     $("#UserName").val(userName);
 }
 function getAvailableCandidate() {
+    $('#candidates').DataTable().clear();
+    $('#candidates').DataTable().destroy();
     $.ajax({
         url: '/Specialist/GetAvailableCandidate',
         //data: '{id: ' + id + ' }',
@@ -85,6 +87,8 @@ function getAvailableCandidate() {
 }
 
 function getMyCandidate() {
+    $('#myTask').DataTable().clear();
+    $('#myTask').DataTable().destroy();
     $.ajax({
         url: '/Specialist/GetMyCandidate',
         //data: '{id: ' + id + ' }',

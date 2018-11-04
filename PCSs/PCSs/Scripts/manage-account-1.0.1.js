@@ -61,6 +61,8 @@ function setUserLoginName(userName) {
     $("#UserName").val(userName);
 }
 function _getAllCandidate() {
+    $('#candidates').DataTable().clear();
+    $('#candidates').DataTable().destroy();
     $.ajax({
         url: '/Client/GetAllCandidate',
         //data: '{id: ' + id + ' }',
@@ -110,6 +112,8 @@ function _getAllCandidate() {
 }
 
 function getAllCandidateCompleted() {
+    $('#report').DataTable().clear();
+    $('#report').DataTable().destroy();
     $.ajax({
         url: '/Client/GetAllCandidateCompleted',
         //data: '{id: ' + id + ' }',
