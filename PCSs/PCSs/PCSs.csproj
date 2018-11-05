@@ -2269,6 +2269,7 @@
     <Content Include="Scripts\jquery\src\wrap.js" />
     <Content Include="Scripts\manage-specialist-account-1.0.2.js" />
     <Content Include="Scripts\manage-account-1.0.2.js" />
+    <Content Include="Scripts\manage-specialist-topmenu.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\process-backgroundchecks-candidate-1.0.2.js" />
     <Content Include="Scripts\respond.js" />

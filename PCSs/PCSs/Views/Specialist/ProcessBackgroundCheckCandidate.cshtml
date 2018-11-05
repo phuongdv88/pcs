@@ -110,7 +110,7 @@
                                 <input class="col-md-12" id="fileInput" type="file" accept="application/pdf">
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" id="btnUpload" onclick="uploadFile(@ViewBag.CandidateId); return false;">Upload file</button>
+                                <button type="button" class="btn btn-primary btnUploadFile" id="btnUpload" onclick="uploadFile(@ViewBag.CandidateId); return false;">Upload file</button>
                             </div>
                         </div>
                     </div>
@@ -203,7 +203,7 @@
             <h3>Candidate's Status - <span id="candidateCurrentStatus"></span></h3>
 
         </div>
-        <div class=" col-md-12 col-sm-12 col-xs-12  clearMaginPadding box" style="padding-top: 1em">
+        <div class=" col-md-12 col-sm-12 col-xs-12  clearMaginPadding box" style="padding: 1em 0 1em 0">
             <div class="row col-md-12  col-sm-12 col-xs-12  clearMaginPadding">
                 <div class="col-md-6 col-sm-12 col-xs-12  ">
                     <div class="row">
@@ -253,6 +253,10 @@
                         </div>
                     </div>
                     <hr />
+                  
+                </div>
+                <div class="col-md-6 ">
+                    <!--status-->
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row col-md-12 clearMaginPadding">
@@ -277,14 +281,9 @@
                         </div>
 
                     </div>
-                </div>
-                <div class="col-md-6 ">
                     <!-- log table-->
-                    <div class="row">
-                        <button type="button" class="btn btn-primary" id="btnUploadReport" data-target="#uploadFileModal" data-toggle="modal"><i class="fas fa-file-upload"></i>Upload</button>
-                        <input type="button" value="Add Log" data-toggle="modal" data-target="#logActivityModal" id="btnAddLogActivity">
-                    </div>
-                    <div class="row">
+
+                    <div class="col-md-12 clearMaginPadding">
                         <div class="box">
                             <div class="box-header">
                                 <h3 class="box-title">Log Activities</h3>
@@ -311,6 +310,11 @@
                         </div>
                         <!-- /.box -->
                     </div>
+                    <div class="col-md-12 clearMaginPadding">
+                        <input type="button" value="Add Log" data-toggle="modal" data-target="#logActivityModal" id="btnAddLogActivity">
+
+                        <button type="button" class="btn btn-primary btnUpload" id="btnUploadReport" data-target="#uploadFileModal" data-toggle="modal"><i class="fas fa-file-upload"></i>Upload</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -328,8 +332,8 @@
                             <div class="row col-md-12 col-sm-12 col-xs-12 clearMaginPadding">
                                 <div class="col-md-12 col-sm-12 col-xs-12 clearMaginPadding" style="padding-top: 1em">
                                     <input type="text" id="companyId_company_comId" value="-1" hidden />
-                                    <div style="padding-left: 1em">
-                                        <div class="row">
+                                    <div >
+                                        <div class="col-md-12 clearMaginPadding">
                                             <div class="col-md-4 col-sm-12 col-xs-12 clearMaginPadding">
                                                 <label>Website:</label>
                                                 <label style="font-weight:bold;" id="companyWebsite"></label>
@@ -406,109 +410,116 @@
 
                         </div>
                         <div class="col-md-6 " style="margin-top: 1em">
-                            <div class="row">
-                                <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
-                                    <div class="form-group">
-                                        <label class="col-md-4 col-sm-4 col-xs-4 ">
-                                            <input type="radio" name="checkResultName_company_comId" id="nameTrue_company_comId" value="True" class="minimal">
-                                            True
-                                        </label>
-                                        <label class="col-md-4 col-sm-4 col-xs-4 ">
-                                            <input type="radio" name="checkResultName_company_comId" id="nameFalse_company_comId" value="False" class="minimal">
-                                            False
-                                        </label>
-                                        <label class="col-md-4 col-sm-4 col-xs-4 ">
-                                            <input type="radio" name="checkResultName_company_comId" id="nameNA_company_comId" value="N/A" class="minimal" checked>
-                                            N/A
-                                        </label>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
+                                        <label>Name:</label>
+                                        <label style="font-weight:bold;" id="companyName"></label>
                                     </div>
-                                </div>
-                                <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
-                                    <label>Name:</label>
-                                    <label style="font-weight:bold;" id="companyName"></label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
-                                    <div class="form-group">
-                                        <label class="col-md-4 col-sm-4 col-xs-4 ">
-                                            <input type="radio" name="checkResultJobTitle_company_comId" id="jobTitleTrue_company_comId" value="True" class="minimal">
-                                            True
-                                        </label>
-                                        <label class="col-md-4 col-sm-4 col-xs-4 ">
-                                            <input type="radio" name="checkResultJobTitle_company_comId" id="jobTitleFalse_company_comId" value="False" class="minimal">
-                                            False
-                                        </label>
-                                        <label class="col-md-4 col-sm-4 col-xs-4 ">
-                                            <input type="radio" name="checkResultJobTitle_company_comId" id="jobTitleNA_company_comId" value="N/A" class="minimal" checked>
-                                            N/A
-                                        </label>
+                                    <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 col-xs-4 ">
+                                                <input type="radio" name="checkResultName_company_comId" id="nameTrue_company_comId" value="True" class="minimal">
+                                                True
+                                            </label>
+                                            <label class="col-md-4 col-sm-4 col-xs-4 ">
+                                                <input type="radio" name="checkResultName_company_comId" id="nameFalse_company_comId" value="False" class="minimal">
+                                                False
+                                            </label>
+                                            <label class="col-md-4 col-sm-4 col-xs-4 ">
+                                                <input type="radio" name="checkResultName_company_comId" id="nameNA_company_comId" value="N/A" class="minimal" checked>
+                                                N/A
+                                            </label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
-                                    <label>Job title:</label>
-                                    <label style="font-weight:bold;" id="companyJobtitle"></label>
-                                </div>
 
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
-                                    <div class="form-group">
-                                        <label class="col-md-4 col-sm-4 col-xs-4 ">
-                                            <input type="radio" name="checkResultPeriod_company_comId" id="periodTrue_company_comId" value="True" class="minimal">
-                                            True
-                                        </label>
-                                        <label class="col-md-4 col-sm-4 col-xs-4 ">
-                                            <input type="radio" name="checkResultPeriod_company_comId" id="periodFalse_company_comId" value="False" class="minimal">
-                                            False
-                                        </label>
-                                        <label class="col-md-4 col-sm-4 col-xs-4 ">
-                                            <input type="radio" name="checkResultPeriod_company_comId" id="periodNA_company_comId" value="N/A" class="minimal" checked>
-                                            N/A
-                                        </label>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
+                                        <label>Job title:</label>
+                                        <label style="font-weight:bold;" id="companyJobtitle"></label>
                                     </div>
-                                </div>
-                                <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
-                                    <label>Startdate:</label>
-                                    <label style="font-weight:bold;" id="companyStartDate"></label>
-                                    <label>Stopdate:</label>
-                                    <label style="font-weight:bold;" id="companyStopDate"></label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
-                                    <div class="form-group">
-                                        <label class="col-md-4 col-sm-4 col-xs-4 ">
-                                            <input type="radio" name="checkResultJobDuties_company_comId" id="dutiesTrue_company_comId" value="True" class="minimal">
-                                            True
-                                        </label>
-                                        <label class="col-md-4 col-sm-4 col-xs-4 ">
-                                            <input type="radio" name="checkResultJobDuties_company_comId" id="dutiesFalse_company_comId" value="False" class="minimal">
-                                            False
-                                        </label>
-                                        <label class="col-md-4 col-sm-4 col-xs-4 ">
-                                            <input type="radio" name="checkResultJobDuties_company_comId" id="dutiesNA_company_comId" value="N/A" class="minimal" checked>
-                                            N/A
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
-                                    <div class="row">
-                                        <div class="col-md-2 col-sm-12 col-xs-12 ">
-                                            <label>Job Duties:</label>
-                                        </div>
-                                        <div class="col-md-12 col-sm-12 col-xs-12 ">
-                                            <textarea style="font-weight:bold;" id="companyJobDuties" rows="5" disabled></textarea>
+
+                                    <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 col-xs-4 ">
+                                                <input type="radio" name="checkResultJobTitle_company_comId" id="jobTitleTrue_company_comId" value="True" class="minimal">
+                                                True
+                                            </label>
+                                            <label class="col-md-4 col-sm-4 col-xs-4 ">
+                                                <input type="radio" name="checkResultJobTitle_company_comId" id="jobTitleFalse_company_comId" value="False" class="minimal">
+                                                False
+                                            </label>
+                                            <label class="col-md-4 col-sm-4 col-xs-4 ">
+                                                <input type="radio" name="checkResultJobTitle_company_comId" id="jobTitleNA_company_comId" value="N/A" class="minimal" checked>
+                                                N/A
+                                            </label>
                                         </div>
                                     </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
+                                        <label>Startdate:</label>
+                                        <label style="font-weight:bold;" id="companyStartDate"></label>
+                                        <label>Stopdate:</label>
+                                        <label style="font-weight:bold;" id="companyStopDate"></label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 col-xs-4 ">
+                                                <input type="radio" name="checkResultPeriod_company_comId" id="periodTrue_company_comId" value="True" class="minimal">
+                                                True
+                                            </label>
+                                            <label class="col-md-4 col-sm-4 col-xs-4 ">
+                                                <input type="radio" name="checkResultPeriod_company_comId" id="periodFalse_company_comId" value="False" class="minimal">
+                                                False
+                                            </label>
+                                            <label class="col-md-4 col-sm-4 col-xs-4 ">
+                                                <input type="radio" name="checkResultPeriod_company_comId" id="periodNA_company_comId" value="N/A" class="minimal" checked>
+                                                N/A
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
+                                        <div class="row">
+                                            <div class="col-md-2 col-sm-12 col-xs-12 ">
+                                                <label>Job Duties:</label>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-xs-12 ">
+                                                <textarea style="font-weight:bold;" id="companyJobDuties" rows="5" disabled></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
+                                        <div class="form-group">
+                                            <label class="col-md-4 col-sm-4 col-xs-4 ">
+                                                <input type="radio" name="checkResultJobDuties_company_comId" id="dutiesTrue_company_comId" value="True" class="minimal">
+                                                True
+                                            </label>
+                                            <label class="col-md-4 col-sm-4 col-xs-4 ">
+                                                <input type="radio" name="checkResultJobDuties_company_comId" id="dutiesFalse_company_comId" value="False" class="minimal">
+                                                False
+                                            </label>
+                                            <label class="col-md-4 col-sm-4 col-xs-4 ">
+                                                <input type="radio" name="checkResultJobDuties_company_comId" id="dutiesNA_company_comId" value="N/A" class="minimal" checked>
+                                                N/A
+                                            </label>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
+                           
                             <!-- note -->
                             <div class="row col-md-12 col-sm-12 col-xs-12  clearMaginPadding">
-                                <div class="col-md-1 clearMaginPadding">
+                                <div class="col-md-12 clearMaginPadding">
                                     <h5>Note</h5>
                                 </div>
-                                <div class="col-md-11 clearMaginPadding">
+                                <div class="col-md-12 clearMaginPadding">
                                     <textarea class="note" rows="10" id="companyNotes"></textarea>
                                 </div>
                             </div>

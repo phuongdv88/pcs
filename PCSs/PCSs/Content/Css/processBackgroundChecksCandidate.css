@@ -71,3 +71,11 @@ input[type=submit], [type=button] {
 #btnAddLogActivity{
     float:right;
 }
+.btnUpload{
+    padding:6px;
+    margin-right:1em;
+    float:right;
+}
+.btnUploadFile{
+    padding:6px;
+}
