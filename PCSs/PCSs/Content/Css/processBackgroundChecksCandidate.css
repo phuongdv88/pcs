@@ -8,7 +8,24 @@
     box-shadow: 0 1px 1px rgba(0,0,0,0.1);
     height: auto;
 }
-
+.content {
+    min-height: 860px;
+    width: 100%;
+    background: #ecf0f5;
+    padding-top: 1em;
+    padding-bottom: 2em;
+    display:flex;
+}
+@media screen and (max-width:450px){
+    .content {
+        min-height: 860px;
+        width: 100%;
+        background: #ecf0f5;
+        padding-top: 1em;
+        padding-bottom: 2em;
+        display: block;
+    }
+}
 
 .clearMaginPadding{
     padding: 0px;
@@ -58,8 +75,8 @@ input[type=submit], [type=button] {
     cursor: pointer;
 }
 .company {
-    background-color: #666666;
-    margin-top: 1em;
+    background-color: #d2d6de;
+    /*margin-top: 1em;*/
 }
 #companyInformation .box {
     
@@ -78,4 +95,10 @@ input[type=submit], [type=button] {
 }
 .btnUploadFile{
     padding:6px;
+}
+.btnViewUpload{
+    margin-top:2em;
+}
+#btnAddLogActivity{
+    font-size:20px;
 }
