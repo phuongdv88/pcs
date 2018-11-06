@@ -108,7 +108,7 @@ function getMyCandidate() {
 
                 html += '<tr>';
                 html += '<td>' + i + '</td>';
-                html += '<td>' + 'CompanyName' + '</td>';
+                html += '<td>' + item.ClientName + '</td>';
                 html += '<td>' + candidateName + '</td>';
                 html += '<td>' + item.Email + '</td>';
                 html += '<td>' + item.PhoneNumber + '</td>';
