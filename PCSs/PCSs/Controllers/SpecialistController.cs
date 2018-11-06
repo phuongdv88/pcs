@@ -129,7 +129,23 @@ namespace PCSs.Controllers
                     return Json(new { rs = -1, msg = "Error: Can't get specialist's profile" }, JsonRequestBehavior.AllowGet);
                 }
 
-                return Json(db.Candidates.Where(s => (s.SpecialistId == specialistId)).OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
+                var cans = (from can in db.Candidates
+                           join client in db.Clients
+                           on can.ClientId equals client.ClientId
+                           where can.SpecialistId == specialistId
+                           select new {
+                               ClientName = client.Name,
+                               can.CandidateId,
+                               can.FirstName,
+                               can.MiddleName,
+                               can.LastName,
+                               can.Email,
+                               can.PhoneNumber,
+                               can.Status,
+                               can.CreatedTime,
+                               can.CompleteTime,
+                           }).OrderByDescending(s=>s.CandidateId);
+                return Json(cans, JsonRequestBehavior.AllowGet);
 
             }
             catch (Exception e)
