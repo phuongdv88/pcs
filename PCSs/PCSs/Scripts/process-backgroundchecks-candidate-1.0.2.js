@@ -253,7 +253,7 @@ function submitCompanyData(comFormId) {
 
     var obj = {
         CompanyInfoId: $("#" + comFormId).find("#companyId_" + comFormId).val(),
-        Note: $("#companyNotes").val(),
+        Note: $("#" + comFormId).find("#companyNotes").val(),
         CheckResult: checkresult,
         CandidateId: currentCandidateId,
     };
@@ -324,3 +324,6 @@ function getLogActivities(canId) {
     return false;
 }
 
+function getCandidateReportById(id) {
+    window.open('/Specialist/GetCandidateReportPdf/' + id);
+}

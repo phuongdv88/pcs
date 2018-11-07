@@ -588,6 +588,48 @@ namespace PCSs.Controllers
                 return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
             }
         }
+        [HttpGet]
+        public ActionResult GetCandidateReportPdf(long id)
+        {
+            long specialistId = -1;
+            try
+            {
+                if (!long.TryParse(Session["SpecialistId"].ToString(), out specialistId))
+                {
+                    return RedirectToAction("ErrorDontHavePermission", "Error");
+                }
+                var can = db.Candidates.FirstOrDefault(s => s.CandidateId == id && s.SpecialistId == specialistId);
+                if (can == null)
+                {
+                    return RedirectToAction("ErrorDontHavePermission", "Error");
+                }
+
+                var attachment = db.AttachmentFiles.Where(s => s.CandidateId == id).OrderByDescending(s => s.AttachmentFileId).Take(1).Single();
+                if (attachment != null)
+                {
+                    byte[] filedata = System.IO.File.ReadAllBytes(attachment.Link);
+                    string contentType = MimeMapping.GetMimeMapping(attachment.Link);
+
+                    var cd = new System.Net.Mime.ContentDisposition
+                    {
+                        FileName = attachment.FileName,
+                        Inline = true,
+                    };
+
+                    Response.AppendHeader("Content-Disposition", cd.ToString());
+
+                    return File(filedata, contentType);
+                }
+
+                return RedirectToAction("Error", "Error");
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Error", "Error");
+            }
+
+                
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
