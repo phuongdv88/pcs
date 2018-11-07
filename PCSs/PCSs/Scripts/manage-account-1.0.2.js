@@ -128,9 +128,9 @@ function getAllCandidateCompleted() {
                 i++;
                 var iconHtml = ""
                 if (item.CheckResult == "False") {
-                    iconHtml = '<i class="far fa-times-circle"> </i>';
+                    iconHtml = '<i class="far fa-times-circle " style="color:red;"> </i>';
                 } else if (item.CheckResult == "True") {
-                    iconHtml = '<i class="far fa-check-circle"></i>';
+                    iconHtml = '<i class="far fa-check-circle" style="color:green;"></i>';
                 }
                 var candidateName = item.FirstName + " " + item.MiddleName + " " + item.LastName;
                 if (item.MiddleName === null) {

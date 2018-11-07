@@ -1,587 +1,379 @@
 ﻿@{
-    Layout = null;
+    Layout = "~/Views/Shared/_TopMenuSpecialist.cshtml";
 }
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title id="title">@ViewBag.SpecialistName</title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link href="~/Content/Css/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <!-- DataTables -->
-    <link href="~/Content/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet" />
-
-    <!-- Bootstrap 3.3.7 -->
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <!-- Font Awesome -->
-    <link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-    <!-- Ionicons -->
-    <link href="~/Content/Ionicons/css/ionicons.min.css" rel="stylesheet" />
-    <!-- Theme style -->
-    <link href="~/Content/Css/AdminLTE.min.css" rel="stylesheet" />
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-         folder instead of downloading all of them to reduce the load. -->
-    <link href="~/Content/Css/skins/_all-skins.min.css" rel="stylesheet" />
-    <link href="~/Content/iCheck/all.css" rel="stylesheet" />
-    <link href="~/Content/Css/logo.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+@section Header{
     <link href="~/Content/Css/processBackgroundChecksCandidate.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-</head>
+}
+<!-- body-->
+<div class="col-md-12 col-sm-12 col-xs-12 content ">
 
-<body class="hold-transition skin-blue sidebar-mini" style="padding-top:0px">
-    <!--Header menu-->
-    <div class="row col-md-12 col-sm-12 col-xs-12  header" style="margin:0;padding:0">
-        <div class="col-md-3 col-sm-3 col-xs-3 " style=" background-color: #464646;padding: 0px;height:100%;">
-            <img src="~/Content/Image/logo PCS trang.png" style="height:100%" />
-        </div>
-        <div class="col-md-9 col-sm-9 col-xs-9 " style=" background-color: #464646;padding: 0px;height:100%">
+    <div class="col-md-6 col-sm-12 col-xs-12" style="flex:1">
+        <!-- general information -->
+        <div class=" col-md-12 col-sm-12 col-xs-12  clearMaginPadding box" style="padding: 0em 0 1em 0;height:100%">
+            <div class="row col-md-12  col-sm-12 col-xs-12  clearMaginPadding">
+                <div class="col-md-12  col-sm-12 col-xs-12 clearMaginPadding" style="z-index:1">
+                    <div class=" col-md-12  col-sm-12 col-xs-12  clearMaginPadding" style="padding-left:1em">
+                        <h3>Candidate's Status - <span id="candidateCurrentStatus"></span></h3>
 
-            <!-- Control Sidebar Toggle Button -->
-            <div style="float: right;padding-top: 15px;padding-left: 15px;padding-right:1em" class="dropdown">
-                <a href="#" data-toggle="control-sidebar">
-                    <i class="fa fa-gears"></i>
-                </a>
-                <div class="dropdown-content sidenav">
-                    <a href="#" data-toggle="modal" onclick="return getProfile();">
-                        <b>
-                            <i class="fa fa-user"></i> Change profile
-                        </b>
-                    </a>
-
-                    <a href="#" data-toggle="modal" data-target="#changePassModal">
-
-                        <b>
-                            <i class="fa fa-edit"></i>Change Password
-                        </b>
-                    </a>
-
-                    <a href=@Url.Action("Login", "Home")>
-                        <b>
-                            <i class="glyphicon glyphicon-log-out"></i>Log out
-                        </b>
-                    </a>
-                </div>
-            </div>
-            <!-- form edit pass -->
-            <div class="modal fade" id="changePassModal" role="dialog" tabindex="-1">
-                <div class="modal-dialog" style="position:unset">
-                    <!-- Modal content-->
-                    <div class="modal-content" style="width: 100%;padding: 2em 2em 0 2em">
-                        <div class="modal-header" style="padding-left: 0px;">
-                            <h4>Change PassWord</h4>
-                        </div>
-                        <form onsubmit="updatePassword(); return false;">
-                            <div class="modal-body form-edit">
-                                <input id="UserName" name="UserName" hidden>
-                                <label>Old Password</label><br />
-                                <input type="password" id="oldPassword" placeholder="Password old.." required>
-                                <label>New Password</label><br />
-                                <input type="password" id="newPassword" placeholder="Password.." required>
-                                <label>Confirm Password</label><br />
-                                <input type="password" id="confirmPassword" placeholder="Confirm password.." required>
-                                <div id="changePasswordMessage"></div>
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary" id="btnEditPass">Save</button>
-                                </div>
-                            </div>
-                        </form>
                     </div>
-                </div>
-            </div>
-            <!-- end form edit pass -->
-            <!-- form uploadFile -->
-            <div class="modal fade" id="uploadFileModal" role="dialog" tabindex="-1">
-                <div class="modal-dialog" style="position:unset">
-                    <!-- Modal content-->
-                    <div class="modal-content" style="width: 100%;padding: 2em 2em 0 2em">
-                        <div class="modal-header" style="padding-left: 0px;">
-                            <h4>Upload Report</h4>
-                        </div>
-                        <div class="modal-body form-edit">
-                            <input id="candidateId" name="candidateId" hidden>
-                            <!--Form upload File-->
-                            <div class="row">
-                                <input class="col-md-12" id="fileInput" type="file" accept="application/pdf">
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-primary btnUploadFile" id="btnUpload" onclick="uploadFile(@ViewBag.CandidateId); return false;">Upload file</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- form edit information -->
-            <div class="modal fade" id="changeProfileModal" role="dialog" tabindex="-1">
-                <div class="modal-dialog modal-lg" style="position:unset">
-                    <!-- Modal content-->
-                    <div class="modal-content" style="width: 100%;padding:  2em 2em 0 2em">
-                        <div class="modal-header" style="padding-left: 0px;">
-                            <h4 class="modal-title">Change Profile</h4>
-                        </div>
-                        <form onsubmit="editProfile(); return false;">
-
-                            <div class="modal-body form-edit">
-                                <label>First name</label><br />
-                                <input type="text" id="specialistFirstName" placeholder="Firstname.." required>
-                                <label>Middle name</label><br />
-                                <input type="text" id="specialistMiddleName" placeholder="Firstname..">
-                                <label>Last name</label><br />
-                                <input type="text" id="specialistLastName" placeholder="Lastname.." required>
-                                <label> Email</label><br />
-                                <input type="email" id="specialistEmail" placeholder="Email.." required>
-                                <label>Phone number</label><br />
-                                <input type="text" id="specialistPhoneNumber" pattern="^[0-9\-\+]{9,15}$" placeholder="Phone number.." required>
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary" id="btnEditProfile">Save</button>
-                                    @*<input />*@
-                                </div>
-                            </div>
-
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <!-- form log activity -->
-            <div class="modal fade" id="logActivityModal" role="dialog" tabindex="-1">
-                <div class="modal-dialog modal-lg" style="position:unset">
-                    <!-- Modal content-->
-                    <div class="modal-content" style="width: 100%;padding:  2em 2em 0 2em">
-                        <div class="modal-header" style="padding-left: 0px;">
-                            <h4 class="modal-title">Log Activity</h4>
-                        </div>
-                        <form onsubmit="logActivity(@ViewBag.CandidateId); return false;">
-                            <div class="modal-body form-edit">
-                                <div class="row">
-                                    <div class="col-lg-2 col-md-2 col-sm-2">
-                                        <label>Action Type</label>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8 col-sm-8">
-                                        <select class="form-control status" id="actionType">
-                                            <option>Check Isurance Number</option>
-                                            <option>Call Reference</option>
-                                            <option>Email Reference</option>
-                                            <option>Call Candidate</option>
-                                            <option>Email Candidate</option>
-                                            <option>Other</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-2 col-md-2 col-sm-2">
-                                        <label>Content</label>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8 col-sm-8">
-                                        <textarea class="note" rows="5" id="logNote" required></textarea>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary" id="btnLogActivity">Save</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <div style="float: right;padding-top: 13px;height: 100%;width:auto">
-                <!-- The user image in the navbar-->
-                <i class="fa fa-user" style="color:silver" id="welcomeUser"> Welcome @ViewBag.SpecialistName</i>
-                <span></span>
-            </div>
-        </div>
-    </div>
-    <!-- body-->
-    <div class="col-md-12 col-sm-12 col-xs-12 content " >
-
-        <div class="col-md-6 col-sm-12 col-xs-12" style="flex:1">
-            <!-- general information -->           
-            <div class=" col-md-12 col-sm-12 col-xs-12  clearMaginPadding box" style="padding: 0em 0 1em 0;height:100%">
-                <div class="row col-md-12  col-sm-12 col-xs-12  clearMaginPadding" >
-                    <div class="col-md-12  col-sm-12 col-xs-12 clearMaginPadding"style="z-index:1">
-                        <div class=" col-md-12  col-sm-12 col-xs-12  clearMaginPadding"style="padding-left:1em" >
-                            <h3>Candidate's Status - <span id="candidateCurrentStatus"></span></h3>
-
-                        </div>
-                        <div class="col-md-12 col-sm-12 col-xs-12  ">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Name:</label>
-                                    <label style="font-weight:bold;" id="candidateFullName"></label>
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Gender:</label>
-                                    <label style="font-weight:bold;" id="candidateGender"></label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Phone:</label>
-                                    <label style="font-weight:bold;" id="candidatePhone"></label>
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Email:</label>
-                                    <label style="font-weight:bold;" id="candidateEmail"></label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label> DOB:</label>
-                                    <label style="font-weight:bold;" id="candidateDOB"></label>
-                                </div>
-                                <div class="col-md-6">
-                                    <label>ID Number:</label>
-                                    <label style="font-weight:bold;" id="candidateIDNumber"></label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Job title:</label>
-                                    <label style="font-weight:bold;" id="candidateJobTitle"></label>
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Job level:</label>
-                                    <label style="font-weight:bold;" id="candidateJobLevel"></label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Address:</label>
-                                    <label style="font-weight:bold;" id="candidateAddress"></label>
-                                </div>
-                            </div>
-                            <hr />
-
-                        </div>
-                    </div>
-                   
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <!-- log table-->
-
-                        <div class="col-md-12 clearMaginPadding">
-                            <div class="box">
-                                <div class="box-header">
-                                    <h3 class="box-title">Log Activities</h3>
-
-                                </div>
-                                <!-- /.box-header -->
-                                <div class="box-body">
-                                    <table id="logActivites" class="table table-bordered table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th style="width: 10px">#</th>
-                                                <th>Time</th>
-                                                <th>Type</th>
-                                                <th>Action</th>
-                                            </tr>
-
-                                        </thead>
-                                        <tbody>
-                                            <!--update date all log activies here-->
-                                        </tbody>
-
-                                    </table>
-                                </div>
-                                <!-- /.box-body -->
-                            </div>
-                            <!-- /.box -->
-                        </div>
-
-                        <!--status-->
+                    <div class="col-md-12 col-sm-12 col-xs-12  ">
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="row col-md-12 clearMaginPadding">
-                                    <div class="col-md-2 clearMaginPadding">
-                                        <label>Status:</label>
-                                    </div>
-                                    <div class="col-md-7 col-sm-12 col-xs-12 clearMaginPadding ">
-                                        <select class="form-control status select2" id="candidateStatusVal">
-                                            <option value="Processing">Processing</option>
-                                            <option value="Completed">Completed</option>
-                                            <option value="Closed">Closed</option>
-                                            <option value="Pending">Pending</option>
-                                        </select>
-
-                                    </div>
-                                    <div class="col-md-3">
-                                        <input type="button" class="btn btn-primary" value="Update" onclick="return updateCandidateStatus(@ViewBag.CandidateId);" id="btnUpdateCandidateStatus">
-
-                                    </div>
-
-                                </div>
+                            <div class="col-md-6">
+                                <label>Name:</label>
+                                <label style="font-weight:bold;" id="candidateFullName"></label>
                             </div>
-
+                            <div class="col-md-6">
+                                <label>Gender:</label>
+                                <label style="font-weight:bold;" id="candidateGender"></label>
+                            </div>
                         </div>
-                        <!--view and upload-->
-                        <div class="col-md-12 col-sm-12 col-xs-12 clearMaginPadding btnViewUpload">
-                            @* <div class="col-md-12  col-xs-12 col-sm-12 clearMaginPadding">*@
-                            @*</div>*@
-                            @*<div class="col-md-12 clearMaginPadding">*@
-
-                            <button type="button" class="btn btn-primary btnUpload" id="btnUploadReport" data-target="#uploadFileModal" data-toggle="modal"><i class="fas fa-file-upload"></i>Upload</button>
-                            @*</div>*@
-                            <input type="button" value="View" style="float:right;margin-right:1em" />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Phone:</label>
+                                <label style="font-weight:bold;" id="candidatePhone"></label>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Email:</label>
+                                <label style="font-weight:bold;" id="candidateEmail"></label>
+                            </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label> DOB:</label>
+                                <label style="font-weight:bold;" id="candidateDOB"></label>
+                            </div>
+                            <div class="col-md-6">
+                                <label>ID Number:</label>
+                                <label style="font-weight:bold;" id="candidateIDNumber"></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Job title:</label>
+                                <label style="font-weight:bold;" id="candidateJobTitle"></label>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Job level:</label>
+                                <label style="font-weight:bold;" id="candidateJobLevel"></label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Address:</label>
+                                <label style="font-weight:bold;" id="candidateAddress"></label>
+                            </div>
+                        </div>
+                        <hr />
+
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <!-- log table-->
+
+                    <div class="col-md-12 clearMaginPadding">
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 class="box-title">Log Activities</h3>
+
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <table id="logActivites" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 10px">#</th>
+                                            <th>Time</th>
+                                            <th>Type</th>
+                                            <th>Action</th>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+                                        <!--update date all log activies here-->
+                                    </tbody>
+
+                                </table>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
                     </div>
 
+                    <!--status-->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row col-md-12 clearMaginPadding">
+                                <div class="col-md-2 clearMaginPadding">
+                                    <label>Status:</label>
+                                </div>
+                                <div class="col-md-7 col-sm-12 col-xs-12 clearMaginPadding ">
+                                    <select class="form-control status select2" id="candidateStatusVal">
+                                        <option value="Processing">Processing</option>
+                                        <option value="Completed">Completed</option>
+                                        <option value="Closed">Closed</option>
+                                        <option value="Pending">Pending</option>
+                                    </select>
 
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="button" class="btn btn-primary" value="Update" onclick="return updateCandidateStatus(@ViewBag.CandidateId);" id="btnUpdateCandidateStatus">
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--view and upload-->
+                    <div class="col-md-12 col-sm-12 col-xs-12 clearMaginPadding btnViewUpload">
+                        @* <div class="col-md-12  col-xs-12 col-sm-12 clearMaginPadding">*@
+                        @*</div>*@
+                        @*<div class="col-md-12 clearMaginPadding">*@
+
+                        <button type="button" class="btn btn-primary btnUpload" id="btnUploadReport" data-target="#uploadFileModal" data-toggle="modal"><i class="fas fa-file-upload"></i>Upload</button>
+                        @*</div>*@
+                        <input type="button" value="View" style="float:right;margin-right:1em" />
+                    </div>
                 </div>
+
+
             </div>
-            <!-- end general information -->
         </div>
-        <div class="col-md-6 col-sm-12 col-xs-12"style="flex:1">
-            <!-- Company -->
-            <div class="col-md-12 col-sm-12 col-xs-12 box clearMaginPadding" style="height:100%;border-top:0px">
+        <!-- end general information -->
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12" style="flex:1">
+        <!-- Company -->
+        <div class="col-md-12 col-sm-12 col-xs-12 box clearMaginPadding" style="height:100%;border-top:0px">
 
 
 
-                <div class="col-md-12  col-sm-12 col-xs-12  clearMaginPadding  company">
-                    <ul class="nav nav-tabs" id="navCompanies"></ul>
-                </div>
-                <div class="tab-content " id="companyInformation">
-                    <div id="companybase">
-                        <div id="company_comId" class="tab-pane fade companyInfo">
-                            <div class="col-md-12 col-sm-12 col-xs-12  clearMaginPadding " style="padding-bottom: 1em">
-                                <div class="col-md-12 col-sm-12 col-xs-12  " style="border-top:0px">
-                                    <!-- information company -->
-                                    <div class="row col-md-12 col-sm-12 col-xs-12 clearMaginPadding">
-                                        <div class="col-md-12 col-sm-12 col-xs-12 clearMaginPadding" style="padding-top: 1em">
-                                            <input type="text" id="companyId_company_comId" value="-1" hidden />
-                                            <div>
-                                                <div class="col-md-12 col-sm-12 col-xs-12 clearMaginPadding">
-                                                    <div class="col-md-4 col-sm-12 col-xs-12 clearMaginPadding">
-                                                        <label>Website:</label>
-                                                        <label style="font-weight:bold;" id="companyWebsite"></label>
-                                                    </div>
-                                                    <div class="col-md-8 col-sm-12 col-xs-12 clearMaginPadding">
-                                                        <label>Address:</label>
-                                                        <label style="font-weight:bold;" id="companyAddress"></label>
-                                                    </div>
+            <div class="col-md-12  col-sm-12 col-xs-12  clearMaginPadding  company">
+                <ul class="nav nav-tabs" id="navCompanies"></ul>
+            </div>
+            <div class="tab-content " id="companyInformation">
+                <div id="companybase">
+                    <div id="company_comId" class="tab-pane fade companyInfo">
+                        <div class="col-md-12 col-sm-12 col-xs-12  clearMaginPadding " style="padding-bottom: 1em">
+                            <div class="col-md-12 col-sm-12 col-xs-12  " style="border-top:0px">
+                                <!-- information company -->
+                                <div class="row col-md-12 col-sm-12 col-xs-12 clearMaginPadding">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 clearMaginPadding" style="padding-top: 1em">
+                                        <input type="text" id="companyId_company_comId" value="-1" hidden />
+                                        <div>
+                                            <div class="col-md-12 col-sm-12 col-xs-12 clearMaginPadding">
+                                                <div class="col-md-4 col-sm-12 col-xs-12 clearMaginPadding">
+                                                    <label>Website:</label>
+                                                    <label style="font-weight:bold;" id="companyWebsite"></label>
                                                 </div>
-                                                <br />
-                                                <hr />
+                                                <div class="col-md-8 col-sm-12 col-xs-12 clearMaginPadding">
+                                                    <label>Address:</label>
+                                                    <label style="font-weight:bold;" id="companyAddress"></label>
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <hr />
 
-                                                <!-- reference -->
+                                            <!-- reference -->
+                                            <div class="col-md-12 col-sm-12 col-xs-12 clearMaginPadding ">
                                                 <div class="col-md-12 col-sm-12 col-xs-12 clearMaginPadding ">
-                                                    <div class="col-md-12 col-sm-12 col-xs-12 clearMaginPadding ">
-                                                        <!-- reference1 -->
-                                                        <div class="row col-md-12 col-sm-12 col-xs-12 clearMaginPadding " id="referenceInformation">
-                                                            <div class="row col-md-12 col-sm-12 col-xs-12 clearMaginPadding " id="referenceForm_0">
-                                                                <div class="row col-md-12 col-sm-12 col-xs-12 ">
-                                                                    <h4>Reference</h4>
+                                                    <!-- reference1 -->
+                                                    <div class="row col-md-12 col-sm-12 col-xs-12 clearMaginPadding " id="referenceInformation">
+                                                        <div class="row col-md-12 col-sm-12 col-xs-12 clearMaginPadding " id="referenceForm_0">
+                                                            <div class="row col-md-12 col-sm-12 col-xs-12 ">
+                                                                <h4>Reference</h4>
+                                                            </div>
+                                                            <div class="row col-md-12 col-sm-12 col-xs-12 clearMaginPadding  ">
+                                                                <div class="col-md-6  col-sm-12 col-xs-12 clearMaginPadding">
+                                                                    <label>Name:</label>
+                                                                    <label style="font-weight:bold;" id="referenceName"></label>
+                                                                    <br>
+                                                                    <label>Phone:</label>
+                                                                    <label style="font-weight:bold;" id="referencePhone"></label>
+                                                                    <br>
+                                                                    <label>Email:</label>
+                                                                    <label style="font-weight:bold;" id="referenceEmail"></label>
                                                                 </div>
-                                                                <div class="row col-md-12 col-sm-12 col-xs-12 clearMaginPadding  ">
-                                                                    <div class="col-md-6  col-sm-12 col-xs-12 clearMaginPadding">
-                                                                        <label>Name:</label>
-                                                                        <label style="font-weight:bold;" id="referenceName"></label>
-                                                                        <br>
-                                                                        <label>Phone:</label>
-                                                                        <label style="font-weight:bold;" id="referencePhone"></label>
-                                                                        <br>
-                                                                        <label>Email:</label>
-                                                                        <label style="font-weight:bold;" id="referenceEmail"></label>
-                                                                    </div>
-                                                                    <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding ">
-                                                                        <label>Job title:</label>
-                                                                        <label style="font-weight:bold;" id="referenceJobTitle"></label>
-                                                                        <br>
-                                                                        <label>Relationship:</label>
-                                                                        <label style="font-weight:bold;" id="referenceRelationship"></label>
-                                                                    </div>
+                                                                <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding ">
+                                                                    <label>Job title:</label>
+                                                                    <label style="font-weight:bold;" id="referenceJobTitle"></label>
+                                                                    <br>
+                                                                    <label>Relationship:</label>
+                                                                    <label style="font-weight:bold;" id="referenceRelationship"></label>
                                                                 </div>
                                                             </div>
-                                                            <div class="row col-md-12 col-sm-12 col-xs-12 clearMaginPadding" id="referenceForm_1">
-                                                                <div class="row col-md-12 col-sm-12 col-xs-12 ">
-                                                                    <h4>Reference</h4>
+                                                        </div>
+                                                        <div class="row col-md-12 col-sm-12 col-xs-12 clearMaginPadding" id="referenceForm_1">
+                                                            <div class="row col-md-12 col-sm-12 col-xs-12 ">
+                                                                <h4>Reference</h4>
+                                                            </div>
+                                                            <div class="row col-md-12 col-sm-12 col-xs-12  clearMaginPadding">
+                                                                <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding ">
+                                                                    <label>Name:</label>
+                                                                    <label style="font-weight:bold;" id="referenceName"></label>
+                                                                    <br>
+                                                                    <label>Phone:</label>
+                                                                    <label style="font-weight:bold;" id="referencePhone"></label>
+                                                                    <br>
+                                                                    <label>Email:</label>
+                                                                    <label style="font-weight:bold;" id="referenceEmail"></label>
                                                                 </div>
-                                                                <div class="row col-md-12 col-sm-12 col-xs-12  clearMaginPadding">
-                                                                    <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding ">
-                                                                        <label>Name:</label>
-                                                                        <label style="font-weight:bold;" id="referenceName"></label>
-                                                                        <br>
-                                                                        <label>Phone:</label>
-                                                                        <label style="font-weight:bold;" id="referencePhone"></label>
-                                                                        <br>
-                                                                        <label>Email:</label>
-                                                                        <label style="font-weight:bold;" id="referenceEmail"></label>
-                                                                    </div>
-                                                                    <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding ">
-                                                                        <label>Job title:</label>
-                                                                        <label style="font-weight:bold;" id="referenceJobTitle"></label>
-                                                                        <br>
-                                                                        <label>Relationship:</label>
-                                                                        <label style="font-weight:bold;" id="referenceRelationship"></label>
-                                                                    </div>
+                                                                <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding ">
+                                                                    <label>Job title:</label>
+                                                                    <label style="font-weight:bold;" id="referenceJobTitle"></label>
+                                                                    <br>
+                                                                    <label>Relationship:</label>
+                                                                    <label style="font-weight:bold;" id="referenceRelationship"></label>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </div>
+
                                         </div>
                                     </div>
-                                    <!-- end information company -->
+                                </div>
+                                <!-- end information company -->
 
+                            </div>
+
+                            <!---->
+                            <div class="col-md-12 col-sm-12 col-xs-12 ">
+                                <div class="col-md-12 clearMaginPadding" style="padding-bottom:1em">
+                                    @* <input type="button" value="Log" >*@
+                                    <a title="Add log activities" data-toggle="modal" data-target="#logActivityModal" id="btnAddLogActivity"><i class="fas fa-plus-circle"></i></a>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
+                                            <label>Name:</label>
+                                            <label style="font-weight:bold;" id="companyName"></label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
+                                            <div class="form-group">
+                                                <label class="col-md-4 col-sm-4 col-xs-4 ">
+                                                    <input type="radio" name="checkResultName_company_comId" id="nameTrue_company_comId" value="True" class="minimal">
+                                                    True
+                                                </label>
+                                                <label class="col-md-4 col-sm-4 col-xs-4 ">
+                                                    <input type="radio" name="checkResultName_company_comId" id="nameFalse_company_comId" value="False" class="minimal">
+                                                    False
+                                                </label>
+                                                <label class="col-md-4 col-sm-4 col-xs-4 ">
+                                                    <input type="radio" name="checkResultName_company_comId" id="nameNA_company_comId" value="N/A" class="minimal" checked>
+                                                    N/A
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
+                                            <label>Job title:</label>
+                                            <label style="font-weight:bold;" id="companyJobtitle"></label>
+                                        </div>
+
+                                        <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
+                                            <div class="form-group">
+                                                <label class="col-md-4 col-sm-4 col-xs-4 ">
+                                                    <input type="radio" name="checkResultJobTitle_company_comId" id="jobTitleTrue_company_comId" value="True" class="minimal">
+                                                    True
+                                                </label>
+                                                <label class="col-md-4 col-sm-4 col-xs-4 ">
+                                                    <input type="radio" name="checkResultJobTitle_company_comId" id="jobTitleFalse_company_comId" value="False" class="minimal">
+                                                    False
+                                                </label>
+                                                <label class="col-md-4 col-sm-4 col-xs-4 ">
+                                                    <input type="radio" name="checkResultJobTitle_company_comId" id="jobTitleNA_company_comId" value="N/A" class="minimal" checked>
+                                                    N/A
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
+                                            <label>Startdate:</label>
+                                            <label style="font-weight:bold;" id="companyStartDate"></label>
+                                            <label>Stopdate:</label>
+                                            <label style="font-weight:bold;" id="companyStopDate"></label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
+                                            <div class="form-group">
+                                                <label class="col-md-4 col-sm-4 col-xs-4 ">
+                                                    <input type="radio" name="checkResultPeriod_company_comId" id="periodTrue_company_comId" value="True" class="minimal">
+                                                    True
+                                                </label>
+                                                <label class="col-md-4 col-sm-4 col-xs-4 ">
+                                                    <input type="radio" name="checkResultPeriod_company_comId" id="periodFalse_company_comId" value="False" class="minimal">
+                                                    False
+                                                </label>
+                                                <label class="col-md-4 col-sm-4 col-xs-4 ">
+                                                    <input type="radio" name="checkResultPeriod_company_comId" id="periodNA_company_comId" value="N/A" class="minimal" checked>
+                                                    N/A
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
+                                            <div class="row">
+                                                <div class="col-md-2 col-sm-12 col-xs-12 ">
+                                                    <label>Job Duties:</label>
+                                                </div>
+                                                <div class="col-md-12 col-sm-12 col-xs-12 ">
+                                                    <textarea style="font-weight:bold;" id="companyJobDuties" rows="5" disabled></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
+                                            <div class="form-group">
+                                                <label class="col-md-4 col-sm-4 col-xs-4 ">
+                                                    <input type="radio" name="checkResultJobDuties_company_comId" id="dutiesTrue_company_comId" value="True" class="minimal">
+                                                    True
+                                                </label>
+                                                <label class="col-md-4 col-sm-4 col-xs-4 ">
+                                                    <input type="radio" name="checkResultJobDuties_company_comId" id="dutiesFalse_company_comId" value="False" class="minimal">
+                                                    False
+                                                </label>
+                                                <label class="col-md-4 col-sm-4 col-xs-4 ">
+                                                    <input type="radio" name="checkResultJobDuties_company_comId" id="dutiesNA_company_comId" value="N/A" class="minimal" checked>
+                                                    N/A
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 </div>
 
-                                <!---->
-                                <div class="col-md-12 col-sm-12 col-xs-12 ">
-                                    <div class="col-md-12 clearMaginPadding" style="padding-bottom:1em">
-                                       @* <input type="button" value="Log" >*@
-                                        <a title="Add log activities" data-toggle="modal" data-target="#logActivityModal" id="btnAddLogActivity"><i class="fas fa-plus-circle"></i></a>
+                                <!-- note -->
+                                <div class="row col-md-12 col-sm-12 col-xs-12  clearMaginPadding">
+                                    <div class="col-md-12 clearMaginPadding">
+                                        <h5>Note</h5>
                                     </div>
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <div class="row">
-                                            <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
-                                                <label>Name:</label>
-                                                <label style="font-weight:bold;" id="companyName"></label>
-                                            </div>
-                                            <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
-                                                <div class="form-group">
-                                                    <label class="col-md-4 col-sm-4 col-xs-4 ">
-                                                        <input type="radio" name="checkResultName_company_comId" id="nameTrue_company_comId" value="True" class="minimal">
-                                                        True
-                                                    </label>
-                                                    <label class="col-md-4 col-sm-4 col-xs-4 ">
-                                                        <input type="radio" name="checkResultName_company_comId" id="nameFalse_company_comId" value="False" class="minimal">
-                                                        False
-                                                    </label>
-                                                    <label class="col-md-4 col-sm-4 col-xs-4 ">
-                                                        <input type="radio" name="checkResultName_company_comId" id="nameNA_company_comId" value="N/A" class="minimal" checked>
-                                                        N/A
-                                                    </label>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
-                                                <label>Job title:</label>
-                                                <label style="font-weight:bold;" id="companyJobtitle"></label>
-                                            </div>
-
-                                            <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
-                                                <div class="form-group">
-                                                    <label class="col-md-4 col-sm-4 col-xs-4 ">
-                                                        <input type="radio" name="checkResultJobTitle_company_comId" id="jobTitleTrue_company_comId" value="True" class="minimal">
-                                                        True
-                                                    </label>
-                                                    <label class="col-md-4 col-sm-4 col-xs-4 ">
-                                                        <input type="radio" name="checkResultJobTitle_company_comId" id="jobTitleFalse_company_comId" value="False" class="minimal">
-                                                        False
-                                                    </label>
-                                                    <label class="col-md-4 col-sm-4 col-xs-4 ">
-                                                        <input type="radio" name="checkResultJobTitle_company_comId" id="jobTitleNA_company_comId" value="N/A" class="minimal" checked>
-                                                        N/A
-                                                    </label>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
-                                                <label>Startdate:</label>
-                                                <label style="font-weight:bold;" id="companyStartDate"></label>
-                                                <label>Stopdate:</label>
-                                                <label style="font-weight:bold;" id="companyStopDate"></label>
-                                            </div>
-                                            <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
-                                                <div class="form-group">
-                                                    <label class="col-md-4 col-sm-4 col-xs-4 ">
-                                                        <input type="radio" name="checkResultPeriod_company_comId" id="periodTrue_company_comId" value="True" class="minimal">
-                                                        True
-                                                    </label>
-                                                    <label class="col-md-4 col-sm-4 col-xs-4 ">
-                                                        <input type="radio" name="checkResultPeriod_company_comId" id="periodFalse_company_comId" value="False" class="minimal">
-                                                        False
-                                                    </label>
-                                                    <label class="col-md-4 col-sm-4 col-xs-4 ">
-                                                        <input type="radio" name="checkResultPeriod_company_comId" id="periodNA_company_comId" value="N/A" class="minimal" checked>
-                                                        N/A
-                                                    </label>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
-                                                <div class="row">
-                                                    <div class="col-md-2 col-sm-12 col-xs-12 ">
-                                                        <label>Job Duties:</label>
-                                                    </div>
-                                                    <div class="col-md-12 col-sm-12 col-xs-12 ">
-                                                        <textarea style="font-weight:bold;" id="companyJobDuties" rows="5" disabled></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 col-sm-12 col-xs-12 clearMaginPadding">
-                                                <div class="form-group">
-                                                    <label class="col-md-4 col-sm-4 col-xs-4 ">
-                                                        <input type="radio" name="checkResultJobDuties_company_comId" id="dutiesTrue_company_comId" value="True" class="minimal">
-                                                        True
-                                                    </label>
-                                                    <label class="col-md-4 col-sm-4 col-xs-4 ">
-                                                        <input type="radio" name="checkResultJobDuties_company_comId" id="dutiesFalse_company_comId" value="False" class="minimal">
-                                                        False
-                                                    </label>
-                                                    <label class="col-md-4 col-sm-4 col-xs-4 ">
-                                                        <input type="radio" name="checkResultJobDuties_company_comId" id="dutiesNA_company_comId" value="N/A" class="minimal" checked>
-                                                        N/A
-                                                    </label>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                    <!-- note -->
-                                    <div class="row col-md-12 col-sm-12 col-xs-12  clearMaginPadding">
-                                        <div class="col-md-12 clearMaginPadding">
-                                            <h5>Note</h5>
-                                        </div>
-                                        <div class="col-md-12 col-sm-12 col-xs-12 clearMaginPadding">
-                                            <textarea class="note" rows="3" id="companyNotes"></textarea>
-                                        </div>
-                                    </div>
-
                                     <div class="col-md-12 col-sm-12 col-xs-12 clearMaginPadding">
-                                        <input class="btnFinish" type="button" id="btnSubmitCompanyResult" value="submit" onclick="submitCompanyData('company_comId')">
+                                        <textarea class="note" rows="3" id="companyNotes"></textarea>
                                     </div>
-
-
                                 </div>
+
+                                <div class="col-md-12 col-sm-12 col-xs-12 clearMaginPadding">
+                                    <input class="btnFinish" type="button" id="btnSubmitCompanyResult" value="submit" onclick="submitCompanyData('company_comId')">
+                                </div>
+
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-                <!-- end -->
-
         </div>
-
-       
-      
+        <!-- end -->
     </div>
-    <!--fooder-->
-    <div class="row col-md-12 col-sm-12 col-xs-12 footer" style="margin:0px">
-        <div class="col-md-6 col-sm-6 col-xs-12">
-            <i class="fa fa-map-marker"></i>
-            No 12, 641 Lane, Pham Van Dong Street, Ha Noi, Viet Nam
-        </div>
-        <div class="row col-md-6 col-sm-6 col-xs-12 footerright">
-            <i>
-                <img src="~/Content/Image/e-mail.png" style="filter:white;height:1em"> contact@swilife.com
-            </i>
-            <i class="fa fa-phone"> 02439942285</i>
-            <i><img src="~/Content/Image/logo PCS trang.png" class="logo"></i>
-        </div>
-    </div>
+</div>
+
+@section Scripts{
     <!-- ./wrapper -->
     <!-- jQuery 3 -->
     <script src="~/Scripts/jquery/dist/jquery.min.js"></script>
@@ -611,18 +403,8 @@
         getAllCompanyInfo(@ViewBag.CandidateId);
         getCandidateId(@ViewBag.CandidateId);
         getLogActivities(@ViewBag.CandidateId);
-        //$('#logActivites').DataTable({
-        //    'pageLength':5,
-        //    'paging': true,
-        //    'lengthChange': false,
-        //    'searching': false,
-        //    'ordering': true,
-        //    'info': true,
-        //    'autoWidth': false,
-        //     "bDestroy": true
-        //})
-
     </script>
+}
 
-</body>
-</html>
+
+

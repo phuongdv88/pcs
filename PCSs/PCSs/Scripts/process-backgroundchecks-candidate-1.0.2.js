@@ -15,16 +15,7 @@ $(document).ready(function () {
     $("#logActivityModal").on('hidden.bs.modal', function () {
         $("#logActivityModal").html(logActivityHtml);
     });
-    //$('#logActivites').DataTable({
-    //    'pageLength': 5,
-    //    'paging': true,
-    //    'lengthChange': false,
-    //    'searching': false,
-    //    'ordering': true,
-    //    'info': true,
-    //    'autoWidth': false,
-    //    "bDestroy": true
-    //})
+
     
 });
 function getCandidateId(candidateId) {
@@ -71,7 +62,7 @@ function addCompany(index) {
         navCom = '<li class="active">';
     }
     index++;
-    navCom += '<a data-toggle="tab" href="#' + comFormId + '">Company ' + index + ' <i class="" id="iconChecked' + comFormId + '"> </i> </a></li>';
+    navCom += '<a data-toggle="tab" href="#' + comFormId + '">Company ' + index + ' <i class="" id="iconChecked' + comFormId + '"  style="color:green;"> </i> </a></li>';
     $("#navCompanies").append(navCom)
     return comFormId;
 }
@@ -289,46 +280,6 @@ function submitCompanyData(comFormId) {
 
 }
 
-//function getLogActivities(canId) {
-//    //reset pages index
-//    $.ajax({
-//        url: '/Specialist/GetLogActivities/' + canId,
-//        type: "GET",
-//        contenttype: "application/json; charset=utf-8",
-//        dataType: "json",
-//        timeout: '5000',
-//        success: function (result) {
-//            var html = '';
-//            var i = 0;
-//            $.each(result, function (key, item) {
-//                i++;
-
-//                html += '<tr>';
-//                html += '<td>' + i + '</td>';
-//                html += '<td>' + formatDate(item.ActionTime.substr(6)) + '</td>';
-//                html += '<td>' + item.ActionType + '</td>';
-//                html += '<td>' + item.ActionContent + '</td>';
-//                html += '</tr>';
-//            });
-//            $('#logActivites tbody').html(html);
-//            $('#logActivites').DataTable({
-//                'pageLength':5,
-//                'paging': true,
-//                'lengthChange': false,
-//                'searching': false,
-//                'ordering': true,
-//                'info': true,
-//                'autoWidth': false,
-//                 "bDestroy": true
-//            })
-//            //$('#logActivites').DataTable().ajax.reload();
-//        },
-//        error: function (errorMessage) {
-//            alert(errorMessage.responseText);
-//        },
-//    });
-//    return false;
-//}
 function getLogActivities(canId) {
     //reset pages index
     $('#logActivites').DataTable().clear();
@@ -365,7 +316,6 @@ function getLogActivities(canId) {
                  "bDestroy": true
             })
 
-            //$('#logActivites').DataTable().ajax.reload();
         },
         error: function (errorMessage) {
             alert(errorMessage.responseText);
