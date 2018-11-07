@@ -120,7 +120,7 @@ function getMyCandidate() {
                 else {
                     html += '<td>' + formatDate(item.CompleteTime.substr(6)) + '</td>';
                 }
-                html += '<td style="text-align: center; vertical-align: middle;"><a href="#" onClick="return _getCandidateEmailInfoById(' + item.CandidateId + ', \'' + candidateName + '\')" class="fas fa-envelope" title="Email to Candidate"></a><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span><a href="/Specialist/ProcessBackgroundCheckCandidate/' + item.CandidateId + '" class="fas fa-user-check" title="Process Background Checks"></a><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span><a href="#" onClick="return getUploadFileForm(' + item.CandidateId + ')" class="fas fa-file-upload" title="Upload Report"></a></td>';
+                html += '<td style="text-align: center; vertical-align: middle;"><a href="#" onClick="return _getCandidateEmailInfoById(' + item.CandidateId + ', \'' + candidateName + '\')" class="fas fa-envelope" title="Email to Candidate"></a><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span><a href="/Specialist/ProcessBackgroundCheckCandidate/' + item.CandidateId + '" class="fas fa-user-check" title="Process Background Checks"></a></td>';
                 html += '</tr>';
             });
             $('#myTask tbody').html(html);
@@ -147,62 +147,6 @@ function assignMe(canId) {
             } else {
                 $('#btnRefresh').click();
                 $('#btnRefreshmyTask').click();
-            }
-        },
-        error: function (errorMessage) {
-            alert(errorMessage.responseText);
-        }
-    });
-    return false;
-}
-function getUploadFileForm(candidateId) {
-    $("#candidateId").val(candidateId);
-    $('#uploadFileModal').modal('show');
-    return false;
-}
-
-function uploadFile() {
-    var formdata = new FormData(); //FormData object
-    var fileInput = document.getElementById('fileInput');
-    //Iterating through each files selected in fileInput
-    for (i = 0; i < fileInput.files.length; i++) {
-        //Appending each file to FormData object
-        formdata.append(fileInput.files[i].name, fileInput.files[i]);
-    }
-    //Creating an XMLHttpRequest and sending
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/Specialist/UploadReport/' + $("#candidateId").val());
-    xhr.send(formdata);
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            //$('#uploadFileModal').modal('hide');
-            // check success or not?
-            //change status
-            updateStatus($("#candidateId").val(), $("#candidateStatus").val())
-        }
-    }
-    //todo: change state of Candidate to Complete of Close
-    return false;
-}
-
-function updateStatus(id, status) {
-
-    var obj = {
-        CandidateId: id,
-        CandidateStatus: status
-    }
-    $.ajax({
-        url: '/Specialist/UpdateCandidateStatus',
-        data: JSON.stringify(obj),
-        type: 'POST',
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (result) {
-            if (result.rs !== -1) {
-                $('#btnRefreshmyTask').click();
-                $('#uploadFileModal').modal('hide');
-            } else {
-                alert(result.msg);
             }
         },
         error: function (errorMessage) {

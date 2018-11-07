@@ -61,7 +61,7 @@ namespace PCSs.Controllers
             if (Session["Role"] == null || Session["Role"]?.ToString() != "2")
                 return RedirectToAction("Error", "Error");
 
-            ViewBag.Specialist = id;
+            @ViewBag.SpecialistId = id;
             var specialist = db.Specialists.FirstOrDefault(s => s.SpecialistId == id);
             if (specialist != null)
             {

@@ -19,3 +19,13 @@
     padding-top: 2px;
     padding-bottom: 3px;
 }
+.nav-management {
+    transition: 0.45s;
+    text-decoration: none;
+        padding: 5px 5px;
+}
+ .nav-management:hover{
+    background-color: #ffffff;
+    color:#3c8dbc;
+    padding: 5px 5px;
+ }
