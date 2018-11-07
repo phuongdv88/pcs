@@ -105,11 +105,28 @@ namespace PCSs.Controllers
                 {
                     return Json(new { rs = -1, msg = "Error: Can't get specialist's profile" }, JsonRequestBehavior.AllowGet);
                 }
+                var cans = (from can in db.Candidates
+                            join client in db.Clients
+                            on can.ClientId equals client.ClientId
+                            where (can.SpecialistId == -1) && (can.Status == "Initial" || can.Status == "Ready")
+                           
+                            select new
+                            {
+                                ClientName = client.Name,
+                                can.CandidateId,
+                                can.FirstName,
+                                can.MiddleName,
+                                can.LastName,
+                                can.Email,
+                                can.PhoneNumber,
+                                can.Status,
+                                can.CreatedTime,
+                            }).OrderByDescending(s => s.CandidateId);
+                return Json(cans, JsonRequestBehavior.AllowGet);
 
-                var result = Json(db.Candidates.Where(s => ((s.Status == "Initial" || s.Status == "Ready") && s.SpecialistId == -1)).OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
+                //var result = Json(db.Candidates.Where(s => ((s.Status == "Initial" || s.Status == "Ready") && s.SpecialistId == -1)).OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
                 //todo:fortest
                 //var result = Json(db.Candidates.OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
-                return result;
 
             }
             catch (Exception e)
