@@ -21,7 +21,11 @@ namespace PCSs.Controllers
         {
             return View();
         }
-
+        // bill report
+        public ActionResult BillReport()
+        {
+            return View();
+        }
 
         // GET: Admin
         public async Task<ActionResult> Index()

@@ -49,6 +49,8 @@ namespace PCSs.Controllers
         /// Get all Candidate
         /// </summary>
         /// <returns></returns>
+        // bill 
+      
 
         public JsonResult GetAllCandidate()
         {

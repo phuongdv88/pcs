@@ -30,8 +30,9 @@ text-decoration: none;
 a:focus .category{
     text-decoration: none;
     background: #404040;
-color: #fff;
+    color: #fff;
 }
+
 a .category{
     padding: 0.5em;
 }

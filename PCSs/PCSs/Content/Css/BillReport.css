@@ -1,0 +1,47 @@
+﻿.clearBorder {
+    border-right: none !important;
+    border-left:none !important;
+    background-color: white !important;
+}
+.backgroundWhile{
+    background-color:white !important;
+}
+.labelBill{
+    font-weight:normal;
+    width:8em;
+}
+.inputBill{
+    width: 20%;
+    padding: 3px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    /*margin-top: 6px;
+    margin-bottom: 16px;*/
+    resize: vertical;
+}
+.clearPaddingMargin{
+    padding:0px;margin:0px;
+
+}
+@media screen and (max-width:450px){
+    .inputBill {
+        width: 100%;
+        padding: 3px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        /*margin-top: 6px;
+    margin-bottom: 16px;*/
+        resize: vertical;
+    }
+}
+.buttonBill{
+    background-color: #3c8dbc;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float:right;
+}
