@@ -1,0 +1,284 @@
+﻿@{
+    Layout = "~/Views/Shared/_TopMenuSpecialist.cshtml";
+}
+@section Header{
+    <link href="~/Content/Css/Specialist.css" rel="stylesheet" />
+    <link href="~/Content/Css/ManageAccount.css" rel="stylesheet" />
+}
+<!-- body-->
+<div class=" col-md-12 col-sm-12 col-xs-12 clearPanddingMargin" style="display:flex;min-height:890px">
+    <div class=" col-md-2 col-sm-2 col-xs-12  slide-bar" style="padding:0px">
+        <div class="col-md-12  col-sm-12 col-xs-12 list">
+
+            <a href="#candidate-management" data-toggle="tab">
+                <div class="col-md-12 col-sm-12 nav-management item">
+                    <i class="far fa-list-alt">&nbsp;</i>
+                    Candidate Management
+                </div>
+            </a>
+
+
+            <a href="#task-management" data-toggle="tab" id="bs-task-management">
+                <div class="col-md-12 col-sm-12 nav-management item">
+                    <i class="fas fa-chalkboard-teacher">&nbsp;</i>
+                    My Task
+                </div>
+            </a>
+
+        </div>
+    </div>
+    <div class=" col-md-10 col-sm-10 col-xs-12  " style="padding-top:1em">
+
+        <div class="tab-content">
+            <div id="candidate-management" class="tab-pane fade">
+                <div class="wrapper">
+                    <!-- Content Wrapper. Contains page content -->
+                    <div class="content-wrapper">
+                        <!-- Main content -->
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="box">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Candidate Information</h3>
+                                        <div>
+                                            <button type="button" class="btn btn-primary btn-lg" id="btnRefresh" title="Refresh" onclick="return getAvailableCandidate();"><span class="glyphicon glyphicon-refresh"></span></button>
+                                        </div>
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <table id="candidates" class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 10px">Index</th>
+                                                    <th>Name</th>
+                                                    <th>Email</th>
+                                                    <th>Phone Number</th>
+                                                    <th>Status</th>
+                                                    <th>Created Date</th>
+                                                    <th>Name Company</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="tbody"></tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th style="width: 10px">Index</th>
+                                                    <th>Name</th>
+                                                    <th>Email</th>
+                                                    <th>Phone Number</th>
+                                                    <th>Status</th>
+                                                    <th>Created Date</th>
+                                                    <th>Name Company</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                                <!-- /.box -->
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                        <!-- /.content -->
+                    </div>
+                </div>
+            </div>
+            <div id="task-management" class="tab-pane fade in  active">
+                <!--chart-->
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class=" box box-success barchart">
+                        <div class="box-header with-border">
+                            <h3 id="textchart" class="box-title">Bar Chart</h3>
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div class="chart">
+                                <canvas id="barChart" style="height:230px"></canvas>
+
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="col-md-3 col-sm-3 col-xs-3" style="height: 2em;width: 2em;background-color: rgb(255, 51, 102) ">
+
+                                        </div>
+                                        <div class="col-md-9 col-sm-9 col-xs-9"> Registered </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="col-md-3 col-sm-3 col-xs-3" style="height: 2em;width: 2em;background-color:#3366ff">
+
+                                        </div>
+                                        <div class="col-md-9 col-sm-9 col-xs-9"> Complete </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+                <!--end chart-->
+
+                <div class="wrapper" style="width:100%">
+                    <!-- Content Wrapper. Contains page content -->
+                    <div class="content-wrapper">
+                        <!-- Main content -->
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="box">
+                                    <div class="box-header">
+                                        <h3 class="box-title">My Task</h3>
+                                        <div>
+                                            <button type="button" class="btn btn-primary btn-lg" id="btnRefreshmyTask" title="Refresh" onclick="return getMyCandidate();"><span class="glyphicon glyphicon-refresh"></span></button>
+                                        </div>
+                                    </div>
+
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <table id="myTask" class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 10px">Index</th>
+                                                    <th>Company</th>
+                                                    <th>Full Name</th>
+                                                    <th>Email</th>
+                                                    <th>Phone Number</th>
+                                                    <th>Status</th>
+                                                    <th>Created Date</th>
+                                                    <th>Completed Date</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="tbody"></tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th style="width: 10px">Index</th>
+                                                    <th>Company</th>
+                                                    <th>Full Name</th>
+                                                    <th>Email</th>
+                                                    <th>Phone Number</th>
+                                                    <th>Status</th>
+                                                    <th>Created Date</th>
+                                                    <th>Completed Date</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                                <!-- /.box -->
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                        <!-- /.content -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Candidate's information Modal -->
+        <div class="modal fade" id="candiateEmailInfoModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg" style="position:unset">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="infoCandidateModalLabel">Please email this content to Candidate</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            Hi &nbsp;<span id="candidateName"></span>,
+                        </p>
+                        <p>
+                            You have received this message because you registered on Professional
+                            Checking System. Professional Checking System owned by SWILIFE is
+                            specialized in Employment Verification service. Our friendly, knowledgeable
+                            customer support team is ready to help ensure your Employment Verification
+                            go smoothly.
+                        </p>
+                        <p>
+                            <em>
+                                Please login at:
+                                <a href="https://professionalcheckingsystem.com/">
+                                    https://professionalcheckingsystem.com
+                                </a>
+                                and fill in your information and the companies you worked for in the
+                                last 5 years before 20/10/2018 to ensure smooth verification process.
+                            </em>
+                        </p>
+                        <p>
+                            Use the following values when prompted to log in:
+                        </p>
+                        <p>
+                            <em>User Name: <span id="userNameInfo"></span> </em>
+                        </p>
+                        <p>
+                            <em>Password: <span id="passwordRaw"></span></em>
+                        </p>
+                        <p>
+                            --------------------------------
+                        </p>
+                        <p>
+                            <em><u>Note:</u></em>
+                            <em>
+                                We only conduct Verification Process according to your company’s order
+                                which is allowed by candidates. If you don’t know about this process,
+                                please contact your company. We shall not hold liable for any
+                                candidates’ claim of collecting personal information without owner’s
+                                permission. Finally, we ensure hold all the information you supplied in
+                                complete confidence, and without your company’s consent in writing
+                                shall not be revealed any part to any other third parties, at any time,
+                                nor used for any purpose other than the performance in the Agreement we
+                                signed with your company.
+                            </em>
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <!-- ./wrapper -->
+    <!-- jQuery 3 -->
+    <script src="~/Scripts/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <!-- DataTables -->
+    <script src="~/Content/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/Content/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <!-- SlimScroll -->
+    <script src="~/Content/Js/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="~/Content/Js/fastclick/lib/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Content/Js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="~/Content/Js/demo.js"></script>
+    <script src="~/Scripts/manage-specialist-account-1.0.4.js"></script>
+    <!--chart-->
+    <script src="~/Scripts/Chart.js"></script>
+
+    <!-- page script -->
+    <script>
+        $(function () {
+            getAvailableCandidate();
+            getMyCandidate();
+            setUserLoginName("@Session["UserName"].ToString()");
+        })
+    </script>
+}
+
+
+

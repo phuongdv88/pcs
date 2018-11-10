@@ -1,4 +1,3 @@
-F:\pcs\PCSs\PCSs\obj\Debug\PCSs.csprojResolveAssemblyReference.cache
 D:\SwilifeSourceCode\PCSGIT\pcs\PCSs\PCSs\bin\roslyn\csc.exe
 D:\SwilifeSourceCode\PCSGIT\pcs\PCSs\PCSs\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 D:\SwilifeSourceCode\PCSGIT\pcs\PCSs\PCSs\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll

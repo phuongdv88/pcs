@@ -21,6 +21,7 @@ namespace PCSs.Controllers
         {
             return View();
         }
+
         // bill report
         public ActionResult BillReport()
         {
@@ -127,6 +128,7 @@ namespace PCSs.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+
 
         protected override void Dispose(bool disposing)
         {

@@ -61,7 +61,7 @@ namespace PCSs.Controllers
             if (Session["Role"] == null || Session["Role"]?.ToString() != "2")
                 return RedirectToAction("Error", "Error");
 
-            ViewBag.Specialist = id;
+            @ViewBag.SpecialistId = id;
             var specialist = db.Specialists.FirstOrDefault(s => s.SpecialistId == id);
             if (specialist != null)
             {
@@ -105,11 +105,28 @@ namespace PCSs.Controllers
                 {
                     return Json(new { rs = -1, msg = "Error: Can't get specialist's profile" }, JsonRequestBehavior.AllowGet);
                 }
+                var cans = (from can in db.Candidates
+                            join client in db.Clients
+                            on can.ClientId equals client.ClientId
+                            where (can.SpecialistId == -1) && (can.Status == "Initial" || can.Status == "Ready")
+                           
+                            select new
+                            {
+                                ClientName = client.Name,
+                                can.CandidateId,
+                                can.FirstName,
+                                can.MiddleName,
+                                can.LastName,
+                                can.Email,
+                                can.PhoneNumber,
+                                can.Status,
+                                can.CreatedTime,
+                            }).OrderByDescending(s => s.CandidateId);
+                return Json(cans, JsonRequestBehavior.AllowGet);
 
-                var result = Json(db.Candidates.Where(s => ((s.Status == "Initial" || s.Status == "Ready") && s.SpecialistId == -1)).OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
+                //var result = Json(db.Candidates.Where(s => ((s.Status == "Initial" || s.Status == "Ready") && s.SpecialistId == -1)).OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
                 //todo:fortest
                 //var result = Json(db.Candidates.OrderByDescending(s => s.CandidateId), JsonRequestBehavior.AllowGet);
-                return result;
 
             }
             catch (Exception e)
@@ -587,6 +604,48 @@ namespace PCSs.Controllers
             {
                 return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
             }
+        }
+        [HttpGet]
+        public ActionResult GetCandidateReportPdf(long id)
+        {
+            long specialistId = -1;
+            try
+            {
+                if (!long.TryParse(Session["SpecialistId"].ToString(), out specialistId))
+                {
+                    return RedirectToAction("ErrorDontHavePermission", "Error");
+                }
+                var can = db.Candidates.FirstOrDefault(s => s.CandidateId == id && s.SpecialistId == specialistId);
+                if (can == null)
+                {
+                    return RedirectToAction("ErrorDontHavePermission", "Error");
+                }
+
+                var attachment = db.AttachmentFiles.Where(s => s.CandidateId == id).OrderByDescending(s => s.AttachmentFileId).Take(1).Single();
+                if (attachment != null)
+                {
+                    byte[] filedata = System.IO.File.ReadAllBytes(attachment.Link);
+                    string contentType = MimeMapping.GetMimeMapping(attachment.Link);
+
+                    var cd = new System.Net.Mime.ContentDisposition
+                    {
+                        FileName = attachment.FileName,
+                        Inline = true,
+                    };
+
+                    Response.AppendHeader("Content-Disposition", cd.ToString());
+
+                    return File(filedata, contentType);
+                }
+
+                return RedirectToAction("Error", "Error");
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Error", "Error");
+            }
+
+                
         }
         protected override void Dispose(bool disposing)
         {
