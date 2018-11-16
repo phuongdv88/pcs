@@ -198,6 +198,7 @@
       <DependentUpon>PcsModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SpecialistAuthorization.cs" />
+    <Compile Include="Models\SpecialistInfo.cs" />
     <Compile Include="Models\UserLogin.cs">
       <DependentUpon>PcsModel.tt</DependentUpon>
     </Compile>
@@ -2152,6 +2153,7 @@
     <None Include="Properties\PublishProfiles\PCS_LAP.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Chart.js" />
+    <Content Include="Scripts\edit_account.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
