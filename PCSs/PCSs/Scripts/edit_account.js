@@ -117,7 +117,7 @@ function _updateSpecialist(id) {
         LastName: $.trim($('#lastnameSpecialist').val()),
         Email: $.trim($('#emailSpecialist').val()),
         PhoneNumber: $.trim($('#phoneSpecialist').val())
-    }
+    };
     $.ajax({
         url: '/Admin/UpdateSpecialist',
         data: JSON.stringify(ojb),
@@ -127,7 +127,7 @@ function _updateSpecialist(id) {
         timeout: '5000',
         success: function () {
             alert("update thanh cong");
-            //$('#newSpecialist').modal('hide');
+            $('#newSpecialist').modal('hide');
             $('#btnrefreshSpecialist').click();
         },
         error: function (errorMessage) {
@@ -143,4 +143,38 @@ $('#showModalNewSpecialist').click(function () {
     $('#formSpecialist').attr("onsubmit", "_addSpecialist()");
     $('#addSpecialist').val("Add");
     $('input[type=text],[type=email]').val("");
-})
+});
+$("#formSpecialist").submit(function (e) {
+    e.preventDefault();
+});
+// get all recruiter
+//function _getAllRecruiter() {
+//    $.ajax({
+//        url: '/Admin/GetAllRecruiter',
+//        type: "GET",
+//        contentType: "application/json;charset=utf-8",
+//        dataType: "json",
+//        timeout: '5000',
+//        success: function (data) {
+//            var html = '';
+//            var i = 0;
+//            $.each(data, function (key, item) {
+//                i++;
+//                html += '<tr>';
+//                html += '<td>' + i + '</td>';
+//                html += '<td>' + item.FirstName + " " + item.MiddleName + " " + item.LastName + '</td>';
+//                html += '<td>' + item.ClientId + '</td>';
+//                html += '<td>' + item.Email + '</td>';
+//                html += '<td>' + PhoneNumber + '</td>';
+//                html += '<td> <a href="#" title="Edit">< i class="fa fa-edit" ></i ></a ><a href="#" title="Delete"><i class="	fa fa-remove"></i></a></td>';
+//                html += '</tr>';
+//            });
+//            $('#tableRecuiter tbody').html(html);
+//            $('#tableRecuiter').DataTable();
+//        },
+//        error: function (errorMessage) {
+
+//        }
+//    });
+//    return false;
+//}

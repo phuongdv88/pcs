@@ -44,6 +44,7 @@ a .category{
 .category i{
     width: 1em;
     margin-right: 1em;
+    color:black;
     /* height: 100%; */
     /* padding-right: 1em; */
 }

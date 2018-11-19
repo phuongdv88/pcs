@@ -181,7 +181,7 @@ namespace PCSs.Controllers
             };
             db.Specialists.Add(specialist);
             db.SaveChanges();
-            return Json(JsonRequestBehavior.AllowGet);
+            return Json(new { rs=specialist.SpecialistId,msg=""},JsonRequestBehavior.AllowGet);
         }
         // delete specialist
         public JsonResult DeleteSpecialist(long id)
@@ -220,7 +220,12 @@ namespace PCSs.Controllers
              db.SaveChanges();
             return Json(JsonRequestBehavior.AllowGet);
         }
-        
+        // get all recruiter
+        public JsonResult GetAllRecruiter()
+        {
+            var queryAllRecruiter = from recruiter in db.Recruiters select recruiter;
+            return Json(queryAllRecruiter, JsonRequestBehavior.AllowGet);
+        }
 
     }
 }

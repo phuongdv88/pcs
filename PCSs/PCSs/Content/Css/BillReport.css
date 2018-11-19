@@ -45,3 +45,19 @@
     cursor: pointer;
     float:right;
 }
+.buttonBack{
+    background-color: #3c8dbc;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+   
+}
+table thead tr th.index{
+    width:1em !important;
+}
+table thead tr th.numberEmployer {
+    width: 4em !important;
+    text-align:center;
+}

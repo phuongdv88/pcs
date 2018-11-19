@@ -492,3 +492,75 @@ padding-left: 20px;
 .nav-management {
     padding: 5px 5px;
 }
+.initial {
+    background: #b3ff1a;
+    color: white;
+    font-size: 12px;
+    margin-left: 1em;
+    min-width: 75px;
+    text-align: center;
+    padding: 0px;
+    border-radius: 3px;
+}
+
+.ready {
+    background: #00cc00;
+    color: white;
+    font-size: 12px;
+    margin-left: 1em;
+    border-radius: 3px;
+    min-width: 75px;
+    padding: 0px;
+    text-align: center;
+}
+
+.processing {
+    background: #4d79ff;
+    color: white;
+    font-size: 12px;
+    margin-left: 1em;
+    border-radius: 3px;
+    min-width: 75px;
+    padding: 0px;
+    text-align: center;
+}
+
+.completed {
+    background: #2d862d;
+    color: white;
+    font-size: 12px;
+    margin-left: 1em;
+    min-width: 75px;
+    padding: 0px;
+    border-radius: 3px;
+    text-align: center;
+}
+
+.progress {
+    height: 8px;
+}
+
+.colorInitial {
+    background: #b3ff1a;
+}
+
+.colorReady {
+    background: #00cc00;
+}
+
+.colorProcess {
+    background: #4d79ff;
+}
+
+.colorCompeleted {
+    background: #2d862d;
+}
+table thead tr th.widthStatus {
+    min-width: 280px !important;
+}
+table thead tr th.widthPhone {
+    max-width: 100px !important;
+}
+table thead tr th.widthIndex {
+    max-width: 40px !important;
+}

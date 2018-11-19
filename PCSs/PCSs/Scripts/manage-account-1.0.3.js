@@ -84,7 +84,19 @@ function _getAllCandidate() {
                 html += '<td>' + candidateName + '</td>';
                 html += '<td>' + item.Email + '</td>';
                 html += '<td>' + item.PhoneNumber + '</td>';
-                html += '<td>' + item.Status + '</td>';
+                if (item.Status === "Initial") {
+                    html += '<td><div class="col-md-12 col-sm-12 col-xs-12" style="padding: 0px"><div class=" col-md-8 col-sm-8 col-xs-8 progress" style = "padding: 0px" ><div class="progress-bar colorInitial" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:20%"></div></div ><div class="col-md-3 col-sm-3 col-xs-3 initial">' + item.Status + '</div></div ></td>';
+                }
+                if (item.Status === "Ready") {
+                    html += '<td> <div class="col-md-12 col-sm-12 col-xs-12" style="padding: 0px"><div class=" col-md-8 col-sm-8 col-xs-8 progress" style = "padding: 0px" ><div class="progress-bar colorReady" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:40%"></div></div ><div class="col-md-3 col-sm-3 col-xs-3 ready">' + item.Status + '</div></div ></td>';
+                }
+                if (item.Status === "Processing") {
+                    html += '<td> <div class="col-md-12 col-sm-12 col-xs-12" style="padding: 0px"><div class=" col-md-8 col-sm-8 col-xs-8 progress" style = "padding: 0px" ><div class="progress-bar colorProcess" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:80%"></div></div ><div class="col-md-3 col-sm-3 col-xs-3 processing">' + item.Status + '</div></div ></td>';
+                }
+                if (item.Status === "Completed") {
+                    html += '<td> <div class="col-md-12 col-sm-12 col-xs-12" style="padding: 0px"><div class=" col-md-8 col-sm-8 col-xs-8 progress" style = "padding: 0px" ><div class="progress-bar colorCompeleted" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:100%"></div></div ><div class="col-md-3 col-sm-3 col-xs-3 completed">' + item.Status + '</div></div ></td>';
+                }
+                //html += '<td>' + item.Status + '</td>';
                 html += '<td>' + formatDate(item.CreatedTime.substr(6)) + '</td>';
                 if (item.CompleteTime == undefined || (item.Status !== 'Completed' && item.Status !== 'Closed')) {
                     html += '<td></td>';
@@ -594,7 +606,7 @@ function getAllCompany(id) {
         },
         error: function (errorMessage) {
             alert(errorMessage.responseText);
-        },
+        }
     });
     return false;
 };
@@ -623,7 +635,7 @@ function newCompany(comFormId, candidateId) {
         },
         error: function (rs) {
             alert(rs.responseText);
-        },
+        }
     });
     return false;
 }
