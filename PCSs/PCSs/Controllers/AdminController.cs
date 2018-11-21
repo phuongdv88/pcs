@@ -142,83 +142,162 @@ namespace PCSs.Controllers
         // GET all specialist
         public JsonResult GetAllSpecialist()
         {
-            var queryAllSpecialist = from specialist in db.Specialists select specialist;
-            return Json(queryAllSpecialist,JsonRequestBehavior.AllowGet);
+
+            try
+            {
+                if (int.Parse(Session["Role"].ToString()) != (int)UserRole.ADMIN)
+                {
+                    return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
+                }
+                var queryAllSpecialist = from spec in db.Specialists
+                                         join userlogin in db.UserLogins
+                                         on spec.UserLoginId equals userlogin.UserLoginId
+                                         select new { spec, userlogin.LockoutEnabled };
+                return Json(queryAllSpecialist, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json(new { rs = -1, msg = e.Message }, JsonRequestBehavior.AllowGet);
+            }
+
         }
         // Create specialist
-        public JsonResult CreateSpecialist(Specialist spec)
+        public JsonResult CreateSpecialist(Specialist spec,UserLogin user)
         {
-            var userLogin = new UserLogin()
+
+            try
             {
-                UserName = Util.Helper.getRandomAlphaNumeric(6).ToUpper(),
-                PasswordRaw = Util.Helper.getRandomAlphaNumeric(8),
-                SecurityStamp = Util.Helper.getRandomAlphaNumeric(100),
-                Role = (int)UserRole.SPECIALIST,
-                AccessFailedCount = 0,
-                LockoutEnabled = true,
-                //LockoutDateUtc = DateTime.UtcNow.AddDays(7)
-            };
-            // create user name pass word
-            while (db.UserLogins.Any(s => s.UserName == userLogin.UserName))
-            {
-                userLogin.UserName = Util.Helper.getRandomAlphaNumeric(6).ToUpper();
+                if (int.Parse(Session["Role"].ToString()) != (int)UserRole.ADMIN)
+                {
+                    return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
+                }
+                var userLogin = new UserLogin()
+                {
+                    //UserName = Util.Helper.getRandomAlphaNumeric(6).ToUpper(),
+                   UserName=user.UserName,
+                   PasswordRaw=user.PasswordRaw,
+                    //PasswordRaw = Util.Helper.getRandomAlphaNumeric(8),
+
+                    SecurityStamp = Util.Helper.getRandomAlphaNumeric(100),
+                    Role = (int)UserRole.SPECIALIST,
+                    AccessFailedCount = 0,
+                    LockoutEnabled = user.LockoutEnabled,
+                    //LockoutDateUtc = DateTime.UtcNow.AddDays(7)
+                };
+                // create user name pass word
+                while (db.UserLogins.Any(s => s.UserName == userLogin.UserName))
+                {
+                    userLogin.UserName = Util.Helper.getRandomAlphaNumeric(6).ToUpper();
+                }
+                userLogin.PasswordHash = Util.Helper.createMD5Hash(userLogin.PasswordRaw, userLogin.UserName, userLogin.SecurityStamp);
+
+                db.UserLogins.Add(userLogin);
+                db.SaveChanges();
+                // create specialist
+                var specialist = new Specialist()
+                {
+                    UserLoginId = userLogin.UserLoginId,
+                    FirstName = spec.FirstName,
+                    MiddleName = spec.MiddleName,
+                    LastName = spec.LastName,
+                    Email = spec.Email,
+                    PhoneNumber = spec.PhoneNumber,
+                    Role = (int)UserRole.SPECIALIST,
+
+                };
+                db.Specialists.Add(specialist);
+                db.SaveChanges();
+                return Json(new { rs = specialist.SpecialistId, msg = "" }, JsonRequestBehavior.AllowGet);
             }
-            userLogin.PasswordHash = Util.Helper.createMD5Hash(userLogin.PasswordRaw, userLogin.UserName, userLogin.SecurityStamp);
-
-            db.UserLogins.Add(userLogin);
-            db.SaveChanges();
-            // create specialist
-            var specialist = new Specialist()
+            catch (Exception e)
             {
-                UserLoginId = userLogin.UserLoginId,
-                FirstName = spec.FirstName,
-                MiddleName = spec.MiddleName,
-                LastName = spec.LastName,
-                Email = spec.Email,
-                PhoneNumber = spec.PhoneNumber,
-                Role = (int)UserRole.SPECIALIST,
+                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
+            }
 
-            };
-            db.Specialists.Add(specialist);
-            db.SaveChanges();
-            return Json(new { rs=specialist.SpecialistId,msg=""},JsonRequestBehavior.AllowGet);
         }
         // delete specialist
         public JsonResult DeleteSpecialist(long id)
         {
-            var specialist = db.Specialists.FirstOrDefault(s => s.SpecialistId == id);
-
-            // remote user login of sepcialist
-            var userlogin = db.UserLogins.FirstOrDefault(s => s.UserLoginId == specialist.UserLoginId);
-            if (userlogin != null)
+            try
             {
-                db.UserLogins.Remove(userlogin);
-            }
-           
-            db.Specialists.Remove(specialist);
-           var r= db.SaveChanges();
-            return Json(new { rs = r, msg = "" }, JsonRequestBehavior.AllowGet);
+                if (int.Parse(Session["Role"].ToString()) != (int)UserRole.ADMIN)
+                {
+                    return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
+                }
+                var specialist = db.Specialists.FirstOrDefault(s => s.SpecialistId == id);
 
+                // remote user login of sepcialist
+                var userlogin = db.UserLogins.FirstOrDefault(s => s.UserLoginId == specialist.UserLoginId);
+                if (userlogin != null)
+                {
+                    db.UserLogins.Remove(userlogin);
+                }
+
+                db.Specialists.Remove(specialist);
+                var r = db.SaveChanges();
+                return Json(new { rs = r, msg = "" }, JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception e)
+            {
+                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
+            }
         }
         // get specialist by id
         public JsonResult GetSpecialistById(long id)
         {
-            var specialist = db.Specialists.FirstOrDefault(s => s.SpecialistId == id);
-
-            return Json(specialist, JsonRequestBehavior.AllowGet); 
+            try
+            {
+                if(int.Parse(Session["Role"].ToString()) != (int)UserRole.ADMIN)
+                {
+                    return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
+                }
+                var specialist = db.Specialists.FirstOrDefault(s => s.SpecialistId == id);
+                //test
+                var data = from spec in db.Specialists
+                           join userlogin in db.UserLogins 
+                           on spec.UserLoginId equals userlogin.UserLoginId
+                           where spec.SpecialistId == id
+                           select new { spec, userlogin };
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception e)
+            {
+                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
+            }
+           
         }
         // update specialist by id
-        public JsonResult UpdateSpecialist(Specialist spec)
+        public JsonResult UpdateSpecialist(Specialist spec,UserLogin user)
         {
-            var specialist = db.Specialists.FirstOrDefault(s => s.SpecialistId == spec.SpecialistId);
-            specialist.FirstName = spec.FirstName;
-            specialist.MiddleName = spec.MiddleName;
-            specialist.LastName = spec.LastName;
-            specialist.PhoneNumber = spec.PhoneNumber;
-            specialist.Email = spec.Email;
-            db.Entry(specialist).State = EntityState.Modified;
-             db.SaveChanges();
-            return Json(JsonRequestBehavior.AllowGet);
+            try
+            {
+                if (int.Parse(Session["Role"].ToString()) != (int)UserRole.ADMIN)
+                {
+                    return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
+                }
+                var specialist = db.Specialists.FirstOrDefault(s => s.SpecialistId == spec.SpecialistId);
+                specialist.FirstName = spec.FirstName;
+                specialist.MiddleName = spec.MiddleName;
+                specialist.LastName = spec.LastName;
+                specialist.PhoneNumber = spec.PhoneNumber;
+                specialist.Email = spec.Email;
+
+                var userLogin = db.UserLogins.FirstOrDefault(s => s.UserLoginId == specialist.UserLoginId);
+                userLogin.UserName = user.UserName;
+                userLogin.PasswordRaw = user.PasswordRaw;
+                userLogin.LockoutEnabled = user.LockoutEnabled;
+                userLogin.PasswordHash = Util.Helper.createMD5Hash(userLogin.PasswordRaw, userLogin.UserName, userLogin.SecurityStamp);
+
+                db.Entry(specialist).State = EntityState.Modified;
+                db.Entry(userLogin).State = EntityState.Modified;
+
+                db.SaveChanges();
+                return Json(JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception e)
+            {
+                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
+            }
         }
         // get all recruiter
         public JsonResult GetAllRecruiter()
