@@ -778,8 +778,8 @@
                                     <div class="row clearPaddingMargin">
                                         <div class="col-md-6 clearPaddingMargin" style="padding-right: 1em">
                                             <label>User Name</label>
-                                            <input type="text" id="usernameSpecialist" name="username" placeholder="username.." required>
-
+                                            <input type="text" id="usernameSpecialist" name="username" placeholder="username.." onchange="return _checkNullUserName()" required>
+                                            <div id="errorUserName" style="color:red;display:none">User Name đã tồn tại!</div>
                                         </div>
                                         <div class="col-md-6 clearPaddingMargin" style="padding-right: 1em">
                                             <label>Pass Word</label>

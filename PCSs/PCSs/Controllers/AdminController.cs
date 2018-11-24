@@ -298,6 +298,7 @@ namespace PCSs.Controllers
             {
                 return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
             }
+           
         }
         // get all recruiter
         public JsonResult GetAllRecruiter()
@@ -305,6 +306,27 @@ namespace PCSs.Controllers
             var queryAllRecruiter = from recruiter in db.Recruiters select recruiter;
             return Json(queryAllRecruiter, JsonRequestBehavior.AllowGet);
         }
+        // get all userlogin
+        public JsonResult GetAllUserLoginByUserName(string id)
+        {
+           
+            try
+            {
+                if (int.Parse(Session["Role"].ToString()) != (int)UserRole.ADMIN)
+                {
+                    return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
 
+                }
+                var query = from user in db.UserLogins
+                            where user.UserName== id
+                            select user;
+                return Json(query, JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception e)
+            {
+                return Json(new { rs = -1, msg = "Permission Denied" }, JsonRequestBehavior.AllowGet);
+
+            }
+        }
     }
 }

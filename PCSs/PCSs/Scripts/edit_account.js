@@ -142,7 +142,7 @@ function _updateSpecialist(id) {
         LockoutEnabled: $.trim($('#lockoutSpecialist').val())
        
     };
-    console.log(ojb.LockoutEnabled);
+    
     $.ajax({
         url: '/Admin/UpdateSpecialist',
         data: JSON.stringify(ojb),
@@ -172,6 +172,37 @@ $('#showModalNewSpecialist').click(function () {
 $("#formSpecialist").submit(function (e) {
     e.preventDefault();
 });
+function _checkNullUserName() {
+
+    var id = $('#usernameSpecialist').val();
+    
+  
+    $.ajax({
+        url: '/Admin/GetAllUserLoginByUserName/' + id,
+       
+        type: 'GET',
+        contentType: 'json',
+        timeout: '5000',
+        success: function (result) {
+            if (result == "") {
+                $('#addSpecialist').prop('disabled', false);
+                $('#errorUserName').css("display", "none");
+               
+                //alert("disabled false");
+            }
+            else {
+                $('#addSpecialist').prop("disabled", true);
+                $('#errorUserName').css("display", "block");
+              
+                //alert("disabled true");
+            }
+        },
+        error: function (errorMessage) {
+            alert(errorMessage.responseText);
+        }
+    });
+    return false;
+}
 // get all recruiter
 //function _getAllRecruiter() {
 //    $.ajax({
