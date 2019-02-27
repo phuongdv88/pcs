@@ -1,6 +1,8 @@
 ﻿
 @{
-    Layout = null;
+                /**/
+
+                Layout = null;
 }
 
 <!DOCTYPE html>
@@ -129,12 +131,12 @@
         <div class="col-md-2 col-sm-2 col-xs-12 clearPaddingMargin menuleft">
             <div class="col-md-12 col-sm-12 col-xs-12 clearPaddingMargin">
                 <a href="#dashboard" data-toggle="tab">
-                    <div class="col-md-12 col-sm-12 col-xs-12  category"><i class="fa fa-dashboard" ></i>Dashboard</div>
+                    <div class="col-md-12 col-sm-12 col-xs-12  category"><i class="fa fa-dashboard"></i>Dashboard</div>
                 </a>
 
                 <a href="#company" data-toggle="tab">
                     @*<img src="~/Content/Image/iconcompany.png" style="color: black">*@
-                    <div class="col-md-12 col-sm-12 col-xs-12 category"><i class="fa fa-building" ></i>Client</div>
+                    <div class="col-md-12 col-sm-12 col-xs-12 category"><i class="fa fa-building"></i>Client</div>
                 </a>
 
                 <a href="#recruiter" data-toggle="tab">
@@ -692,7 +694,7 @@
 
                                     </td>
                                 </tr>
-                                
+
                             </tbody>
 
                         </table>
@@ -723,11 +725,11 @@
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Role</th>
+                                    <th>Lock Out</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody> 
-                            </tbody>
+                            <tbody></tbody>
 
                         </table>
                     </div>
@@ -773,18 +775,28 @@
 
                                         </div>
                                     </div>
-                                    @*<div class="col-md-12 clearPaddingMargin">
-                                            <div class="col-md-6 clearPaddingMargin" style="padding-right: 1em">
-                                                <label>User Name</label>
-                                                <input type="text" id="usernameSpecialist" name="username" placeholder="username.." required>
+                                    <div class="row clearPaddingMargin">
+                                        <div class="col-md-6 clearPaddingMargin" style="padding-right: 1em">
+                                            <label>User Name</label>
+                                            <input type="text" id="usernameSpecialist" name="username" placeholder="username.." onchange="return _checkNullUserName()" required>
+                                            <div id="errorUserName" style="color:red;display:none">User Name đã tồn tại!</div>
+                                        </div>
+                                        <div class="col-md-6 clearPaddingMargin" style="padding-right: 1em">
+                                            <label>Pass Word</label>
+                                            <input type="text" id="passwordSpecialist" name="password" placeholder="PassWord.." required>
 
-                                            </div>
-                                            <div class="col-md-6 clearPaddingMargin" style="padding-right: 1em">
-                                                <label>Pass Word</label>
-                                                <input type="password" id="passwordSpecialist" name="password" placeholder="PassWord.." required>
-
-                                            </div>
-                                        </div>*@
+                                        </div>
+                                    </div>
+                                   
+                                        <div class="col-md-12" style="padding-left:0px">
+                                            <label>Lock Out</label>
+                                            <select id="lockoutSpecialist"  required >
+                                                <option value="true">True</option>
+                                                <option value="false" selected="selected">False</option>
+                                            </select>
+                                        </div>
+                                        
+                                   
                                     <div style="text-align:right">
                                         <div class="col-md-12">
                                             <input type="submit" value="Add" id="addSpecialist" @*onclick="return _addSpecialist()"*@>
@@ -859,7 +871,7 @@
                                     <td>600,000</td>
 
                                 </tr>
-                               
+
                                 <tr>
                                     <td class="clearBorder"> Total(Before tax)</td>
                                     <td class="clearBorder"></td>
@@ -1002,8 +1014,8 @@
     <script>
         $(document).ready(function () {
             $('#tableCompany').DataTable();
-          
-            
+
+
             $('#tableRecuiter').DataTable();
             //$('#tableSpecialist').DataTable();
             $('#tableTop5').DataTable();
@@ -1011,6 +1023,6 @@
 
         });
     </script>
-    
+
 </body>
 </html>

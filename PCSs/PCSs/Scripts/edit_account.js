@@ -12,15 +12,18 @@ function _getAllSpecialist(){
         success: function (result) {
             var html = '';
             var i = 0;
-            $.each(result, function (key, item) {
+           
+            $.each(result, function (key) {
                 i++;
+               
                 html += '<tr>';
                 html += '<td>' + i + '</td>';
-                html += '<td>' + item.FirstName + " " + item.MiddleName + " " + item.LastName+ '</td>';
-                html += '<td>' + item.Email + '</td>';
-                html += '<td>' + item.PhoneNumber + '</td>';
+                html += '<td>' + result[i - 1].spec.FirstName + " " + result[i - 1].spec.MiddleName + " " + result[i - 1].spec.LastName + '</td>';
+                html += '<td>' + result[i - 1].spec.Email + '</td>';
+                html += '<td>' + result[i - 1].spec.PhoneNumber + '</td>';
                 html += '<td>Specialist</td>';
-                html += '<td> <a href="#" title ="Edit" onclick="return _getSpecialistById(' + item.SpecialistId + ')"><i class="fa fa-edit"></i></a ><a href="#" title="Delete" onclick="return _deleteSpecialist(' + item.SpecialistId + ')"><i class="fa fa-remove"></i></a></td>';
+                html += '<td>' + result[i - 1].LockoutEnabled+'</td>';
+                html += '<td> <a href="#" title ="Edit" onclick="return _getSpecialistById(' + result[i - 1].spec.SpecialistId + ')"><i class="fa fa-edit"></i></a ><a href="#" title="Delete" onclick="return _deleteSpecialist(' + result[i - 1].spec.SpecialistId + ')"><i class="fa fa-remove"></i></a></td>';
                 html += '</tr>';
             });
             $('#tableSpecialist tbody').html(html);
@@ -40,8 +43,12 @@ function _addSpecialist() {
         MiddleName: $.trim($('#middlenameSpecialist').val()),
         LastName: $.trim($('#lastnameSpecialist').val()),
         Email: $.trim($('#emailSpecialist').val()),
-        PhoneNumber: $.trim($('#phoneSpecialist').val())
+        PhoneNumber: $.trim($('#phoneSpecialist').val()),
+        UserName: $.trim($('#usernameSpecialist').val()),
+        PasswordRaw: $.trim($('#passwordSpecialist').val()),
+        LockoutEnabled: $.trim($('#lockoutSpecialist').val())
     }
+   
     $.ajax({
         url: '/Admin/CreateSpecialist',
         data: JSON.stringify(ojb),
@@ -90,12 +97,25 @@ function _getSpecialistById(id) {
         contentType: 'json',
         timeout: '5000',
         success: function (result) {
+           
+            var lockout = result[0].userlogin.LockoutEnabled;
+          
+           
+            $('#fristnameSpecialist').val(result[0].spec.FirstName);
+            $('#middlenameSpecialist').val(result[0].spec.MiddleName);
+            $('#lastnameSpecialist').val(result[0].spec.LastName);
+            $('#emailSpecialist').val(result[0].spec.Email);
+            $('#phoneSpecialist').val(result[0].spec.PhoneNumber);
+            $('#usernameSpecialist').val(result[0].userlogin.UserName);
+            $('#passwordSpecialist').val(result[0].userlogin.PasswordRaw);
+            if (lockout ==true) {
+                $('#lockoutSpecialist').val("true");
 
-            $('#fristnameSpecialist').val(result.FirstName);
-            $('#middlenameSpecialist').val(result.MiddleName);
-            $('#lastnameSpecialist').val(result.LastName);
-            $('#emailSpecialist').val(result.Email);
-            $('#phoneSpecialist').val(result.PhoneNumber);
+            }
+            else {
+                $('#lockoutSpecialist').val("false");
+            }
+            //$('#lockoutSpecialist').val(lockout);
             $('#newSpecialist').modal('show');
             $('#addSpecialist').val("Update");
             $('#formSpecialist').attr("onsubmit", "_updateSpecialist(" + id + ")");
@@ -116,8 +136,13 @@ function _updateSpecialist(id) {
         MiddleName: $.trim($('#middlenameSpecialist').val()),
         LastName: $.trim($('#lastnameSpecialist').val()),
         Email: $.trim($('#emailSpecialist').val()),
-        PhoneNumber: $.trim($('#phoneSpecialist').val())
+        PhoneNumber: $.trim($('#phoneSpecialist').val()),  
+          UserName: $.trim($('#usernameSpecialist').val()),
+        PasswordRaw: $.trim($('#passwordSpecialist').val()),
+        LockoutEnabled: $.trim($('#lockoutSpecialist').val())
+       
     };
+    
     $.ajax({
         url: '/Admin/UpdateSpecialist',
         data: JSON.stringify(ojb),
@@ -147,6 +172,37 @@ $('#showModalNewSpecialist').click(function () {
 $("#formSpecialist").submit(function (e) {
     e.preventDefault();
 });
+function _checkNullUserName() {
+
+    var id = $('#usernameSpecialist').val();
+    
+  
+    $.ajax({
+        url: '/Admin/GetAllUserLoginByUserName/' + id,
+       
+        type: 'GET',
+        contentType: 'json',
+        timeout: '5000',
+        success: function (result) {
+            if (result == "") {
+                $('#addSpecialist').prop('disabled', false);
+                $('#errorUserName').css("display", "none");
+               
+                //alert("disabled false");
+            }
+            else {
+                $('#addSpecialist').prop("disabled", true);
+                $('#errorUserName').css("display", "block");
+              
+                //alert("disabled true");
+            }
+        },
+        error: function (errorMessage) {
+            alert(errorMessage.responseText);
+        }
+    });
+    return false;
+}
 // get all recruiter
 //function _getAllRecruiter() {
 //    $.ajax({
